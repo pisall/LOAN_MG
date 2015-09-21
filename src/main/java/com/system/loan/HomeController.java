@@ -36,4 +36,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public String listUser(){
+		return "home";
+	}
+	
 }
