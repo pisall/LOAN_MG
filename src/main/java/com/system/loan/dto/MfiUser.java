@@ -1,6 +1,8 @@
 package com.system.loan.dto;
 
 public class MfiUser {
-	private Integer ;
-	private String usNM
+	private Integer usID ;
+	private String usNM;
+	private String usSex;
+	private Integer
 }
