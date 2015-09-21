@@ -2,7 +2,9 @@ package com.system.loan;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.system.loan.dao.MfiUserImp;
+import com.system.loan.dto.MfiUser;
 
 /**
  * Handles requests for the application home page.
@@ -28,31 +31,23 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String home(Locale locale, Map<String, Object> model) {
+		userImp=new MfiUserImp();
+		List<MfiUser> users = userImp.listUser();
+		System.out.println("LIST COUNT==="+ users.size());
+		for(MfiUser user : users){
+			System.out.println(user.getUsID());
+			System.out.println(user.getUsEmail());
+		}
+		model.put("users",users);
 		return "home";
 	}
 	
-	@RequestMapping(value="/listUser/{id}", method=RequestMethod.POST)
-	public String listUser(@PathVariable("id") Integer id,Model model){
+	/*@RequestMapping(value="/listUser", method=RequestMethod.POST)
+	public String listUser(Model model){
 		userImp=new MfiUserImp();
 		model.addAttribute("listUser",userImp.listUser());
 		return "home";
-	}
-	
-	@RequestMapping(value="/listUser", method=RequestMethod.POST)
-	public String listUser(){
-		userImp=new MfiUserImp();
-		userImp.listUser();
-		return "home";
-	}
+	}*/
 	
 }

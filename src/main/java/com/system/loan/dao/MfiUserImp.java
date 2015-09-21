@@ -1,5 +1,6 @@
 package com.system.loan.dao;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,8 +36,21 @@ public class MfiUserImp implements MfiUserDao {
 
 	@Override
 	public Boolean insertUser(MfiUser user) {
-	
-		return null;
+		 Session session = factory.openSession();
+	      Transaction tx = null;
+	      Boolean status = true;
+	      try{
+	         tx = session.beginTransaction(); 
+	          session.save(user); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	         return false;
+	      }finally {
+	         session.close(); 
+	      }
+	      return true;
 	}
 
 	@Override
@@ -49,25 +63,25 @@ public class MfiUserImp implements MfiUserDao {
 	public List<MfiUser> listUser() {
 		Session session = factory.openSession();
 	      Transaction tx = null;
-	      List list=null;
+	      List<MfiUser> list=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("From MfiUser");
-	         list=query.list();
-	         for (Iterator iterator = 
+	         Query query=session.createQuery("SELECT u From MfiUser u");
+	         list=(List<MfiUser>)query.list();
+	     /*   for (Iterator iterator = 
                      list.iterator(); iterator.hasNext();){
 				      MfiUser user = (MfiUser) iterator.next(); 
 				      System.out.print("User ID: " + user.getUsID()); 				   
-				   }
+				   }*/
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
-	     
+	         return null;
 	      }finally {
 	         session.close(); 
 	      }
-		return null;
+		return list;
 	}
 
 }

@@ -13,8 +13,6 @@ public class MfiUser {
 	@GeneratedValue
 	@Column(name="us_id")
 	private Integer usID ;
-
-	private String usNM;
 	@Column(name="us_sex")
 	private String usSex;
 	@Column(name="us_photo")
@@ -48,18 +46,6 @@ public class MfiUser {
 	 */
 	public void setUsID(Integer usID) {
 		this.usID = usID;
-	}
-	/**
-	 * @return the usNM
-	 */
-	public String getUsNM() {
-		return usNM;
-	}
-	/**
-	 * @param usNM the usNM to set
-	 */
-	public void setUsNM(String usNM) {
-		this.usNM = usNM;
 	}
 	/**
 	 * @return the usSex
@@ -109,16 +95,4 @@ public class MfiUser {
 	public void setUsEmail(String usEmail) {
 		this.usEmail = usEmail;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "MfiUser [usID=" + usID + ", usNM=" + usNM + ", usSex=" + usSex
-				+ ", usPhoto=" + usPhoto + ", usPhone=" + usPhone
-				+ ", usEmail=" + usEmail + "]";
-	}
-	
-	
-
 }
