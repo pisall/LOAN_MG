@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -51,6 +52,8 @@ public class MfiUserImp implements MfiUserDao {
 	      List list=null;
 	      try{
 	         tx = session.beginTransaction();
+	         Query query=session.createQuery("From MfiUser");
+	         list=query.list();
 	         for (Iterator iterator = 
                      list.iterator(); iterator.hasNext();){
 				      MfiUser user = (MfiUser) iterator.next(); 

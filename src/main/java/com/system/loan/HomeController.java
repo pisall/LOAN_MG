@@ -42,8 +42,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/listUser/{id}", method=RequestMethod.POST)
-	public String listUser(@PathVariable("id") Integer id){
-		
+	public String listUser(@PathVariable("id") Integer id,Model model){
+		userImp=new MfiUserImp();
+		model.addAttribute("listUser",userImp.listUser());
 		return "home";
 	}
 	
