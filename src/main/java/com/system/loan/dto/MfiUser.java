@@ -1,12 +1,42 @@
 package com.system.loan.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="mfi_user")
 public class MfiUser {
+	@Id
+	@GeneratedValue
+	@Column(name="us_id")
 	private Integer usID ;
+
 	private String usNM;
+	@Column(name="us_sex")
 	private String usSex;
+	@Column(name="us_photo")
 	private String usPhoto;
+	@Column(name="us_phone")
 	private String usPhone;
+	@Column(name="us_email")
 	private String usEmail;
+	@Column(name="us_address")
+	private String usAddress;
+	/**
+	 * @return the usAddress
+	 */
+	public String getUsAddress() {
+		return usAddress;
+	}
+	/**
+	 * @param usAddress the usAddress to set
+	 */
+	public void setUsAddress(String usAddress) {
+		this.usAddress = usAddress;
+	}
 	/**
 	 * @return the usID
 	 */
