@@ -73,14 +73,8 @@
             </div>
             <!-- /.container-fluid -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-
-
+			<!-- Include Script -->
+			<jsp:include page="include/_script.jsp" />
 </body>
 
 </html>

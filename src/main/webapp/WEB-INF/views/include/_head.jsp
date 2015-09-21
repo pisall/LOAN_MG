@@ -15,7 +15,7 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css " rel="stylesheet">
+    <link href="<c:url value="resources/css/bootstrap.min.css "/>" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
 
