@@ -25,8 +25,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Map<String, Object> model) {
-		userImp=new MfiUserDaoImp();
-		model.put("users",userImp.listUser());
+	/*	userImp=new MfiUserDaoImp();
+		model.put("users",userImp.listUser());*/
 		return "home";
 	}
 	
