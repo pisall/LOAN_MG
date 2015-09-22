@@ -8,13 +8,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.system.loan.dto.MfiUser;
+import com.system.loan.dto.MfiUserDto;
 
-public class MfiUserImp implements MfiUserDao {
+public class MfiUserDaoImp implements MfiUserDao {
 	public static SessionFactory factory=null;
 	
 	
-	public MfiUserImp() {
+	public MfiUserDaoImp() {
 		 try{
 	         factory = new Configuration().configure().buildSessionFactory();
 	      }catch (HibernateException e) { 
@@ -33,12 +33,12 @@ public class MfiUserImp implements MfiUserDao {
 	 * 		return false
 	 */
 	@Override
-	public Boolean updateUser(MfiUser user) {
+	public Boolean updateUser(MfiUserDto user) {
 		 Session session = factory.openSession();
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         MfiUser usr = (MfiUser)session.get(MfiUser.class, user.getUsID()); 
+	         MfiUserDto usr = (MfiUserDto)session.get(MfiUserDto.class, user.getUsID()); 
 	         usr.setUsNm(user.getUsNm());
 	         usr.setUsSex(user.getUsSex());
 	         usr.setUsPhone(user.getUsPhone());
@@ -62,7 +62,7 @@ public class MfiUserImp implements MfiUserDao {
 	 * else 
 	 * 		return false
 	 */
-	public Boolean updateUser1(MfiUser user) {
+	public Boolean updateUser1(MfiUserDto user) {
 		 Session session = factory.openSession();
 	      Transaction tx = null;
 	      try{
@@ -86,7 +86,7 @@ public class MfiUserImp implements MfiUserDao {
 	 * 		return false
 	 */
 	@Override
-	public Boolean insertUser(MfiUser user) {
+	public Boolean insertUser(MfiUserDto user) {
 		 Session session = factory.openSession();
 	      Transaction tx = null;
 	      try{
@@ -110,12 +110,12 @@ public class MfiUserImp implements MfiUserDao {
 	 * 		return false
 	 */
 	@Override
-	public Boolean deleateUser(MfiUser user) {
+	public Boolean deleateUser(MfiUserDto user) {
 		 Session session = factory.openSession();
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         MfiUser usr = (MfiUser)session.get(MfiUser.class, user.getUsID()); 
+	         MfiUserDto usr = (MfiUserDto)session.get(MfiUserDto.class, user.getUsID()); 
 			 session.delete(usr);
 	         tx.commit();
 	      }catch (HibernateException e) {
@@ -135,14 +135,14 @@ public class MfiUserImp implements MfiUserDao {
 	 * 		return null
 	 */
 	@Override
-	public List<MfiUser> listUser() {
+	public List<MfiUserDto> listUser() {
 		Session session = factory.openSession();
 	      Transaction tx = null;
-	      List<MfiUser> list=null;
+	      List<MfiUserDto> list=null;
 	      try{
 	         tx = session.beginTransaction();
 	         Query query=session.createQuery("From MfiUser");
-	         list=(List<MfiUser>)query.list(); 
+	         list=(List<MfiUserDto>)query.list(); 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -162,15 +162,15 @@ public class MfiUserImp implements MfiUserDao {
 	 * 		return null
 	 */
 	
-	public List<MfiUser> listSpecificUser(Integer userID) {
+	public List<MfiUserDto> listSpecificUser(Integer userID) {
 	      Session session = factory.openSession();
 	      Transaction tx = null;
-	      List<MfiUser> user=null;
+	      List<MfiUserDto> user=null;
 	      try{
 	         tx = session.beginTransaction();
 	         Query query=session.createQuery("From MfiUser Where usID=?");
 	         query.setParameter(0, userID);
-	         user=(List<MfiUser>)query.list();         
+	         user=(List<MfiUserDto>)query.list();         
 	         System.out.println(user.toString());	         
 	         tx.commit();
 	      }catch (HibernateException e) {

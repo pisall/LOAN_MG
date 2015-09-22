@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.system.loan.dao.MfiUserImp;
+import com.system.loan.dao.MfiUserDaoImp;
 @Controller
 
 public class test01Controller {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	MfiUserImp userImp=null;
+	MfiUserDaoImp userImp=null;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
