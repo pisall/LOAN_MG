@@ -19,17 +19,17 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<c:url value="resources/css/bootstrap.min.css "/>" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<c:url value="resources/css/sb-admin.css"/>" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="<c:url value="resources/css/plugins/morris.css"/>" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<c:url value="resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-     <link rel="stylesheet" type="text/css" href="<c:url value="resources/css/v_costomize.css"/>">
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
      
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

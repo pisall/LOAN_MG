@@ -1,4 +1,4 @@
-<jsp:include page="include/_head.jsp" />
+<%@include file="include/_head.jsp"%>
 
 <body style="background-color:#fff;">
 

@@ -1,4 +1,4 @@
-<jsp:include page="include/_head.jsp" />d>
+<%@include file="include/_head.jsp"%>
 
 <body>
 
@@ -8,12 +8,12 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         
         	<!-- Fixed Up Navigation -->
-       		<jsp:include page="include/_fixed_up_nav.jsp" />
-        
-           	<!-- Side Bar Navigation -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-               <jsp:include page="include/_side_nav.jsp" />
-            </div>
+			<%@include file="include/_fixed_up_nav.jsp"%>
+
+			<!-- Side Bar Navigation -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<%@include file="include/_side_nav.jsp"%>
+			</div>
            
         </nav>
          <!-- End Navigation -->

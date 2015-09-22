@@ -62,7 +62,7 @@
 										<td>${user.usAddress}</td>
 										<td>
 										<a href="${pageContext.request.contextPath}/deleteUser/${user.usID}">Delete</a>
-										<a href="${pageContext.request.contextPath}/listSpecificUser/${user.usID}">Edit</a>
+										<a href="${pageContext.request.contextPath}/updateForm/${user.usID}">Edit</a>
 										</td>
 									</tr>
 								</c:forEach>
