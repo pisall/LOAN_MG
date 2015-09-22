@@ -48,7 +48,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
-	public String updateUser(@ModelAttribute MfiUser user){
+	public String updateUser(  @ModelAttribute MfiUser user){
 		userImp=new MfiUserImp();
 		userImp.updateUser(user);
 		return "redirect:/";
@@ -59,9 +59,15 @@ public class HomeController {
 		userImp=new MfiUserImp();
 		MfiUser user=new MfiUser();
 		user.setUsID(userID);
-		System.out.println("user ID=========================="+userID);
 		userImp.deleateUser(user);
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/listSpecificUser/{usID}", method=RequestMethod.GET)
+	public String listSpecificUser(@PathVariable("usID") Integer userID, Map<String,Object>model){
+		userImp=new MfiUserImp();
+		//model.put("listSpecificUser",userImp.listSpecificUser(userID));
+		return "update_user_test";
 	}
 	
 	

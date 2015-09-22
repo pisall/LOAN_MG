@@ -109,4 +109,15 @@ public class MfiUser {
 	public void setUsEmail(String usEmail) {
 		this.usEmail = usEmail;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MfiUser [usID=" + usID + ", usNm=" + usNm + ", usSex=" + usSex
+				+ ", usPhoto=" + usPhoto + ", usPhone=" + usPhone
+				+ ", usEmail=" + usEmail + ", usAddress=" + usAddress + "]";
+	}
+	
+	
 }

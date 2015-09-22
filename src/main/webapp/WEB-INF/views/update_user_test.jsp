@@ -37,54 +37,23 @@
 				<%-- <a href="${pageContext.request.contextPath}/listUser" >List User</a> --%>
 				<!-- /.row -->
 				<div>
-					<c:if test="${not empty users }">
-						<h2>Users</h2>
-						<table class="table table-default">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Sex</th>
-									<th>Phone</th>
-									<th>Email</th>
-									<th>Address</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${users}" var="user">
-									<tr>
-										<td>${user.usID}</td>
-										<td>${user.usNm}</td>
-										<td>${user.usSex}</td>
-										<td>${user.usPhone}</td>
-										<td>${user.usEmail}</td>
-										<td>${user.usAddress}</td>
-										<td>
-										<a href="${pageContext.request.contextPath}/deleteUser/${user.usID}">Delete</a>
-										<a href="${pageContext.request.contextPath}/listSpecificUser/${user.usID}">Edit</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-
-						</table>
-					</c:if>
-					<h2>Add User</h2>
-					<form:form action="addUser" method="post">
+					<c:if test="${not empty listSpecificUser }">
+						<h2>Update User</h2>
+						<%-- <c:out value="${listSpecificUser.usID}" /> --%>
+						<form:form action="updateUser" method="post">
 						NM :<input type="text" name="usNm" class="form-control">
-						<br />
+							<br />
 						Sex :<input type="text" name="usSex" class="form-control">
-						<br />
+							<br />
 						Phone :<input type="text" name="usPhone" class="form-control">
-						<br />
+							<br />
 						Email :<input type="text" name="usEmail" class="form-control">
-						<br />
+							<br />
 						Address :<input type="text" name="usAddress" class="form-control">
-						<br />
-						<input type="submit" value="add">
-					</form:form>
-					<br />
+							<br />
+							<input type="submit" value="add">
+						</form:form>
+					</c:if>
 				</div>
 
 

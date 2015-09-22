@@ -1,19 +1,12 @@
 package com.system.loan.dao;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.springframework.http.HttpRequest;
 
 import com.system.loan.dto.MfiUser;
 
@@ -150,7 +143,6 @@ public class MfiUserImp implements MfiUserDao {
 	         tx = session.beginTransaction();
 	         Query query=session.createQuery("From MfiUser");
 	         list=(List<MfiUser>)query.list(); 
-	         System.out.println("size list============="+list.size());
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -160,6 +152,35 @@ public class MfiUserImp implements MfiUserDao {
 	         session.close(); 
 	      }
 		return list;
+	}
+	
+	/**
+	 * List User by id 
+	 * if true 
+	 * 		return List
+	 * else 
+	 * 		return null
+	 */
+	
+	public List<MfiUser> listSpecificUser(Integer userID) {
+	      Session session = factory.openSession();
+	      Transaction tx = null;
+	      List<MfiUser> user=null;
+	      try{
+	         tx = session.beginTransaction();
+	         Query query=session.createQuery("From MfiUser Where usID=?");
+	         query.setParameter(0, userID);
+	         user=(List<MfiUser>)query.list();         
+	         System.out.println(user.toString());	         
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	         return null;
+	      }finally {
+	         session.close(); 
+	      }
+		return user;
 	}
 
 }
