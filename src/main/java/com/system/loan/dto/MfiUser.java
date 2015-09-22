@@ -13,6 +13,8 @@ public class MfiUser {
 	@GeneratedValue
 	@Column(name="us_id")
 	private Integer usID ;
+	@Column(name="us_nm")
+	private String usNm;
 	@Column(name="us_sex")
 	private String usSex;
 	@Column(name="us_photo")
@@ -23,6 +25,18 @@ public class MfiUser {
 	private String usEmail;
 	@Column(name="us_address")
 	private String usAddress;
+	/**
+	 * @return the usNm
+	 */
+	public String getUsNm() {
+		return usNm;
+	}
+	/**
+	 * @param usNm the usNm to set
+	 */
+	public void setUsNm(String usNm) {
+		this.usNm = usNm;
+	}
 	/**
 	 * @return the usAddress
 	 */

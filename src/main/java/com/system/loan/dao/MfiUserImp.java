@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.http.HttpRequest;
 
 import com.system.loan.dto.MfiUser;
 
@@ -67,12 +71,7 @@ public class MfiUserImp implements MfiUserDao {
 	      try{
 	         tx = session.beginTransaction();
 	         Query query=session.createQuery("SELECT u From MfiUser u");
-	         list=(List<MfiUser>)query.list();
-	     /*   for (Iterator iterator = 
-                     list.iterator(); iterator.hasNext();){
-				      MfiUser user = (MfiUser) iterator.next(); 
-				      System.out.print("User ID: " + user.getUsID()); 				   
-				   }*/
+	         list=(List<MfiUser>)query.list(); 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

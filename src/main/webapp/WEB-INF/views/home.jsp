@@ -1,4 +1,4 @@
-<jsp:include page="include/_head.jsp" />
+<%@include file="include/_head.jsp"%>
 
 <body>
 	<div id="wrapper">
@@ -7,11 +7,11 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 			<!-- Fixed Up Navigation -->
-			<jsp:include page="include/_fixed_up_nav.jsp" />
+			<%@include file="include/_fixed_up_nav.jsp"%>
 
 			<!-- Side Bar Navigation -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<jsp:include page="include/_side_nav.jsp" />
+				<%@include file="include/_side_nav.jsp"%>
 			</div>
 
 		</nav>
@@ -34,23 +34,29 @@
                         </ol> -->
 					</div>
 				</div>
+				<a href="${pageContext.request.contextPath}/listUser" >List User</a>
 				<!-- /.row -->
 				<div>
 					 <c:if test="${not empty users }">
 						<ul>
 							<c:forEach items="${users }" var="user">
 								<li>${user.usID }</li>
-							</c:forEach>
-							
+							</c:forEach>						
 						</ul>
 					</c:if> 
+					<br/>
+					
+					<form:form action="addUser" method="post">
+						NM :<input  type="text" name="usNm"><br/>
+						Sex :<input  type="text" name="usSex"><br/>
+						Phone :<input  type="text" name="usPhone"><br/>
+						Email :<input  type="text" name="usEmail"><br/>
+						Address :<input  type="text" name="usAddress"><br/>
+						<input type="submit" value="add">
+					</form:form>
 					
 				</div>
-					<c:forEach items="${users }" var="user">
-		${user.usID }
-		${user. }
-	
-	</c:forEach>
+				
 
 				<div class="row">
 					<div class="col-lg-6">
@@ -195,8 +201,9 @@
 
 	</div>
 	<!-- /#wrapper -->
-
-	<jsp:include page="include/_script.jsp" />
+	
+	<%@include file="include/_script.jsp"%>
+	
 
 </body>
 
