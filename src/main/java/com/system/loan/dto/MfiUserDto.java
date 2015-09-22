@@ -3,14 +3,17 @@ package com.system.loan.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_user")
 public class MfiUserDto {
-	@Id
-	@GeneratedValue
+	@Id	
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_US_ID", name="us_id")
+	@GeneratedValue(generator="us_id", strategy=GenerationType.SEQUENCE)
 	@Column(name="us_id")
 	private Integer usID ;
 	@Column(name="us_nm")
