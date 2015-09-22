@@ -38,7 +38,8 @@
 				<!-- /.row -->
 				<div>
 					<c:if test="${not empty users }">
-						<table>
+						<h2>Users</h2>
+						<table class="table table-default">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -47,6 +48,7 @@
 									<th>Phone</th>
 									<th>Email</th>
 									<th>Address</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -58,36 +60,39 @@
 										<td>${user.usPhone}</td>
 										<td>${user.usEmail}</td>
 										<td>${user.usAddress}</td>
+										<td><a href="${pageContext.request.contextPath}/deleteUser/${user.usID}">Delete</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 
 						</table>
 					</c:if>
+					<h2>Add User</h2>
 					<form:form action="addUser" method="post">
-						NM :<input type="text" name="usNm">
+						NM :<input type="text" name="usNm" class="form-control">
 						<br />
-						Sex :<input type="text" name="usSex">
+						Sex :<input type="text" name="usSex" class="form-control">
 						<br />
-						Phone :<input type="text" name="usPhone">
+						Phone :<input type="text" name="usPhone" class="form-control">
 						<br />
-						Email :<input type="text" name="usEmail">
+						Email :<input type="text" name="usEmail" class="form-control">
 						<br />
-						Address :<input type="text" name="usAddress">
+						Address :<input type="text" name="usAddress" class="form-control">
 						<br />
 						<input type="submit" value="add">
 					</form:form>
 					<br />
+					<h2>Update User</h2>
 					<form:form action="updateUser" method="post">
-						NM :<input type="text" name="usNm">
+						NM :<input type="text" name="usNm" class="form-control">
 						<br />
-						Sex :<input type="text" name="usSex">
+						Sex :<input type="text" name="usSex" class="form-control">
 						<br />
-						Phone :<input type="text" name="usPhone">
+						Phone :<input type="text" name="usPhone" class="form-control">
 						<br />
-						Email :<input type="text" name="usEmail">
+						Email :<input type="text" name="usEmail" class="form-control">
 						<br />
-						Address :<input type="text" name="usAddress">
+						Address :<input type="text" name="usAddress" class="form-control">
 						<br />
 						<input type="submit" value="add">
 					</form:form>

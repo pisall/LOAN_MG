@@ -1,5 +1,6 @@
 package com.system.loan;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Map<String, Object> model) {
+	public String home(Map<String, Object> model) {
 		userImp=new MfiUserImp();
 		model.put("users",userImp.listUser());
 		return "home";
@@ -43,14 +44,24 @@ public class HomeController {
 	public String addUser(@ModelAttribute MfiUser user){
 		userImp=new MfiUserImp();
 		userImp.insertUser(user);
-		return "home";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
 	public String updateUser(@ModelAttribute MfiUser user){
 		userImp=new MfiUserImp();
 		userImp.updateUser(user);
-		return "home";
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/deleteUser/{usID}", method=RequestMethod.GET)
+	public String deleteUser(@PathVariable("usID") Integer userID){
+		userImp=new MfiUserImp();
+		MfiUser user=new MfiUser();
+		user.setUsID(userID);
+		System.out.println("user ID=========================="+userID);
+		userImp.deleateUser(user);
+		return "redirect:/";
 	}
 	
 	
