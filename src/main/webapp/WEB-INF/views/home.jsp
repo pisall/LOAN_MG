@@ -46,14 +46,7 @@
 					</c:if> 
 					<br/>
 					
-					<form:form action="addUser" method="post">
-						NM :<input  type="text" name="usNm"><br/>
-						Sex :<input  type="text" name="usSex"><br/>
-						Phone :<input  type="text" name="usPhone"><br/>
-						Email :<input  type="text" name="usEmail"><br/>
-						Address :<input  type="text" name="usAddress"><br/>
-						<input type="submit" value="add">
-					</form:form>
+					
 					
 				</div>
 				

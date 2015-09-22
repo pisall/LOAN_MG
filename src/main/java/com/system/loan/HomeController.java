@@ -49,7 +49,7 @@ public class HomeController {
 	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
 	public String updateUser(@ModelAttribute MfiUser user){
 		userImp=new MfiUserImp();
-		userImp.insertUser(user);
+		userImp.updateUser(user);
 		return "home";
 	}
 	
