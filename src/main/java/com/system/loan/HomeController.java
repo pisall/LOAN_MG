@@ -41,7 +41,7 @@ public class HomeController {
 	public String updateUser( @ModelAttribute MfiUser user){
 		userImp=new MfiUserImp();
 		userImp.updateUser(user);
-		return "redirect:/../";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/deleteUser/{usID}", method=RequestMethod.GET)
