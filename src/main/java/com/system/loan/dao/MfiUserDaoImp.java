@@ -141,7 +141,7 @@ public class MfiUserDaoImp implements MfiUserDao {
 	      List<MfiUserDto> list=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("From MfiUser");
+	         Query query=session.createQuery("From MfiUserDto");
 	         list=(List<MfiUserDto>)query.list(); 
 	         tx.commit();
 	      }catch (HibernateException e) {
@@ -168,7 +168,7 @@ public class MfiUserDaoImp implements MfiUserDao {
 	      List<MfiUserDto> user=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("From MfiUser Where usID=?");
+	         Query query=session.createQuery("From MfiUserDto Where usID=?");
 	         query.setParameter(0, userID);
 	         user=(List<MfiUserDto>)query.list();         
 	         System.out.println(user.toString());	         
