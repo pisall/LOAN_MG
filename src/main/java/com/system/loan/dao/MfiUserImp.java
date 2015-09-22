@@ -148,8 +148,9 @@ public class MfiUserImp implements MfiUserDao {
 	      List<MfiUser> list=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("SELECT u From MfiUser u");
+	         Query query=session.createQuery("From MfiUser");
 	         list=(List<MfiUser>)query.list(); 
+	         System.out.println("size list============="+list.size());
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

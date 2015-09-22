@@ -34,22 +34,69 @@
                         </ol> -->
 					</div>
 				</div>
-				<a href="${pageContext.request.contextPath}/listUser" >List User</a>
+				<%-- <a href="${pageContext.request.contextPath}/listUser" >List User</a> --%>
 				<!-- /.row -->
 				<div>
-					 <c:if test="${not empty users }">
-						<ul>
-							<c:forEach items="${users }" var="user">
-								<li>${user.usID }</li>
-							</c:forEach>						
-						</ul>
-					</c:if> 
-					<br/>
-					
-					
-					
+					<c:if test="${not empty users }">
+						<table>
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Name</th>
+									<th>Sex</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${users}" var="user">
+									<tr>
+										<td>${user.usID}</td>
+										<td>${user.usNm}</td>
+										<td>${user.usSex}</td>
+										<td>${user.usPhone}</td>
+										<td>${user.usEmail}</td>
+										<td>${user.usAddress}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+
+						</table>
+					</c:if>
+					<form:form action="addUser" method="post">
+						NM :<input type="text" name="usNm">
+						<br />
+						Sex :<input type="text" name="usSex">
+						<br />
+						Phone :<input type="text" name="usPhone">
+						<br />
+						Email :<input type="text" name="usEmail">
+						<br />
+						Address :<input type="text" name="usAddress">
+						<br />
+						<input type="submit" value="add">
+					</form:form>
+					<br />
+					<form:form action="updateUser" method="post">
+						NM :<input type="text" name="usNm">
+						<br />
+						Sex :<input type="text" name="usSex">
+						<br />
+						Phone :<input type="text" name="usPhone">
+						<br />
+						Email :<input type="text" name="usEmail">
+						<br />
+						Address :<input type="text" name="usAddress">
+						<br />
+						<input type="submit" value="add">
+					</form:form>
+
+
+
+
 				</div>
-				
+
 
 				<div class="row">
 					<div class="col-lg-6">
@@ -194,9 +241,9 @@
 
 	</div>
 	<!-- /#wrapper -->
-	
+
 	<%@include file="include/_script.jsp"%>
-	
+
 
 </body>
 
