@@ -60,6 +60,12 @@ public class HomeController {
 		return "update_user_test";
 	}
 	
+	@RequestMapping(value="/new_co", method=RequestMethod.GET)
+	public String newCo(){
+		
+		return "new_co";
+	}
+	
 	
 	
 }
