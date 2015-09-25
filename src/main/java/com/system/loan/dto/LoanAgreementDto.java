@@ -36,16 +36,18 @@ public class LoanAgreementDto {
 	@Column(name="cu_address")
 	private String us_address;
 	@Column(name="cu_pawn")
-	private String us_pawn;
+	private String us_pawn; 
 	@Column(name="note")
 	private String note;
+	@Column(name="photo")
+	private String photo;
 	 
 	public LoanAgreementDto(){
 		  
 	}
 	 
 	public LoanAgreementDto(String us_nm, String us_nick_nm, String us_sex, String us_dob, String us_id_card,
-			String us_phone, String us_address, String us_pawn, String end_date , String note) {
+			String us_phone, String us_address, String us_pawn, String end_date ,String photo, String note) {
 		super();
 		this.us_nm = us_nm;
 		this.us_nick_nm = us_nick_nm;
@@ -55,6 +57,7 @@ public class LoanAgreementDto {
 		this.us_phone = us_phone;
 		this.us_address = us_address;
 		this.us_pawn = us_pawn; 
+		this.photo=photo;
 		this.note=note;
 	}
 	
@@ -105,6 +108,13 @@ public class LoanAgreementDto {
 	}
 	public void setUs_pawn(String us_pawn) {
 		this.us_pawn = us_pawn;
+	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	  
 	public String getNote() {

@@ -54,7 +54,7 @@ public class AcountInfoDto {
 	@Column(name="cu_id")
 	private String end_date;
 	
-	public void AcountInfoDto(){
+	public AcountInfoDto(){
 		
 	}
 	
