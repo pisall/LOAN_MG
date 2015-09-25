@@ -1,15 +1,19 @@
 package com.system.loan.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.MfiUserDto;
 
+@Service
 public class MfiUserDaoImp implements MfiUserDao {
 	public static SessionFactory factory=null;
 	
@@ -142,7 +146,8 @@ public class MfiUserDaoImp implements MfiUserDao {
 	      try{
 	         tx = session.beginTransaction();
 	         Query query=session.createQuery("From MfiUserDto");
-	         list=(List<MfiUserDto>)query.list(); 
+	         list=(ArrayList<MfiUserDto>)query.list();
+	        
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

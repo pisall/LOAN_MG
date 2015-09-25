@@ -37,54 +37,37 @@
 				<%-- <a href="${pageContext.request.contextPath}/listUser" >List User</a> --%>
 				<!-- /.row -->
 				<div>
-					<c:if test="${not empty users }">
-						<h2>Users</h2>
-						<table class="table table-default">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Sex</th>
-									<th>Phone</th>
-									<th>Email</th>
-									<th>Address</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${users}" var="user">
-									<tr>
-										<td>${user.usID}</td>
-										<td>${user.usNm}</td>
-										<td>${user.usSex}</td>
-										<td>${user.usPhone}</td>
-										<td>${user.usEmail}</td>
-										<td>${user.usAddress}</td>
-										<td>
-										<a href="${pageContext.request.contextPath}/deleteUser/${user.usID}">Delete</a>
-										<a href="${pageContext.request.contextPath}/updateForm/${user.usID}">Edit</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
 
-						</table>
-					</c:if>
+					<h2>Users</h2>
+					<table class="table table-default">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Sex</th>
+								<th>Phone</th>
+								<th>Email</th>
+								<th>Address</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody id="tableUser">
+
+						</tbody>
+
+					</table>
+
+					<div id="success"></div>
 					<h2>Add User</h2>
-					
-						NM :<input type="text" name="usNm" id="usNm" class="form-control">
-						<br />
-						Sex :<input type="text" name="usSex" id="usSex" class="form-control">
-						<br />
-						Phone :<input type="text" name="usPhone" id="usPhone" class="form-control">
-						<br />
-						Email :<input type="text" name="usEmail" id="usEmail" class="form-control">
-						<br />
-						Address :<input type="text" name="usAddress" id="usAddress" class="form-control">
-						<br />
-						<input type="submit" value="add" id="addUser">
-					
-					<br />
+
+					NM :<input type="text" name="usNm" id="usNm" class="form-control">
+					<br /> Sex :<input type="text" name="usSex" id="usSex"
+						class="form-control"> <br /> Phone :<input type="text"
+						name="usPhone" id="usPhone" class="form-control"> <br />
+					Email :<input type="text" name="usEmail" id="usEmail"
+						class="form-control"> <br /> Address :<input type="text"
+						name="usAddress" id="usAddress" class="form-control"> <br />
+					<input type="submit" value="add" id="addUser"> <br />
 				</div>
 
 
@@ -233,41 +216,169 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
-	
+
 	<script type="text/javascript">
-      $(function(){
-       $("#addUser").click(function(){
-        alert();
-        json = {
-        		
-         "name" : $("#usNm").val(),
-         "sex"    : $("#usSex").val(),
-         "phone"    : $("#usPhone").val(),
-         "email"   : $("#usEmail").val(),
-         "address"   : $("#usAddress").val()
-       
-        };
-        $.ajax({ 
-            url: "${pageContext.request.contextPath}/admin/product/add", 
-            type: 'GET', 
-            dataType: 'JSON', 
-            data: JSON.stringify(json), 
-            beforeSend: function(xhr) {
-                         xhr.setRequestHeader("Accept", "application/json");
-                         xhr.setRequestHeader("Content-Type", "application/json");
-                     },
-            success: function(data) { 
-                console.log(data);
-            },
-            error:function(data,status,er) { 
-                console.log("error: "+data+" status: "+status+" er:"+er);
-            }
-        });
-       });
-      });
-     </script>
+		$(function() {
+			
+			listUser();
 		
-	
+		
+		
+$("#addUser")
+.click(
+		function() {
+
+			json = {
+
+				"usNm" : $("#usNm").val(),
+				"usSex" : $("#usSex").val(),
+				"usPhone" : $("#usPhone").val(),
+				"usEmail" : $("#usEmail").val(),
+				"usAddress" : $("#usAddress").val()
+
+			};
+			
+			$
+					.ajax({
+						url : "${pageContext.request.contextPath}/addUser",
+						type : 'POST',
+						dataType : 'JSON',
+						data : JSON.stringify(json),
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("Accept",
+									"application/json");
+							xhr.setRequestHeader(
+									"Content-Type",
+									"application/json");
+						},
+						success : function(data) {
+
+							if (data == true) {
+								$("#success")
+										.html(
+												"<div class='alert alert-success' role='alert'>Successfully Added</div>");
+								$("#success").fadeIn(1500)
+										.fadeOut(3000);
+								
+								listUser();
+							}
+
+						},
+						error : function(data, status, er) {
+							console.log("error: " + data
+									+ " status: " + status
+									+ " er:" + er);
+						}
+					});
+		});
+
+});
+		
+		function listUser(){
+			
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath}/listUser",
+				type : 'GET',
+				dataType : 'JSON',
+				//data : JSON.stringify(json),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {
+					var results;
+					$(data).each(function(i,v){
+						results+="<tr>"
+									+"<td >"+v.usID+"</td>"
+									+"<td >"+v.usNm+"</td>"
+									+"<td >"+v.usSex+"</td>"
+									+"<td >"+v.usPhone+"</td>"
+									+"<td >"+v.usEmail+"</td>"
+									+"<td >"+v.usAddress+"</td>"
+									+"<td><button onclick='return deleteUser("+v.usID+");'>Delete</button><button onclick='return updateUser();''>Edit</button></td>"
+									+"</tr>"
+					});
+					
+					$("#tableUser").html(results);
+
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status+ " er:" + er);
+				}
+			});
+		}
+		
+
+		function deleteUser(userID) {
+		
+			json = {
+
+				"usID" : userID
+
+			};
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/deleteUser",
+				type : 'POST',
+				dataType : 'JSON',
+				data : JSON.stringify(json),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {
+
+					listUser();
+
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status+ " er:" + er);
+				}
+			});
+
+		}
+		
+		function updateUser(){
+			
+			
+			json = {
+
+					"usID" : $("#usID").html(),
+					"usNm" : $("#usNm").html(),
+					"usSex" : $("#usSex").html(),
+					"usPhone" : $("#usPhone").html(),
+					"usEmail" : $("#usEmail").html(),
+					"usAddress" : $("#usAddress").html()
+
+				};
+			
+			console.log(json);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/updateUser",
+				type : 'POST',
+				dataType : 'JSON',
+				data : JSON.stringify(json),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {					
+					
+					console.log(data);
+
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status+ " er:" + er);
+				}
+			});
+		}
+		
+		
+	</script>
+
+
 
 </body>
 

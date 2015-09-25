@@ -1,5 +1,7 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_user")
-public class MfiUserDto {
+public class MfiUserDto implements Serializable{
 	@Id	
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_US_ID", name="us_id")
 	@GeneratedValue(generator="us_id", strategy=GenerationType.SEQUENCE)
