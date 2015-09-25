@@ -66,6 +66,12 @@ public class HomeController {
 		return "new_co";
 	}
 	
+	@RequestMapping(value="/loan_agreement", method=RequestMethod.GET)
+	public String loanAgreement(){
+		
+		return "loan_agreement";
+	}
+	
 	
 	
 }
