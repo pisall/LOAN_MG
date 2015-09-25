@@ -29,7 +29,9 @@ public class LoanAgreementDao {
 		Session session = factory.openSession();
 		Transaction transection = null;
 		try{ 
+			
 			transection= session.beginTransaction();
+			
 			session.save(acodto);
 			session.save(loanAgreDto);
 			session.save(guDto);
