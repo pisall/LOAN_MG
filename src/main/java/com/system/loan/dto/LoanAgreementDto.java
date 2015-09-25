@@ -39,13 +39,34 @@ public class LoanAgreementDto {
 	private String us_pawn;
 	@Column(name="note")
 	private String note;
-	 
-	public LoanAgreementDto(){
+	
+	/*
+	 * Guarator info "this info not full need to modiy later"
+	 * 
+	 */
+	
+	private String gu_full_nm;
+	private String gu_id_card;
+	private String gu_note;
+	
+	/*
+	 * money info
+	 */
+	private float amount;
+	private float rate;
+	private String type;
+	private String period;
+	private String paytype;
+	private String start_date;
+	private String end_date;
+	
+	public void LoanAgreement(){
 		  
 	}
 	 
 	public LoanAgreementDto(String us_nm, String us_nick_nm, String us_sex, String us_dob, String us_id_card,
-			String us_phone, String us_address, String us_pawn, String end_date , String note) {
+			String us_phone, String us_address, String us_pawn, String gu_full_nm, String gu_id_card, String gu_note,
+			float amount, float rate, String type, String period, String paytype, String start_date, String end_date , String note) {
 		super();
 		this.us_nm = us_nm;
 		this.us_nick_nm = us_nick_nm;
@@ -54,7 +75,17 @@ public class LoanAgreementDto {
 		this.us_id_card = us_id_card;
 		this.us_phone = us_phone;
 		this.us_address = us_address;
-		this.us_pawn = us_pawn; 
+		this.us_pawn = us_pawn;
+		this.gu_full_nm = gu_full_nm;
+		this.gu_id_card = gu_id_card;
+		this.gu_note = gu_note;
+		this.amount = amount;
+		this.rate = rate;
+		this.type = type;
+		this.period = period;
+		this.paytype = paytype;
+		this.start_date = start_date;
+		this.end_date = end_date;
 		this.note=note;
 	}
 	
@@ -106,12 +137,73 @@ public class LoanAgreementDto {
 	public void setUs_pawn(String us_pawn) {
 		this.us_pawn = us_pawn;
 	}
-	  
+	public String getGu_full_nm() {
+		return gu_full_nm;
+	}
+	public void setGu_full_nm(String gu_full_nm) {
+		this.gu_full_nm = gu_full_nm;
+	}
+	public String getGu_id_card() {
+		return gu_id_card;
+	}
+	public void setGu_id_card(String gu_id_card) {
+		this.gu_id_card = gu_id_card;
+	}
+	public String getGu_note() {
+		return gu_note;
+	}
+	public void setGu_note(String gu_note) {
+		this.gu_note = gu_note;
+	}
+	public float getAmount() {
+		return amount;
+	}
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
+	public float getRate() {
+		return rate;
+	}
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getPeriod() {
+		return period;
+	}
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+	public String getPaytype() {
+		return paytype;
+	}
+	public void setPaytype(String paytype) {
+		this.paytype = paytype;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	
+	
 	public String getNote() {
 		return note;
 	}
 	public void setNote(String note) {
-		this.note = note;
+		this.end_date = note;
 	}
 	 
 }
