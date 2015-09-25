@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.system.loan.dto.AcountInfoDto;
 import com.system.loan.dto.GuarantorInfoDto;
+import com.system.loan.dto.LoanAgreementDto;
 
 public class LoanAgreementDao {
 	public static SessionFactory factory = null;
@@ -25,7 +26,7 @@ public class LoanAgreementDao {
 		}
 	}
 	// insert new Loan Agreement info
-	public boolean InsertNewCustomer(AcountInfoDto acodto, LoanAgreementDao loanAgreDto, GuarantorInfoDto guDto) throws IllegalStateException{
+	public boolean InsertNewCustomer(AcountInfoDto acodto, LoanAgreementDto loanAgreDto, GuarantorInfoDto guDto) throws IllegalStateException{
 		Session session = factory.openSession();
 		Transaction transection = null;
 		try{ 
