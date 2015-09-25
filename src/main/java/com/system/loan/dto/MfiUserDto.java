@@ -16,7 +16,7 @@ public class MfiUserDto implements Serializable{
 	@Id	
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_US_ID", name="us_id")
 	@GeneratedValue(generator="us_id", strategy=GenerationType.SEQUENCE)
-	@Column(name="us_id")
+	@Column(name="us_id") //us_id
 	private Integer usID ;
 	@Column(name="us_nm")
 	private String usNm;
