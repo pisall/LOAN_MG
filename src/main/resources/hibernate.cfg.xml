@@ -27,6 +27,8 @@
   <!--  <mapping resource="employee.hbm.xml"/> -->
  <!--  <mapping class="com.mvc.dto.User"/> -->
   <mapping class="com.system.loan.dto.MfiUserDto"/>
+  
+  <mapping class="com.system.loan.dto.MfiCoDto"/>
 
 </session-factory>
 </hibernate-configuration>

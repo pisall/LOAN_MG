@@ -60,6 +60,7 @@
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<div class="table-responsive">
+								<c:if test="${not empty listCo}">
 									<table class="table table-hover table-striped">
 										<thead>
 											<tr>
@@ -72,7 +73,26 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+											<c:forEach items="${listCo}" var="co">
+												<tr>
+													<td>${co.coId} <c:if test="${not empty paging}"><span>page=${paging.pageNo}</span></c:if></td>
+													<td>${co.coFirstNm} ${co.coLastNm} </td>
+													<td>
+														<c:if test="${co.coSex == \"M\"}">Male</c:if>
+														<c:if test="${co.coSex == \"F\"}">Female</c:if>
+													
+													</td>
+													<td>${co.coBrand}</td>
+													<td>${co.coPhone}</td>
+													<td><a href="#none"><span
+															class="glyphicon glyphicon-pencil"></span></a> &nbsp; <a
+														href="#none"><span class="glyphicon glyphicon-trash"></span></a>
+													</td>
+												</tr>	
+												
+											</c:forEach>
+										
+											<!-- <tr>
 												<td>2464</td>
 												<td>Prak virak</td>
 												<td>Male</td>
@@ -115,10 +135,11 @@
 														class="glyphicon glyphicon-pencil"></span></a> &nbsp; <a
 													href="#none"><span class="glyphicon glyphicon-trash"></span></a>
 												</td>
-											</tr>
+											</tr> -->
 
 										</tbody>
 									</table>
+								</c:if>
 								</div>
 
 							</div>
@@ -126,6 +147,9 @@
 
 						</div>
 						<div class="row">
+						<form rol="form" method="get">
+							
+						</form>
 							<div class="col-md-6 col-md-offset-3" style="text-align: center">
 								<ul class="pagination">
 									<li class="next"><a href="none"><span
