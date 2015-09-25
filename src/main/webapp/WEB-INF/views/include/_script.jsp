@@ -8,7 +8,7 @@
     
      <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris.min.js"></script>
      
-      <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script>
+     <%--  <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script> --%>
     
     
   

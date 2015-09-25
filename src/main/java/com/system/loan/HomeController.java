@@ -2,13 +2,17 @@ package com.system.loan;
 
 import java.util.Map;
 
+import javax.xml.ws.RequestWrapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.system.loan.dao.MfiUserDaoImp;
 import com.system.loan.dto.MfiUserDto;
@@ -30,11 +34,19 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/addUser", method=RequestMethod.POST)
+	/*@RequestMapping(value="/addUser", method=RequestMethod.POST)
 	public String addUser(@ModelAttribute MfiUserDto user){
 		userImp=new MfiUserDaoImp();
 		userImp.insertUser(user);
 		return "redirect:/";
+	}*/
+	 
+	@RequestMapping(value="/addUser", method=RequestMethod.POST)
+	public @ResponseBody Boolean addUser(@RequestBody MfiUserDto user){
+		
+		System.out.println(user.toString());
+		
+		return userImp.insertUser(user);
 	}
 	
 	@RequestMapping(value="/updateUser", method=RequestMethod.GET)
@@ -64,6 +76,12 @@ public class HomeController {
 	public String newCo(){
 		
 		return "new_co";
+	}
+	
+	@RequestMapping(value="/loan_agreement", method=RequestMethod.GET)
+	public String loanAgreement(){
+		
+		return "loan_agreement";
 	}
 	
 	

@@ -235,6 +235,11 @@
 										</div>
 									</div>
 
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Register</button>
+										<button type="button" class="btn btn-default">Cancel</button>
+									</div>
+
 
 								</form>
 							</div>
