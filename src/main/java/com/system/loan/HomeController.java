@@ -20,7 +20,7 @@ import com.system.loan.dto.MfiUserDto;
 @Controller
 public class HomeController {
 	
-	
+	@Inject
 	MfiUserDaoImp userImp = null;
 
 	/**
