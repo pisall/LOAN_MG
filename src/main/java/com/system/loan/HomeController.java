@@ -42,7 +42,8 @@ public class HomeController {
 	}*/
 	 
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
-	public @ResponseBody Boolean addUser(@RequestBody MfiUserDto user){
+	public @ResponseBody 
+	Boolean addUser(@RequestBody MfiUserDto user){
 		
 		System.out.println(user.toString());
 		

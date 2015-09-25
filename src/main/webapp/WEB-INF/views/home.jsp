@@ -71,19 +71,19 @@
 						</table>
 					</c:if>
 					<h2>Add User</h2>
-					<form:form action="addUser" method="post">
-						NM :<input type="text" name="usNm" class="form-control">
+					
+						NM :<input type="text" name="usNm" id="usNm" class="form-control">
 						<br />
-						Sex :<input type="text" name="usSex" class="form-control">
+						Sex :<input type="text" name="usSex" id="usSex" class="form-control">
 						<br />
-						Phone :<input type="text" name="usPhone" class="form-control">
+						Phone :<input type="text" name="usPhone" id="usPhone" class="form-control">
 						<br />
-						Email :<input type="text" name="usEmail" class="form-control">
+						Email :<input type="text" name="usEmail" id="usEmail" class="form-control">
 						<br />
-						Address :<input type="text" name="usAddress" class="form-control">
+						Address :<input type="text" name="usAddress" id="usAddress" class="form-control">
 						<br />
-						<input type="submit" value="add">
-					</form:form>
+						<input type="submit" value="add" id="addUser">
+					
 					<br />
 				</div>
 
@@ -233,7 +233,39 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
-
+		
+	<script type="text/javascript">
+      $(function(){
+       $("#addUser").click(function(){
+        alert();
+        json = {
+        		
+         "name" : $("#usNm").val(),
+         "sex"    : $("#usSex").val(),
+         "phone"    : $("#usPhone").val(),
+         "email"   : $("#usEmail").val(),
+         "address"   : $("#usAddress").val()
+       
+        };
+        $.ajax({ 
+            url: "${pageContext.request.contextPath}/admin/product/add", 
+            type: 'GET', 
+            dataType: 'JSON', 
+            data: JSON.stringify(json), 
+            beforeSend: function(xhr) {
+                         xhr.setRequestHeader("Accept", "application/json");
+                         xhr.setRequestHeader("Content-Type", "application/json");
+                     },
+            success: function(data) { 
+                console.log(data);
+            },
+            error:function(data,status,er) { 
+                console.log("error: "+data+" status: "+status+" er:"+er);
+            }
+        });
+       });
+      });
+     </script>
 
 </body>
 
