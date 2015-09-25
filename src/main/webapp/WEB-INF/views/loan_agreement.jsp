@@ -43,7 +43,7 @@
 							<div class="panel-heading" style="font-size: 14px;">User
 								Information</div>
 							<div class="panel-body">
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal" action ="LoanAgreementController" method = "POST" role="form">
 
 									<div>
 										<span class="glyphicon glyphicon-user"
