@@ -233,6 +233,39 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
+	
+	<script type="text/javascript">
+      $(function(){
+       $("#addUser").click(function(){
+        alert();
+        json = {
+        		
+         "name" : $("#usNm").val(),
+         "sex"    : $("#usSex").val(),
+         "phone"    : $("#usPhone").val(),
+         "email"   : $("#usEmail").val(),
+         "address"   : $("#usAddress").val()
+       
+        };
+        $.ajax({ 
+            url: "${pageContext.request.contextPath}/admin/product/add", 
+            type: 'GET', 
+            dataType: 'JSON', 
+            data: JSON.stringify(json), 
+            beforeSend: function(xhr) {
+                         xhr.setRequestHeader("Accept", "application/json");
+                         xhr.setRequestHeader("Content-Type", "application/json");
+                     },
+            success: function(data) { 
+                console.log(data);
+            },
+            error:function(data,status,er) { 
+                console.log("error: "+data+" status: "+status+" er:"+er);
+            }
+        });
+       });
+      });
+     </script>
 		
 	
 
