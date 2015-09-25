@@ -47,7 +47,9 @@ public class HomeController {
 		
 		System.out.println(user.toString());
 		
-		return userImp.insertUser(user);
+		//return userImp.insertUser(user);
+		System.out.println("Cambodia Kingdom Of Wonder");
+		return true;
 	}
 	
 	@RequestMapping(value="/updateUser", method=RequestMethod.GET)
