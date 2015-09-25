@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="mfi_account	postgres")
+@Table(name="mfi_account")
 public class AcountInfoDto {
 	/*
 	 * account sequence
@@ -17,21 +17,7 @@ public class AcountInfoDto {
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_AC_ID",name="ac_id")
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
-	
-/*	
-	 * User id Sequence
 	 
-	@Id
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_US_ID",name="us_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
-	
-	
-	 * Co_id sequence
-	 
-	@Id
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CO_ID",name="co_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)*/
-	
 	/*
 	 * acountinfo
 	 */
