@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: PC_VIRAK
-Build-Jdk: 1.8.0_40
+Build-Jdk: 1.7.0_51
+Built-By: The White Lover
 Created-By: Maven Integration for Eclipse
 
