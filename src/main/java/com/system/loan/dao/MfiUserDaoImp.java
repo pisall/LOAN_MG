@@ -17,7 +17,7 @@ import com.system.loan.dto.MfiUserDto;
 public class MfiUserDaoImp implements MfiUserDao {
 	public static SessionFactory factory=null;
 	
-	
+	//Contructor
 	public MfiUserDaoImp() {
 		 try{
 	         factory = new Configuration().configure().buildSessionFactory();

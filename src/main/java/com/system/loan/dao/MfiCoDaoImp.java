@@ -21,7 +21,8 @@ import com.system.loan.dto.pagingDto;
  */
 public class MfiCoDaoImp implements MfiCoDao {
 	public static SessionFactory factory = null;
-
+	
+	//Constructor
 	public MfiCoDaoImp() {
 		// TODO Auto-generated constructor stub
 
