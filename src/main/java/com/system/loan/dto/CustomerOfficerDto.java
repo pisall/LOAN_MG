@@ -5,9 +5,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-@Entity(name = "ForeignKeyAssoEntity")
+//@Entity(name = "ForeignKeyAssoEntity")
+@Entity
 @Table(name = "mfi_customer_officer", uniqueConstraints = @UniqueConstraint(columnNames = "co_id") )
-public class CustomerOfficer implements Serializable {
+public class CustomerOfficerDto implements Serializable {
 	/*
 	 * customer officer sequence
 	 */
@@ -22,8 +23,7 @@ public class CustomerOfficer implements Serializable {
 	@Column(name = "co_id")
 	private Integer coID;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "co_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="customerOfficer")
 	private Set<CustomerDto> customer;
 	@Column(name = "co_nm")
 	private String coName;
@@ -47,7 +47,7 @@ public class CustomerOfficer implements Serializable {
 	/**
 	 * 
 	 */
-	public CustomerOfficer() {
+	public CustomerOfficerDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -64,7 +64,7 @@ public class CustomerOfficer implements Serializable {
 	 * @param coDob
 	 * @param coAddress
 	 */
-	public CustomerOfficer(Integer coID, String coName, String coFirstname, String coSex, String coNationalID,
+	public CustomerOfficerDto(Integer coID, String coName, String coFirstname, String coSex, String coNationalID,
 			String coBrand, String coPhone, String coCpmPhone, String coDob, String coAddress) {
 		super();
 		this.coID = coID;
@@ -92,7 +92,7 @@ public class CustomerOfficer implements Serializable {
 	 * @param coDob
 	 * @param coAddress
 	 */
-	public CustomerOfficer(Integer coID, Set<CustomerDto> customer, String coName, String coFirstname, String coSex,
+	public CustomerOfficerDto(Integer coID, Set<CustomerDto> customer, String coName, String coFirstname, String coSex,
 			String coNationalID, String coBrand, String coPhone, String coCpmPhone, String coDob, String coAddress) {
 		super();
 		this.coID = coID;

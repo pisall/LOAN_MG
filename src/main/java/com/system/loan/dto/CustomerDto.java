@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Entity(name = "ForeignKeyAssoCustomerDto")
+//@Entity(name = "ForeignKeyAssoCustomerDto")
+@Entity
 @Table(name = "mfi_customer", uniqueConstraints =@UniqueConstraint(columnNames = "cu_id"))
 public class CustomerDto implements Serializable {
 	/*
@@ -24,8 +26,9 @@ public class CustomerDto implements Serializable {
 	 
 	@Column(name="cu_id")
 	private Integer customerID;
-	@ManyToOne
-	private CustomerOfficer customerOfficer;
+	@ManyToOne()
+	@JoinColumn(name="co_id")
+	private CustomerOfficerDto customerOfficer;
 	@Column(name="cu_nm")
 	private String customerName;
 	@Column(name="cu_nick_nm")
@@ -74,7 +77,7 @@ public class CustomerDto implements Serializable {
 	 * @param customerNote
 	 * @param customerPhoto
 	 */
-	public CustomerDto(Integer customerID, CustomerOfficer customerOfficer, String customerName,
+	public CustomerDto(Integer customerID, CustomerOfficerDto customerOfficer, String customerName,
 			String custoemrNickName, String customerSex, String customerDOB, String customerNationalID,
 			String customerPhone, String customerAddress, String customerPawn, String customerDtt, String customerNote,
 			String customerPhoto) {
@@ -140,7 +143,7 @@ public class CustomerDto implements Serializable {
 	/**
 	 * @return the customerOfficer
 	 */
-	public CustomerOfficer customerOfficer() {
+	public CustomerOfficerDto customerOfficer() {
 		return customerOfficer;
 	}
 	

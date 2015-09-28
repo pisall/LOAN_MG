@@ -5,7 +5,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.UserDaoImp;
 
 /**
@@ -16,16 +18,15 @@ import com.system.loan.dao.UserDaoImp;
 public class CustomerController {
 	
 	@Inject
-	UserDaoImp userImp = null;
+	CustomerDaoImp customerImp;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value ="/listCustomer", method = RequestMethod.GET)
-	public String listCustomer() {
-			
-		return "home";
-		
+	@RequestMapping(value = "/listCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
+	public @ResponseBody String listCustomer() {
+		customerImp.listCustomer();
+		return "customer_information";
 	}
 	
 	
