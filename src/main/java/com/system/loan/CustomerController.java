@@ -6,26 +6,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.system.loan.dao.MfiUserDaoImp;
+import com.system.loan.dao.UserDaoImp;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping("customer")
 public class CustomerController {
 	
 	@Inject
-	MfiUserDaoImp userImp = null;
+	UserDaoImp userImp = null;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value ={"/","home"}, method = RequestMethod.GET)
-	public String home() {
+	@RequestMapping(value ="/listCustomer", method = RequestMethod.GET)
+	public String listCustomer() {
 			
 		return "home";
 		
 	}
+	
+	
 	
 
 }

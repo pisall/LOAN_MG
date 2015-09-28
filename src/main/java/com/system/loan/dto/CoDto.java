@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_co")
-public class MfiCoDto {
+public class CoDto {
 	@Id
 	@GeneratedValue
 	@Column(name="co_id")

@@ -12,18 +12,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.system.loan.dto.MfiCoDto;
+import com.system.loan.dto.CoDto;
 import com.system.loan.dto.pagingDto;
 
 /**
  * @author PC_VIRAK
  *
  */
-public class MfiCoDaoImp implements MfiCoDao {
+public class CoDaoImp implements CoDao {
 	public static SessionFactory factory = null;
 	
 	//Constructor
-	public MfiCoDaoImp() {
+	public CoDaoImp() {
 		// TODO Auto-generated constructor stub
 
 		try {
@@ -37,15 +37,15 @@ public class MfiCoDaoImp implements MfiCoDao {
 	}
 
 	@Override
-	public List<MfiCoDto> listCo(pagingDto paging) {
+	public List<CoDto> listCo(pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session = factory.openSession();
-		List<MfiCoDto> list = null;
+		List<CoDto> list = null;
 		try {
 		Query query = session.createQuery("from MfiCoDto M where 1=1 ");
 		query.setFirstResult(paging.getPageNo());
 		query.setMaxResults(paging.getPcnt());
-			list =(List<MfiCoDto>) query.list();
+			list =(List<CoDto>) query.list();
 			session.close();
 		} catch (HibernateException e) {
 			session.close();

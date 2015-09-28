@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.system.loan.dao.MfiUserDaoImp;
-import com.system.loan.dto.MfiUserDto;
+import com.system.loan.dao.UserDaoImp;
+import com.system.loan.dto.UserDto;
 
 /**
  * Handles requests for the application home page.
@@ -21,7 +21,7 @@ import com.system.loan.dto.MfiUserDto;
 public class HomeController {
 	
 	@Inject
-	MfiUserDaoImp userImp = null;
+	UserDaoImp userImp = null;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -45,28 +45,28 @@ public class HomeController {
 	 */
 	
 	@RequestMapping(value = "/listUser", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
-	public @ResponseBody java.util.List<MfiUserDto> listUser() {
+	public @ResponseBody java.util.List<UserDto> listUser() {
 		
 		return userImp.listUser();
 
 	}
 
 	@RequestMapping(value = "/addUser", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean addUser(@RequestBody MfiUserDto user) {
+	public @ResponseBody Boolean addUser(@RequestBody UserDto user) {
 
 		return userImp.insertUser(user);
 
 	}
 
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
-	public @ResponseBody Boolean updateUser(@RequestBody MfiUserDto user) {
+	public @ResponseBody Boolean updateUser(@RequestBody UserDto user) {
 
 		return userImp.updateUser(user);
 
 	}
 
 	@RequestMapping(value = "/deleteUser", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean deleteUser(@RequestBody MfiUserDto user) {
+	public @ResponseBody Boolean deleteUser(@RequestBody UserDto user) {
 
 		return userImp.deleateUser(user);
 

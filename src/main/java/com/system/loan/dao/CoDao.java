@@ -5,16 +5,16 @@ package com.system.loan.dao;
 
 import java.util.List;
 
-import com.system.loan.dto.MfiCoDto;
-import com.system.loan.dto.MfiUserDto;
+import com.system.loan.dto.CoDto;
+import com.system.loan.dto.UserDto;
 import com.system.loan.dto.pagingDto;
 
 /**
  * @author PC_VIRAK
  *
  */
-public interface MfiCoDao {
+public interface CoDao {
 
-	public List<MfiCoDto> listCo(pagingDto paging);
+	public List<CoDto> listCo(pagingDto paging);
 	public int totalRecord(String filter);
 }

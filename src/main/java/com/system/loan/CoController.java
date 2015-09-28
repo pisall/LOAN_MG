@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.system.loan.dao.MfiCoDaoImp;
-import com.system.loan.dao.MfiUserDaoImp;
+import com.system.loan.dao.CoDaoImp;
+import com.system.loan.dao.UserDaoImp;
 import com.system.loan.dto.pagingDto;
 
 /**
@@ -28,7 +28,7 @@ public class CoController {
 	@RequestMapping(value = "/co_list", method = RequestMethod.GET)
 	public String coList(Map<String,Object> model){
 		System.out.println("no parameter");
-		MfiCoDaoImp co=new MfiCoDaoImp();
+		CoDaoImp co=new CoDaoImp();
 		pagingDto paging=new pagingDto();
 		paging.setPageNo(0);
 		paging.setPcnt(1);
@@ -48,7 +48,7 @@ public class CoController {
 	@RequestMapping(value = "/co_list/{pageNo}", method = RequestMethod.GET)
 	public String coList(@PathVariable("pageNo") Integer pno,Map<String,Object> model){
 		System.out.println("parameter page no");
-		MfiCoDaoImp co=new MfiCoDaoImp();
+		CoDaoImp co=new CoDaoImp();
 		pagingDto paging=new pagingDto();
 		paging.setPageNo(pno);
 		paging.setPcnt(1);
@@ -80,7 +80,7 @@ public class CoController {
 		}
 		
 		System.out.println("parameter page no");
-		MfiCoDaoImp co=new MfiCoDaoImp();
+		CoDaoImp co=new CoDaoImp();
 		pagingDto paging=new pagingDto();
 		paging.setPageNo(intpno);
 		paging.setPcnt(intpcnt);

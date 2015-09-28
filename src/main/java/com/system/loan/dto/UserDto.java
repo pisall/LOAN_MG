@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_user")
-public class MfiUserDto implements Serializable{
+public class UserDto implements Serializable{
 	@Id	
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_US_ID", name="us_id")
 	@GeneratedValue(generator="us_id", strategy=GenerationType.SEQUENCE)
