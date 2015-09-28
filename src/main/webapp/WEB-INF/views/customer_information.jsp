@@ -190,11 +190,35 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+   	<%@include file="include/_script.jsp"%>
+    
+    <script type="text/javascript">
+   	$(function(){
+   		listUser();
+   	}); 
+   
+    function listUser(){
+		
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath}/customer/listCustomer",
+			type : 'GET',
+			dataType : 'JSON',
+			//data : JSON.stringify(json),
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+			},
+			success : function(data) {
+				console.log("data==========="+data);
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+			},
+			error : function(data, status, er) {
+				console.log("error: " + data + " status: " + status+ " er:" + er);
+			}
+		});
+	}
+    </script>
 
 
 
