@@ -80,76 +80,8 @@
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>2464</td>
-												<td>Prak virak</td>
-												<td>Male</td>
-												<td>09-08-1990</td>
-												<td>09978797767</td>
-												<td>Phnom Penh</td>
-												<td>010 988-752</td>
-												
-												<td>
-													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-trash"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-random"></span></a>
-												</td>
-		
-											</tr>
-											<tr>
-												<td>2464</td>
-												<td>Prak virak</td>
-												<td>Male</td>
-												<td>09-08-1990</td>
-												<td>09978797767</td>
-												<td>Phnom Penh</td>
-												<td>010 988-752</td>
+										<tbody id="tableCustomer">
 											
-												<td>
-													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-trash"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-random"></span></a>
-												</td>
-											</tr>
-											<tr>
-												<td>2464</td>
-												<td>Prak virak</td>
-												<td>Male</td>
-												<td>09-08-1990</td>
-												<td>09978797767</td>
-												<td>Phnom Penh</td>
-												<td>010 988-752</td>
-												
-												<td>
-													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-trash"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-random"></span></a>
-												</td>
-											</tr>
-											<tr>
-												<td>2464</td>
-												<td>Prak virak</td>
-												<td>Male</td>
-												<td>09-08-1990</td>
-												<td>09978797767</td>
-												<td>Phnom Penh</td>
-												<td>010 988-752</td>
-											
-												<td>
-													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-trash"></span></a>
-													&nbsp;
-													<a href="#none"><span class="glyphicon glyphicon-random"></span></a>
-												</td>
-											</tr>
 											
 										</tbody>
 									</table>
@@ -191,39 +123,12 @@
     <!-- /#wrapper -->
 
    	<%@include file="include/_script.jsp"%>
+   	<script type="text/javascript">
+   		var BASE_URL="${pageContext.request.contextPath}";
+   	</script>
    	
-   <%-- 	<script src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script> --%>
+   <script src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script> 
     
-    <script type="text/javascript">
-   	$(function(){
-   		listCustomer();
-   	}); 
-   
-    function listCustomer(){
-		
-		$.ajax({
-			
-			url : "${pageContext.request.contextPath}/customer/listCustomer",
-			type : 'GET',
-			dataType : 'JSON',
-			//data : JSON.stringify(json),
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader("Accept", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
-			},
-			success : function(data) {
-				console.log("data==========="+data);
-
-			},
-			error : function(data, status, er) {
-				console.log("error: " + data + " status: " + status+ " er:" + er);
-			}
-		});
-	}
-    </script>
-
-
-
 </body>
 
 </html>
