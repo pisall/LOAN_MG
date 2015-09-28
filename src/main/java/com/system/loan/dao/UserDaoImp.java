@@ -145,7 +145,7 @@ public class UserDaoImp implements UserDao {
 	      List<UserDto> list=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("From MfiUserDto");
+	         Query query=session.createQuery("From UserDto");
 	         list=(ArrayList<UserDto>)query.list();
 	        
 	         tx.commit();
