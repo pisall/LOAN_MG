@@ -31,6 +31,8 @@
   <mapping class="com.system.loan.dto.CoDto"/>
   
   <mapping class="com.system.loan.dto.CustomerDto"/>
+  
+   <mapping class="com.system.loan.dto.CustomerOfficerDto"/>
 
 </session-factory>
 </hibernate-configuration>
