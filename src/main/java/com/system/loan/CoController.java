@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 
 import com.system.loan.dao.MfiCoDaoImp;
 import com.system.loan.dao.MfiUserDaoImp;
@@ -57,6 +58,37 @@ public class CoController {
 		model.put("paging",paging);
 		return "customer_officer";		
 		
+	}
+	
+	@RequestMapping(value="/listCo",method=RequestMethod.GET)
+	public String listCo(WebRequest webrequest,Map<String,Object> model){
+		
+		String pno=webrequest.getParameter("page_no");
+		String pcnt=webrequest.getParameter("pcnt");
+		String sw=webrequest.getParameter("sw");
+		
+		int intpno=0;
+		int intpcnt=5;
+		if(pno!=null){
+			intpno=Integer.parseInt(pno);
+		}
+		if(pcnt!=null){
+			intpcnt=Integer.parseInt(pcnt);
+		}
+		if(sw==null){
+			sw="";
+		}
+		
+		System.out.println("parameter page no");
+		MfiCoDaoImp co=new MfiCoDaoImp();
+		pagingDto paging=new pagingDto();
+		paging.setPageNo(intpno);
+		paging.setPcnt(intpcnt);
+		paging.setTotal(co.totalRecord(sw));
+		model.put("listCo", co.listCo(paging));
+		model.put("paging",paging);
+		
+		return "customer_officer";
 	}
 
 }

@@ -16,4 +16,5 @@ import com.system.loan.dto.pagingDto;
 public interface MfiCoDao {
 
 	public List<MfiCoDto> listCo(pagingDto paging);
+	public int totalRecord(String filter);
 }

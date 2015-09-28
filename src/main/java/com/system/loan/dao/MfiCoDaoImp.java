@@ -54,4 +54,22 @@ public class MfiCoDaoImp implements MfiCoDao {
 		return list;
 	}
 
+	@Override
+	public int totalRecord(String filter) {
+		// TODO Auto-generated method stub
+		Session session=factory.openSession();
+		int cnt=0;
+		try{
+			Query query=session.createQuery("select count(M.coId) from MfiCoDto M where 1=1 "+filter);
+			List<Object> list=(List<Object>)query.list();
+			for(Object ob:list){
+				cnt=Integer.parseInt(ob.toString());
+			}
+				
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
 }
