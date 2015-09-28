@@ -1,51 +1,49 @@
 package com.system.loan.dto;
 
-
 import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity(name = "ForeignKeyAssoEntity")
-@Table(name = "mfi_customer_officer", uniqueConstraints =@UniqueConstraint(columnNames = "co_id"))
+@Table(name = "mfi_customer_officer", uniqueConstraints = @UniqueConstraint(columnNames = "co_id") )
 public class CustomerOfficer implements Serializable {
 	/*
 	 * customer officer sequence
 	 */
 	@Id
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="customer_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
-	
+	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "SQ_CO_ID", name = "co_id")
+	@GeneratedValue(generator = "", strategy = GenerationType.SEQUENCE)
+
 	/*
 	 * customer officer information
 	 */
-	
-	@Column(name="co_id")
+
+	@Column(name = "co_id")
 	private Integer coID;
-	
-	 @OneToMany(cascade=CascadeType.ALL)
-	    @JoinColumn(name="co_id")
-	 private Set<CustomerDto>customer;
-	@Column(name="co_nm")
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "co_id")
+	private Set<CustomerDto> customer;
+	@Column(name = "co_nm")
 	private String coName;
-	@Column(name="co_first_nm")
+	@Column(name = "co_first_nm")
 	private String coFirstname;
-	@Column(name="co_sex")
+	@Column(name = "co_sex")
 	private String coSex;
-	@Column(name="co_national_id")
+	@Column(name = "co_national_id")
 	private String coNationalID;
-	@Column(name="co_brand")
+	@Column(name = "co_brand")
 	private String coBrand;
-	@Column(name="co_phone")
+	@Column(name = "co_phone")
 	private String coPhone;
-	@Column(name="co_cpm_phone")
+	@Column(name = "co_cpm_phone")
 	private String coCpmPhone;
-	@Column(name="dob")
+	@Column(name = "dob")
 	private String coDob;
-	@Column(name="address")
+	@Column(name = "address")
 	private String coAddress;
-	
-	
+
 	/**
 	 * 
 	 */
@@ -53,7 +51,6 @@ public class CustomerOfficer implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	/**
 	 * @param coID
@@ -81,7 +78,6 @@ public class CustomerOfficer implements Serializable {
 		this.coDob = coDob;
 		this.coAddress = coAddress;
 	}
-
 
 	/**
 	 * @param coID
@@ -112,7 +108,6 @@ public class CustomerOfficer implements Serializable {
 		this.coAddress = coAddress;
 	}
 
-
 	/**
 	 * @return the coID
 	 */
@@ -120,14 +115,13 @@ public class CustomerOfficer implements Serializable {
 		return coID;
 	}
 
-
 	/**
-	 * @param coID the coID to set
+	 * @param coID
+	 *            the coID to set
 	 */
 	public void setCoID(Integer coID) {
 		this.coID = coID;
 	}
-
 
 	/**
 	 * @return the customer
@@ -136,14 +130,13 @@ public class CustomerOfficer implements Serializable {
 		return customer;
 	}
 
-
 	/**
-	 * @param customer the customer to set
+	 * @param customer
+	 *            the customer to set
 	 */
 	public void setCustomer(Set<CustomerDto> customer) {
 		this.customer = customer;
 	}
-
 
 	/**
 	 * @return the coName
@@ -152,14 +145,13 @@ public class CustomerOfficer implements Serializable {
 		return coName;
 	}
 
-
 	/**
-	 * @param coName the coName to set
+	 * @param coName
+	 *            the coName to set
 	 */
 	public void setCoName(String coName) {
 		this.coName = coName;
 	}
-
 
 	/**
 	 * @return the coFirstname
@@ -168,14 +160,13 @@ public class CustomerOfficer implements Serializable {
 		return coFirstname;
 	}
 
-
 	/**
-	 * @param coFirstname the coFirstname to set
+	 * @param coFirstname
+	 *            the coFirstname to set
 	 */
 	public void setCoFirstname(String coFirstname) {
 		this.coFirstname = coFirstname;
 	}
-
 
 	/**
 	 * @return the coSex
@@ -184,14 +175,13 @@ public class CustomerOfficer implements Serializable {
 		return coSex;
 	}
 
-
 	/**
-	 * @param coSex the coSex to set
+	 * @param coSex
+	 *            the coSex to set
 	 */
 	public void setCoSex(String coSex) {
 		this.coSex = coSex;
 	}
-
 
 	/**
 	 * @return the coNationalID
@@ -200,14 +190,13 @@ public class CustomerOfficer implements Serializable {
 		return coNationalID;
 	}
 
-
 	/**
-	 * @param coNationalID the coNationalID to set
+	 * @param coNationalID
+	 *            the coNationalID to set
 	 */
 	public void setCoNationalID(String coNationalID) {
 		this.coNationalID = coNationalID;
 	}
-
 
 	/**
 	 * @return the coBrand
@@ -216,14 +205,13 @@ public class CustomerOfficer implements Serializable {
 		return coBrand;
 	}
 
-
 	/**
-	 * @param coBrand the coBrand to set
+	 * @param coBrand
+	 *            the coBrand to set
 	 */
 	public void setCoBrand(String coBrand) {
 		this.coBrand = coBrand;
 	}
-
 
 	/**
 	 * @return the coPhone
@@ -232,14 +220,13 @@ public class CustomerOfficer implements Serializable {
 		return coPhone;
 	}
 
-
 	/**
-	 * @param coPhone the coPhone to set
+	 * @param coPhone
+	 *            the coPhone to set
 	 */
 	public void setCoPhone(String coPhone) {
 		this.coPhone = coPhone;
 	}
-
 
 	/**
 	 * @return the coCpmPhone
@@ -248,14 +235,13 @@ public class CustomerOfficer implements Serializable {
 		return coCpmPhone;
 	}
 
-
 	/**
-	 * @param coCpmPhone the coCpmPhone to set
+	 * @param coCpmPhone
+	 *            the coCpmPhone to set
 	 */
 	public void setCoCpmPhone(String coCpmPhone) {
 		this.coCpmPhone = coCpmPhone;
 	}
-
 
 	/**
 	 * @return the coDob
@@ -264,14 +250,13 @@ public class CustomerOfficer implements Serializable {
 		return coDob;
 	}
 
-
 	/**
-	 * @param coDob the coDob to set
+	 * @param coDob
+	 *            the coDob to set
 	 */
 	public void setCoDob(String coDob) {
 		this.coDob = coDob;
 	}
-
 
 	/**
 	 * @return the coAddress
@@ -280,16 +265,17 @@ public class CustomerOfficer implements Serializable {
 		return coAddress;
 	}
 
-
 	/**
-	 * @param coAddress the coAddress to set
+	 * @param coAddress
+	 *            the coAddress to set
 	 */
 	public void setCoAddress(String coAddress) {
 		this.coAddress = coAddress;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -299,14 +285,5 @@ public class CustomerOfficer implements Serializable {
 				+ ", coPhone=" + coPhone + ", coCpmPhone=" + coCpmPhone + ", coDob=" + coDob + ", coAddress="
 				+ coAddress + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
