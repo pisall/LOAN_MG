@@ -192,14 +192,14 @@
 
    	<%@include file="include/_script.jsp"%>
    	
-   	<script src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script>
+   <%-- 	<script src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script> --%>
     
     <script type="text/javascript">
    	$(function(){
-   		listUser();
+   		listCustomer();
    	}); 
    
-    function listUser(){
+    function listCustomer(){
 		
 		$.ajax({
 			
