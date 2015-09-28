@@ -1,121 +1,294 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@Entity
-@Table(name="mfi_account")
-public class CustomerDto {
+@Entity(name = "ForeignKeyAssoEntity")
+@Table(name = "mfi_customer", uniqueConstraints =@UniqueConstraint(columnNames = "co_id"))
+public class CustomerDto implements Serializable {
 	/*
-	 * account sequence
+	 * customer sequence
 	 */
 	@Id
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_AC_ID",name="ac_id")
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="customer_id")
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
 	 
-	/*
-	 * acountinfo
+	@Column(name="cu_id")
+	private Integer customerID;
+	@ManyToOne
+	private CustomerOfficer customerOfficer;
+	@Column(name="cu_nm")
+	private String customerName;
+	@Column(name="cu_nick_nm")
+	private String custoemrNickName;
+	@Column(name="cu_sex")
+	private String customerSex;
+	@Column(name="cu_dob")
+	private String customerDOB;
+	@Column(name="cu_national_id")
+	private String customerNationalID;
+	@Column(name="cu_phone")
+	private String customerPhone;
+	@Column(name="cu_address")
+	private String customerAddress;
+	@Column(name="cu_pawn")
+	private String customerPawn;
+	@Column(name="cu_dtt")
+	private String customerDtt;
+	@Column(name="cu_note")
+	private String customerNote;
+	@Column(name="cu_photo")
+	private String customerPhoto;
+	
+	
+	/**
+	 * 
 	 */
-	@Column(name="ac_id")
-	private Integer AcId;
-	private Integer UserId;
-	private Integer CoId;
-	@Column(name="ac_amount")
-	private float amount;
-	@Column(name="cu_id")
-	private float rate;
-	@Column(name="cu_id")
-	private String type;
-	@Column(name="cu_id")
-	private String period;
-	@Column(name="cu_id")
-	private String paytype;
-	@Column(name="cu_id")
-	private String start_date;
-	@Column(name="cu_id")
-	private String end_date;
-	
-	public CustomerDto(){
-		
-	}
-	
-	public CustomerDto(Integer acId, Integer userId, Integer coId, float amount, float rate, String type,
-			String period, String paytype, String start_date, String end_date) {
+	public CustomerDto() {
 		super();
-		AcId = acId;
-		UserId = userId;
-		CoId = coId; 
-		this.amount = amount;
-		this.rate = rate;
-		this.type = type;
-		this.period = period;
-		this.paytype = paytype;
-		this.start_date = start_date;
-		this.end_date = end_date;
+		// TODO Auto-generated constructor stub
 	}
-	public Integer getAcId() {
-		return AcId;
+	
+	
+	/**
+	 * @param customerID
+	 * @param customerOfficer
+	 * @param customerName
+	 * @param custoemrNickName
+	 * @param customerSex
+	 * @param customerDOB
+	 * @param customerNationalID
+	 * @param customerPhone
+	 * @param customerAddress
+	 * @param customerPawn
+	 * @param customerDtt
+	 * @param customerNote
+	 * @param customerPhoto
+	 */
+	public CustomerDto(Integer customerID, CustomerOfficer customerOfficer, String customerName,
+			String custoemrNickName, String customerSex, String customerDOB, String customerNationalID,
+			String customerPhone, String customerAddress, String customerPawn, String customerDtt, String customerNote,
+			String customerPhoto) {
+		super();
+		this.customerID = customerID;
+		this.customerOfficer = customerOfficer;
+		this.customerName = customerName;
+		this.custoemrNickName = custoemrNickName;
+		this.customerSex = customerSex;
+		this.customerDOB = customerDOB;
+		this.customerNationalID = customerNationalID;
+		this.customerPhone = customerPhone;
+		this.customerAddress = customerAddress;
+		this.customerPawn = customerPawn;
+		this.customerDtt = customerDtt;
+		this.customerNote = customerNote;
+		this.customerPhoto = customerPhoto;
 	}
-	public void setAcId(Integer acId) {
-		AcId = acId;
+
+
+	/**
+	 * @param customerID
+	 * @param customerName
+	 * @param custoemrNickName
+	 * @param customerSex
+	 * @param customerDOB
+	 * @param customerNationalID
+	 * @param customerPhone
+	 * @param customerAddress
+	 * @param customerPawn
+	 * @param customerDtt
+	 */
+	public CustomerDto(Integer customerID, String customerName, String custoemrNickName, String customerSex,
+			String customerDOB, String customerNationalID, String customerPhone, String customerAddress,
+			String customerPawn, String customerDtt) {
+		super();
+		this.customerID = customerID;
+		this.customerName = customerName;
+		this.custoemrNickName = custoemrNickName;
+		this.customerSex = customerSex;
+		this.customerDOB = customerDOB;
+		this.customerNationalID = customerNationalID;
+		this.customerPhone = customerPhone;
+		this.customerAddress = customerAddress;
+		this.customerPawn = customerPawn;
+		this.customerDtt = customerDtt;
 	}
-	public Integer getUserId() {
-		return UserId;
+	
+	
+	/**
+	 * @return the customerID
+	 */
+	public Integer getCustomerID() {
+		return customerID;
 	}
-	public void setUserId(Integer userId) {
-		UserId = userId;
+	/**
+	 * @param customerID the customerID to set
+	 */
+	public void setCustomerID(Integer customerID) {
+		this.customerID = customerID;
 	}
-	public Integer getCoId() {
-		return CoId;
+	
+	/**
+	 * @return the customerOfficer
+	 */
+	public CustomerOfficer customerOfficer() {
+		return customerOfficer;
 	}
-	public void setCoId(Integer coId) {
-		CoId = coId;
+	
+	/**
+	 * @return the customerName
+	 */
+	public String getCustomerName() {
+		return customerName;
 	}
-	public float getAmount() {
-		return amount;
+	/**
+	 * @param customerName the customerName to set
+	 */
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-	public void setAmount(float amount) {
-		this.amount = amount;
+	/**
+	 * @return the custoemrNickName
+	 */
+	public String getCustoemrNickName() {
+		return custoemrNickName;
 	}
-	public float getRate() {
-		return rate;
+	/**
+	 * @param custoemrNickName the custoemrNickName to set
+	 */
+	public void setCustoemrNickName(String custoemrNickName) {
+		this.custoemrNickName = custoemrNickName;
 	}
-	public void setRate(float rate) {
-		this.rate = rate;
+	/**
+	 * @return the customerSex
+	 */
+	public String getCustomerSex() {
+		return customerSex;
 	}
-	public String getType() {
-		return type;
+	/**
+	 * @param customerSex the customerSex to set
+	 */
+	public void setCustomerSex(String customerSex) {
+		this.customerSex = customerSex;
 	}
-	public void setType(String type) {
-		this.type = type;
+	/**
+	 * @return the customerDOB
+	 */
+	public String getCustomerDOB() {
+		return customerDOB;
 	}
-	public String getPeriod() {
-		return period;
+	/**
+	 * @param customerDOB the customerDOB to set
+	 */
+	public void setCustomerDOB(String customerDOB) {
+		this.customerDOB = customerDOB;
 	}
-	public void setPeriod(String period) {
-		this.period = period;
+	/**
+	 * @return the customerNationalID
+	 */
+	public String getCustomerNationalID() {
+		return customerNationalID;
 	}
-	public String getPaytype() {
-		return paytype;
+	/**
+	 * @param customerNationalID the customerNationalID to set
+	 */
+	public void setCustomerNationalID(String customerNationalID) {
+		this.customerNationalID = customerNationalID;
 	}
-	public void setPaytype(String paytype) {
-		this.paytype = paytype;
+	/**
+	 * @return the customerPhone
+	 */
+	public String getCustomerPhone() {
+		return customerPhone;
 	}
-	public String getStart_date() {
-		return start_date;
+	/**
+	 * @param customerPhone the customerPhone to set
+	 */
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
 	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
+	/**
+	 * @return the customerAddress
+	 */
+	public String getCustomerAddress() {
+		return customerAddress;
 	}
-	public String getEnd_date() {
-		return end_date;
+	/**
+	 * @param customerAddress the customerAddress to set
+	 */
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
 	}
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
-	} 
+	/**
+	 * @return the customerPawn
+	 */
+	public String getCustomerPawn() {
+		return customerPawn;
+	}
+	/**
+	 * @param customerPawn the customerPawn to set
+	 */
+	public void setCustomerPawn(String customerPawn) {
+		this.customerPawn = customerPawn;
+	}
+	/**
+	 * @return the customerDtt
+	 */
+	public String getCustomerDtt() {
+		return customerDtt;
+	}
+	/**
+	 * @param customerDtt the customerDtt to set
+	 */
+	public void setCustomerDtt(String customerDtt) {
+		this.customerDtt = customerDtt;
+	}
+	/**
+	 * @return the customerNote
+	 */
+	public String getCustomerNote() {
+		return customerNote;
+	}
+	/**
+	 * @param customerNote the customerNote to set
+	 */
+	public void setCustomerNote(String customerNote) {
+		this.customerNote = customerNote;
+	}
+	/**
+	 * @return the customerPhoto
+	 */
+	public String getCustomerPhoto() {
+		return customerPhoto;
+	}
+	/**
+	 * @param customerPhoto the customerPhoto to set
+	 */
+	public void setCustomerPhoto(String customerPhoto) {
+		this.customerPhoto = customerPhoto;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CustomerDto [customerID=" + customerID + ", customerOfficer=" + customerOfficer + ", customerName="
+				+ customerName + ", custoemrNickName=" + custoemrNickName + ", customerSex=" + customerSex
+				+ ", customerDOB=" + customerDOB + ", customerNationalID=" + customerNationalID + ", customerPhone="
+				+ customerPhone + ", customerAddress=" + customerAddress + ", customerPawn=" + customerPawn
+				+ ", customerDtt=" + customerDtt + ", customerNote=" + customerNote + ", customerPhoto=" + customerPhoto
+				+ "]";
+	}
+	
+	
+	
 }
