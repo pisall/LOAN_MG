@@ -72,8 +72,11 @@
 												<th>ID</th>
 												<th>Name</th>
 												<th>Sex</th>
-												<th>Brand</th>
-												<th>Tell</th>
+												<th>DOF</th>
+												<th>National ID</th>
+												<th>Branch</th>
+												<th>Phone</th>
+												
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -82,8 +85,11 @@
 												<td>2464</td>
 												<td>Prak virak</td>
 												<td>Male</td>
+												<td>09-08-1990</td>
+												<td>09978797767</td>
 												<td>Phnom Penh</td>
 												<td>010 988-752</td>
+												
 												<td>
 													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
 													&nbsp;
@@ -97,8 +103,11 @@
 												<td>2464</td>
 												<td>Prak virak</td>
 												<td>Male</td>
+												<td>09-08-1990</td>
+												<td>09978797767</td>
 												<td>Phnom Penh</td>
 												<td>010 988-752</td>
+											
 												<td>
 													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
 													&nbsp;
@@ -111,8 +120,11 @@
 												<td>2464</td>
 												<td>Prak virak</td>
 												<td>Male</td>
+												<td>09-08-1990</td>
+												<td>09978797767</td>
 												<td>Phnom Penh</td>
 												<td>010 988-752</td>
+												
 												<td>
 													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
 													&nbsp;
@@ -125,8 +137,11 @@
 												<td>2464</td>
 												<td>Prak virak</td>
 												<td>Male</td>
+												<td>09-08-1990</td>
+												<td>09978797767</td>
 												<td>Phnom Penh</td>
 												<td>010 988-752</td>
+											
 												<td>
 													<a href="#none"><span class="glyphicon glyphicon-pencil"></span></a>
 													&nbsp;
