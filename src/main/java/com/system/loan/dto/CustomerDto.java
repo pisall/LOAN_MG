@@ -12,8 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Entity(name = "ForeignKeyAssoEntity")
-@Table(name = "mfi_customer", uniqueConstraints =@UniqueConstraint(columnNames = "co_id"))
+@Entity(name = "ForeignKeyAssoCustomerDto")
+@Table(name = "mfi_customer", uniqueConstraints =@UniqueConstraint(columnNames = "cu_id"))
 public class CustomerDto implements Serializable {
 	/*
 	 * customer sequence
@@ -55,7 +55,7 @@ public class CustomerDto implements Serializable {
 	 */
 	public CustomerDto() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	
