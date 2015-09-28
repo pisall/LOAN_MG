@@ -32,6 +32,11 @@ public class HomeController {
 		return "home";
 		
 	}
+	
+	@RequestMapping(value="customer_information")
+	public String customerInformation(){
+		return "customer_information";
+	}
 
 	/*
 	 * @RequestMapping(value="/addUser", method=RequestMethod.POST) public

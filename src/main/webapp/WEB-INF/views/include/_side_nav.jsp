@@ -1,6 +1,6 @@
 
 <ul class="nav navbar-nav side-nav">
-	<li class="active"><a href="index.html"><span
+	<li class="active"><a href="${pageContext.request.contextPath}/customer_information"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
 			Information</a></li>
 	<li><a href="charts.html"><span
