@@ -19,7 +19,7 @@ public class CustomerDto implements Serializable {
 	 * customer sequence
 	 */
 	@Id
-	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="customer_id")
+	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="cu_id")
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
 	 
 	@Column(name="cu_id")
