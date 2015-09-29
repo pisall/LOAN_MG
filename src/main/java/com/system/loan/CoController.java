@@ -52,7 +52,6 @@ public class CoController {
 		pagingDto paging=new pagingDto();
 		paging.setPageNo(pno);
 		paging.setPcnt(1);
-		//co.listCo();
 		String filter=" limit 0,5";
 		model.put("listCo", co.listCo(paging));
 		model.put("paging",paging);
@@ -63,9 +62,13 @@ public class CoController {
 	@RequestMapping(value="/listCo",method=RequestMethod.GET)
 	public String listCo(WebRequest webrequest,Map<String,Object> model){
 		
+		System.out.println(" test your");
+		
 		String pno=webrequest.getParameter("page_no");
 		String pcnt=webrequest.getParameter("pcnt");
 		String sw=webrequest.getParameter("sw");
+		int totRec=0;
+		int totPage=0;
 		
 		int intpno=0;
 		int intpcnt=5;
@@ -79,15 +82,17 @@ public class CoController {
 			sw="";
 		}
 		
-		System.out.println("parameter page no");
 		CoDaoImp co=new CoDaoImp();
 		pagingDto paging=new pagingDto();
 		paging.setPageNo(intpno);
 		paging.setPcnt(intpcnt);
-		paging.setTotal(co.totalRecord(sw));
+		paging.setSw(sw);
+		totRec=co.totalRecord(paging);
+		totPage=(int) Math.ceil((float)totRec/intpcnt);
+		paging.setTotal(totRec);
+		paging.setTotalPage(totPage);
 		model.put("listCo", co.listCo(paging));
-		model.put("paging",paging);
-		
+		model.put("paging",paging);	
 		return "customer_officer";
 	}
 

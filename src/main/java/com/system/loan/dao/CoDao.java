@@ -16,5 +16,5 @@ import com.system.loan.dto.pagingDto;
 public interface CoDao {
 
 	public List<CoDto> listCo(pagingDto paging);
-	public int totalRecord(String filter);
+	public int totalRecord(pagingDto paging);
 }

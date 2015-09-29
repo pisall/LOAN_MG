@@ -151,18 +151,36 @@
 							
 						</form>
 							<div class="col-md-6 col-md-offset-3" style="text-align: center">
+								<c:if test="${not empty paging}">
 								<ul class="pagination">
-									<li class="next"><a href="none"><span
+									
+									<li class="next">
+										<a href="
+											
+											<c:if test="${paging.pageNo==1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=1&pcnt=3</c:if>
+											<c:if test="${paging.pageNo!=1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo-1}&pcnt=3</c:if>
+											
+										"><span
 											class="glyphicon glyphicon-chevron-left"></span></a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
+									<c:forEach var="i" begin="1" end="${paging.totalPage}">
+									<c:if test="${paging.pageNo == i}">
+										<li class="active" ><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=3">${i}</a></li>
+										
+									</c:if>
+									<c:if test="${paging.pageNo != i}">
+										<li><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=3">${i}</a></li>
+									</c:if>
+									
+									</c:forEach>
 
-									<li class="next"><a href="none"><span
-											class="glyphicon glyphicon-chevron-right"></span></a></li>
+									<li class="next">
+										<a href="
+											<c:if test="${paging.pageNo==paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo}&pcnt=3</c:if>
+											<c:if test="${paging.pageNo!=paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo+1}&pcnt=3</c:if>
+											"
+										><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 								</ul>
+								</c:if>
 							</div>
 						</div>
 						<!--//panel top -->

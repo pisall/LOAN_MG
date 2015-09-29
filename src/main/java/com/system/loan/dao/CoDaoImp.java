@@ -41,32 +41,51 @@ public class CoDaoImp implements CoDao {
 		// TODO Auto-generated method stub
 		Session session = factory.openSession();
 		List<CoDto> list = null;
+		String filter="";
 		try {
-		Query query = session.createQuery("from MfiCoDto M where 1=1 ");
-		query.setFirstResult(paging.getPageNo());
-		query.setMaxResults(paging.getPcnt());
+			if(paging.getSw()!=null){
+				if(paging.getSw()!=""){
+					filter=" and (M.coFirstNm like '%"+ paging.getSw() + "%' or M.coLastNm like '%"+paging.getSw()+"%')";
+				} 
+			}
+			
+			System.out.println("fileter="+ filter);
+			Query query = session.createQuery("from CoDto M where 1=1 " + filter);
+			query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
+			query.setMaxResults(paging.getPcnt());
 			list =(List<CoDto>) query.list();
 			session.close();
 		} catch (HibernateException e) {
 			session.close();
+			System.out.println(" there error");
 			e.printStackTrace();
 		}
 		return list;
 	}
 
 	@Override
-	public int totalRecord(String filter) {
+	public int totalRecord(pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session=factory.openSession();
 		int cnt=0;
+		String filter="";
 		try{
-			Query query=session.createQuery("select count(M.coId) from MfiCoDto M where 1=1 "+filter);
+				
+			if(paging.getSw()!=null){
+				if(paging.getSw()!=""){
+					filter=" and (M.coFirstNm like '%"+ paging.getSw() + "%' or M.coLastNm like '%"+paging.getSw()+"%')";
+				} 
+			}
+			Query query=session.createQuery("select count(M.coId) from CoDto M where 1=1 "+filter);
 			List<Object> list=(List<Object>)query.list();
 			for(Object ob:list){
 				cnt=Integer.parseInt(ob.toString());
 			}
+			session.close();
 				
 		}catch(HibernateException e){
+			session.close();
+			System.out.println(" error total remord");
 			e.printStackTrace();
 		}
 		return cnt;

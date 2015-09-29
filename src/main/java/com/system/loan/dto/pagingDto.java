@@ -11,6 +11,7 @@ public class pagingDto {
 	private int pageNo;
 	private int pcnt;
 	private int total;
+	private int totalPage;
 	private String sw;
 	/**
 	 * @return the pageNo
@@ -47,6 +48,19 @@ public class pagingDto {
 	 */
 	public void setTotal(int total) {
 		this.total = total;
+	}
+	
+	/**
+	 * @return the totalPage
+	 */
+	public int getTotalPage() {
+		return totalPage;
+	}
+	/**
+	 * @param totalPage the totalPage to set
+	 */
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
 	}
 	/**
 	 * @return the sw
