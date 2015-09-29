@@ -43,12 +43,8 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         CustomerDto cus = (CustomerDto)session.get(CustomerDto.class, customer.getCustomerID()); 
-	         cus.setCustomerName(customer.getCustomerName());
-	         cus.setCustoemrNickName(customer.getCustoemrNickName());
-	         cus.setCustomerSex(customer.getCustomerSex());
-	         cus.setCustomerDOB(customer.getCustomerDOB());
-	         cus.setCustomerNationalID(customer.getCustomerNationalID());
+	         CustomerDto cus = (CustomerDto)session.get(CustomerDto.class, customer.getcuID()); 
+	        
 			 session.update(cus);
 	         tx.commit();
 	      }catch (HibernateException e) {
@@ -120,7 +116,7 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         CustomerDto usr = (CustomerDto)session.get(CustomerDto.class, customer.getCustomerID()); 
+	         CustomerDto usr = (CustomerDto)session.get(CustomerDto.class, customer.getcuID()); 
 			 session.delete(usr);
 	         tx.commit();
 	      }catch (HibernateException e) {
@@ -146,7 +142,7 @@ public static SessionFactory factory=null;
 	      List<CustomerDto> list=null;
 	      try{
 	         tx = session.beginTransaction();
-	         Query query=session.createQuery("Select C.customerID , C.customerOfficer.coName From CustomerDto C");
+	         Query query=session.createQuery("Select C.cuID , C.co.coName From CustomerDto C");
 	         list=(ArrayList<CustomerDto>)query.list();
 	         tx.commit();
 	      }catch (HibernateException e) {

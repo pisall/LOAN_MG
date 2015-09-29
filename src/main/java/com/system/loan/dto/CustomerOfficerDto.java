@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 //@Entity(name = "ForeignKeyAssoEntity")
 @Entity
-@Table(name = "mfi_customer_officer", uniqueConstraints = @UniqueConstraint(columnNames = "co_id") )
+@Table(name = "mfi_co", uniqueConstraints = @UniqueConstraint(columnNames = "co_id") )
 public class CustomerOfficerDto implements Serializable {
 	/*
 	 * customer officer sequence
@@ -23,7 +23,7 @@ public class CustomerOfficerDto implements Serializable {
 	@Column(name = "co_id")
 	private Integer coID;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="customerOfficer")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="co")
 	private Set<CustomerDto> customer;
 	@Column(name = "co_nm")
 	private String coName;
