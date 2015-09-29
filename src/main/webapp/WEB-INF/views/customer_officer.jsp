@@ -155,11 +155,9 @@
 								<ul class="pagination">
 									
 									<li class="next">
-										<a href="
-											
-											<c:if test="${paging.pageNo==1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=1&pcnt=3</c:if>
-											<c:if test="${paging.pageNo!=1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo-1}&pcnt=3</c:if>
-											
+										<a href="											
+											<c:if test="${paging.pageNo==1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=1&pcnt=${paging.pcnt}</c:if>
+											<c:if test="${paging.pageNo!=1}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo-1}&pcnt=${paging.pcnt}</c:if>											
 										"><span
 											class="glyphicon glyphicon-chevron-left"></span></a></li>
 									<c:forEach var="i" begin="1" end="${paging.totalPage}">
@@ -175,8 +173,8 @@
 
 									<li class="next">
 										<a href="
-											<c:if test="${paging.pageNo==paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo}&pcnt=3</c:if>
-											<c:if test="${paging.pageNo!=paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo+1}&pcnt=3</c:if>
+											<c:if test="${paging.pageNo==paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo}&pcnt=${paging.pcnt}</c:if>
+											<c:if test="${paging.pageNo!=paging.totalPage}">${pageContext.request.contextPath}/cocontroller/listCo?page_no=${paging.pageNo+1}&pcnt=${paging.pcnt}</c:if>
 											"
 										><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 								</ul>
