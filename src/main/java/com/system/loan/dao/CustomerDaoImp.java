@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.CustomerDto;
 
-@Service
+@Service("customerService")
 public class CustomerDaoImp implements CustomerDao {
 
 public static SessionFactory factory=null;

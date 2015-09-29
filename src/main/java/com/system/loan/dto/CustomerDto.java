@@ -2,16 +2,8 @@ package com.system.loan.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+
 
 //@Entity(name = "ForeignKeyAssocuDto")
 /*@Table(name = "mfi_customers", uniqueConstraints =@UniqueConstraint(columnNames = "cu_id"))*/
@@ -28,8 +20,11 @@ public class CustomerDto implements Serializable {
 	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	@ManyToOne()
-	@JoinColumn(name="co_id")
+	@ManyToOne( cascade =CascadeType.ALL, fetch=FetchType.EAGER )
+    @JoinTable(name="cu_co",
+        joinColumns = @JoinColumn(name="cu_id"),
+        inverseJoinColumns = @JoinColumn(name="co_id")
+    )
 	private CustomerOfficerDto co;
 	@Column(name="cu_nm")
 	private String cuName;

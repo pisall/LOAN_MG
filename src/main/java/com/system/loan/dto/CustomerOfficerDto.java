@@ -23,7 +23,11 @@ public class CustomerOfficerDto implements Serializable {
 	@Column(name = "co_id")
 	private Integer coID;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="co")
+	@OneToMany( cascade =CascadeType.ALL, fetch=FetchType.EAGER )
+    @JoinTable(name="cu_co",
+        joinColumns = @JoinColumn(name="co_id"),
+        inverseJoinColumns = @JoinColumn(name="cu_id")
+    )
 	private Set<CustomerDto> customer;
 	@Column(name = "co_nm")
 	private String coName;
