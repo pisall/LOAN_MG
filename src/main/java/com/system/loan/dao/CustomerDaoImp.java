@@ -43,7 +43,7 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         CustomerDto cus = (CustomerDto)session.get(CustomerDto.class, customer.getcuID()); 
+	         CustomerDto cus = (CustomerDto)session.get(CustomerDto.class, customer.getCuID()); 
 	        
 			 session.update(cus);
 	         tx.commit();
@@ -116,7 +116,7 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         CustomerDto usr = (CustomerDto)session.get(CustomerDto.class, customer.getcuID()); 
+	         CustomerDto usr = (CustomerDto)session.get(CustomerDto.class, customer.getCuID()); 
 			 session.delete(usr);
 	         tx.commit();
 	      }catch (HibernateException e) {
@@ -141,10 +141,11 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      List<CustomerDto> list=null;
 	      try{
-	         tx = session.beginTransaction();
-	         Query query=session.createQuery("Select C.cuID , C.co.coName From CustomerDto C");
+	        
+	         Query query=session.createQuery("From CustomerDto");
 	         list=(ArrayList<CustomerDto>)query.list();
-	         tx.commit();
+	        
+	       
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 

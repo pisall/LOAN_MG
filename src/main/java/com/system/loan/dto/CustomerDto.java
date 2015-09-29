@@ -1,30 +1,18 @@
 package com.system.loan.dto;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
-
-
-//@Entity(name = "ForeignKeyAssocuDto")
-/*@Table(name = "mfi_customers", uniqueConstraints =@UniqueConstraint(columnNames = "cu_id"))*/
 
 @Entity
 @Table(name="mfi_customers")
-public class CustomerDto implements Serializable {
-	/*
-	 * cu sequence
-	 */
+public class CustomerDto {
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="cu_id")
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
 	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	@ManyToOne( cascade =CascadeType.ALL, fetch=FetchType.EAGER )
-    @JoinTable(name="cu_co",
-        joinColumns = @JoinColumn(name="cu_id"),
-        inverseJoinColumns = @JoinColumn(name="co_id")
-    )
+	@ManyToOne
+	@JoinColumn(name="co_id")
 	private CustomerOfficerDto co;
 	@Column(name="cu_nm")
 	private String cuName;
@@ -37,7 +25,7 @@ public class CustomerDto implements Serializable {
 	@Column(name="cu_national_id")
 	private String cuNationalID;
 	@Column(name="cu_phone")
-	private String cuPhone;
+	private String cuPhone;	
 	@Column(name="cu_address")
 	private String cuAddress;
 	@Column(name="cu_pawn")
@@ -48,247 +36,162 @@ public class CustomerDto implements Serializable {
 	private String cuNote;
 	@Column(name="cu_photo")
 	private String cuPhoto;
-	
-	
-	/**
-	 * 
-	 */
-	public CustomerDto() {
-		super();
-		
-	}
-	
-	
-	/**
-	 * @param cuID
-	 * @param cuOfficer
-	 * @param cuName
-	 * @param custoemrNickName
-	 * @param cuSex
-	 * @param cuDOB
-	 * @param cuNationalID
-	 * @param cuPhone
-	 * @param cuAddress
-	 * @param cuPawn
-	 * @param cuDtt
-	 * @param cuNote
-	 * @param cuPhoto
-	 */
-	public CustomerDto(Integer cuID, CustomerOfficerDto co, String cuName,
-			String custoemrNickName, String cuSex, String cuDOB, String cuNationalID,
-			String cuPhone, String cuAddress, String cuPawn, String cuDtt, String cuNote,
-			String cuPhoto) {
-		super();
-		this.cuID = cuID;
-		this.co=co;
-		this.cuName = cuName;
-		this.cuNickName = custoemrNickName;
-		this.cuSex = cuSex;
-		this.cuDOB = cuDOB;
-		this.cuNationalID = cuNationalID;
-		this.cuPhone = cuPhone;
-		this.cuAddress = cuAddress;
-		this.cuPawn = cuPawn;
-		this.cuDtt = cuDtt;
-		this.cuNote = cuNote;
-		this.cuPhoto = cuPhoto;
-	}
-
-
-	/**
-	 * @param cuID
-	 * @param cuName
-	 * @param custoemrNickName
-	 * @param cuSex
-	 * @param cuDOB
-	 * @param cuNationalID
-	 * @param cuPhone
-	 * @param cuAddress
-	 * @param cuPawn
-	 * @param cuDtt
-	 */
-	public CustomerDto(Integer cuID, String cuName, String custoemrNickName, String cuSex,
-			String cuDOB, String cuNationalID, String cuPhone, String cuAddress,
-			String cuPawn, String cuDtt) {
-		super();
-		this.cuID = cuID;
-		this.cuName = cuName;
-		this.cuNickName = custoemrNickName;
-		this.cuSex = cuSex;
-		this.cuDOB = cuDOB;
-		this.cuNationalID = cuNationalID;
-		this.cuPhone = cuPhone;
-		this.cuAddress = cuAddress;
-		this.cuPawn = cuPawn;
-		this.cuDtt = cuDtt;
-	}
-	
-	
 	/**
 	 * @return the cuID
 	 */
-	public Integer getcuID() {
+	public Integer getCuID() {
 		return cuID;
 	}
 	/**
 	 * @param cuID the cuID to set
 	 */
-	public void setcuID(Integer cuID) {
+	public void setCuID(Integer cuID) {
 		this.cuID = cuID;
 	}
-	
 	/**
-	 * @return the cuOfficer
+	 * @return the co
 	 */
-	public CustomerOfficerDto cuOfficer() {
-		return cuOfficer();
+	public CustomerOfficerDto getCo() {
+		return co;
 	}
-	
+	/**
+	 * @param co the co to set
+	 */
+	public void setCo(CustomerOfficerDto co) {
+		this.co = co;
+	}
 	/**
 	 * @return the cuName
 	 */
-	public String getcuName() {
+	public String getCuName() {
 		return cuName;
 	}
 	/**
 	 * @param cuName the cuName to set
 	 */
-	public void setcuName(String cuName) {
+	public void setCuName(String cuName) {
 		this.cuName = cuName;
 	}
 	/**
-	 * @return the custoemrNickName
+	 * @return the cuNickName
 	 */
-	public String getCustoemrNickName() {
+	public String getCuNickName() {
 		return cuNickName;
 	}
 	/**
-	 * @param custoemrNickName the custoemrNickName to set
+	 * @param cuNickName the cuNickName to set
 	 */
-	public void setCustoemrNickName(String custoemrNickName) {
-		this.cuNickName = custoemrNickName;
+	public void setCuNickName(String cuNickName) {
+		this.cuNickName = cuNickName;
 	}
 	/**
 	 * @return the cuSex
 	 */
-	public String getcuSex() {
+	public String getCuSex() {
 		return cuSex;
 	}
 	/**
 	 * @param cuSex the cuSex to set
 	 */
-	public void setcuSex(String cuSex) {
+	public void setCuSex(String cuSex) {
 		this.cuSex = cuSex;
 	}
 	/**
 	 * @return the cuDOB
 	 */
-	public String getcuDOB() {
+	public String getCuDOB() {
 		return cuDOB;
 	}
 	/**
 	 * @param cuDOB the cuDOB to set
 	 */
-	public void setcuDOB(String cuDOB) {
+	public void setCuDOB(String cuDOB) {
 		this.cuDOB = cuDOB;
 	}
 	/**
 	 * @return the cuNationalID
 	 */
-	public String getcuNationalID() {
+	public String getCuNationalID() {
 		return cuNationalID;
 	}
 	/**
 	 * @param cuNationalID the cuNationalID to set
 	 */
-	public void setcuNationalID(String cuNationalID) {
+	public void setCuNationalID(String cuNationalID) {
 		this.cuNationalID = cuNationalID;
 	}
 	/**
 	 * @return the cuPhone
 	 */
-	public String getcuPhone() {
+	public String getCuPhone() {
 		return cuPhone;
 	}
 	/**
 	 * @param cuPhone the cuPhone to set
 	 */
-	public void setcuPhone(String cuPhone) {
+	public void setCuPhone(String cuPhone) {
 		this.cuPhone = cuPhone;
 	}
 	/**
 	 * @return the cuAddress
 	 */
-	public String getcuAddress() {
+	public String getCuAddress() {
 		return cuAddress;
 	}
 	/**
 	 * @param cuAddress the cuAddress to set
 	 */
-	public void setcuAddress(String cuAddress) {
+	public void setCuAddress(String cuAddress) {
 		this.cuAddress = cuAddress;
 	}
 	/**
 	 * @return the cuPawn
 	 */
-	public String getcuPawn() {
+	public String getCuPawn() {
 		return cuPawn;
 	}
 	/**
 	 * @param cuPawn the cuPawn to set
 	 */
-	public void setcuPawn(String cuPawn) {
+	public void setCuPawn(String cuPawn) {
 		this.cuPawn = cuPawn;
 	}
 	/**
 	 * @return the cuDtt
 	 */
-	public String getcuDtt() {
+	public String getCuDtt() {
 		return cuDtt;
 	}
 	/**
 	 * @param cuDtt the cuDtt to set
 	 */
-	public void setcuDtt(String cuDtt) {
+	public void setCuDtt(String cuDtt) {
 		this.cuDtt = cuDtt;
 	}
 	/**
 	 * @return the cuNote
 	 */
-	public String getcuNote() {
+	public String getCuNote() {
 		return cuNote;
 	}
 	/**
 	 * @param cuNote the cuNote to set
 	 */
-	public void setcuNote(String cuNote) {
+	public void setCuNote(String cuNote) {
 		this.cuNote = cuNote;
 	}
 	/**
 	 * @return the cuPhoto
 	 */
-	public String getcuPhoto() {
+	public String getCuPhoto() {
 		return cuPhoto;
 	}
 	/**
 	 * @param cuPhoto the cuPhoto to set
 	 */
-	public void setcuPhoto(String cuPhoto) {
+	public void setCuPhoto(String cuPhoto) {
 		this.cuPhoto = cuPhoto;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "cuDto [cuID=" + cuID + ", co=" + co + ", cuName="
-				+ cuName + ", custoemrNickName=" + cuNickName + ", cuSex=" + cuSex
-				+ ", cuDOB=" + cuDOB + ", cuNationalID=" + cuNationalID + ", cuPhone="
-				+ cuPhone + ", cuAddress=" + cuAddress + ", cuPawn=" + cuPawn
-				+ ", cuDtt=" + cuDtt + ", cuNote=" + cuNote + ", cuPhoto=" + cuPhoto
-				+ "]";
-	}
-	
 	
 	
 }
