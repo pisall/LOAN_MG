@@ -18,7 +18,7 @@
 				
 				var result="";
 				
-				$(data).each(function(i,v){
+				/*$(data).each(function(i,v){
 					
 					result+="<tr>"
 								+"<td></td>"
@@ -36,7 +36,7 @@
 								+"<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
 								+"</td>"		
 							+"</tr>"
-				});
+				});*/
 
 			},
 			error : function(data, status, er) {

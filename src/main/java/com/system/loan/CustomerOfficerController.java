@@ -11,25 +11,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.system.loan.dao.CustomerDaoImp;
+import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dto.CustomerDto;
+import com.system.loan.dto.CustomerOfficerDto;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("customer")
-public class CustomerController {
+@RequestMapping("customer_officer")
+public class CustomerOfficerController {
 	
 	@Inject
-	CustomerDaoImp customerImp;
+	CustomerOfficerDaoImp coImp;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/listCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
-	public @ResponseBody List<CustomerDto> listCustomer() {
+	@RequestMapping(value = "/list_customer_officer", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
+	public @ResponseBody List<CustomerOfficerDto> listCustomer() {
 		
-		return customerImp.listCustomer();
+		return coImp.listCustomerOfficer();
 	}
 	
 	
