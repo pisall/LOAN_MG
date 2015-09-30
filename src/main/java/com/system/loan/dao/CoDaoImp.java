@@ -90,5 +90,21 @@ public class CoDaoImp implements CoDao {
 		}
 		return cnt;
 	}
+	
+	public void testjoin(){
+		Session session=factory.openSession();
+		try{
+			
+			Query query=session.createQuery("select M.codto.coFirstNm from custDto M where M.cuId=1");
+			List<String> list=(List<String>)query.list();
+			for(String in:list){
+				System.out.println("inte ="+in);
+			}
+			System.out.println("size="+ list.size());
+			session.close();
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+	}
 
 }

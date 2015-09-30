@@ -95,5 +95,13 @@ public class CoController {
 		model.put("paging",paging);	
 		return "customer_officer";
 	}
+	
+	@RequestMapping(value="/testjoin",method=RequestMethod.GET)
+	public String test(){
+		CoDaoImp co=new CoDaoImp();
+		co.testjoin();
+		System.out.println("how are you?");
+		return null;
+	}
 
 }
