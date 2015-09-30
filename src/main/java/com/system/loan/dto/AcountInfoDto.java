@@ -1,5 +1,7 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 import javax.annotation.Resource;
 import javax.management.Query;
 import javax.persistence.CascadeType;
@@ -19,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  
 @Entity
 @Table(name="mfi_account")
-public class AcountInfoDto {
+public class AcountInfoDto implements Serializable {
 	 @Resource(name="sessionFactory")
 	 private SessionFactory sessionFactory;
 	/*

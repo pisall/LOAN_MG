@@ -3,6 +3,8 @@
  */
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +25,7 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="mfi_customers")
-public class custDto {
+public class custDto implements Serializable {
 	@Id
 	@Column(name="cu_id")
 	private Integer cuId;

@@ -1,10 +1,12 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -12,14 +14,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_co")
-public class CoDto {
+public class CoDto implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="co_id")
 	private int coId;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="coDto")
-	private Set<LoanAgreementDto> loanAgreementDto;
+	/*
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="coDto")
+	private Set<LoanAgreementDto> loanAgreementDto;*/
 	
 	@Column(name="co_first_nm")
 	private String coFirstNm;
@@ -191,17 +193,17 @@ public class CoDto {
 	/**
 	 * @return the loanAgreementDto
 	 */
-	public Set<LoanAgreementDto> getLoanAgreementDto() {
+	/*public Set<LoanAgreementDto> getLoanAgreementDto() {
 		return loanAgreementDto;
-	}
+	}*/
 
 	/**
 	 * @param loanAgreementDto the loanAgreementDto to set
 	 */
-	public void setLoanAgreementDto(Set<LoanAgreementDto> loanAgreementDto) {
+	/*public void setLoanAgreementDto(Set<LoanAgreementDto> loanAgreementDto) {
 		this.loanAgreementDto = loanAgreementDto;
 	}
-
+*/
 	
 	
 	

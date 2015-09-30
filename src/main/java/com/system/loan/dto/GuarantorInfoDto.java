@@ -1,5 +1,7 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="mfi_guarantor")
-public class GuarantorInfoDto { 
+public class GuarantorInfoDto implements Serializable { 
 	/*
 	 * Guarantor info "this info not full need to modify later"
 	 * 

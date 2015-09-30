@@ -1,10 +1,12 @@
 package com.system.loan.dto;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +20,7 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="mfi_customers")
-public class LoanAgreementDto {
+public class LoanAgreementDto implements Serializable {
 
 	/*
 	 * User info 
@@ -30,7 +32,7 @@ public class LoanAgreementDto {
 	@Column(name="cu_id")
 	private Integer cu_id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="co_id")
 	private CoDto coDto;
 	
