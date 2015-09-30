@@ -37,13 +37,13 @@
 				<div class="row" style="font-size: 12px;">
 
 					<!-- Form User Information -->
+				<form class="form-horizontal" action="newLoanAgreementGetData" method ="POST" role="form">
 
 					<div class="col-md-6 col-lg-6">
 						<div class="panel panel-default">
 							<div class="panel-heading" style="font-size: 14px;">User
 								Information</div>
 							<div class="panel-body">
-								<form class="form-horizontal" action="LoanAgreementController" method ="POST" role="form">
 
 									<div>
 										<span class="glyphicon glyphicon-user"
@@ -124,23 +124,9 @@
 											<textarea class="form-control" rows="7" name="cu_pawn" id="user_pawn" placeholder="User Pawn"></textarea>
 										</div>
 									</div>
-
 									
-
-								</form>
-							</div>
-						</div>
-					</div>
-
-					<!-- Loan Information -->
-
-					<div class="col-md-6 col-lg-6">
-						<div class="panel panel-default">
-							<div class="panel-heading" style="font-size: 14px;">Loan
-								Information</div>
-							<div class="panel-body">
-								<form class="form-horizontal" role="form">
-										
+									<hr/>
+									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
 											Guarantor</label>
@@ -170,9 +156,9 @@
 									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Sex</label>
+											DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="" id="gu_dob"
+											<input type="text" class="form-control" name="gu_dob" id="gu_dob"
 												placeholder="Guarantor dob">
 										</div>
 									</div> 
@@ -186,7 +172,7 @@
 									</div>
 										<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Sex</label>
+											Phone</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="gu_phone" id="gu_phone"
 												placeholder="Guarantor phone">
@@ -195,7 +181,7 @@
 									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Sex</label>
+											Address</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="gu_address" id="gu_address"
 												placeholder="Guarantor address">
@@ -204,7 +190,7 @@
 									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Sex</label>
+											Date Time</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="gu_dtt" id="gu_dtt"
 												placeholder="Guarantor Date Time">
@@ -213,7 +199,7 @@
 									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Sex</label>
+											Photo</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="photo" id="photo"
 												placeholder="Guarantor photo">
@@ -227,7 +213,20 @@
 											<textarea class="form-control" rows="3" name="gu_note" id="gu_note" placeholder="Guarantor Note"></textarea>
 										</div>
 									</div>
-									<hr /> 
+									
+									 
+							</div>
+						</div>
+					</div>
+
+					<!-- Loan Information -->
+
+					<div class="col-md-6 col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="font-size: 14px;">Loan
+								Information</div>
+							<div class="panel-body">
+								 
 									<!-- account infor  -->
 									<div class="form-group">
 										<label class="control-label col-sm-2">Amount</label>
@@ -304,12 +303,12 @@
 									</div>
 
 
-								</form>
+								 
 							</div>
 						</div>
 					</div>
 
-
+					</form>
 				</div>
 				<!-- //list -->
 
