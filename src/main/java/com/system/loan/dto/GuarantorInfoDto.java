@@ -1,10 +1,13 @@
 package com.system.loan.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,104 +23,129 @@ public class GuarantorInfoDto {
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
 	
 	@Column(name="gu_id")
-	private Integer GuId;
+	private Integer gu_id;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cus_id")
+	private LoanAgreementDto loanAgreementDto;
+	
 	@Column (name="cu_id")
-	private Integer CuId; 
+	private Integer cu_id; 
+	
 	@Column(name="gu_nm")
-	private String gu_full_nm;
+	private String gu_nm;
+	
 	@Column(name="gu_sex")
-	private String GuSex;
+	private String gu_sex;
+	
 	@Column(name="gu_national_id")
-	private String gu_id_card;
+	private String gu_national_id;
+	
 	@Column(name="gu_phone")
-	private String gu_Phone;
+	private String gu_phone;
+	
 	@Column(name="gu_address")
-	private String guaddress;
+	private String gu_address;
+	
 	@Column(name="gu_note")
 	private String gu_note;
+	
 	@Column(name="gu_dtt")
-	private String dtt;
+	private String gu_dtt;
+	
 	@Column(name="photo")
-	private String Photo;
+	private String photo;
 	
 	public GuarantorInfoDto(){
 		
 	}
-	
-	
-	public GuarantorInfoDto(Integer guId, Integer cuId, String gu_full_nm, String guSex, String gu_id_card,
-			String gu_Phone, String guaddress, String gu_note, String dtt, String photo) {
-		super();
-		GuId = guId;
-		CuId = cuId;
-		this.gu_full_nm = gu_full_nm;
-		GuSex = guSex;
-		this.gu_id_card = gu_id_card;
-		this.gu_Phone = gu_Phone;
-		this.guaddress = guaddress;
-		this.gu_note = gu_note;
-		this.dtt = dtt;
-		Photo = photo;
+
+	public Integer getGu_id() {
+		return gu_id;
 	}
-	public Integer getGuId() {
-		return GuId;
+
+	public void setGu_id(Integer gu_id) {
+		this.gu_id = gu_id;
 	}
-	public void setGuId(Integer guId) {
-		GuId = guId;
+
+	public Integer getCu_id() {
+		return cu_id;
 	}
-	public Integer getCuId() {
-		return CuId;
+
+	public void setCu_id(Integer cu_id) {
+		this.cu_id = cu_id;
 	}
-	public void setCuId(Integer cuId) {
-		CuId = cuId;
+
+	public String getGu_nm() {
+		return gu_nm;
 	}
-	public String getGu_full_nm() {
-		return gu_full_nm;
+
+	public void setGu_nm(String gu_nm) {
+		this.gu_nm = gu_nm;
 	}
-	public void setGu_full_nm(String gu_full_nm) {
-		this.gu_full_nm = gu_full_nm;
+
+	public String getGu_sex() {
+		return gu_sex;
 	}
-	public String getGuSex() {
-		return GuSex;
+
+	public void setGu_sex(String gu_sex) {
+		this.gu_sex = gu_sex;
 	}
-	public void setGuSex(String guSex) {
-		GuSex = guSex;
+
+	public String getGu_national_id() {
+		return gu_national_id;
 	}
-	public String getGu_id_card() {
-		return gu_id_card;
+
+	public void setGu_national_id(String gu_national_id) {
+		this.gu_national_id = gu_national_id;
 	}
-	public void setGu_id_card(String gu_id_card) {
-		this.gu_id_card = gu_id_card;
+
+	public String getGu_phone() {
+		return gu_phone;
 	}
-	public String getGu_Phone() {
-		return gu_Phone;
+
+	public void setGu_phone(String gu_phone) {
+		this.gu_phone = gu_phone;
 	}
-	public void setGu_Phone(String gu_Phone) {
-		this.gu_Phone = gu_Phone;
+
+	public String getGu_address() {
+		return gu_address;
 	}
-	public String getGuaddress() {
-		return guaddress;
+
+	public void setGu_address(String gu_address) {
+		this.gu_address = gu_address;
 	}
-	public void setGuaddress(String guaddress) {
-		this.guaddress = guaddress;
-	}
+
 	public String getGu_note() {
 		return gu_note;
 	}
+
 	public void setGu_note(String gu_note) {
 		this.gu_note = gu_note;
 	}
-	public String getDtt() {
-		return dtt;
+
+	public String getGu_dtt() {
+		return gu_dtt;
 	}
-	public void setDtt(String dtt) {
-		this.dtt = dtt;
+
+	public void setGu_dtt(String gu_dtt) {
+		this.gu_dtt = gu_dtt;
 	}
+
 	public String getPhoto() {
-		return Photo;
+		return photo;
 	}
+
 	public void setPhoto(String photo) {
-		Photo = photo;
+		this.photo = photo;
 	}
- 
+
+	public LoanAgreementDto getLoanAgreementDto() {
+		return loanAgreementDto;
+	}
+
+	public void setLoanAgreementDto(LoanAgreementDto loanAgreementDto) {
+		this.loanAgreementDto = loanAgreementDto;
+	}
+	 
 }

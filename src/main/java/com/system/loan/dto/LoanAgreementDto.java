@@ -1,12 +1,18 @@
 package com.system.loan.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="mfi_customers")
@@ -21,26 +27,47 @@ public class LoanAgreementDto {
 	
 	@Column(name="cu_id")
 	private Integer cu_id;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="co_id")
+	private CoDto coDto;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="loanAgreementDto")
+	private AcountInfoDto acountInfoDto;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="loanAgreementDto")
+	private GuarantorInfoDto gurantorInfoDto;
+	
 	@Column(name="cu_nm")
 	private String cu_nm;
+	
 	@Column(name="cu_nick_nm")
 	private String cu_nick_nm;
+	
 	@Column(name="cu_sex")
 	private String cu_sex;
+	
 	@Column(name="cu_dob")
 	private String cu_dob;
+	
 	@Column(name="cu_national_id")
 	private String cu_id_card;
+	
 	@Column(name="cu_phone")
 	private String cu_phone;
+	
 	@Column(name="cu_address")
 	private String cu_address;
+	
 	@Column(name="cu_pawn")
 	private String cu_pawn; 
+	
 	@Column(name="note")
 	private String cu_note;
+	
 	@Column(name="photo")
 	private String cu_photo;
+	
 	
 	public LoanAgreementDto(){
 		
@@ -126,6 +153,30 @@ public class LoanAgreementDto {
 	}
 	public void setCu_photo(String cu_photo) {
 		this.cu_photo = cu_photo;
+	}
+
+	public CoDto getCoDto() {
+		return coDto;
+	}
+
+	public void setCoDto(CoDto coDto) {
+		this.coDto = coDto;
+	}
+
+	public AcountInfoDto getAcountInfoDto() {
+		return acountInfoDto;
+	}
+
+	public void setAcountInfoDto(AcountInfoDto acountInfoDto) {
+		this.acountInfoDto = acountInfoDto;
+	}
+
+	public GuarantorInfoDto getGurantorInfoDto() {
+		return gurantorInfoDto;
+	}
+
+	public void setGurantorInfoDto(GuarantorInfoDto gurantorInfoDto) {
+		this.gurantorInfoDto = gurantorInfoDto;
 	}
 	 
 	 

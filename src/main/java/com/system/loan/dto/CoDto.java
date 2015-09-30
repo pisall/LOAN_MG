@@ -1,12 +1,10 @@
 package com.system.loan.dto;
 
-import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +15,9 @@ public class CoDto {
 	@GeneratedValue
 	@Column(name="co_id")
 	private int coId;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="coDto")
+	private LoanAgreementDto loanAgreementDto;
 	
 	@Column(name="co_first_nm")
 	private String coFirstNm;
@@ -44,10 +45,6 @@ public class CoDto {
 	
 	@Column(name="address")
 	private String address;
-	
-	@OneToMany
-    @JoinColumn(name="co_id")
-	private Set<custDto> custdot;
 
 	/**
 	 * @return the coId
@@ -189,18 +186,12 @@ public class CoDto {
 		this.address = address;
 	}
 
-	/**
-	 * @return the custdot
-	 */
-	public Set<custDto> getCustdot() {
-		return custdot;
+	public LoanAgreementDto getLoanAgreementDto() {
+		return loanAgreementDto;
 	}
 
-	/**
-	 * @param custdot the custdot to set
-	 */
-	public void setCustdot(Set<custDto> custdot) {
-		this.custdot = custdot;
+	public void setLoanAgreementDto(LoanAgreementDto loanAgreementDto) {
+		this.loanAgreementDto = loanAgreementDto;
 	}
 	
 	

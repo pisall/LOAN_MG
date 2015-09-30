@@ -1,6 +1,8 @@
 package com.system.loan.dao;
 
-import org.hibernate.HibernateException; 
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 
 import com.system.loan.dto.AcountInfoDto;
+import com.system.loan.dto.CoDto;
 import com.system.loan.dto.GuarantorInfoDto;
 import com.system.loan.dto.LoanAgreementDto;
 
@@ -29,12 +32,29 @@ public class LoanAgreementDao {
 	public boolean InsertNewCustomer(AcountInfoDto acodto, LoanAgreementDto loanAgreDto, GuarantorInfoDto guDto) throws IllegalStateException{
 		Session session = factory.openSession();
 		Transaction transection = null;
-		try{ 
+		Integer co_id =null;
+		CoDto codto =null;
+		
+		 //Session session = sessionFactory.getCurrentSession(); 
+		 // Create a Hibernate query (HQL)
+		
+		  
+		try{  
+			transection= session.beginTransaction(); 
+			// Retrieve session from Hibernate 
+			//co_id=query;
+			 //Query query = session.createQuery("nextval('co_id')");
+			 //co_id = query.uniqueResult();
 			
-			transection= session.beginTransaction();
-			
-			session.save(acodto);
+			codto = (CoDto) session.get(CoDto.class, 1);
+			System.out.println("9999999CO_ID get form login :="+codto); 
+			loanAgreDto.setCoDto(codto);
 			session.save(loanAgreDto);
+			 
+			//codto=new CoDto();
+			//codto.setCoId(co_id);
+			session.save(acodto);
+			//session.save(loanAgreDto);
 			session.save(guDto);
 			
 			transection.commit(); 
@@ -47,7 +67,5 @@ public class LoanAgreementDao {
 		}
 		return true;
 	} 
-	
-	
-	
+	 
 }
