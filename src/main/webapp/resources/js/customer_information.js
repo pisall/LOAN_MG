@@ -41,7 +41,7 @@ function pagePrevious() {
 		page_no--;
 		totalPage = value.PAGING.totalPage;
 		alert(page_no);
-		if (page_no> totalPage) {
+		if (page_no +1> totalPage) {
 			page_no = totalPage
 			alert("cannot previous");
 		}
