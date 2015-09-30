@@ -6,9 +6,9 @@ $(function() {
 	listCus(page_no);
 
 	
-	pageNext();
+	//pageNext();
 
-	pagePrevious();
+	//pagePrevious();
 });
 
 function loadPaging() {
@@ -40,15 +40,12 @@ function pagePrevious() {
 		page_no = $(this).siblings(".active").children("a").html();
 		page_no--;
 		totalPage = value.PAGING.totalPage;
-		alert(page_no);
-		if (page_no +1> totalPage) {
-			page_no = totalPage
+		if (page_no < 1) {
+			page_no = 1
 			alert("cannot previous");
 		}
 
 		listCus(page_no);
-		
-		console.log(page_no)
 
 	});
 }
@@ -112,27 +109,27 @@ function listCus(pageNo) {
 					$(data)
 							.each(
 									function(i, v) {
-
+										console.log(v);
 										result += "<tr>" + "<td>"
-												+ v[0]
+												+ v.REC[i].cuID
 												+ "</td>"
 												+ "<td>"
-												+ v[1]
+												+ v.REC[i].cuName
 												+ "</td>"
 												+ "<td>"
-												+ v[2]
+												+ v.REC[i].cuSex
 												+ "</td>"
 												+ "<td>"
-												+ v[3]
+												+ v.REC[i].cuDOB
 												+ "</td>"
 												+ "<td>"
-												+ v[4]
+												+ v.REC[i].cuNationalID
 												+ "</td>"
 												+ "<td>"
-												+ v[5]
+												+ v.REC[i].cuAddress
 												+ "</td>"
 												+ "<td>"
-												+ v[6]
+												+ v.REC[i].cuPhone
 												+ "</td>"
 												+ "<td>"
 												+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
