@@ -74,7 +74,7 @@
 												<th>Sex</th>
 												<th>DOF</th>
 												<th>National ID</th>
-												<th>Branch</th>
+												<th>Address</th>
 												<th>Phone</th>
 												
 												<th>Action</th>
@@ -93,15 +93,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-md-offset-3" style="text-align:center">
-								<ul class="pagination">
-								   <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-								  <li class="active"><a href="#">1</a></li>
-								  <li><a href="#">2</a></li>
-								  <li><a href="#">3</a></li>
-								  <li><a href="#">4</a></li>
-								  <li><a href="#">5</a></li>
-								  
-								  <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+								<ul class="pagination" id="paging">
 								</ul>
 							</div>
 						</div>

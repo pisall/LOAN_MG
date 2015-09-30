@@ -1,8 +1,7 @@
 package com.system.loan.dto;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,15 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "mfi_co")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@co_id")
 public class CustomerOfficerDto implements Serializable {
 	@Id
 	@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "SQ_CO_ID", name = "co_id")
@@ -33,11 +29,8 @@ public class CustomerOfficerDto implements Serializable {
 
 	@Column(name = "co_id")
 	private Integer coID;
-
-	/*@OneToMany(mappedBy = "customerOfficerDto")*/
 	 @OneToMany(mappedBy = "customerOfficerDto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @Column(nullable = true)
-	 @JsonManagedReference
+	 @JsonBackReference
 	private Set<CustomerDto> customerDto;
 	@Column(name = "co_nm")
 	private String coName;
