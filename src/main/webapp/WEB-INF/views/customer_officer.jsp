@@ -162,11 +162,11 @@
 											class="glyphicon glyphicon-chevron-left"></span></a></li>
 									<c:forEach var="i" begin="1" end="${paging.totalPage}">
 									<c:if test="${paging.pageNo == i}">
-										<li class="active" ><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=3">${i}</a></li>
+										<li class="active" ><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=${paging.pcnt}">${i}</a></li>
 										
 									</c:if>
 									<c:if test="${paging.pageNo != i}">
-										<li><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=3">${i}</a></li>
+										<li><a href="${pageContext.request.contextPath}/cocontroller/listCo?page_no=${i}&pcnt=${paging.pcnt}">${i}</a></li>
 									</c:if>
 									
 									</c:forEach>

@@ -1,5 +1,7 @@
 package com.system.loan.dto;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,10 +35,10 @@ public class LoanAgreementDto {
 	private CoDto coDto;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="loanAgreementDto")
-	private AcountInfoDto acountInfoDto;
+	private Set<AcountInfoDto> acountInfoDto;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="loanAgreementDto")
-	private GuarantorInfoDto gurantorInfoDto;
+	private Set<GuarantorInfoDto> gurantorInfoDto;
 	
 	@Column(name="cu_nm")
 	private String cu_nm;
@@ -163,21 +165,36 @@ public class LoanAgreementDto {
 		this.coDto = coDto;
 	}
 
-	public AcountInfoDto getAcountInfoDto() {
-		return acountInfoDto;
-	}
-
-	public void setAcountInfoDto(AcountInfoDto acountInfoDto) {
-		this.acountInfoDto = acountInfoDto;
-	}
-
-	public GuarantorInfoDto getGurantorInfoDto() {
+	
+	/**
+	 * @return the gurantorInfoDto
+	 */
+	public Set<GuarantorInfoDto> getGurantorInfoDto() {
 		return gurantorInfoDto;
 	}
 
-	public void setGurantorInfoDto(GuarantorInfoDto gurantorInfoDto) {
+	/**
+	 * @param gurantorInfoDto the gurantorInfoDto to set
+	 */
+	public void setGurantorInfoDto(Set<GuarantorInfoDto> gurantorInfoDto) {
 		this.gurantorInfoDto = gurantorInfoDto;
 	}
+
+	/**
+	 * @return the acountInfoDto
+	 */
+	public Set<AcountInfoDto> getAcountInfoDto() {
+		return acountInfoDto;
+	}
+
+	/**
+	 * @param acountInfoDto the acountInfoDto to set
+	 */
+	public void setAcountInfoDto(Set<AcountInfoDto> acountInfoDto) {
+		this.acountInfoDto = acountInfoDto;
+	}
+
+	
 	 
 	 
 }
