@@ -23,6 +23,9 @@
    </property>
 	
 	<property name="hibernate.hbm2ddl.auto">update</property>
+	
+	
+	
    <!-- List of XML mapping files -->
   <!--  <mapping resource="employee.hbm.xml"/> -->
  <!--  <mapping class="com.mvc.dto.User"/> -->

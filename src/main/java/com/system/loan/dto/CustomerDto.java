@@ -1,19 +1,37 @@
 package com.system.loan.dto;
 
-import javax.persistence.*;
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="mfi_customers")
-public class CustomerDto {
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@cu_id")
+public class CustomerDto implements Serializable {
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="cu_id")
 	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
 	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	@ManyToOne
-	@JoinColumn(name="co_id")
-	private CustomerOfficerDto co;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="co_id")
+	@JsonBackReference
+	private CustomerOfficerDto customerOfficerDto;
 	@Column(name="cu_nm")
 	private String cuName;
 	@Column(name="cu_nick_nm")
@@ -37,6 +55,18 @@ public class CustomerDto {
 	@Column(name="cu_photo")
 	private String cuPhoto;
 	/**
+	 * @return the customerOfficerDto
+	 */
+	public CustomerOfficerDto getCustomerOfficerDto() {
+		return customerOfficerDto;
+	}
+	/**
+	 * @param customerOfficerDto the customerOfficerDto to set
+	 */
+	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
+		this.customerOfficerDto = customerOfficerDto;
+	}
+	/**
 	 * @return the cuID
 	 */
 	public Integer getCuID() {
@@ -47,18 +77,6 @@ public class CustomerDto {
 	 */
 	public void setCuID(Integer cuID) {
 		this.cuID = cuID;
-	}
-	/**
-	 * @return the co
-	 */
-	public CustomerOfficerDto getCo() {
-		return co;
-	}
-	/**
-	 * @param co the co to set
-	 */
-	public void setCo(CustomerOfficerDto co) {
-		this.co = co;
 	}
 	/**
 	 * @return the cuName
@@ -192,6 +210,18 @@ public class CustomerDto {
 	public void setCuPhoto(String cuPhoto) {
 		this.cuPhoto = cuPhoto;
 	}
+	/**
+	 * @return the customerOfficerDto
+	 *//*
+	public CustomerOfficerDto getCustomerOfficerDto() {
+		return customerOfficerDto;
+	}
+	*//**
+	 * @param customerOfficerDto the customerOfficerDto to set
+	 *//*
+	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
+		this.customerOfficerDto = customerOfficerDto;
+	}*/
 	
 	
 }

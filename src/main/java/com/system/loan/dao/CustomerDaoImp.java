@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.system.loan.dto.CustomerDto;
 
 @Service("customerService")
+
 public class CustomerDaoImp implements CustomerDao {
 
 public static SessionFactory factory=null;
@@ -141,11 +142,13 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      List<CustomerDto> list=null;
 	      try{
-	        
-	         Query query=session.createQuery("From CustomerDto");
-	         list=(ArrayList<CustomerDto>)query.list();
-	        
-	       
+	        tx = session.beginTransaction();
+	         Query query=session.createQuery("From CustomerDto C Where C.cuID=1");
+	         list=(List<CustomerDto>)query.list();	         
+	         for(CustomerDto customer:list){
+	        	 System.out.println(" Address :" + customer.getCustomerOfficerDto().getCoAddress());
+	         }
+	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 

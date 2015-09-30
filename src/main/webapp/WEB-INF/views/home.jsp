@@ -287,6 +287,7 @@ $("#addUser")
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
+					console.log(data);
 					var results;
 					$(data).each(function(i,v){
 						results+="<tr>"
