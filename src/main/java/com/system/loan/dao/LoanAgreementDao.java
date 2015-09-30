@@ -47,15 +47,15 @@ public class LoanAgreementDao {
 			 //co_id = query.uniqueResult();
 			
 			codto = (CoDto) session.get(CoDto.class, 1);
+			
 			System.out.println("9999999CO_ID get form login :="+codto); 
 			loanAgreDto.setCoDto(codto);
-			session.save(loanAgreDto);
-			 
+			session.save(loanAgreDto); 
 			//codto=new CoDto();
 			//codto.setCoId(co_id);
-			session.save(acodto);
+			//session.save(acodto);
 			//session.save(loanAgreDto);
-			session.save(guDto);
+			//session.save(guDto);
 			
 			transection.commit(); 
 		}catch(HibernateException e){
