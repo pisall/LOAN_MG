@@ -1,5 +1,7 @@
 package com.system.loan.dto;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ public class CoDto {
 	private int coId;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="coDto")
-	private LoanAgreementDto loanAgreementDto;
+	private Set<LoanAgreementDto> loanAgreementDto;
 	
 	@Column(name="co_first_nm")
 	private String coFirstNm;
@@ -186,13 +188,20 @@ public class CoDto {
 		this.address = address;
 	}
 
-	public LoanAgreementDto getLoanAgreementDto() {
+	/**
+	 * @return the loanAgreementDto
+	 */
+	public Set<LoanAgreementDto> getLoanAgreementDto() {
 		return loanAgreementDto;
 	}
 
-	public void setLoanAgreementDto(LoanAgreementDto loanAgreementDto) {
+	/**
+	 * @param loanAgreementDto the loanAgreementDto to set
+	 */
+	public void setLoanAgreementDto(Set<LoanAgreementDto> loanAgreementDto) {
 		this.loanAgreementDto = loanAgreementDto;
 	}
+
 	
 	
 	
