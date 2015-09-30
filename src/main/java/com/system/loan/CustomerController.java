@@ -30,9 +30,7 @@ public class CustomerController {
 	public @ResponseBody List<CustomerDto> listCustomer() {
 		
 		return customerImp.listCustomer();
+	
 	}
 	
-	
-	
-
 }

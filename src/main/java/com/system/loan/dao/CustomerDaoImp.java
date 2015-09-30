@@ -143,8 +143,11 @@ public static SessionFactory factory=null;
 	      List<CustomerDto> list=null;
 	      try{
 	        tx = session.beginTransaction();
-	         Query query=session.createQuery("Select  C From CustomerDto C");
-	         list=(ArrayList<CustomerDto>)query.list();
+	         Query query=session.createQuery("From CustomerDto C Where C.cuID=1");
+	         list=(List<CustomerDto>)query.list();	         
+	         for(CustomerDto customer:list){
+	        	 System.out.println(" Address :" + customer.getCustomerOfficerDto().getCoAddress());
+	         }
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

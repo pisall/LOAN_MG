@@ -2,21 +2,19 @@ package com.system.loan.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 import org.hibernate.annotations.Proxy;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="mfi_customers")
-@Proxy(lazy=false)
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@cu_id")
+//@Proxy(lazy=false)
 public class CustomerDto implements Serializable {
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="cu_id")
@@ -24,8 +22,9 @@ public class CustomerDto implements Serializable {
 	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	@ManyToOne
-	@JoinColumn(name="co_id", nullable=false)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="co_id")
+	@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;
 	@Column(name="cu_nm")
 	private String cuName;

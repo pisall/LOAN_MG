@@ -16,6 +16,12 @@
 			success : function(data) {
 				console.log(data);
 				
+				
+				$(data).each(function(i,v){
+					console.log(v[3]);
+					
+				});
+				
 				var result="";
 				
 				/*$(data).each(function(i,v){
