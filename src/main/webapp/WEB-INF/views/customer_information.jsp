@@ -72,7 +72,7 @@
 								<div class="table-responsive">
 									<table class="table table-hover table-striped">
 										<thead>
-											<tr>
+											<tr class="active">
 												<th>ID</th>
 												<th>Name</th>
 												<th>Sex</th>
@@ -106,7 +106,7 @@
 				<div class="row">
 					<div class="col-md-1">
 						<select class="form-control" id="record_num" style='width: 100%'>
-							<option value="5">05</option>
+							
 							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="30">30</option>

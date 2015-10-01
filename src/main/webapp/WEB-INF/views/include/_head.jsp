@@ -29,6 +29,12 @@
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
+     <style type="text/css">
+     	table tr th{
+     		    background-color: #638BE0 !important;
+    			color: #fff;
+     	}
+     </style>
  
 
 </head>

@@ -4,6 +4,11 @@ $(function() {
 	var totalPage = 0;
 
 	listCus(page_no);
+	
+	$("#record_num").click(function(){
+		
+		listCus(page_no);
+	});
 
 });
 
@@ -16,6 +21,9 @@ function loadPaging() {
 	});
 }
 
+/**
+ * Next pagination
+ */
 function pageNext() {
 
 	$("#p_next").click(function() {
@@ -32,6 +40,9 @@ function pageNext() {
 	});
 }
 
+/**
+ * Previouse pagination
+ */
 function pagePrevious() {
 
 	$("#p_pre").click(function() {
@@ -47,8 +58,12 @@ function pagePrevious() {
 
 	});
 }
-
-function showPagin(totalPage, curPage) {
+/**
+ * Load pagination
+ * @param totalPage
+ * @param curPage
+ */
+function showPaging(totalPage, curPage) {
 	$("#paging").html("");
 	$("#paging").append('<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
 	for (var i = 1; i <= totalPage; i++) {
@@ -59,21 +74,17 @@ function showPagin(totalPage, curPage) {
 			$("#paging").append('<li  name="p_index"><a href="#none">'	+ i + '</a></li>');
 
 	}
-	
 	$("#paging").append('<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
-	
-	
-//	var previous = '<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
-//	var number = '<li class=' + active + '  name="p_index"><a href="#none">'
-//			+ i + '</a></li>';
-//	var next = '<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
-//	var paging = previous + number + next;
-//	return paging;
 }
-
+/**
+ * List Customer
+ * @param pageNo
+ */
 function listCus(pageNo) {
+	
 	var input = {
 		pageNo : pageNo,
+		pcnt: $("#record_num").val(),
 		sw : ''
 	}
 	$.ajax({
@@ -98,7 +109,7 @@ function listCus(pageNo) {
 
 					//load totalpage
 					
-					showPagin(totalPage, curPage)
+					showPaging(totalPage, curPage)
 					
 					//loadTotalPage(totalPage, curPage)
 					
@@ -177,7 +188,7 @@ function deleteCustomer(cusID) {
 						xhr.setRequestHeader("Content-Type", "application/json");
 					},
 					success : function(data) {
-						alert(page_no);
+					
 						listCus(page_no);
 					},
 					error : function(data, status, er) {
@@ -193,22 +204,5 @@ function deleteCustomer(cusID) {
 	});
 		
 }
-/*
-function loadTotalPage(totalPage,curPage){
-	
-//	for (var i = 1; i <= totalPage; i++) {
-//		if (i == curPage)
-//			$("#paging").html(showPagin('active', i));
-//
-//		else
-//			$("#paging").html(showPagin('', i));
-//
-//	}
-	
-	showPagin(totalPage, curPage)
-	
-	
-	
-}*/
 
 

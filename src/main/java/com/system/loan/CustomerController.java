@@ -36,7 +36,7 @@ public class CustomerController {
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String,Object> listCus(@RequestBody pagingDto paging){
 		
-		paging.setPcnt(10);
+		//paging.setPcnt(10);
 		paging.setTotalPage((int)Math.ceil((float)customerImp.totalCus(paging)/paging.getPcnt()));
 		HashMap<String, Object> model=new HashMap<String, Object>();
 		
