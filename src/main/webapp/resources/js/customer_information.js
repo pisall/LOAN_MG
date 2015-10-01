@@ -2,7 +2,7 @@ $(function() {
 	var page_no = 1;
 	var value = {};
 	var totalPage = 0;
-	
+
 	listCus(page_no);
 
 });
@@ -17,7 +17,9 @@ function loadPaging() {
 }
 
 function pageNext() {
+
 	$("#p_next").click(function() {
+
 		page_no = $(this).siblings(".active").children("a").html();
 		page_no++;
 		totalPage = value.PAGING.totalPage;
@@ -46,13 +48,27 @@ function pagePrevious() {
 	});
 }
 
-function showPagin(active, i) {
-	var previous = '<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
-	var number = '<li class=' + active + '  name="p_index"><a href="#none">'
-			+ i + '</a></li>';
-	var next = '<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
-	var paging = previous + number + next;
-	return paging;
+function showPagin(totalPage, curPage) {
+	$("#paging").html("");
+	$("#paging").append('<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
+	for (var i = 1; i <= totalPage; i++) {
+		if (i == curPage)
+			$("#paging").append('<li class="active"  name="p_index"><a href="#none">'	+ i + '</a></li>');
+
+		else
+			$("#paging").append('<li  name="p_index"><a href="#none">'	+ i + '</a></li>');
+
+	}
+	
+	$("#paging").append('<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
+	
+	
+//	var previous = '<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
+//	var number = '<li class=' + active + '  name="p_index"><a href="#none">'
+//			+ i + '</a></li>';
+//	var next = '<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
+//	var paging = previous + number + next;
+//	return paging;
 }
 
 function listCus(pageNo) {
@@ -60,8 +76,7 @@ function listCus(pageNo) {
 		pageNo : pageNo,
 		sw : ''
 	}
-	$
-			.ajax({
+	$.ajax({
 
 				url : BASE_URL + "/customer/listCus",
 				type : 'POST',
@@ -76,71 +91,59 @@ function listCus(pageNo) {
 					var result = "";
 					var paging = data.PAGING;
 					var curPage = paging.pageNo;
-					// clear
+					var totalPage = parseInt(paging.totalPage);
+					
+					// clear paging
 					$("#paging").html("");
 
-					var totalPage = parseInt(paging.totalPage);
-
-					for (var i = 1; i <= totalPage; i++) {
-						if (i == curPage)
-							$("#paging").html(showPagin('active', i));
-
-						else
-							$("#paging").html(showPagin('', i));
-
+					//load totalpage
+					
+					showPagin(totalPage, curPage)
+					
+					//loadTotalPage(totalPage, curPage)
+					
+					if(data.REC.length > 0){
+						
+						for(var i=0;i<data.REC.length;i++){
+							result += "<tr>" + "<td>"
+							+ data.REC[i].cuID
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuName
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuSex
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuDOB
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuNationalID
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuAddress
+							+ "</td>"
+							+ "<td>"
+							+ data.REC[i].cuPhone
+							+ "</td>"
+							+ "<td>"
+							+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
+							+ "&nbsp;"
+							+ "<a href='#none' onclick=\"return deleteCustomer("+data.REC[i].cuID+")\"><span class='glyphicon glyphicon-trash'></span></a>"
+							+ "&nbsp;"
+							+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
+							+ "</td>" + "</tr>"
+						}
+						
+						
 					}
-
-					//loadPaging();
-									
 					
-					$("#p_pre").click(
-							function() {
-								page_no = $(this).siblings(".active").children(
-										"a").html();
-								page_no--;
-								listCus(page_no);
-
-							});
-
-					$(data)
-							.each(
-									function(i, v) {
-										console.log(v);
-										result += "<tr>" + "<td>"
-												+ v.REC[i].cuID
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuName
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuSex
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuDOB
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuNationalID
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuAddress
-												+ "</td>"
-												+ "<td>"
-												+ v.REC[i].cuPhone
-												+ "</td>"
-												+ "<td>"
-												+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
-												+ "&nbsp;"
-												+ "<a href='#none'><span class='glyphicon glyphicon-trash'></span></a>"
-												+ "&nbsp;"
-												+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
-												+ "</td>" + "</tr>"
-									});
 					$("#tableCustomer").html(result);
-					
+
 					loadPaging();
-					
+
 					pageNext();
-					
+
 					pagePrevious();
 				},
 				error : function(data, status, er) {
@@ -150,95 +153,62 @@ function listCus(pageNo) {
 			});
 }
 
-function listCustomer() {
-
-	$
-			.ajax({
-
-				url : BASE_URL + "/customer/listCustomer",
-				type : 'GET',
-				dataType : 'JSON',
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Accept", "application/json");
-					xhr.setRequestHeader("Content-Type", "application/json");
-				},
-				success : function(data) {
-					console.log(data);
-					var result = "";
-
-					$(data)
-							.each(
-									function(i, v) {
-
-										result += "<tr>" + "<td>"
-												+ v[0]
-												+ "</td>"
-												+ "<td>"
-												+ v[1]
-												+ "</td>"
-												+ "<td>"
-												+ v[2]
-												+ "</td>"
-												+ "<td>"
-												+ v[3]
-												+ "</td>"
-												+ "<td>"
-												+ v[4]
-												+ "</td>"
-												+ "<td>"
-												+ v[5]
-												+ "</td>"
-												+ "<td>"
-												+ v[6]
-												+ "</td>"
-												+ "<td>"
-												+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
-												+ "&nbsp;"
-												+ "<a href='#none' ><span  onclick='return deleteCustomer('"+v[0]+"')' class='glyphicon glyphicon-trash'></span></a>"
-												+ "&nbsp;"
-												+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
-												+ "</td>" + "</tr>"
-									});
-					$("#tableCustomer").html(result);
-				},
-				error : function(data, status, er) {
-					console.log("error: " + data + " status: " + status
-							+ " er:" + er);
-				}
-			});
-}
+/**
+ * Delete customer 
+ * @param cusID
+ */
 
 function deleteCustomer(cusID) {
-	alert(cusID);
-	if(confirmDelete()==true){
-		var input = {
-				customerID : cusID
-			}
-			$.ajax({
 
-				url : BASE_URL + "/customer/deleteCustomer",
-				type : 'GET',
-				dataType : 'JSON',
-				data : JSON.stringify(input),
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Accept", "application/json");
-					xhr.setRequestHeader("Content-Type", "application/json");
-				},
-				success : function(data) {
-
-				},
-				error : function(data, status, er) {
-					console.log("error: " + data + " status: " + status + " er:" + er);
+	$.confirm({
+		text : "Are you sure you want to delete this record?",
+		confirm : function() {
+			var input = {
+					cuID : cusID
 				}
-			});
-	}
+				$.ajax({
+			
+					url : BASE_URL + "/customer/deleteCustomer",
+					type : 'POST',
+					dataType : 'JSON',
+					data : JSON.stringify(input),
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader("Accept", "application/json");
+						xhr.setRequestHeader("Content-Type", "application/json");
+					},
+					success : function(data) {
+						alert(page_no);
+						listCus(page_no);
+					},
+					error : function(data, status, er) {
+						console.log("error: " + data + " status: " + status + " er:"
+								+ er);
+					}
+				});
+			
+		},
+		cancel : function() {
+			
+		}
+	});
+		
 }
+/*
+function loadTotalPage(totalPage,curPage){
+	
+//	for (var i = 1; i <= totalPage; i++) {
+//		if (i == curPage)
+//			$("#paging").html(showPagin('active', i));
+//
+//		else
+//			$("#paging").html(showPagin('', i));
+//
+//	}
+	
+	showPagin(totalPage, curPage)
+	
+	
+	
+}*/
 
-function confirmDelete() {
-    var r = confirm("Are you sure to delete!");
-    if (r == true) {
-       return true;
-    } else {
-       return false;
-    }
-}
+

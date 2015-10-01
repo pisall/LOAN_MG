@@ -29,10 +29,10 @@ public class CustomerDto implements Serializable {
 	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	/*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="co_id")
 	@JsonBackReference
-	private CustomerOfficerDto customerOfficerDto;
+	private CustomerOfficerDto customerOfficerDto;*/
 	@Column(name="cu_nm")
 	private String cuName;
 	@Column(name="cu_nick_nm")
@@ -57,16 +57,16 @@ public class CustomerDto implements Serializable {
 	private String cuPhoto;
 	/**
 	 * @return the customerOfficerDto
-	 */
+	 *//*
 	public CustomerOfficerDto getCustomerOfficerDto() {
 		return customerOfficerDto;
 	}
-	/**
+	*//**
 	 * @param customerOfficerDto the customerOfficerDto to set
-	 */
+	 *//*
 	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
 		this.customerOfficerDto = customerOfficerDto;
-	}
+	}*/
 	/**
 	 * @return the cuID
 	 */
