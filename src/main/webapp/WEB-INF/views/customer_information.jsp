@@ -25,12 +25,15 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-12">
+					<div class="col-lg-10 col-md-10">
 
 						<h2 class="page-header">
 							<span></span>Customer Infomation
 						</h2>
 
+					</div>
+					<div class="col-lg-2 col-md-2">
+						<button class="button button-primary"></button>						
 					</div>
 
 				</div>
