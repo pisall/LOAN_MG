@@ -116,8 +116,9 @@ public static SessionFactory factory=null;
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction(); 
-	         CustomerDto usr = (CustomerDto)session.get(CustomerDto.class, customer.getCuID()); 
-			 session.delete(usr);
+	         CustomerDto cus = (CustomerDto)session.get(CustomerDto.class, customer.getCuID());
+	         cus.setCuDelYn("Y");
+			 session.update(cus);
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -148,7 +149,7 @@ public static SessionFactory factory=null;
 						} 
 					}		
 					System.out.println("fileter="+ filter);
-					Query query = session.createQuery("From CustomerDto C where 1=1 " + filter);
+					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' " + filter);
 					query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
 					query.setMaxResults(paging.getPcnt());
 					list =(List<CustomerDto>) query.list();
@@ -190,23 +191,7 @@ public static SessionFactory factory=null;
 	      }
 		return Customer;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public int totalCus(pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session=factory.openSession();
@@ -219,7 +204,7 @@ public static SessionFactory factory=null;
 					filter=" and (C.cuName like '%"+paging.getSw()+"%')";
 				} 
 			}
-			Query query=session.createQuery("Select Count(C.cuID) From CustomerDto C where 1=1 "+filter);
+			Query query=session.createQuery("Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' "+filter);
 			List<Object> list=(List<Object>)query.list();
 			for(Object ob:list){
 				cnt=Integer.parseInt(ob.toString());

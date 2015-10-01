@@ -42,7 +42,7 @@ public class CustomerDto implements Serializable {
 	@Column(name="cu_dob")
 	private String cuDOB;
 	@Column(name="cu_national_id")
-	private String cuNationalID;
+	private Integer cuNationalID;
 	@Column(name="cu_phone")
 	private String cuPhone;	
 	@Column(name="cu_address")
@@ -55,6 +55,10 @@ public class CustomerDto implements Serializable {
 	private String cuNote;
 	@Column(name="cu_photo")
 	private String cuPhoto;
+	@Column(name="cu_del_yn")
+	private String cuDelYn;
+	
+
 	/**
 	 * @return the customerOfficerDto
 	 *//*
@@ -130,13 +134,13 @@ public class CustomerDto implements Serializable {
 	/**
 	 * @return the cuNationalID
 	 */
-	public String getCuNationalID() {
+	public Integer getCuNationalID() {
 		return cuNationalID;
 	}
 	/**
 	 * @param cuNationalID the cuNationalID to set
 	 */
-	public void setCuNationalID(String cuNationalID) {
+	public void setCuNationalID(Integer cuNationalID) {
 		this.cuNationalID = cuNationalID;
 	}
 	/**
@@ -211,6 +215,19 @@ public class CustomerDto implements Serializable {
 	public void setCuPhoto(String cuPhoto) {
 		this.cuPhoto = cuPhoto;
 	}
+	
+	/**
+	 * @return the cuDelYn
+	 */
+	public String getCuDelYn() {
+		return cuDelYn;
+	}
+	/**
+	 * @param cuDelYn the cuDelYn to set
+	 */
+	public void setCuDelYn(String cuDelYn) {
+		this.cuDelYn = cuDelYn;
+	}
 	/**
 	 * @return the customerOfficerDto
 	 *//*
@@ -223,6 +240,15 @@ public class CustomerDto implements Serializable {
 	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
 		this.customerOfficerDto = customerOfficerDto;
 	}*/
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CustomerDto [cuID=" + cuID + ", cuName=" + cuName + ", cuNickName=" + cuNickName + ", cuSex=" + cuSex
+				+ ", cuDOB=" + cuDOB + ", cuNationalID=" + cuNationalID + ", cuPhone=" + cuPhone + ", cuAddress="
+				+ cuAddress + ", cuPawn=" + cuPawn + ", cuDtt=" + cuDtt + ", cuNote=" + cuNote + ", cuPhoto=" + cuPhoto
+				+ ", cuDelYn=" + cuDelYn + "]";
+	}
 	
 }

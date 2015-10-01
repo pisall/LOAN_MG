@@ -37,6 +37,7 @@ public class CustomerController {
 	public @ResponseBody HashMap<String,Object> listCus(@RequestBody pagingDto paging){
 		
 		//paging.setPcnt(10);
+		System.out.println("total page="+customerImp.totalCus(paging));
 		paging.setTotalPage((int)Math.ceil((float)customerImp.totalCus(paging)/paging.getPcnt()));
 		HashMap<String, Object> model=new HashMap<String, Object>();
 		
@@ -62,7 +63,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/deleteCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody Boolean deleteCustomer(@RequestBody CustomerDto customer) {
-
+			
 		return customerImp.deleateCustomer(customer);
 
 	}
