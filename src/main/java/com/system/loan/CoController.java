@@ -3,17 +3,21 @@
  */
 package com.system.loan;
 
+import java.util.HashMap;
 import java.util.Map;
  
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.system.loan.dao.CoDaoImp;
 import com.system.loan.dao.UserDaoImp;
+import com.system.loan.dto.MFI_CO_I001;
 import com.system.loan.dto.pagingDto;
 
 /**
@@ -101,6 +105,14 @@ public class CoController {
 		CoDaoImp co=new CoDaoImp();
 		co.testjoin();
 		System.out.println("how are you?");
+		return null;
+	}
+	
+	@RequestMapping(value="/list_co_r001",method=RequestMethod.GET)
+	public @ResponseBody HashMap<String, Object> listCo_R001(@RequestBody MFI_CO_I001 input ){
+		
+		System.out.println("input="+input.toString());
+		
 		return null;
 	}
 
