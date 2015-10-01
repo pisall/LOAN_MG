@@ -96,32 +96,32 @@
 
 						</div>
 
-						
+
 						<!--//panel top -->
 
 					</div>
 
 				</div>
 				<!-- //list -->
-<div class="row">
-							<div class="col-md-1">
-								<select class="form-control" id="record_num" style='width:100%'>
-									<option value="5">05</option>
-									<option  value="10">10</option>
-									<option  value="20">20</option>
-									<option  value="30">30</option>
-									<option  value="40">40</option>
-									<option  value="50">50</option>
-								</select>
-							</div>
-							<div class="col-md-11" style="text-align: center;">
-								<!-- <div class="col-md-6 col-md-offset-3" style="text-align: center"> -->
-									<ul class="pagination" id="paging" style="margin:0 auto;">
-									</ul>
-								<!-- </div> -->
-							</div>
+				<div class="row">
+					<div class="col-md-1">
+						<select class="form-control" id="record_num" style='width: 100%'>
+							<option value="5">05</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>
+					</div>
+					<div class="col-md-11" style="text-align: center;">
+						<!-- <div class="col-md-6 col-md-offset-3" style="text-align: center"> -->
+						<ul class="pagination" id="paging" style="margin: 0 auto;">
+						</ul>
+						<!-- </div> -->
+					</div>
 
-						</div>
+				</div>
 
 			</div>
 			<!-- /.container-fluid -->
