@@ -1,6 +1,5 @@
 package com.system.loan.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -11,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Service;
 
-import com.system.loan.dto.CoDto;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
@@ -138,23 +136,30 @@ public static SessionFactory factory=null;
 	 * 		return null
 	 */
 	@Override
-	public List<CustomerDto> listCustomer() {
-		Session session = factory.openSession();
-	      Transaction tx = null;
-	      List<CustomerDto> list=null;
-	      try{
-	        tx = session.beginTransaction();
-	         Query query=session.createQuery("Select C.cuID,C.cuName,C.cuSex,C.cuDOB,C.cuNationalID,C.cuAddress,C.cuPhone From CustomerDto C");
-	         list=(List<CustomerDto>)query.list();	         
-	         tx.commit();
-	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	         return null;
-	      }finally {
-	         session.close(); 
-	      }
-		return list;
+	public List<CustomerDto> listCustomer(pagingDto paging) {
+		// TODO Auto-generated method stub
+				Session session = factory.openSession();
+				List<CustomerDto> list = null;
+				String filter="";
+				try {
+					if(paging.getSw()!=null){
+						if(paging.getSw()!=""){
+							filter=" and (C.cuName like '%"+paging.getSw()+"%')";
+						} 
+					}		
+					System.out.println("fileter="+ filter);
+					Query query = session.createQuery("From CustomerDto C where 1=1 " + filter);
+					query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
+					query.setMaxResults(paging.getPcnt());
+					list =(List<CustomerDto>) query.list();
+					session.close();
+				} catch (HibernateException e) {
+					session.close();
+					System.out.println(" there error");
+					e.printStackTrace();
+					return null;
+				}
+				return list;
 	}
 	
 	/**
@@ -200,31 +205,7 @@ public static SessionFactory factory=null;
 	
 	
 	
-	public List<CustomerDto> listCus(pagingDto paging) {
-		// TODO Auto-generated method stub
-		Session session = factory.openSession();
-		List<CustomerDto> list = null;
-		String filter="";
-		try {
-			if(paging.getSw()!=null){
-				if(paging.getSw()!=""){
-					filter=" and (C.cuName like '%"+paging.getSw()+"%')";
-				} 
-			}		
-			System.out.println("fileter="+ filter);
-			Query query = session.createQuery("From CustomerDto C where 1=1 " + filter);
-			query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
-			query.setMaxResults(paging.getPcnt());
-			list =(List<CustomerDto>) query.list();
-			session.close();
-		} catch (HibernateException e) {
-			session.close();
-			System.out.println(" there error");
-			e.printStackTrace();
-			return null;
-		}
-		return list;
-	}
+	
 	
 	public int totalCus(pagingDto paging) {
 		// TODO Auto-generated method stub

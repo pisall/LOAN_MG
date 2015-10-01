@@ -194,7 +194,7 @@ function listCustomer() {
 												+ "<td>"
 												+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
 												+ "&nbsp;"
-												+ "<a href='#none'><span class='glyphicon glyphicon-trash'></span></a>"
+												+ "<a href='#none' ><span  onclick='return deleteCustomer('"+v[0]+"')' class='glyphicon glyphicon-trash'></span></a>"
 												+ "&nbsp;"
 												+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
 												+ "</td>" + "</tr>"
@@ -209,25 +209,36 @@ function listCustomer() {
 }
 
 function deleteCustomer(cusID) {
+	alert(cusID);
+	if(confirmDelete()==true){
+		var input = {
+				customerID : cusID
+			}
+			$.ajax({
 
-	var input = {
-		customerID : cusID
+				url : BASE_URL + "/customer/deleteCustomer",
+				type : 'GET',
+				dataType : 'JSON',
+				data : JSON.stringify(input),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {
+
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status + " er:" + er);
+				}
+			});
 	}
-	$.ajax({
+}
 
-		url : BASE_URL + "/customer/deleteCustomer",
-		type : 'GET',
-		dataType : 'JSON',
-		data : JSON.stringify(input),
-		beforeSend : function(xhr) {
-			xhr.setRequestHeader("Accept", "application/json");
-			xhr.setRequestHeader("Content-Type", "application/json");
-		},
-		success : function(data) {
-
-		},
-		error : function(data, status, er) {
-			console.log("error: " + data + " status: " + status + " er:" + er);
-		}
-	});
+function confirmDelete() {
+    var r = confirm("Are you sure to delete!");
+    if (r == true) {
+       return true;
+    } else {
+       return false;
+    }
 }
