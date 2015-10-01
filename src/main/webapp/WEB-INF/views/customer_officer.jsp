@@ -59,6 +59,7 @@
 							</div>
 							<!-- panel body -->
 							<div class="panel panel-body">
+								<a class="btn btn-default" id="test">Test</a>
 								<div class="table-responsive">
 								<c:if test="${not empty listCo}">
 									<table class="table table-hover table-striped">
@@ -198,11 +199,12 @@
 	</div>
 	<!-- /#wrapper -->
 
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	
+	<%@include file="include/_script.jsp"%>
+	<script type="text/javascript">
+   		var BASE_URL="${pageContext.request.contextPath}";
+   	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
 
 
 

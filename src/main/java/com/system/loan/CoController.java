@@ -108,12 +108,17 @@ public class CoController {
 		return null;
 	}
 	
-	@RequestMapping(value="/list_co_r001",method=RequestMethod.GET)
+	@RequestMapping(value="/list_co_r001",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCo_R001(@RequestBody MFI_CO_I001 input ){
 		
 		System.out.println("input="+input.toString());
+		pagingDto paging=new pagingDto();
+		System.out.println("paging="+ paging.toString());
+		HashMap<String, Object> output=new HashMap<String, Object>();
 		
-		return null;
+		
+		
+		return output;
 	}
 
 }

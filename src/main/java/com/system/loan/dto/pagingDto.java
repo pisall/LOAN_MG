@@ -3,11 +3,18 @@
  */
 package com.system.loan.dto;
 
+import java.io.Serializable;
+
 /**
  * @author PC_VIRAK
  *
  */
-public class pagingDto {
+public class pagingDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3551241633076213434L;
+	
 	private int pageNo;
 	private int pcnt;
 	private int total;
@@ -75,7 +82,25 @@ public class pagingDto {
 		this.sw = sw;
 	}
 	
-	
+	@Override
+	public String toString(){
+		StringBuffer buff=new StringBuffer();
+		//open tage
+		buff.append("{");
+		
+		buff.append("pageNo:"+ pageNo+",");
+		buff.append("pcnt:"+ pcnt+",");
+		buff.append("total:"+ total+",");
+		buff.append("totalPage:"+ totalPage+",");
+		
+		//total
+		//last element
+		buff.append("sw:"+ sw);
+		
+		//close tag
+		buff.append("}");
+		return buff.toString();
+	}
 	
 	
 

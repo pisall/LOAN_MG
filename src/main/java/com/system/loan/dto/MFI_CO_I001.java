@@ -4,15 +4,34 @@
 package com.system.loan.dto;
 
 import java.io.Serializable;
+import java.io.ObjectOutputStream.PutField;
 
 /**
  * @author PC_VIRAK
  *
  */
 public class MFI_CO_I001 implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5424935218461628170L;
 	private int CO_ID;
 	private String CO_FIRST_NM;
 	private String CO_LAST_NM;
+	private pagingDto paging;
+	
+	
+	public MFI_CO_I001(){
+		paging=new pagingDto();
+	}
+	
+	public MFI_CO_I001(int cO_ID, String cO_FIRST_NM, String cO_LAST_NM, pagingDto paging) {
+		super();
+		CO_ID = cO_ID;
+		CO_FIRST_NM = cO_FIRST_NM;
+		CO_LAST_NM = cO_LAST_NM;
+		this.paging = paging;
+	}
 	/**
 	 * @return the cO_ID
 	 */
@@ -50,9 +69,36 @@ public class MFI_CO_I001 implements Serializable{
 		CO_LAST_NM = cO_LAST_NM;
 	}
 	
+	
+	
+	/**
+	 * @return the paging
+	 */
+	public pagingDto getPaging() {
+		return paging;
+	}
+	/**
+	 * @param paging the paging to set
+	 */
+	public void setPaging(pagingDto paging) {
+		this.paging = paging;
+	}
 	@Override
 	public String toString(){
-		return "!not yes impliment";
+		StringBuffer buff=new StringBuffer();
+		//open tage
+		buff.append("{");
+		
+		buff.append("paging:"+paging.toString()+",");
+		//System.out.println(paging.toString());
+		buff.append("CO_ID:"+ CO_ID+",");
+		buff.append("CO_FIRST_NM:"+ CO_FIRST_NM+",");
+		//last element
+		buff.append("CO_LAST_NM:"+ CO_LAST_NM);
+		
+		//close tag
+		buff.append("}");
+		return buff.toString();
 		
 	}
 
