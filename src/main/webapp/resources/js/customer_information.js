@@ -5,10 +5,6 @@ $(function() {
 	
 	listCus(page_no);
 
-	
-	//pageNext();
-
-	//pagePrevious();
 });
 
 function loadPaging() {
