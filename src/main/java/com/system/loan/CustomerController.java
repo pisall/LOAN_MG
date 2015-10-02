@@ -44,28 +44,47 @@ public class CustomerController {
 		
 		return model;
 	}
-	
+	/**
+	 * Add New Customer
+	 * @param customer
+	 * @return
+	 */
 	@RequestMapping(value = "/addCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody Boolean addCustomer(@RequestBody CustomerDto customer) {
 		
 		return customerImp.insertCustomer(customer);
 
 	}
-
+	
+	/**
+	 * Update Customer
+	 * @param Customer
+	 * @return
+	 */
 	@RequestMapping(value = "/updateCustomer", method = RequestMethod.GET)
 	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto Customer) {
 
 		return customerImp.updateCustomer(Customer);
 
 	}
-
+	/**
+	 * Delete Customer
+	 * @param customer
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody Boolean deleteCustomer(@RequestBody CustomerDto customer) {
 			
 		return customerImp.deleateCustomer(customer);
 
 	}
-
+	
+	/**
+	 * Update Form
+	 * @param usID
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/updateForm/{usID}", method = RequestMethod.GET)
 	public String listSpecificCustomer(@PathVariable("usID") Integer usID, Map<String, Object> model) {
 		
@@ -73,12 +92,20 @@ public class CustomerController {
 		return "update_Customer_test";
 	}
 
+	/**
+	 * New Customer Officer
+	 * @return
+	 */
 	@RequestMapping(value = "/new_co", method = RequestMethod.GET)
 	public String newCo() {
 
 		return "new_co";
 	}
 
+	/**
+	 * Load page loan agreement
+	 * @return
+	 */
 	@RequestMapping(value = "/loan_agreement", method = RequestMethod.GET)
 	public String loanAgreement() {
 
