@@ -137,21 +137,21 @@ public static SessionFactory factory=null;
 	 * 		return null
 	 */
 	@Override
-	public List<CustomerDto> listCustomer(pagingDto paging) {
+	public List<CustomerDto> listCustomer(pagingDto paging,CustomerDto cus) {
 		// TODO Auto-generated method stub
 				Session session = factory.openSession();
 				List<CustomerDto> list = null;
 				String filter="";
 				String orderRec=" Order By C.cuID DESC";
-				System.out.println("fiter :"+filter);
 				try {
 					if(paging.getSw()!=null){
 						if(paging.getSw()!=""){
 							filter=" and (C.cuName like '%"+paging.getSw()+"%')";
 						} 
 					}
-					System.out.println("fileter="+ filter);
-					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' " + filter + orderRec);
+					
+					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' And C.coID=?  " + filter + orderRec);
+					query.setParameter(0,cus.getCoID() );
 					query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
 					query.setMaxResults(paging.getPcnt());
 					list =(List<CustomerDto>) query.list();
@@ -194,7 +194,7 @@ public static SessionFactory factory=null;
 		return Customer;
 	}
 
-	public int totalCus(pagingDto paging) {
+	public int totalCus(pagingDto paging, CustomerDto cus) {
 		// TODO Auto-generated method stub
 		Session session=factory.openSession();
 		int cnt=0;
@@ -206,7 +206,8 @@ public static SessionFactory factory=null;
 					filter=" and (C.cuName like '%"+paging.getSw()+"%')";
 				} 
 			}
-			Query query=session.createQuery("Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' "+filter);
+			Query query=session.createQuery("Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And C.coID=?  "+filter);
+			query.setParameter(0,cus.getCoID());
 			List<Object> list=(List<Object>)query.list();
 			for(Object ob:list){
 				cnt=Integer.parseInt(ob.toString());

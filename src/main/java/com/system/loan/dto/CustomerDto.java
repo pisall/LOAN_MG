@@ -33,6 +33,8 @@ public class CustomerDto implements Serializable {
     @JoinColumn(name="co_id")
 	@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;*/
+	@Column(name="co_id")
+	private Integer coID;
 	@Column(name="cu_nm")
 	private String cuName;
 	@Column(name="cu_nick_nm")
@@ -82,6 +84,19 @@ public class CustomerDto implements Serializable {
 	 */
 	public void setCuID(Integer cuID) {
 		this.cuID = cuID;
+	}
+	
+	/**
+	 * @return the coID
+	 */
+	public Integer getCoID() {
+		return coID;
+	}
+	/**
+	 * @param coID the coID to set
+	 */
+	public void setCoID(Integer coID) {
+		this.coID = coID;
 	}
 	/**
 	 * @return the cuName

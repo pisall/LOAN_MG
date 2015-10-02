@@ -34,23 +34,21 @@ public class CustomerController {
 	 */
 
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String,Object> listCus(@RequestBody pagingDto paging){
+	public @ResponseBody HashMap<String,Object> listCus(@RequestBody pagingDto paging, CustomerDto cus){
 		
-		//paging.setPcnt(10);
-		System.out.println("total page="+customerImp.totalCus(paging));
-		paging.setTotalPage((int)Math.ceil((float)customerImp.totalCus(paging)/paging.getPcnt()));
+		paging.setTotalPage((int)Math.ceil((float)customerImp.totalCus(paging,cus)/paging.getPcnt()));
 		HashMap<String, Object> model=new HashMap<String, Object>();
 		
-		model.put("REC", customerImp.listCustomer(paging));
+		model.put("REC", customerImp.listCustomer(paging,cus));
 		model.put("PAGING", paging);
 		
 		return model;
 	}
 	
 	@RequestMapping(value = "/addCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean addCustomer(@RequestBody CustomerDto Customer) {
-
-		return customerImp.insertCustomer(Customer);
+	public @ResponseBody Boolean addCustomer(@RequestBody CustomerDto customer) {
+		
+		return customerImp.insertCustomer(customer);
 
 	}
 

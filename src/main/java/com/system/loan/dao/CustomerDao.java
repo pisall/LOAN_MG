@@ -9,5 +9,5 @@ public interface CustomerDao {
 	public Boolean updateCustomer(CustomerDto cus);
 	public Boolean insertCustomer(CustomerDto cus);
 	public Boolean deleateCustomer(CustomerDto cus);
-	public List<CustomerDto> listCustomer(pagingDto paging);
+	public List<CustomerDto> listCustomer(pagingDto paging,CustomerDto cus);
 }
