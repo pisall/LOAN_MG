@@ -32,8 +32,12 @@
 						</h2>
 
 					</div>
-					<div class="col-lg-2 col-md-2">
-						<button class="button button-primary"></button>						
+					<div class="col-lg-2 col-md-2"
+						style="padding-bottom: 9px; margin: 40px 0 20px; text-align: right;">
+						<!-- <button type="button"
+							class='btn btn-primary data-toggle="modal" data-target="#myModal"'>Add
+							Customer</button> -->
+							 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Customer</button>
 					</div>
 
 				</div>
@@ -109,7 +113,7 @@
 				<div class="row">
 					<div class="col-md-1">
 						<select class="form-control" id="record_num" style='width: 100%'>
-							
+
 							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="30">30</option>
@@ -133,6 +137,8 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
+	<%@include file="customer_add.jsp"%>
+
 
 	<%@include file="include/_script.jsp"%>
 	<script type="text/javascript">

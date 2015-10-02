@@ -147,7 +147,9 @@ public static SessionFactory factory=null;
 						if(paging.getSw()!=""){
 							filter=" and (C.cuName like '%"+paging.getSw()+"%')";
 						} 
-					}		
+					}else{
+						filter=" Order By C.cuID DESC";
+					}	
 					System.out.println("fileter="+ filter);
 					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' " + filter);
 					query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
