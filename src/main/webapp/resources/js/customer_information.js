@@ -3,7 +3,7 @@ var value = {};
 var totalPage = 0;
 
 $(function() {
-
+	datetimenow();
 	listCus(page_no);
 
 	$("#record_num").click(function() {
@@ -220,7 +220,7 @@ function deleteCustomer(cusID) {
  * Add Customer
  */
 function addCustomer() {
-	var now=moment();
+	var now=moment('YYYYMMDDh:mm:ss a');
 			var input = {
 				cuName : $("#cu_name").val(),
 				cuNickName :$("#cu_nick_name").val(),
@@ -253,4 +253,9 @@ function addCustomer() {
 							+ " er:" + er);
 				}
 			});
+}
+
+function datetimenow(){
+	var now=moment();
+	console.log(now);
 }
