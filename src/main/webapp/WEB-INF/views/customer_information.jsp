@@ -25,21 +25,16 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-10 col-md-10">
+					<div class="col-lg-12 col-md-12 col-sm-12">					
 
 						<h2 class="page-header">
+							
 							<span></span>Customer Infomation
+								<button style="float: right;" type="button" class="btn btn-info" data-toggle="modal"
+							data-target="#myModal">Add Customer</button>
 						</h2>
 
 					</div>
-					<div class="col-lg-2 col-md-2"
-						style="padding-bottom: 9px; margin: 40px 0 20px; text-align: right;">
-						<!-- <button type="button"
-							class='btn btn-primary data-toggle="modal" data-target="#myModal"'>Add
-							Customer</button> -->
-							 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Customer</button>
-					</div>
-
 				</div>
 				<!--//Page Heading -->
 				<!-- list-->

@@ -142,16 +142,16 @@ public static SessionFactory factory=null;
 				Session session = factory.openSession();
 				List<CustomerDto> list = null;
 				String filter="";
+				String orderRec=" Order By C.cuID DESC";
+				System.out.println("fiter :"+filter);
 				try {
 					if(paging.getSw()!=null){
 						if(paging.getSw()!=""){
 							filter=" and (C.cuName like '%"+paging.getSw()+"%')";
 						} 
-					}else{
-						filter=" Order By C.cuID DESC";
-					}	
+					}
 					System.out.println("fileter="+ filter);
-					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' " + filter);
+					Query query = session.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' " + filter + orderRec);
 					query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
 					query.setMaxResults(paging.getPcnt());
 					list =(List<CustomerDto>) query.list();

@@ -216,3 +216,41 @@ function deleteCustomer(cusID) {
 	});
 
 }
+/**
+ * Add Customer
+ */
+function addCustomer() {
+	var now=moment();
+			var input = {
+				cuName : $("#cu_name").val(),
+				cuNickName :$("#cu_nick_name").val(),
+				cuSex :$("#cu_sex").val(),
+				cuDOB :$("#cu_dob").val(),
+				cuNationalID :$("#cu_national_id").val(),
+				cuPhone :$("#cu_phone").val(),
+				cuAddress :$("#cu_address").val(),
+				cuDtt :now,
+				cuPawn :$("#cu_pawn").val(),
+				cuNote :$("#cu_note").val(),
+			}
+			console.log("input :" + " " + input);
+			$.ajax({
+
+				url : BASE_URL + "/customer/addCustomer",
+				type : 'POST',
+				dataType : 'JSON',
+				data : JSON.stringify(input),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {
+					console.log(data);
+					//listCus(page_no);
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status
+							+ " er:" + er);
+				}
+			});
+}

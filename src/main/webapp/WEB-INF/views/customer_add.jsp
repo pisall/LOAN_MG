@@ -18,72 +18,69 @@
 							</span>
 						</div>
 						  <div class="form-group">
-							<label class="control-label col-sm-2" for="fst_nm">Name</label>
+							<label class="control-label col-sm-2" for="cu_name">Name</label>
 							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="fst_nm" placeholder="First Name">
+							  <input type="email" class="form-control" id="cu_name" placeholder="Enter Name">
 							</div>
 						  </div>
 						  
 						  <div class="form-group">
-							<label class="control-label col-sm-2" for="ls_nm">Nickname</label>
+							<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
 							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="ls_nm" placeholder="Last Name">
+							  <input type="email" class="form-control" id="cu_nick_name" placeholder="Enter Nickname">
 							</div>
 						  </div>
 						  
 						  <div class="form-group">
-							<label class="control-label col-sm-2" for="ls_nm">Sex</label>
+							<label class="control-label col-sm-2" for="cu_sex">Sex</label>
 							<div class="col-sm-10">
-								<select class="form-control">
+								<select class="form-control" id="cu_sex">
 									<option value="f">Female</option>
 									<option value="m">Male</option>
 								</select>
 							</div>
 						  </div>
 						   <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">DOB</label>
+							<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="nt_card" placeholder="Enter National Card">
+							  <input type="email" class="form-control" id="cu_dob" placeholder="Enter Date Of Birth">
 							</div>
 						  </div>
 						  
 						  <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">ID Card</label>
+							<label class="control-label col-sm-2" for="cu_id_card">ID Card</label>
 							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="nt_card" placeholder="Enter National Card">
+							  <input type="email" class="form-control" id="cu_id_card" placeholder="Enter National Card">
 							</div>
 						  </div>
 						   <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">Phone</label>
+							<label class="control-label col-sm-2" for="cu_phone">Phone</label>
 							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="nt_card" placeholder="Enter National Card">
-							</div>
-						  </div>
-						  
-						   <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">Address</label>
-							<div class="col-sm-10">
-							  <input type="email" class="form-control" id="nt_card" placeholder="Enter National Card">
+							  <input type="email" class="form-control" id="cu_phone" placeholder="Enter Phone">
 							</div>
 						  </div>
 						  
 						   <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">Pawn</label>
+							<label class="control-label col-sm-2" for="cu_address">Address</label>
 							<div class="col-sm-10">
-							   <textarea class="form-control" cols="5"></textarea>
+							  <input type="email" class="form-control" id="cu_address" placeholder="Enter Address">
 							</div>
 						  </div>
 						  
 						   <div class="form-group">
-							<label class="control-label col-sm-2" for="nt_card">NOte</label>
+							<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
 							<div class="col-sm-10">
-							  <textarea class="form-control" cols="5"></textarea>
+							   <textarea class="form-control" cols="5" id="cu_pawn"></textarea>
 							</div>
 						  </div>
 						  
-						
-						  
-						
+						   <div class="form-group">
+							<label class="control-label col-sm-2" for="cu_note">Note</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control" cols="5" id="cu_note"></textarea>
+							</div>
+						  </div>
+					
 						  <div class="pull-right">
 							  <button type="submit" class="btn btn-primary">Register</button>
 							  <button type="button" class="btn btn-danger">Cancel</button>
