@@ -60,6 +60,7 @@
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<a class="btn btn-default" id="test">Test</a>
+								<a class="btn btn-default" id="test2">Test2</a>
 								<div class="table-responsive">
 								<c:if test="${not empty listCo}">
 									<table class="table table-hover table-striped">

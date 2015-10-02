@@ -4,6 +4,7 @@
 package com.system.loan;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
  
 
@@ -115,10 +116,20 @@ public class CoController {
 		pagingDto paging=new pagingDto();
 		System.out.println("paging="+ paging.toString());
 		HashMap<String, Object> output=new HashMap<String, Object>();
-		
+		CoDaoImp co=new CoDaoImp();
+		String test=co.testNativeSql();
 		
 		
 		return output;
+	}
+	@RequestMapping(value="/list_co_r002",method=RequestMethod.POST)
+	public @ResponseBody List listCo_R002( ){
+		
+		CoDaoImp co=new CoDaoImp();
+		List list=co.testJson();
+		
+		
+		return list;
 	}
 
 }

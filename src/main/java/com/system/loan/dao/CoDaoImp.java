@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -105,6 +106,54 @@ public class CoDaoImp implements CoDao {
 		}catch(HibernateException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public String testNativeSql(){
+		String sql="select nextval('sq_co_id')";
+		Session session=factory.openSession();
+		try{
+			SQLQuery query=session.createSQLQuery(sql);
+			 Object ob=query.uniqueResult();
+			 String strOb=ob.toString();
+			 int intOb=Integer.parseInt(strOb);
+//			for(Integer s:list){
+//				System.out.println(s);
+//			}
+			 
+			 /*for (Iterator iterator = list.iterator(); iterator.hasNext(); )
+			    {
+				 Object ob=iterator.next();
+				 String strOb=ob.toString();
+			        System.out.println(strOb);
+			        
+			    }*/
+			 
+			 System.out.println(intOb);
+			 session.close();
+			
+		}catch(HibernateException e){
+			session.close();
+			e.printStackTrace();
+		}
+		
+		return "yyy";
+	}
+	
+	public List testJson() {
+		Session session=factory.openSession();
+		List list=null;
+		
+		try{
+			Query query=session.createQuery("select new map(coId as coId,dob as dob) from CoDto");
+			 list=query.list();
+			
+			session.close();
+		}catch(HibernateException e){
+			session.close();
+			e.printStackTrace();
+		}
+		return list;
+		
 	}
 
 }
