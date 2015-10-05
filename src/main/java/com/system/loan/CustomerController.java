@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,8 +112,6 @@ public class CustomerController {
 
 		return "loan_agreement";
 	}
-	
-	
 	
 	
 }

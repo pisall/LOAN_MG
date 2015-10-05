@@ -2,6 +2,9 @@ package com.system.loan.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -221,6 +224,35 @@ public static SessionFactory factory=null;
 		}
 		return cnt;
 	}
+	
+	public Boolean login(HttpServletRequest re,CustomerDto user){
+		// TODO Auto-generated method stub
+				Session session=factory.openSession();
+				int cnt=0;
+				String filter="";
+				List list=null;
+				HttpSession ss=re.getSession(false);
+				try{				
+					Query query=(Query) session.createQuery("Select UserId,UserName,UserPWD From User Where UserName=? And UserPWD=?");
+					query.setParameter(0, user.getCuName());
+					
+					list =query.list();
+					for(int i=0;i<list.size();i++){
+						ss.setAttribute("userid",list.get(1));
+					}
+	
+					session.close();
+					return true;	
+				}catch(HibernateException e){
+					session.close();
+					System.out.println(" error total remord");
+					e.printStackTrace();
+					
+				}
+				return false;
+	}
+	
+	
 	
 	
 	
