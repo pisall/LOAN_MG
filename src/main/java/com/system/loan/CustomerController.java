@@ -37,6 +37,8 @@ public class CustomerController {
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String,Object> listCus(@RequestBody pagingDto paging, CustomerDto cus){
 		
+		cus.setCoID(8);
+	
 		paging.setTotalPage((int)Math.ceil((float)customerImp.totalCus(paging,cus)/paging.getPcnt()));
 		HashMap<String, Object> model=new HashMap<String, Object>();
 		
@@ -107,10 +109,10 @@ public class CustomerController {
 	 * Load page loan agreement
 	 * @return
 	 */
-	@RequestMapping(value = "/loan_agreement", method = RequestMethod.GET)
-	public String loanAgreement() {
-
-		return "loan_agreement";
+	@RequestMapping(value = "/customer_form_update", method = RequestMethod.GET)
+	public String customerFormUpdate() {
+		customerImp.listSpecificCustomer(52);
+		return "customer_form_update";
 	}
 	
 	

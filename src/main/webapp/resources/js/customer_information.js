@@ -65,7 +65,7 @@ function pagePrevious() {
 	});
 }
 /**
- * Load pagination
+ * Show pagination
  * 
  * @param totalPage
  * @param curPage
@@ -98,7 +98,6 @@ function showPaging(totalPage, curPage) {
 function listCus(pageNo) {
 
 	var input = {
-		coID :8,
 		pageNo : pageNo,
 		pcnt : $("#record_num").val(),
 		sw : ''
@@ -155,7 +154,7 @@ function listCus(pageNo) {
 									+ data.REC[i].cuPhone
 									+ "</td>"
 									+ "<td>"
-									+ "<a href='#none'><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "<a href='"+BASE_URL+"/customer/customer_form_update' ><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
 									+ "<a href='#none' onclick=\"return deleteCustomer("
 									+ data.REC[i].cuID
@@ -259,7 +258,16 @@ function addCustomer() {
 		}
 	});
 }
-
+/**
+ * Load Current Date Time 
+ * @returns
+ */
 function datetimenow() {
 	return moment().format('YYYYMMDDhmmss');
+}
+/**
+ * Go Back
+ */
+function goBack() {
+    window.history.back();
 }

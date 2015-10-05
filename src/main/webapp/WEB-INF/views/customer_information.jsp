@@ -21,17 +21,17 @@
 		<div id="page-wrapper">
 
 			<div class="container-fluid">
-
+			
 				<!-- Page Heading -->
 				<div class="row">
-
+					
 					<div class="col-lg-12 col-md-12 col-sm-12">					
 
 						<h2 class="page-header">
 							
 							<span></span>Customer Infomation
-								<button style="float: right;" type="button" class="btn btn-info" data-toggle="modal"
-							data-target="#myModal">Add Customer</button>
+								<!-- <button style="float: right;" type="button" class="btn btn-info" data-toggle="modal"
+							data-target="#myModal">Add Customer</button> -->
 						</h2>
 
 					</div>
@@ -132,7 +132,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-	<%@include file="customer_add.jsp"%>
+	<%-- <%@include file="customer_edit.jsp"%> --%>
 
 
 	<%@include file="include/_script.jsp"%>
