@@ -34,7 +34,5 @@
      		    background-color: #638BE0 !important;
     			color: #fff;
      	}
-     </style>
- 
-
+     </style> 
 </head>

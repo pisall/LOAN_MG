@@ -12,9 +12,11 @@ $(function() {
 	});
 
 	$("#register").click(function() {
-		alert();
-		addCustomer();add
+	
+		addCustomer();
+		
 	});
+	
 
 });
 
@@ -154,7 +156,9 @@ function listCus(pageNo) {
 									+ data.REC[i].cuPhone
 									+ "</td>"
 									+ "<td>"
-									+ "<a href='"+BASE_URL+"/customer/customer_form_update' ><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "<a href='"
+									+ BASE_URL
+									+ "/customer/customer_form_update?cuID="+data.REC[i].cuID+"' ><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
 									+ "<a href='#none' onclick=\"return deleteCustomer("
 									+ data.REC[i].cuID
@@ -180,6 +184,7 @@ function listCus(pageNo) {
 				}
 			});
 }
+
 
 /**
  * Delete customer
@@ -259,15 +264,14 @@ function addCustomer() {
 	});
 }
 /**
- * Load Current Date Time 
+ * Load Current Date Time
+ * 
  * @returns
  */
 function datetimenow() {
 	return moment().format('YYYYMMDDhmmss');
 }
-/**
- * Go Back
- */
-function goBack() {
-    window.history.back();
-}
+
+
+
+ 

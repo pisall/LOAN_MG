@@ -1,5 +1,6 @@
 package com.system.loan.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +12,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
 @Service
+@Repository
+@Transactional
 public class CustomerDaoImp implements CustomerDao {
 
 	public static SessionFactory factory = null;
@@ -38,16 +43,10 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	public Boolean updateCustomer(CustomerDto customer) {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
-
 			session.update(cus);
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -61,14 +60,9 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	public Boolean updateCustomer1(CustomerDto Customer) {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			session.update(Customer);
-			tx.commit();
+			session.update(Customer);	
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -82,15 +76,10 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Override
 	public Boolean insertCustomer(CustomerDto Customer) {
-		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.save(Customer);
-			tx.commit();
+		Session session = factory.openSession();	
+		try {			
+			session.save(Customer);		
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -105,16 +94,11 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	public Boolean deleateCustomer(CustomerDto customer) {
 		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
+		try {		
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			cus.setCuDelYn("Y");
-			session.update(cus);
-			tx.commit();
+			session.update(cus);		
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -149,7 +133,6 @@ public class CustomerDaoImp implements CustomerDao {
 			session.close();
 		} catch (HibernateException e) {
 			session.close();
-			System.out.println(" there error");
 			e.printStackTrace();
 			return null;
 		}
@@ -164,26 +147,18 @@ public class CustomerDaoImp implements CustomerDao {
 	 * 		return null
 	 */
 	
-	public CustomerDto listSpecificCustomer(Integer cuID) {
+	public CustomerDto listSpecificCustomer(String cuID) {
 	      Session session = factory.openSession();
-	      Transaction tx = null;
-	      CustomerDto customer=null;
-	      try{
-	         tx = session.beginTransaction();
-	         Query query=session.createQuery("SELECT C.cu_id,C.cu_nm,C.cu_nick_nm,C.cu_sex,C.cu_dob,C.cu_national_id,C.cu_phone,C.cu_address,C.cu_pawn ,C.cu_note,C.cu_photo , G.gu_id,G.gu_nm From CustomerDto C INNER JOIN GuarantorInfoDto G ON C.cu_id=G.cu_id WHERE C.cu_id=?");
-	         query.setParameter(0, cuID);
-	         customer=(CustomerDto) query.uniqueResult();
-	        /* customer=session.get(CustomerDto.class, cuID);*/
-	         System.out.println(customer.toString());
-	         tx.commit();
+	      CustomerDto cus=null;
+	      try{        
+	          cus=session.get(CustomerDto.class, Integer.parseInt(cuID));
 	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	         return null;
 	      }finally {
 	         session.close(); 
 	      }
-		return customer;
+		return cus;
 	}
 
 	public int totalCus(pagingDto paging, CustomerDto cus) {

@@ -1,4 +1,4 @@
-<%@include file="include/_head.jsp"%>
+f<%@include file="include/_head.jsp"%>
 
 <body>
 
@@ -53,7 +53,6 @@
 				<!-- Form Update-->
 				<!-- Row -->
 				<div class="row">
-
 					<div class="col-md-6 col-lg-6">
 						<!-- Panel  -->
 						<div class="panel panel-default">
@@ -61,88 +60,94 @@
 							<div class="panel-heading">Customer Information</div>
 							<!-- Panel Body -->
 							<div class="panel-body">
-								<!-- Start From -->
-								<form class="form-horizontal" role="form">
-									<div>
+								<c:if test="${not empty customer}">
+									<c:set value="${customer}" var="cu" />
+									<!-- Start From -->
+									<form class="form-horizontal" role="form">
 										<div>
-											<span class="glyphicon glyphicon-user"
-												style="font-size: 90px;"></span>
+											<div>
+												<span class="glyphicon glyphicon-user"
+													style="font-size: 90px;"></span>
+											</div>
+											<span class="btn btn-default btn-file btn-sm"> Browse
+												<input type="file">
+											</span>
 										</div>
-										<span class="btn btn-default btn-file btn-sm"> Browse <input
-											type="file">
-										</span>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_name">Name</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_name"
-												placeholder="Enter Name">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_name">Name</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_name"
+													placeholder="Enter Name" value="${cu.cuName}">
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_nick_name"
-												placeholder="Enter Nickname">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_nick_name"
+													placeholder="Enter Nickname" value="${cu.cuNickName}">
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_sex">Sex</label>
-										<div class="col-sm-10">
-											<select class="form-control" id="cu_sex">
-												<option value="f">Female</option>
-												<option value="m">Male</option>
-											</select>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_sex">Sex</label>
+											<div class="col-sm-10">
+												<select class="form-control" id="cu_sex">
+													<c:if test="${cu.cuSex=='f'}">
+														<option value="f">Female</option>
+													</c:if>
+													<option value="m">Male</option>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_dob"
-												placeholder="Enter Date Of Birth">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_dob">DOB</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_dob"
+													placeholder="Enter Date Of Birth" value="${cu.cuDOB}">
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_id_card">ID
-											Card</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_id_card"
-												placeholder="Enter National Card">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_id_card">ID
+												Card</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_id_card"
+													placeholder="Enter National Card"
+													value="${cu.cuNationalID}">
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_phone">Phone</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_phone"
-												placeholder="Enter Phone">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_phone">Phone</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_phone"
+													placeholder="Enter Phone" value="${cu.cuPhone}">
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_address">Address</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_address"
-												placeholder="Enter Address">
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_address">Address</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cu_address"
+													placeholder="Enter Address" value="${cu.cuAddress}">
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
-										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_pawn"></textarea>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
+											<div class="col-sm-10">
+												<textarea class="form-control" rows="5" id="cu_pawn">${cu.cuPawn}</textarea>
+											</div>
 										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_note">Note</label>
-										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_note"></textarea>
+										<div class="form-group">
+											<label class="control-label col-sm-2" for="cu_note">Note</label>
+											<div class="col-sm-10">
+												<textarea class="form-control" rows="5" id="cu_note">${cu.cuNickName}</textarea>
+											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								</c:if>
 								<!-- End Form -->
 							</div>
 							<!-- End Panel Body -->
@@ -161,7 +166,14 @@
 
 							<!-- Panel Body -->
 							<div class="panel-body">
-
+								<c:if test="${not empty guarantor}">
+									<c:out value="${guarantor}" />							
+									<select id="foundGuarantorByID">
+									<c:forEach items="${guarantor}" var="gu" >
+										<option value="${gu.gu_id}">${gu.gu_id}</option>
+									</c:forEach>
+									</select>
+								</c:if>
 								<!-- Start Form -->
 								<form class="form-horizontal" role="form">
 									<div>
@@ -260,7 +272,7 @@
 					<button type="button" class="btn btn-danger">Cancel</button>
 				</div>
 				<!-- End Form -->
-				<br/>
+				<br />
 			</div>
 			<!-- /.container-fluid -->
 
@@ -270,10 +282,50 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
-
-	<script
-		src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script>
-
+	
+	<script type="text/javascript">
+		var BASE_URL = "${pageContext.request.contextPath}";
+	</script>
+	
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#foundGuarantorByID").change(function(){
+					
+					var input={
+						"customerDto":{
+							"cuID":52,
+						},
+						"gu_id":$(this).val()
+					}
+					
+					$.ajax({
+						url : BASE_URL + "/guarantor/listGuarantorByID",
+						type : 'POST',
+						dataType : 'JSON',
+						data : JSON.stringify(input),
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("Accept", "application/json");
+							xhr.setRequestHeader("Content-Type", "application/json");
+						},
+						success : function(data) {
+							console.log(data);
+						},
+						error : function(data, status, er) {
+							console.log("error: " + data + " status: " + status + " er:" + er);
+						}
+					});
+			});
+			
+		});
+		/**
+		 * Go Back
+		 */
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+	
 </body>
 
 </html>

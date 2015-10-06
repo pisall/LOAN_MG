@@ -1,6 +1,7 @@
 package com.system.loan.dto;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,30 +10,24 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="mfi_customers")
 public class CustomerDto implements Serializable {
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_CU_ID",name="cu_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
-	 
+	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)	 
 	@Column(name="cu_id")
 	private Integer cuID;
-	/*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="co_id")
-	@JsonBackReference
-	private CustomerOfficerDto customerOfficerDto;*/
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="customerDto")
+	private Set<GuarantorInfoDto>guarantorInfoDto;
+	
 	@Column(name="co_id")
 	private Integer coID;
 	@Column(name="cu_nm")
@@ -61,18 +56,19 @@ public class CustomerDto implements Serializable {
 	private String cuDelYn;
 	
 
+	
 	/**
-	 * @return the customerOfficerDto
-	 *//*
-	public CustomerOfficerDto getCustomerOfficerDto() {
-		return customerOfficerDto;
+	 * @return the guarantorInfoDto
+	 */
+	public Set<GuarantorInfoDto> getGuarantorInfoDto() {
+		return guarantorInfoDto;
 	}
-	*//**
-	 * @param customerOfficerDto the customerOfficerDto to set
-	 *//*
-	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
-		this.customerOfficerDto = customerOfficerDto;
-	}*/
+	/**
+	 * @param guarantorInfoDto the guarantorInfoDto to set
+	 */
+	public void setGuarantorInfoDto(Set<GuarantorInfoDto> guarantorInfoDto) {
+		this.guarantorInfoDto = guarantorInfoDto;
+	}
 	/**
 	 * @return the cuID
 	 */
@@ -243,18 +239,8 @@ public class CustomerDto implements Serializable {
 	public void setCuDelYn(String cuDelYn) {
 		this.cuDelYn = cuDelYn;
 	}
-	/**
-	 * @return the customerOfficerDto
-	 *//*
-	public CustomerOfficerDto getCustomerOfficerDto() {
-		return customerOfficerDto;
-	}
-	*//**
-	 * @param customerOfficerDto the customerOfficerDto to set
-	 *//*
-	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
-		this.customerOfficerDto = customerOfficerDto;
-	}*/
+	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

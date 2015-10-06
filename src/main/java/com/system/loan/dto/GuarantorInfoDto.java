@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="mfi_guarantor")
@@ -27,12 +30,16 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="gu_id")
 	private Integer gu_id;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cus_id")
-	private LoanAgreementDto loanAgreementDto;
+	/*@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cu_id")
+	private LoanAgreementDto loanAgreementDto;*/
 	
-	@Column (name="cu_id")
-	private Integer cu_id; 
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cu_id")
+	private CustomerDto customerDto;
+	
+	/*@Column (name="cu_id")
+	private Integer cuID; */
 	
 	@Column(name="gu_nm")
 	private String gu_nm;
@@ -58,6 +65,22 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="photo")
 	private String photo;
 	
+	
+
+	/**
+	 * @return the customerDto
+	 */
+	public CustomerDto getCustomerDto() {
+		return customerDto;
+	}
+
+	/**
+	 * @param customerDto the customerDto to set
+	 */
+	public void setCustomerDto(CustomerDto customerDto) {
+		this.customerDto = customerDto;
+	}
+
 	public GuarantorInfoDto(){
 		
 	}
@@ -70,13 +93,13 @@ public class GuarantorInfoDto implements Serializable {
 		this.gu_id = gu_id;
 	}
 
-	public Integer getCu_id() {
-		return cu_id;
+/*	public Integer getCu_id() {
+		return cuID;
 	}
 
 	public void setCu_id(Integer cu_id) {
-		this.cu_id = cu_id;
-	}
+		this.cuID = cu_id;
+	}*/
 
 	public String getGu_nm() {
 		return gu_nm;
@@ -142,12 +165,7 @@ public class GuarantorInfoDto implements Serializable {
 		this.photo = photo;
 	}
 
-	public LoanAgreementDto getLoanAgreementDto() {
-		return loanAgreementDto;
-	}
-
-	public void setLoanAgreementDto(LoanAgreementDto loanAgreementDto) {
-		this.loanAgreementDto = loanAgreementDto;
-	}
+	
+	
 	 
 }
