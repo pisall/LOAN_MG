@@ -11,12 +11,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.CustomerOfficerDto;
 
 @Service
+@Repository
+@Transactional
 public class CustomerOfficerDaoImp {
 
 	public static SessionFactory factory = null;
@@ -39,16 +43,11 @@ public class CustomerOfficerDaoImp {
 	
 	public List<CustomerOfficerDto> listCustomerOfficer() {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		List<CustomerOfficerDto> list = null;
 		try {
-			tx = session.beginTransaction();
-			Query query = session.createQuery("From CustomerOfficerDto");
+			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO");
 			list = (ArrayList<CustomerOfficerDto>) query.list();		
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return null;
 		} finally {

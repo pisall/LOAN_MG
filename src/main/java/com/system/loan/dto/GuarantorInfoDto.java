@@ -44,17 +44,26 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="gu_nm")
 	private String gu_nm;
 	
+	@Column(name="gu_nick_nm")
+	private String gu_nick_nm;
+	
 	@Column(name="gu_sex")
 	private String gu_sex;
 	
 	@Column(name="gu_national_id")
 	private String gu_national_id;
 	
+	@Column(name="gu_dob")
+	private String gu_dob;
+	
 	@Column(name="gu_phone")
 	private String gu_phone;
 	
 	@Column(name="gu_address")
 	private String gu_address;
+	
+	@Column(name="gu_pawn")
+	private String gu_pawn;
 	
 	@Column(name="gu_note")
 	private String gu_note;
@@ -64,7 +73,6 @@ public class GuarantorInfoDto implements Serializable {
 	
 	@Column(name="photo")
 	private String photo;
-	
 	
 
 	/**
@@ -109,6 +117,34 @@ public class GuarantorInfoDto implements Serializable {
 		this.gu_nm = gu_nm;
 	}
 
+	/**
+	 * @return the gu_nick_nm
+	 */
+	public String getGu_nick_nm() {
+		return gu_nick_nm;
+	}
+
+	/**
+	 * @param gu_nick_nm the gu_nick_nm to set
+	 */
+	public void setGu_nick_nm(String gu_nick_nm) {
+		this.gu_nick_nm = gu_nick_nm;
+	}
+
+	/**
+	 * @return the gu_pawn
+	 */
+	public String getGu_pawn() {
+		return gu_pawn;
+	}
+
+	/**
+	 * @param gu_pawn the gu_pawn to set
+	 */
+	public void setGu_pawn(String gu_pawn) {
+		this.gu_pawn = gu_pawn;
+	}
+
 	public String getGu_sex() {
 		return gu_sex;
 	}
@@ -123,6 +159,20 @@ public class GuarantorInfoDto implements Serializable {
 
 	public void setGu_national_id(String gu_national_id) {
 		this.gu_national_id = gu_national_id;
+	}
+
+	/**
+	 * @return the gu_dob
+	 */
+	public String getGu_dob() {
+		return gu_dob;
+	}
+
+	/**
+	 * @param gu_dob the gu_dob to set
+	 */
+	public void setGu_dob(String gu_dob) {
+		this.gu_dob = gu_dob;
 	}
 
 	public String getGu_phone() {

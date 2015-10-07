@@ -41,14 +41,12 @@ public class CustomerController {
 	 */
 
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging, CustomerDto cus) {
+	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging) {
 
-		cus.setCoID(8);
-
-		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging, cus) / paging.getPcnt()));
+		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging) / paging.getPcnt()));
 		HashMap<String, Object> model = new HashMap<String, Object>();
 
-		model.put("REC", customerImp.listCustomer(paging, cus));
+		model.put("REC", customerImp.listCustomer(paging));
 		model.put("PAGING", paging);
 
 		return model;
@@ -124,8 +122,8 @@ public class CustomerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/customer_form_update", method = RequestMethod.GET)
-	public String customerFormUpdate(@RequestParam(name = "cuID", defaultValue = "") String cuID,
-			@RequestParam(name = "guID", defaultValue = "") String guID, Map<String, Object> model) {
+	public String customerFormUpdate(@RequestParam(value = "cuID", defaultValue = "") String cuID,
+			@RequestParam( value = "guID", defaultValue = "") String guID, Map<String, Object> model) {
 
 		model.put("customer", customerImp.listSpecificCustomer(cuID));
 		model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));

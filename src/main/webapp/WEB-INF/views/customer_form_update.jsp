@@ -29,7 +29,7 @@ f<%@include file="include/_head.jsp"%>
 
 						<h2 class="page-header">
 
-							<span></span>Customer Form Update
+							<span></span>Edit Customer 
 							<!-- <button style="float: right;" type="button" class="btn btn-info" data-toggle="modal"
 							data-target="#myModal">Add Customer</button> -->
 						</h2>
@@ -162,18 +162,22 @@ f<%@include file="include/_head.jsp"%>
 						<!-- Panel  -->
 						<div class="panel panel-default">
 							<!-- Panel Head -->
-							<div class="panel-heading">Guarantor Information</div>
+							<div class="panel-heading">
+								<span>Guarantor Information</span>
+								<span>
+									<c:if test="${not empty guarantor}">						
+									<select id="foundGuarantorByID" class="form-control" style="width: 57%;float: right;margin-top: -7px">
+										<option value="">-----Select Guarantor ID And Name-----</option>
+										<c:forEach items="${guarantor}" var="gu" >										
+											<option value="${gu.gu_id}">ID = ${gu.gu_id} , Name=${gu.gu_nm}</option>
+										</c:forEach>
+									</select>
+								</c:if>
+								</span>
+							</div>
 
 							<!-- Panel Body -->
 							<div class="panel-body">
-								<c:if test="${not empty guarantor}">
-									<c:out value="${guarantor}" />							
-									<select id="foundGuarantorByID">
-									<c:forEach items="${guarantor}" var="gu" >
-										<option value="${gu.gu_id}">${gu.gu_id}</option>
-									</c:forEach>
-									</select>
-								</c:if>
 								<!-- Start Form -->
 								<form class="form-horizontal" role="form">
 									<div>
@@ -188,7 +192,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_name"
+											<input type="text" class="form-control" id="gu_name"
 												placeholder="Enter Name">
 										</div>
 									</div>
@@ -196,16 +200,18 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_nick_name"
+											<input type="text" class="form-control" id="gu_nick_name"
 												placeholder="Enter Nickname">
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_sex">Sex</label>
+										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
 											<select class="form-control" id="cu_sex">
-												<option value="f">Female</option>
+												<c:if test="${gu.gu_sex=='f'} }">
+													<option value="f">Female</option>
+												</c:if>											
 												<option value="m">Male</option>
 											</select>
 										</div>
@@ -213,7 +219,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_dob"
+											<input type="text" class="form-control" id="gu_dob"
 												placeholder="Enter Date Of Birth">
 										</div>
 									</div>
@@ -222,14 +228,14 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_id_card">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_id_card"
+											<input type="text" class="form-control" id="gu_national_id"
 												placeholder="Enter National Card">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_phone"
+											<input type="text" class="form-control" id="gu_phone"
 												placeholder="Enter Phone">
 										</div>
 									</div>
@@ -237,7 +243,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_address"
+											<input type="text" class="form-control" id="gu_address"
 												placeholder="Enter Address">
 										</div>
 									</div>
@@ -245,14 +251,14 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_pawn"></textarea>
+											<textarea class="form-control" rows="5" id="gu_pawn"></textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_note"></textarea>
+											<textarea class="form-control" rows="5" id="gu_note"></textarea>
 										</div>
 									</div>
 
@@ -291,30 +297,55 @@ f<%@include file="include/_head.jsp"%>
 	<script type="text/javascript">
 		$(function(){
 			$("#foundGuarantorByID").change(function(){
+					var guID=$(this).val();
 					
 					var input={
 						"customerDto":{
 							"cuID":52,
 						},
-						"gu_id":$(this).val()
-					}
+						"gu_id":guID
+					} 
 					
-					$.ajax({
-						url : BASE_URL + "/guarantor/listGuarantorByID",
-						type : 'POST',
-						dataType : 'JSON',
-						data : JSON.stringify(input),
-						beforeSend : function(xhr) {
-							xhr.setRequestHeader("Accept", "application/json");
-							xhr.setRequestHeader("Content-Type", "application/json");
-						},
-						success : function(data) {
-							console.log(data);
-						},
-						error : function(data, status, er) {
-							console.log("error: " + data + " status: " + status + " er:" + er);
-						}
-					});
+					if(guID!=""){
+						$.ajax({
+							url : BASE_URL + "/guarantor/listGuarantorByID",
+							type : 'POST',
+							dataType : 'JSON',
+							data : JSON.stringify(input),
+							beforeSend : function(xhr) {
+								xhr.setRequestHeader("Accept", "application/json");
+								xhr.setRequestHeader("Content-Type", "application/json");
+							},
+							success : function(data) {
+								if(data.length==1){
+									$(data).each(function(i,v){
+										$("#gu_name").val(v.gu_nm);
+										$("#gu_nick_name").val(v.gu_nick_nm);
+										$("#gu_sex").val(v.gu_sex);
+										$("#gu_dob").val(v.gu_dob);
+										$("#gu_national_id").val(v.gu_national_id);
+										$("#gu_phone").val(v.gu_phone);
+										$("#gu_address").val(v.gu_address);
+										$("#gu_pawn").val(v.gu_pawn);
+										$("#gu_note").val(v.gu_note);
+									});
+								}
+							},
+							error : function(data, status, er) {
+								console.log("error: " + data + " status: " + status + " er:" + er);
+							}
+						});					
+					}else{
+						$("#gu_name").val("");
+						$("#gu_nick_name").val("");
+						$("#gu_sex").val("");
+						$("#gu_dob").val("");
+						$("#gu_national_id").val("");
+						$("#gu_phone").val("");
+						$("#gu_address").val("");
+						$("#gu_pawn").val("");
+						$("#gu_note").val("");
+					}		
 			});
 			
 		});

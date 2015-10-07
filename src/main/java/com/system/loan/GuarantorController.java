@@ -30,8 +30,11 @@ public class GuarantorController {
 	 */
 	@RequestMapping(value = "/listGuarantorByID", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public @ResponseBody List listGuarantorByID(@RequestBody GuarantorInfoDto gu) {
-		System.out.println("guarantor=====================" + gu.getGu_id() + gu.getCustomerDto().getCuID());
-		return guarantor.foundGuarantorByID("52", "32");
+
+		String cuID = gu.getCustomerDto().getCuID() + "";
+		String guID = gu.getGu_id() + "";
+
+		return guarantor.foundGuarantorByID(cuID, guID);
 	}
 
 }

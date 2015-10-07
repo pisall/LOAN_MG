@@ -34,7 +34,7 @@ public class GuarantorDaoImp implements GuarantorDao {
 		Session session = factory.openSession();
 		List<GuarantorInfoDto>guarantor=null;
 		try {
-			Query query=session.createQuery("From GuarantorInfoDto G WHERE cast(G.customerDto.cuID as string) Like ? And cast(G.gu_id as string) Like ? ");
+			Query query=session.createQuery("Select G From GuarantorInfoDto G WHERE cast(G.customerDto.cuID as string) Like ? And cast(G.gu_id as string) Like ? ");
 		    query.setString(0, "%"+cuID+"%");
 		    query.setString(1, "%"+guID+"%");
 			guarantor=query.list();

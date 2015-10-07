@@ -29,9 +29,10 @@ public class CustomerOfficerDto implements Serializable {
 
 	@Column(name = "co_id")
 	private Integer coID;
-	/*@OneToMany(mappedBy = "customerOfficerDto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonBackReference
-	private Set<CustomerDto> customerDto;*/
+	
+	@OneToMany(mappedBy = "customerOfficerDto", cascade = CascadeType.ALL)
+	private Set<CustomerDto> customerDto;
+	
 	@Column(name = "co_nm")
 	private String coName;
 	@Column(name = "co_first_nm")
@@ -50,21 +51,6 @@ public class CustomerOfficerDto implements Serializable {
 	private String coDob;
 	@Column(name = "address")
 	private String coAddress;
-
-	/**
-	 * @return the customerDto
-	 *//*
-	public Set<CustomerDto> getCustomerDto() {
-		return customerDto;
-	}
-
-	*//**
-	 * @param customerDto
-	 *            the customerDto to set
-	 *//*
-	public void setCustomerDto(Set<CustomerDto> customerDto) {
-		this.customerDto = customerDto;
-	}*/
 
 	/**
 	 * @return the customer
@@ -229,6 +215,20 @@ public class CustomerOfficerDto implements Serializable {
 	 */
 	public void setCoAddress(String coAddress) {
 		this.coAddress = coAddress;
+	}
+
+	/**
+	 * @return the customerDto
+	 */
+	public Set<CustomerDto> getCustomerDto() {
+		return customerDto;
+	}
+
+	/**
+	 * @param customerDto the customerDto to set
+	 */
+	public void setCustomerDto(Set<CustomerDto> customerDto) {
+		this.customerDto = customerDto;
 	}
 
 }

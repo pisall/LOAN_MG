@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -28,8 +30,13 @@ public class CustomerDto implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="customerDto")
 	private Set<GuarantorInfoDto>guarantorInfoDto;
 	
-	@Column(name="co_id")
-	private Integer coID;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="co_id")
+	private CustomerOfficerDto customerOfficerDto;
+	
+/*	@Column(name="co_id")
+	private Integer coID;*/
+	
 	@Column(name="cu_nm")
 	private String cuName;
 	@Column(name="cu_nick_nm")
@@ -70,6 +77,18 @@ public class CustomerDto implements Serializable {
 		this.guarantorInfoDto = guarantorInfoDto;
 	}
 	/**
+	 * @return the customerOfficerDto
+	 */
+	public CustomerOfficerDto getCustomerOfficerDto() {
+		return customerOfficerDto;
+	}
+	/**
+	 * @param customerOfficerDto the customerOfficerDto to set
+	 */
+	public void setCustomerOfficerDto(CustomerOfficerDto customerOfficerDto) {
+		this.customerOfficerDto = customerOfficerDto;
+	}
+	/**
 	 * @return the cuID
 	 */
 	public Integer getCuID() {
@@ -84,16 +103,16 @@ public class CustomerDto implements Serializable {
 	
 	/**
 	 * @return the coID
-	 */
+	 *//*
 	public Integer getCoID() {
 		return coID;
 	}
-	/**
+	*//**
 	 * @param coID the coID to set
-	 */
+	 *//*
 	public void setCoID(Integer coID) {
 		this.coID = coID;
-	}
+	}*/
 	/**
 	 * @return the cuName
 	 */

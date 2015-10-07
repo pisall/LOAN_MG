@@ -100,9 +100,9 @@ function showPaging(totalPage, curPage) {
 function listCus(pageNo) {
 
 	var input = {
-		pageNo : pageNo,
-		pcnt : $("#record_num").val(),
-		sw : ''
+		"pageNo" : pageNo,
+		"pcnt" : $("#record_num").val(),
+		"sw" : ''
 	}
 	$
 			.ajax({
