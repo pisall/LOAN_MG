@@ -29,9 +29,9 @@ public class CustomerOfficerController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/list_customer_officer", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
-	public @ResponseBody List<CustomerOfficerDto> listCustomer() {
+	public @ResponseBody List<CustomerOfficerDto> listCustomer(String brand) {
 		
-		return coImp.listCustomerOfficer();
+		return coImp.listCustomerOfficer(brand);
 	}
 	
 	

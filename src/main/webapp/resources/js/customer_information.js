@@ -1,24 +1,44 @@
 var page_no = 1;
 var value = {};
 var totalPage = 0;
+var coID = id;
+var recNum=10;
 
 $(function() {
+	if(totalPage >10)recordNum();
 	datetimenow();
 	listCus(page_no);
 
-	$("#record_num").click(function() {
-
+	$("#record_num").change(function() {
 		listCus(page_no);
 	});
 
 	$("#register").click(function() {
-	
+
 		addCustomer();
-		
+
 	});
-	
+
+	$("#co_info").change(function() {
+		coID = $.trim($(this).val());
+		listCus(page_no);
+	});
+
+	$("#word").keyup(function() {
+		listCus(page_no, $(this).val());
+	});
 
 });
+
+function recordNum(){
+	var result="";
+	var num=0;
+	for(var i=1;i<=5;i++){
+		num=i*10;
+		result="<select class='form-control' id='record_num' style='width: 100%'><option value='"+num+"'>"+num+"</option></select>";
+	}
+	$("#record_num").html(result);
+}
 
 function loadPaging() {
 	$("#paging").children("[name=p_index]").click(function() {
@@ -72,42 +92,49 @@ function pagePrevious() {
  * @param totalPage
  * @param curPage
  */
+
 function showPaging(totalPage, curPage) {
 	$("#paging").html("");
-	$("#paging")
-			.append(
-					'<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
-	for (var i = 1; i <= totalPage; i++) {
-		if (i == curPage)
-			$("#paging").append(
-					'<li class="active"  name="p_index"><a href="#none">' + i
-							+ '</a></li>');
+	if (totalPage > 1) {
+		$("#paging")
+				.append(
+						'<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
+		for (var i = 1; i <= totalPage; i++) {
+			if (i == curPage)
+				$("#paging").append(
+						'<li class="active"  name="p_index"><a href="#none">'
+								+ i + '</a></li>');
 
-		else
-			$("#paging").append(
-					'<li  name="p_index"><a href="#none">' + i + '</a></li>');
+			else
+				$("#paging").append(
+						'<li  name="p_index"><a href="#none">' + i
+								+ '</a></li>');
 
+		}
+		$("#paging")
+				.append(
+						'<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
 	}
-	$("#paging")
-			.append(
-					'<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
 }
+
+
 /**
  * List Customer
  * 
  * @param pageNo
  */
-function listCus(pageNo) {
-
+function listCus(pageNo, word) {
+	recNum=$("#record_num").val();
+	
 	var input = {
-		"pageNo" : pageNo,
-		"pcnt" : $("#record_num").val(),
-		"sw" : ''
+		"pageNo" : $.trim(pageNo),
+		"pcnt" : $.trim(recNum),
+		"sw" : $.trim(word),
 	}
 	$
 			.ajax({
 
-				url : BASE_URL + "/customer/listCus",
+				url : BASE_URL + "/customer/listCus/" + coID + "/" + brand,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
@@ -116,6 +143,7 @@ function listCus(pageNo) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
+
 					value = data;
 					var result = "";
 					var paging = data.PAGING;
@@ -158,7 +186,9 @@ function listCus(pageNo) {
 									+ "<td>"
 									+ "<a href='"
 									+ BASE_URL
-									+ "/customer/customer_form_update?cuID="+data.REC[i].cuID+"' ><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "/customer/customer_form_update?cuID="
+									+ data.REC[i].cuID
+									+ "' ><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
 									+ "<a href='#none' onclick=\"return deleteCustomer("
 									+ data.REC[i].cuID
@@ -168,6 +198,9 @@ function listCus(pageNo) {
 									+ "</td>" + "</tr>"
 						}
 
+					}
+					if (data.CO.length > 0) {
+						listCO(data);
 					}
 
 					$("#tableCustomer").html(result);
@@ -185,6 +218,20 @@ function listCus(pageNo) {
 			});
 }
 
+function listCO(data) {
+	var result = "";
+	$(data.CO).each(
+			function(i, v) {
+				var selected = "";
+				if (v.coID == coID) {
+					selected = "selected";
+				}
+				result += "<option value='" + v.coID + "'" + selected
+						+ ">CO ID : " + v.coID + " , CO Name : " + v.coName
+						+ " </option>";
+			});
+	$("#co_info").html(result);
+}
 
 /**
  * Delete customer
@@ -198,7 +245,7 @@ function deleteCustomer(cusID) {
 		text : "Are you sure you want to delete this record?",
 		confirm : function() {
 			var input = {
-				cuID : cusID
+				cuID : $.trim(cusID)
 			}
 			$.ajax({
 
@@ -232,18 +279,18 @@ function deleteCustomer(cusID) {
 function addCustomer() {
 
 	var input = {
-		cuName : $("#cu_name").val(),
-		cuNickName : $("#cu_nick_name").val(),
-		cuSex : $("#cu_sex").val(),
-		cuDOB : $("#cu_dob").val(),
-		cuNationalID : $("#cu_national_id").val(),
-		cuPhone : $("#cu_phone").val(),
-		cuAddress : $("#cu_address").val(),
-		cuDtt : datetimenow(),
-		cuPawn : $("#cu_pawn").val(),
-		cuNote : $("#cu_note").val(),
+		cuName : $.trim($("#cu_name").val()),
+		cuNickName : $.trim($("#cu_nick_name").val()),
+		cuSex : $.trim($("#cu_sex").val()),
+		cuDOB : $.trim($("#cu_dob").val()),
+		cuNationalID : $.trim($("#cu_national_id").val()),
+		cuPhone : $.trim($("#cu_phone").val()),
+		cuAddress : $.trim($("#cu_address").val()),
+		cuDtt : $.trim(datetimenow()),
+		cuPawn : $.trim($("#cu_pawn").val()),
+		cuNote : $.trim($("#cu_note").val()),
 	}
-	console.log("input :" + " " + input);
+
 	$.ajax({
 
 		url : BASE_URL + "/customer/addCustomer",
@@ -255,8 +302,7 @@ function addCustomer() {
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			console.log(data);
-			// listCus(page_no);
+
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
@@ -271,7 +317,3 @@ function addCustomer() {
 function datetimenow() {
 	return moment().format('YYYYMMDDhmmss');
 }
-
-
-
- 

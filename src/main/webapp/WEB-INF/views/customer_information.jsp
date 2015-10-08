@@ -1,5 +1,11 @@
 <%@include file="include/_head.jsp"%>
 
+<%
+	HttpSession ses=request.getSession(false);
+	ses.setAttribute("id", "9");
+	ses.setAttribute("brand", "bb");
+%>
+
 <body>
 
 	<div id="wrapper">
@@ -45,11 +51,9 @@
 							<div class="panel panel-heading">
 								<div class="row">
 									<div class="col-md-6">
-										<span class="col-md-4 col-sm-4" style="padding: 0px"> <select
-											class="form-control">
-												<option>Co ID or Name</option>
-												<option>Co ID</option>
-												<option>Name</option>
+										<span class="col-md-8 col-sm-8" style="padding: 0px"> <select
+											class="form-control" id="co_info">
+
 										</select>
 										</span>
 
@@ -57,8 +61,8 @@
 									<div class="col-md-6 col-sm-6 pull-right">
 
 										<div class="form-group input-group">
-											<input class="form-control" type="text"
-												placeholder="Enter Customer ID Card or Name"> <span
+											<input class="form-control" type="text" id="word"
+												placeholder="Search Customer By ID Card or Name"> <span
 												class="input-group-btn"><button
 													class="btn btn-default" type="button">
 													<i class="fa fa-search"></i>
@@ -106,15 +110,8 @@
 				</div>
 				<!-- //list -->
 				<div class="row">
-					<div class="col-md-1">
-						<select class="form-control" id="record_num" style='width: 100%'>
-
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="30">30</option>
-							<option value="40">40</option>
-							<option value="50">50</option>
-						</select>
+					<div class="col-md-1" id="select_num">
+						
 					</div>
 					<div class="col-md-11" style="text-align: center;">
 						<!-- <div class="col-md-6 col-md-offset-3" style="text-align: center"> -->
@@ -137,8 +134,10 @@
 
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
+		var id="<%=ses.getAttribute("id")%>";
+		var brand="<%=ses.getAttribute("brand")%>";
 	</script>
-	
+
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script>
 

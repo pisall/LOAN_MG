@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.system.loan.dao.CustomerDaoImp;
+import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
 
@@ -32,6 +35,8 @@ public class CustomerController {
 	CustomerDaoImp customerImp;
 	@Inject
 	GuarantorDaoImp guarantorImp;
+	@Inject
+	CustomerOfficerDaoImp coImp;
 
 	/**
 	 * List Customer
@@ -40,15 +45,15 @@ public class CustomerController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging) {
-
-		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging) / paging.getPcnt()));
+	@RequestMapping(value = "/listCus/{coID}/{brand}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,@PathVariable("coID")int coID,@PathVariable("brand")String brand  ) {
+	
+		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging,coID) / paging.getPcnt()));
 		HashMap<String, Object> model = new HashMap<String, Object>();
-
-		model.put("REC", customerImp.listCustomer(paging));
+		
+		model.put("REC", customerImp.listCustomer(paging,coID));
 		model.put("PAGING", paging);
-
+		model.put("CO", coImp.listCustomerOfficer(brand));
 		return model;
 	}
 
@@ -130,5 +135,6 @@ public class CustomerController {
 
 		return "customer_form_update";
 	}
+	
 
 }

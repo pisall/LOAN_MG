@@ -41,16 +41,18 @@ public class CustomerOfficerDaoImp {
 	 * List Customer Information if true return List else return null
 	 */
 	
-	public List<CustomerOfficerDto> listCustomerOfficer() {
+	public List<CustomerOfficerDto> listCustomerOfficer(String brand) {
 		Session session = factory.openSession();
 		List<CustomerOfficerDto> list = null;
 		try {
-			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO");
+			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO Where CO.coBrand=? ");
+					query.setString(0, brand);
 			list = (ArrayList<CustomerOfficerDto>) query.list();		
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
+			session.flush();
 			session.close();
 		}
 		return list;
