@@ -1,5 +1,6 @@
 package com.system.loan.dao;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,11 +13,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.*;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.system.loan.config.HibernateSessionFactory;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
@@ -25,25 +30,16 @@ import com.system.loan.dto.pagingDto;
 @Transactional
 public class CustomerDaoImp implements CustomerDao {
 
-	public static SessionFactory factory = null;
-
-	public CustomerDaoImp() {
-		try {
-			factory = new Configuration().configure().buildSessionFactory();
-		} catch (HibernateException e) {
-			System.out.println(e.toString());
-			e.printStackTrace();
-			if (e.getCause() != null)
-				System.out.println(e.getCause().getMessage());
-		} 
-	}
-
+	//public static SessionFactory factory = null;
+	@Autowired
+	HibernateSessionFactory factory;
+	
 	/**
 	 * Update Customer Information if true return true else return false
 	 */
 	@Override
 	public Boolean updateCustomer(CustomerDto customer) {
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		try {
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			session.update(cus);
@@ -62,7 +58,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Update Customer Information if true return true else return false
 	 */
 	public Boolean updateCustomer1(CustomerDto Customer) {
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		try {
 			session.update(Customer);
 		} catch (HibernateException e) {
@@ -81,7 +77,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Override
 	public Boolean insertCustomer(CustomerDto Customer) {
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		try {
 			session.save(Customer);
 			session.close();
@@ -100,12 +96,13 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Delete Customer Information if true return true else return false
 	 */
 	@Override
-	public Boolean deleateCustomer(CustomerDto customer) {
-		Session session = factory.openSession();
+	public Boolean deleteCustomer(CustomerDto customer) {
+		Session session = factory.getSessionFactory().openSession();
 		try {
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
-			cus.setCuDelYn("Y");
-			session.update(cus);
+			cus.setCuDelYn(customer.getCuDelYn());
+			System.out.println("Customer yn"+cus.getCuDelYn()+"===========================Customer ID+="+customer.getCuID());
+			session.saveOrUpdate(cus);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
@@ -123,7 +120,7 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	public List<CustomerDto> listCustomer(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		List<CustomerDto> list = null;
 		String filter = "";
 		String orderRec = " Order By C.cuID DESC";
@@ -155,7 +152,7 @@ public class CustomerDaoImp implements CustomerDao {
 
 	public int totalCus(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		int cnt = 0;
 		String filter = "";
 		try {
@@ -190,7 +187,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 
 	public CustomerDto listSpecificCustomer(String cuID) {
-		Session session = factory.openSession();
+		Session session = factory.getSessionFactory().openSession();
 		CustomerDto cus = null;
 		try {
 			cus = session.get(CustomerDto.class, Integer.parseInt(cuID));

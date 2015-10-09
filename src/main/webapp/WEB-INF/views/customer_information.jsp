@@ -145,7 +145,9 @@
 	</script>
 
 	<script
-		src="${pageContext.request.contextPath}/resources/js/customer_information.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
+		<script
+		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
 
 </body>
 

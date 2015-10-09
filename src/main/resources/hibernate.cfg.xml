@@ -50,9 +50,6 @@
 		<mapping class="com.system.loan.dto.CustomerOfficerDto" />
 
 		<mapping class="com.system.loan.dto.custDto" />
-		
-	
-		
 
 	</session-factory>
 </hibernate-configuration>

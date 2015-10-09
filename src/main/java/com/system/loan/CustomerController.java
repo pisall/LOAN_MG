@@ -35,8 +35,6 @@ public class CustomerController {
 	CustomerDaoImp customerImp;
 	@Inject
 	GuarantorDaoImp guarantorImp;
-	@Inject
-	CustomerOfficerDaoImp coImp;
 
 	/**
 	 * List Customer
@@ -45,15 +43,13 @@ public class CustomerController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/listCus/{coID}/{brand}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,@PathVariable("coID")int coID,@PathVariable("brand")String brand  ) {
+	@RequestMapping(value = "/listCus/{coID}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,@PathVariable("coID")int coID) {
 	
 		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging,coID) / paging.getPcnt()));
-		HashMap<String, Object> model = new HashMap<String, Object>();
-		
+		HashMap<String, Object> model = new HashMap<String, Object>();	
 		model.put("REC", customerImp.listCustomer(paging,coID));
 		model.put("PAGING", paging);
-		model.put("CO", coImp.listCustomerOfficer(brand));
 		return model;
 	}
 
@@ -92,7 +88,7 @@ public class CustomerController {
 	@RequestMapping(value = "/deleteCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody Boolean deleteCustomer(@RequestBody CustomerDto customer) {
 
-		return customerImp.deleateCustomer(customer);
+		return customerImp.deleteCustomer(customer);
 
 	}
 

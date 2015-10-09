@@ -3,29 +3,30 @@ var value = {};
 var totalPage = 1;
 var coID = id;
 var recNum=10;
+var word="";
 
 $(function() {
 	
 	datetimenow();
 	listCus(page_no);
-
+	
 	$("#record_num").change(function() {
 		listCus(page_no);
 	});
 
 	$("#register").click(function() {
-
 		addCustomer();
-
 	});
 
-	$("#co_info").change(function() {
+	/*$("#co_info").change(function() {
 		coID = $.trim($(this).val());
 		listCus(page_no);
-	});
+	});*/
 
 	$("#word").keyup(function() {
-		listCus(page_no, $(this).val());
+		word=$(this).val();
+		listCus(page_no);
+		
 	});
 
 });
@@ -127,7 +128,7 @@ function showPaging(totalPage, curPage) {
  * 
  * @param pageNo
  */
-function listCus(pageNo, word) {
+function listCus(pageNo) {
 	
 	var input = {
 		"pageNo" : $.trim(pageNo),
@@ -137,7 +138,7 @@ function listCus(pageNo, word) {
 	$
 			.ajax({
 
-				url : BASE_URL + "/customer/listCus/" + coID + "/" + brand,
+				url : BASE_URL + "/customer/listCus/" + coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
@@ -155,11 +156,7 @@ function listCus(pageNo, word) {
 					// clear paging
 					$("#paging").html("");
 
-					
-
 					showPaging(totalPage, curPage)
-
-					// loadTotalPage(totalPage, curPage)
 
 					if (data.REC.length > 0) {
 
@@ -201,9 +198,6 @@ function listCus(pageNo, word) {
 						}
 
 					}
-					if (data.CO.length > 0) {
-						listCO(data);
-					}
 					
 					$("#tableCustomer").html(result);
 					
@@ -225,21 +219,6 @@ function listCus(pageNo, word) {
 			});
 }
 
-function listCO(data) {
-	var result = "";
-	$(data.CO).each(
-			function(i, v) {
-				var selected = "";
-				if (v.coID == coID) {
-					selected = "selected";
-				}
-				result += "<option value='" + v.coID + "'" + selected
-						+ ">CO ID : " + v.coID + " , CO Name : " + v.coName
-						+ " </option>";
-			});
-	$("#co_info").html(result);
-}
-
 /**
  * Delete customer
  * 
@@ -247,12 +226,12 @@ function listCO(data) {
  */
 
 function deleteCustomer(cusID) {
-
 	$.confirm({
 		text : "Are you sure you want to delete this record?",
 		confirm : function() {
 			var input = {
-				cuID : $.trim(cusID)
+				"cuID" : $.trim(cusID),
+				"cuDelYn":$.trim("Y")
 			}
 			$.ajax({
 

@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -31,6 +32,7 @@ public class CustomerOfficerDto implements Serializable {
 	private Integer coID;
 	
 	@OneToMany(mappedBy = "customerOfficerDto", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<CustomerDto> customerDto;
 	
 	@Column(name = "co_nm")

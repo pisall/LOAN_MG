@@ -32,6 +32,7 @@ public class CustomerDto implements Serializable {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="co_id")
+	@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;
 	
 /*	@Column(name="co_id")
