@@ -51,8 +51,9 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -63,12 +64,14 @@ public class CustomerDaoImp implements CustomerDao {
 	public Boolean updateCustomer1(CustomerDto Customer) {
 		Session session = factory.openSession();
 		try {
-			session.update(Customer);	
+			session.update(Customer);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -78,15 +81,17 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Override
 	public Boolean insertCustomer(CustomerDto Customer) {
-		Session session = factory.openSession();	
-		try {			
-			session.save(Customer);		
+		Session session = factory.openSession();
+		try {
+			session.save(Customer);
+			session.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
-		} finally {
-			session.flush();
-			session.close();
+		}finally {
+			if (session != null) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -97,16 +102,17 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	public Boolean deleateCustomer(CustomerDto customer) {
 		Session session = factory.openSession();
-		try {		
+		try {
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			cus.setCuDelYn("Y");
-			session.update(cus);		
+			session.update(cus);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -115,7 +121,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 * List Customer Information if true return List else return null
 	 */
 	@Override
-	public List<CustomerDto> listCustomer(pagingDto paging,int coID ) {
+	public List<CustomerDto> listCustomer(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.openSession();
 		List<CustomerDto> list = null;
@@ -124,29 +130,30 @@ public class CustomerDaoImp implements CustomerDao {
 		try {
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
-					filter = " and  cast(C.cuID as string) like '%" + paging.getSw() + "%' Or C.cuName like '%" + paging.getSw() + "%'";
+					filter = " and  cast(C.cuID as string) like '%" + paging.getSw() + "%' Or C.cuName like '%"
+							+ paging.getSw() + "%'";
 				}
 			}
-	
+
 			Query query = session
-					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' And C.customerOfficerDto.coID=?  " + filter + orderRec);
-			query.setInteger(0,coID);
+					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
+							+ filter + orderRec);
+			query.setInteger(0, coID);
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list = (List<CustomerDto>) query.list();
-
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
-		}finally{
-			session.flush();
-			session.close();
+		}finally {
+			if (session != null) {
+				session.close();
+			}
 		}
 		return list;
 	}
-	
-	
-	public int totalCus(pagingDto paging,int coID) {
+
+	public int totalCus(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.openSession();
 		int cnt = 0;
@@ -159,47 +166,43 @@ public class CustomerDaoImp implements CustomerDao {
 				}
 			}
 			Query query = session.createQuery(
-					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And C.customerOfficerDto.coID=?  " + filter);
-		
-			query.setInteger(0,coID);
+					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
+							+ filter);
+
+			query.setInteger(0, coID);
 			List<Object> list = (List<Object>) query.list();
 			for (Object ob : list) {
 				cnt = Integer.parseInt(ob.toString());
 			}
-
-		} catch (HibernateException e) {			
+		} catch (HibernateException e) {
 			System.out.println(" error total remord");
 			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
 		}
 		return cnt;
 	}
-	
+
 	/**
-	 * List Customer by id 
-	 * if true 
-	 * 		return List
-	 * else 
-	 * 		return null
+	 * List Customer by id if true return List else return null
 	 */
-	
+
 	public CustomerDto listSpecificCustomer(String cuID) {
-	      Session session = factory.openSession();
-	      CustomerDto cus=null;
-	      try{        
-	          cus=session.get(CustomerDto.class, Integer.parseInt(cuID));
-	      }catch (HibernateException e) {
-	         e.printStackTrace(); 
-	         return null;
-	      }finally {
-	    	 session.flush();
-	         session.close(); 
-	      }
+		Session session = factory.openSession();
+		CustomerDto cus = null;
+		try {
+			cus = session.get(CustomerDto.class, Integer.parseInt(cuID));
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 		return cus;
 	}
-
-	
 
 }

@@ -42,8 +42,9 @@ public class GuarantorDaoImp implements GuarantorDao {
 			e.printStackTrace();
 			return null;
 		} finally {
-			session.flush();
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
 		return guarantor;
 	}

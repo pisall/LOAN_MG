@@ -1,11 +1,11 @@
 var page_no = 1;
 var value = {};
-var totalPage = 0;
+var totalPage = 1;
 var coID = id;
 var recNum=10;
 
 $(function() {
-	if(totalPage >10)recordNum();
+	
 	datetimenow();
 	listCus(page_no);
 
@@ -33,11 +33,15 @@ $(function() {
 function recordNum(){
 	var result="";
 	var num=0;
+	var str="";
+	$("#select_num").html("");
+	str="<select class='form-control' id='record_num' style='width: 100%'>";
 	for(var i=1;i<=5;i++){
 		num=i*10;
-		result="<select class='form-control' id='record_num' style='width: 100%'><option value='"+num+"'>"+num+"</option></select>";
+		str+="<option value='"+num+"'>"+num+"</option>";
 	}
-	$("#record_num").html(result);
+	str+="</select>";
+	$("#select_num").html(str);
 }
 
 function loadPaging() {
@@ -124,11 +128,10 @@ function showPaging(totalPage, curPage) {
  * @param pageNo
  */
 function listCus(pageNo, word) {
-	recNum=$("#record_num").val();
 	
 	var input = {
 		"pageNo" : $.trim(pageNo),
-		"pcnt" : $.trim(recNum),
+		"pcnt" : $.trim($("#record_num").val()),
 		"sw" : $.trim(word),
 	}
 	$
@@ -143,17 +146,16 @@ function listCus(pageNo, word) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
-
+				
 					value = data;
 					var result = "";
 					var paging = data.PAGING;
 					var curPage = paging.pageNo;
-					var totalPage = parseInt(paging.totalPage);
-
+					totalPage = parseInt(paging.totalPage);
 					// clear paging
 					$("#paging").html("");
 
-					// load totalpage
+					
 
 					showPaging(totalPage, curPage)
 
@@ -202,9 +204,14 @@ function listCus(pageNo, word) {
 					if (data.CO.length > 0) {
 						listCO(data);
 					}
-
+					
 					$("#tableCustomer").html(result);
-
+					
+					$("#record_num").change(function() {
+						recNum=$("#record_num").val();
+						listCus(page_no);
+					});
+					
 					loadPaging();
 
 					pageNext();

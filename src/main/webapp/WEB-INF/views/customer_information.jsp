@@ -1,7 +1,7 @@
 <%@include file="include/_head.jsp"%>
 
 <%
-	HttpSession ses=request.getSession(false);
+	HttpSession ses = request.getSession(false);
 	ses.setAttribute("id", "9");
 	ses.setAttribute("brand", "bb");
 %>
@@ -111,7 +111,13 @@
 				<!-- //list -->
 				<div class="row">
 					<div class="col-md-1" id="select_num">
-						
+						<select class='form-control' id='record_num' style='width: 100%'>
+						<option value='10'>10</option>
+						<option value='20'>20</option>
+						<option value='30'>30</option>
+						<option value='40'>40</option>
+						<option value='50'>50</option>
+						</select>
 					</div>
 					<div class="col-md-11" style="text-align: center;">
 						<!-- <div class="col-md-6 col-md-offset-3" style="text-align: center"> -->

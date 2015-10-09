@@ -47,13 +47,14 @@ public class CustomerOfficerDaoImp {
 		try {
 			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO Where CO.coBrand=? ");
 					query.setString(0, brand);
-			list = (ArrayList<CustomerOfficerDto>) query.list();		
+			list = (ArrayList<CustomerOfficerDto>) query.list();	
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
-			session.flush();
-			session.close();
+			if (session != null) {
+				session.close();
+			}
 		}
 		return list;
 	}
