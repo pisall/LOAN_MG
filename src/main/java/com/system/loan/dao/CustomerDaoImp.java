@@ -35,7 +35,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			if (e.getCause() != null)
 				System.out.println(e.getCause().getMessage());
-		}
+		} 
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -69,7 +69,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -89,7 +89,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return false;
 		}finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -110,7 +110,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -146,7 +146,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return null;
 		}finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -178,7 +178,7 @@ public class CustomerDaoImp implements CustomerDao {
 			System.out.println(" error total remord");
 			e.printStackTrace();
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}
@@ -198,7 +198,7 @@ public class CustomerDaoImp implements CustomerDao {
 			e.printStackTrace();
 			return null;
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}

@@ -12,6 +12,9 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.CoDto;
 import com.system.loan.dto.pagingDto;
@@ -20,6 +23,9 @@ import com.system.loan.dto.pagingDto;
  * @author PC_VIRAK
  *
  */
+@Service
+@Repository
+@Transactional
 public class CoDaoImp implements CoDao {
 	public static SessionFactory factory = null;
 	
@@ -55,11 +61,13 @@ public class CoDaoImp implements CoDao {
 			query.setFirstResult((paging.getPageNo()-1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list =(List<CoDto>) query.list();
-			session.close();
 		} catch (HibernateException e) {
-			session.close();
 			System.out.println(" there error");
 			e.printStackTrace();
+		}finally{
+			if(session.isOpen()){
+				session.close();
+			}
 		}
 		return list;
 	}
@@ -82,12 +90,15 @@ public class CoDaoImp implements CoDao {
 			for(Object ob:list){
 				cnt=Integer.parseInt(ob.toString());
 			}
-			session.close();
-				
+			
 		}catch(HibernateException e){
-			session.close();
+			
 			System.out.println(" error total remord");
 			e.printStackTrace();
+		}finally{
+			if(session.isOpen()){
+				session.close();
+			}
 		}
 		return cnt;
 	}
@@ -102,9 +113,13 @@ public class CoDaoImp implements CoDao {
 				System.out.println("inte ="+in);
 			}
 			System.out.println("size="+ list.size());
-			session.close();
+			
 		}catch(HibernateException e){
 			e.printStackTrace();
+		}finally{
+			if(session.isOpen()){
+				session.close();
+			}
 		}
 	}
 	
@@ -129,11 +144,14 @@ public class CoDaoImp implements CoDao {
 			    }*/
 			 
 			 System.out.println(intOb);
-			 session.close();
 			
 		}catch(HibernateException e){
-			session.close();
+			
 			e.printStackTrace();
+		}finally{
+			if(session.isOpen()){
+				session.close();
+			}
 		}
 		
 		return "yyy";
@@ -146,11 +164,13 @@ public class CoDaoImp implements CoDao {
 		try{
 			Query query=session.createQuery("select new map(coId as coId,dob as dob) from CoDto");
 			 list=query.list();
-			
-			session.close();
 		}catch(HibernateException e){
 			session.close();
 			e.printStackTrace();
+		}finally{
+			if(session.isOpen()){
+				session.close();
+			}
 		}
 		return list;
 		

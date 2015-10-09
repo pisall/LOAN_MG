@@ -52,7 +52,7 @@ public class CustomerOfficerDaoImp {
 			e.printStackTrace();
 			return null;
 		} finally {
-			if (session != null) {
+			if (session.isOpen()) {
 				session.close();
 			}
 		}

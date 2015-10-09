@@ -9,11 +9,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.UserDto;
 
 @Service
+@Repository
+@Transactional
 public class UserDaoImp implements UserDao {
 	public static SessionFactory factory = null;
 
@@ -35,9 +39,7 @@ public class UserDaoImp implements UserDao {
 	@Override
 	public Boolean updateUser(UserDto user) {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
 			UserDto usr = (UserDto) session.get(UserDto.class, user.getUsID());
 			usr.setUsNm(user.getUsNm());
 			usr.setUsSex(user.getUsSex());
@@ -45,15 +47,13 @@ public class UserDaoImp implements UserDao {
 			usr.setUsEmail(user.getUsEmail());
 			usr.setUsAddress(user.getUsAddress());
 			session.update(usr);
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -63,19 +63,15 @@ public class UserDaoImp implements UserDao {
 	 */
 	public Boolean updateUser1(UserDto user) {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
 			session.update(user);
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -88,17 +84,14 @@ public class UserDaoImp implements UserDao {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
 			session.save(user);
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -111,18 +104,18 @@ public class UserDaoImp implements UserDao {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
+
 			UserDto usr = (UserDto) session.get(UserDto.class, user.getUsID());
 			session.delete(usr);
-			tx.commit();
+
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
+
 			e.printStackTrace();
 			return false;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return true;
 	}
@@ -136,19 +129,15 @@ public class UserDaoImp implements UserDao {
 		Transaction tx = null;
 		List<UserDto> list = null;
 		try {
-			tx = session.beginTransaction();
 			Query query = session.createQuery("From UserDto");
 			list = (ArrayList<UserDto>) query.list();
-
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return null;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return list;
 	}
@@ -159,23 +148,18 @@ public class UserDaoImp implements UserDao {
 
 	public List<UserDto> listSpecificUser(Integer userID) {
 		Session session = factory.openSession();
-		Transaction tx = null;
 		List<UserDto> user = null;
 		try {
-			tx = session.beginTransaction();
 			Query query = session.createQuery("From MfiUserDto Where usID=?");
 			query.setParameter(0, userID);
 			user = (List<UserDto>) query.list();
-			System.out.println(user.toString());
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
 			e.printStackTrace();
 			return null;
 		} finally {
-			session.flush();
-			session.close();
+			if (session.isOpen()) {
+				session.close();
+			}
 		}
 		return user;
 	}

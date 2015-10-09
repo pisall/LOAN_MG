@@ -49,8 +49,8 @@ public class LoanAgreementDao {
 				transection.rollback();
 			e.printStackTrace();
 			return false;
-		} finally {
-			if (session != null) {
+		} finally{
+			if(session.isOpen()){
 				session.close();
 			}
 		}

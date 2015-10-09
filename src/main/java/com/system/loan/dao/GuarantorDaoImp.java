@@ -41,8 +41,8 @@ public class GuarantorDaoImp implements GuarantorDao {
 		} catch (HibernateException e) {		
 			e.printStackTrace();
 			return null;
-		} finally {
-			if (session != null) {
+		} finally{
+			if(session.isOpen()){
 				session.close();
 			}
 		}
