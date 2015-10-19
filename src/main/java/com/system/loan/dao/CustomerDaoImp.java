@@ -1,21 +1,10 @@
 package com.system.loan.dao;
 
-import java.sql.Connection;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.*;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -27,7 +16,6 @@ import com.system.loan.dto.pagingDto;
 
 @Service
 @Repository
-@Transactional
 public class CustomerDaoImp implements CustomerDao {
 
 	//public static SessionFactory factory = null;
@@ -38,6 +26,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Update Customer Information if true return true else return false
 	 */
 	@Override
+	@Transactional
 	public Boolean updateCustomer(CustomerDto customer) {
 		Session session = factory.getSessionFactory().openSession();
 		try {
@@ -55,27 +44,10 @@ public class CustomerDaoImp implements CustomerDao {
 	}
 
 	/**
-	 * Update Customer Information if true return true else return false
-	 */
-	public Boolean updateCustomer1(CustomerDto Customer) {
-		Session session = factory.getSessionFactory().openSession();
-		try {
-			session.update(Customer);
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
-		}
-		return true;
-	}
-
-	/**
 	 * Add Customer Information if true return true else return false
 	 */
 	@Override
+	@Transactional
 	public Boolean insertCustomer(CustomerDto Customer) {
 		Session session = factory.getSessionFactory().openSession();
 		try {
@@ -96,6 +68,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Delete Customer Information if true return true else return false
 	 */
 	@Override
+	@Transactional
 	public Boolean deleteCustomer(CustomerDto customer) {
 		Session session = factory.getSessionFactory().openSession();
 		try {
@@ -118,9 +91,10 @@ public class CustomerDaoImp implements CustomerDao {
 	 * List Customer Information if true return List else return null
 	 */
 	@Override
+	@Transactional
 	public List<CustomerDto> listCustomer(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = factory.getSessionFactory().openSession();
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		List<CustomerDto> list = null;
 		String filter = "";
 		String orderRec = " Order By C.cuID DESC";
@@ -149,7 +123,8 @@ public class CustomerDaoImp implements CustomerDao {
 		}
 		return list;
 	}
-
+	
+	@Transactional
 	public int totalCus(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.getSessionFactory().openSession();
@@ -185,7 +160,7 @@ public class CustomerDaoImp implements CustomerDao {
 	/**
 	 * List Customer by id if true return List else return null
 	 */
-
+	@Transactional
 	public CustomerDto listSpecificCustomer(String cuID) {
 		Session session = factory.getSessionFactory().openSession();
 		CustomerDto cus = null;
