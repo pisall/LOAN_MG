@@ -60,7 +60,7 @@ f<%@include file="include/_head.jsp"%>
 							<div class="panel-heading">Customer Information</div>
 							<!-- Panel Body -->
 							<div class="panel-body">
-								<c:if test="${not empty customer}">
+								
 									<c:set value="${customer}" var="cu" />
 									<!-- Start From -->
 									<form class="form-horizontal" role="form">
@@ -147,7 +147,7 @@ f<%@include file="include/_head.jsp"%>
 											</div>
 										</div>
 									</form>
-								</c:if>
+								
 								<!-- End Form -->
 							</div>
 							<!-- End Panel Body -->
@@ -317,8 +317,10 @@ f<%@include file="include/_head.jsp"%>
 								xhr.setRequestHeader("Content-Type", "application/json");
 							},
 							success : function(data) {
+								console.log(data);
 								if(data.length==1){
 									$(data).each(function(i,v){
+										console.log(v);
 										$("#gu_name").val(v.gu_nm);
 										$("#gu_nick_name").val(v.gu_nick_nm);
 										$("#gu_sex").val(v.gu_sex);

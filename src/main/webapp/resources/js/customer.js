@@ -2,7 +2,6 @@ var page_no = 1;
 var value = {};
 var totalPage = 1;
 var coID = id;
-var recNum=10;
 var word="";
 
 $(function() {
@@ -11,39 +10,21 @@ $(function() {
 	listCus(page_no);
 	
 	$("#record_num").change(function() {
-		listCus(page_no);
+		listCus(1);
 	});
 
 	$("#register").click(function() {
 		addCustomer();
 	});
 
-	/*$("#co_info").change(function() {
-		coID = $.trim($(this).val());
-		listCus(page_no);
-	});*/
-
 	$("#word").keyup(function() {
 		word=$(this).val();
-		listCus(page_no);
+		listCus(1);
 		
 	});
 
 });
 
-function recordNum(){
-	var result="";
-	var num=0;
-	var str="";
-	$("#select_num").html("");
-	str="<select class='form-control' id='record_num' style='width: 100%'>";
-	for(var i=1;i<=5;i++){
-		num=i*10;
-		str+="<option value='"+num+"'>"+num+"</option>";
-	}
-	str+="</select>";
-	$("#select_num").html(str);
-}
 
 function loadPaging() {
 	$("#paging").children("[name=p_index]").click(function() {
@@ -99,7 +80,7 @@ function pagePrevious() {
  */
 
 function showPaging(totalPage, curPage) {
-	$("#paging").html("");
+	
 	if (totalPage > 1) {
 		$("#paging")
 				.append(
@@ -201,10 +182,6 @@ function listCus(pageNo) {
 					
 					$("#tableCustomer").html(result);
 					
-					$("#record_num").change(function() {
-						recNum=$("#record_num").val();
-						listCus(page_no);
-					});
 					
 					loadPaging();
 

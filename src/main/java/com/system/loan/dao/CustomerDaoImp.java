@@ -37,20 +37,16 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Update Customer Information if true return true else return false
 	 */
 	@Override
-	@Transactional
+	
 	public Boolean updateCustomer(CustomerDto customer) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		try {
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			session.update(cus);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
-		}
+		} 
 		return true;
 	}
 
@@ -58,19 +54,15 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Add Customer Information if true return true else return false
 	 */
 	@Override
-	@Transactional
+	
 	public Boolean insertCustomer(CustomerDto Customer) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		try {
 			session.save(Customer);
 			session.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
-		}finally {
-			if (session.isOpen()) {
-				session.close();
-			}
 		}
 		return true;
 	}
@@ -86,7 +78,6 @@ public class CustomerDaoImp implements CustomerDao {
 			tx=session.beginTransaction();
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			cus.setCuDelYn(customer.getCuDelYn());
-			System.out.println("Customer yn"+cus.getCuDelYn()+"===========================Customer ID+="+customer.getCuID());
 			session.update(cus);
 			tx.commit();
 		} catch (HibernateException e) {
@@ -112,13 +103,13 @@ public class CustomerDaoImp implements CustomerDao {
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
 					filter = " and  cast(C.cuID as string) like '%" + paging.getSw() + "%' Or C.cuName like '%"
-							+ paging.getSw() + "%'";
+							+ paging.getSw() + "%' ";
 				}
 			}
 			tx=session.beginTransaction();
 			Query query = session
-					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
-							+ filter + orderRec);
+					.createQuery("From CustomerDto C where 1=1  And C.customerOfficerDto.coID=?  "
+							+ filter + " And C.cuDelYn='N' "+ orderRec);
 			query.setInteger(0, coID);
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
@@ -131,12 +122,13 @@ public class CustomerDaoImp implements CustomerDao {
 		return list;
 	}
 	
-	@Transactional
+	
 	public int totalCus(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		int cnt = 0;
 		String filter = "";
+		Transaction tx=null;
 		try {
 
 			if (paging.getSw() != null) {
@@ -144,6 +136,7 @@ public class CustomerDaoImp implements CustomerDao {
 					filter = " and (C.cuName like '%" + paging.getSw() + "%')";
 				}
 			}
+			tx=session.beginTransaction();
 			Query query = session.createQuery(
 					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
 							+ filter);
@@ -153,33 +146,29 @@ public class CustomerDaoImp implements CustomerDao {
 			for (Object ob : list) {
 				cnt = Integer.parseInt(ob.toString());
 			}
+			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");
 			e.printStackTrace();
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
-		}
+		} 
 		return cnt;
 	}
 
 	/**
 	 * List Customer by id if true return List else return null
 	 */
-	@Transactional
+	
 	public CustomerDto listSpecificCustomer(String cuID) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		CustomerDto cus = null;
+		Transaction tx=null;
 		try {
-			cus = session.get(CustomerDto.class, Integer.parseInt(cuID));
+			tx=session.beginTransaction();
+			cus =(CustomerDto) session.get(CustomerDto.class, Integer.parseInt(cuID));
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
 		}
 		return cus;
 	}

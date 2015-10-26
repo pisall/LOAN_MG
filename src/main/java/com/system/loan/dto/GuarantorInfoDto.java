@@ -34,7 +34,7 @@ public class GuarantorInfoDto implements Serializable {
 	@JoinColumn(name="cu_id")
 	private LoanAgreementDto loanAgreementDto;*/
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="cu_id")
 	private CustomerDto customerDto;
 	

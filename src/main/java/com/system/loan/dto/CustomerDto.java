@@ -30,7 +30,7 @@ public class CustomerDto implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="customerDto")
 	private Set<GuarantorInfoDto>guarantorInfoDto;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="co_id")
 	@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;
