@@ -26,13 +26,17 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-		
+		<property name="hibernate.current_session_context_class">
+			thread
+		</property>
+
+
 		<property name="hibernate.c3p0.min_size">50</property>
 		<property name="hibernate.c3p0.max_size">100</property>
 		<property name="hibernate.c3p0.timeout">500</property>
 		<property name="hibernate.c3p0.max_statements">100</property>
 		<property name="hibernate.c3p0.idle_test_period">5000</property>
-		
+
 
 
 
@@ -44,7 +48,7 @@
 		<mapping class="com.system.loan.dto.CoDto" />
 
 		<mapping class="com.system.loan.dto.CustomerDto" />
-		
+
 		<mapping class="com.system.loan.dto.GuarantorInfoDto" />
 
 		<mapping class="com.system.loan.dto.CustomerOfficerDto" />

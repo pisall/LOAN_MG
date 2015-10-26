@@ -5,22 +5,33 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.system.loan.config.HibernateSessionFactory;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
 @Service
-@Repository
 public class CustomerDaoImp implements CustomerDao {
-
-	//public static SessionFactory factory = null;
-	@Autowired
-	HibernateSessionFactory factory;
+	public static SessionFactory factory = null;
+	public CustomerDaoImp() {
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.configure() // configures settings from hibernate.cfg.xml
+				.build();
+		try {
+			factory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+		}
+		catch (Exception e) {
+			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy( registry );
+		}
+	}
 	
 	/**
 	 * Update Customer Information if true return true else return false
@@ -28,7 +39,7 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	@Transactional
 	public Boolean updateCustomer(CustomerDto customer) {
-		Session session = factory.getSessionFactory().openSession();
+		Session session = factory.openSession();
 		try {
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			session.update(cus);
@@ -49,7 +60,7 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	@Transactional
 	public Boolean insertCustomer(CustomerDto Customer) {
-		Session session = factory.getSessionFactory().openSession();
+		Session session = factory.openSession();
 		try {
 			session.save(Customer);
 			session.close();
@@ -68,22 +79,21 @@ public class CustomerDaoImp implements CustomerDao {
 	 * Delete Customer Information if true return true else return false
 	 */
 	@Override
-	@Transactional
 	public Boolean deleteCustomer(CustomerDto customer) {
-		Session session = factory.getSessionFactory().openSession();
+		Session session = factory.getCurrentSession();
+		Transaction tx=null;
 		try {
+			tx=session.beginTransaction();
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
 			cus.setCuDelYn(customer.getCuDelYn());
 			System.out.println("Customer yn"+cus.getCuDelYn()+"===========================Customer ID+="+customer.getCuID());
-			session.saveOrUpdate(cus);
+			session.update(cus);
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			tx.rollback();
 			return false;
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
-		}
+		} 
 		return true;
 	}
 
@@ -91,13 +101,13 @@ public class CustomerDaoImp implements CustomerDao {
 	 * List Customer Information if true return List else return null
 	 */
 	@Override
-	@Transactional
 	public List<CustomerDto> listCustomer(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Session session = factory.getCurrentSession();
 		List<CustomerDto> list = null;
 		String filter = "";
 		String orderRec = " Order By C.cuID DESC";
+		Transaction tx=null;
 		try {
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
@@ -105,7 +115,7 @@ public class CustomerDaoImp implements CustomerDao {
 							+ paging.getSw() + "%'";
 				}
 			}
-
+			tx=session.beginTransaction();
 			Query query = session
 					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
 							+ filter + orderRec);
@@ -113,13 +123,10 @@ public class CustomerDaoImp implements CustomerDao {
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list = (List<CustomerDto>) query.list();
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
-		}finally {
-			if (session.isOpen()) {
-				session.close();
-			}
 		}
 		return list;
 	}
@@ -127,7 +134,7 @@ public class CustomerDaoImp implements CustomerDao {
 	@Transactional
 	public int totalCus(pagingDto paging, int coID) {
 		// TODO Auto-generated method stub
-		Session session = factory.getSessionFactory().openSession();
+		Session session = factory.openSession();
 		int cnt = 0;
 		String filter = "";
 		try {
@@ -162,7 +169,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Transactional
 	public CustomerDto listSpecificCustomer(String cuID) {
-		Session session = factory.getSessionFactory().openSession();
+		Session session = factory.openSession();
 		CustomerDto cus = null;
 		try {
 			cus = session.get(CustomerDto.class, Integer.parseInt(cuID));

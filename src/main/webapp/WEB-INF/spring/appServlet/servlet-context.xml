@@ -29,10 +29,6 @@
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
-	<beans:bean id="sessionFactory" class="com.system.loan.config.HibernateSessionFactory" />
-		
-
-
 
 	<annotation-driven>
 		<message-converters>
