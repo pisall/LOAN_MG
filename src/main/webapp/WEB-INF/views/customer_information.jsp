@@ -82,16 +82,14 @@
 											<tr class="active">
 												<th>ID</th>
 												<th>Name</th>
+												<th>Nickname</th>
 												<th>Sex</th>
-												<th>DOF</th>
-												<th>National ID</th>
-												<th>Address</th>
 												<th>Phone</th>
-
+												<th>Address</th>										
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody id="tableCustomer">
+										<tbody id="tableCustomer" >
 
 
 										</tbody>
@@ -114,10 +112,9 @@
 					<div class="col-md-1" id="select_num">
 						<select class='form-control' id='record_num' style='width: 100%'>
 						<option value='10'>10</option>
+						<option value='15'>15</option>
 						<option value='20'>20</option>
-						<option value='30'>30</option>
-						<option value='40'>40</option>
-						<option value='50'>50</option>
+						<option value='25'>25</option>
 						</select>
 					</div>
 					<div class="col-md-11" style="text-align: center;">
@@ -136,6 +133,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
+	<%@include file="customer_detail.jsp"%>
 
 	<%@include file="include/_script.jsp"%>
 

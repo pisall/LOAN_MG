@@ -21,7 +21,7 @@ $(function() {
 		listCus(1);
 		
 	});
-
+	
 });
 
 
@@ -141,42 +141,43 @@ function listCus(pageNo) {
 					if (data.REC.length > 0) {
 
 						for (var i = 0; i < data.REC.length; i++) {
-							result += "<tr>" + "<td>"
-									+ data.REC[i].cuID
+							var cuID=data.REC[i].cuID;
+							result += "<tr><td>"
+									+ cuID
+									+ "</td>"
+									+ "<td style='cursor: pointer;' class='name'>"
+									+ data.REC[i].cuName
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuName
+									+ data.REC[i].cuNickName
 									+ "</td>"
 									+ "<td>"
 									+ data.REC[i].cuSex
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuDOB
-									+ "</td>"
-									+ "<td>"
-									+ data.REC[i].cuNationalID
+									+ data.REC[i].cuPhone
 									+ "</td>"
 									+ "<td>"
 									+ data.REC[i].cuAddress
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuPhone
-									+ "</td>"
-									+ "<a href="+BASE_URL+"/customer/edit_customer?cuID="+data.REC[i].cuID+"><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "<a href='"+BASE_URL+"/customer/edit_customer?cuID="+cuID+"'><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
-									+ "<a href='#none' onclick=\"return deleteCustomer("
-									+ data.REC[i].cuID
-									+ ")\"><span class='glyphicon glyphicon-trash'></span></a>"
+									+ "<a href='#none' onclick=\"return deleteCustomer("+cuID+")\"><span class='glyphicon glyphicon-trash'></span></a>"
 									+ "&nbsp;"
 									+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
-									+ "</td>" + "</tr>"
+									+ "</td></tr>";
 						}
 
 					}
 					
 					$("#tableCustomer").html(result);
 					
-					
+					$('.name').click( function(){
+						var cuID=$(this).parent().find("td:first").text();
+						getCustomerDetail(cuID);
+					});
+										
 					loadPaging();
 
 					pageNext();
@@ -188,6 +189,38 @@ function listCus(pageNo) {
 							+ " er:" + er);
 				}
 			});
+}
+
+function getCustomerDetail(cuID){
+	$.ajax({
+		url : BASE_URL + "/customer/get_customer_detail/"+cuID,
+		type : 'POST',
+		dataType : 'JSON',
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(data) {
+			console.log(data);
+			$('#myModal').modal('show');
+			$("#cu_id").html(data.cuID);
+			$("#cu_name").html(data.cuName);
+			$("#cu_nick_name").html(data.cuNickName);
+			$("#cu_national_id").html(data.cuNationalID);
+			$("#cu_dob").html(data.cuDOB);
+			$("#cu_sex").html(data.cuSex);
+			$("#cu_address").html(data.cuAddress);
+			$("#cu_phone").html(data.cuPhone);
+			$("#cu_note").html(data.cuNote);
+			$("#cu_pawn").html(data.cuPawn);
+			$("#cu_date_created").html(data.cuDtt);
+			
+		},
+		error : function(data, status, er) {
+			console.log("error: " + data + " status: " + status
+					+ " er:" + er);
+		}
+	});
 }
 
 /**
@@ -266,6 +299,7 @@ function addCustomer() {
 		}
 	});
 }
+
 /**
  * Load Current Date Time
  * 

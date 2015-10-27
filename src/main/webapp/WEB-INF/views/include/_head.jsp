@@ -33,6 +33,9 @@
      		    background-color: #638BE0 !important;
     			color: #fff;
      	}
+     	#customer_detail th{
+     		width: 22%;
+     	}
      </style> 
     
 </head>

@@ -56,6 +56,18 @@ public class CustomerController {
 		model.put("PAGING", paging);
 		return model;
 	}
+	
+	/**
+	 * Get Customer Detail
+	 * 
+	 * @param paging
+	 * @return
+	 */
+
+	@RequestMapping(value = "/get_customer_detail/{cuID}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody CustomerDto getCustomerDetail(@PathVariable("cuID") String cuID) {
+		return customerImp.listSpecificCustomer(cuID);
+	}
 
 	/**
 	 * Add New Customer
