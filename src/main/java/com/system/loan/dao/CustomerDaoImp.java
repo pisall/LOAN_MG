@@ -92,7 +92,7 @@ public class CustomerDaoImp implements CustomerDao {
 	 * List Customer Information if true return List else return null
 	 */
 	@Override
-	public List<CustomerDto> listCustomer(pagingDto paging, int coID) {
+	public List<CustomerDto> listCustomer(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		List<CustomerDto> list = null;
@@ -108,9 +108,9 @@ public class CustomerDaoImp implements CustomerDao {
 			}
 			tx=session.beginTransaction();
 			Query query = session
-					.createQuery("From CustomerDto C where 1=1  And C.customerOfficerDto.coID=?  "
-							+ filter + " And C.cuDelYn='N' "+ orderRec);
-			query.setInteger(0, coID);
+					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N'  And cast(C.customerOfficerDto.coID as text) Like  ?  "
+							+ filter + orderRec);
+			query.setString(0, "%"+coID+"%");
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list = (List<CustomerDto>) query.list();
@@ -123,7 +123,7 @@ public class CustomerDaoImp implements CustomerDao {
 	}
 	
 	
-	public int totalCus(pagingDto paging, int coID) {
+	public int totalCus(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		int cnt = 0;
@@ -138,10 +138,10 @@ public class CustomerDaoImp implements CustomerDao {
 			}
 			tx=session.beginTransaction();
 			Query query = session.createQuery(
-					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And C.customerOfficerDto.coID=?  "
+					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And cast(C.customerOfficerDto.coID as text) like ?  "
 							+ filter);
 
-			query.setInteger(0, coID);
+			query.setString(0, "%"+coID+"%");
 			List<Object> list = (List<Object>) query.list();
 			for (Object ob : list) {
 				cnt = Integer.parseInt(ob.toString());

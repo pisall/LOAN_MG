@@ -62,6 +62,7 @@ f<%@include file="include/_head.jsp"%>
 							<div class="panel-body">
 								
 									<c:set value="${customer}" var="cu" />
+									<input type="hidden" value="${cu.cuID}" id="cu_id">
 									<!-- Start From -->
 									<form class="form-horizontal" role="form">
 										<div>
@@ -275,7 +276,7 @@ f<%@include file="include/_head.jsp"%>
 				<!-- End Row -->
 				<div style="text-align: center;">
 					<button type="submit" class="btn btn-primary">Update</button>
-					<button type="button" class="btn btn-danger">Cancel</button>
+					<button type="button" class="btn btn-danger" onclick="goBack()">Cancel</button>
 				</div>
 				<!-- End Form -->
 				<br />
@@ -297,11 +298,12 @@ f<%@include file="include/_head.jsp"%>
 	<script type="text/javascript">
 		$(function(){
 			$("#foundGuarantorByID").change(function(){
+		
 					var guID=$(this).val();
 					
 					var input={
 						"customerDto":{
-							"cuID":52,
+							"cuID":$("#cu_id").val(),
 						},
 						"gu_id":guID
 					} 
@@ -320,7 +322,7 @@ f<%@include file="include/_head.jsp"%>
 								console.log(data);
 								if(data.length==1){
 									$(data).each(function(i,v){
-										console.log(v);
+										
 										$("#gu_name").val(v.gu_nm);
 										$("#gu_nick_name").val(v.gu_nick_nm);
 										$("#gu_sex").val(v.gu_sex);

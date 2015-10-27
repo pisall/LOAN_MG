@@ -1,11 +1,10 @@
 var page_no = 1;
 var value = {};
 var totalPage = 1;
-var coID = id;
+var coID = $.trim(id);
 var word="";
 
 $(function() {
-	
 	datetimenow();
 	listCus(page_no);
 	
@@ -110,7 +109,7 @@ function showPaging(totalPage, curPage) {
  * @param pageNo
  */
 function listCus(pageNo) {
-	
+	console.log(coID);
 	var input = {
 		"pageNo" : $.trim(pageNo),
 		"pcnt" : $.trim($("#record_num").val()),
@@ -119,7 +118,7 @@ function listCus(pageNo) {
 	$
 			.ajax({
 
-				url : BASE_URL + "/customer/listCus/" + coID,
+				url : BASE_URL + "/customer/listCus?coID="+coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
@@ -163,12 +162,7 @@ function listCus(pageNo) {
 									+ "<td>"
 									+ data.REC[i].cuPhone
 									+ "</td>"
-									+ "<td>"
-									+ "<a href='"
-									+ BASE_URL
-									+ "/customer/customer_form_update?cuID="
-									+ data.REC[i].cuID
-									+ "' ><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "<a href="+BASE_URL+"/customer/edit_customer?cuID="+data.REC[i].cuID+"><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
 									+ "<a href='#none' onclick=\"return deleteCustomer("
 									+ data.REC[i].cuID

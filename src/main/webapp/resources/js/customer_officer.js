@@ -13,6 +13,7 @@ $(function() {
 	
 	$("#co_info").change(function() {
 		parent.coID = $.trim($(this).val());
+		
 		parent.listCus(page_no);
 	});
 
@@ -86,7 +87,7 @@ function listCoByBrand() {
 								+ ">CO ID : " + v.coID + " , CO Name : "
 								+ v.coName + " </option>";
 					});
-			$("#co_info").html(result);
+			$("#co_info").append(result);
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

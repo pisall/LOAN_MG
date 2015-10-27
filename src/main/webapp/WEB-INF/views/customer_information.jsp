@@ -53,6 +53,7 @@
 									<div class="col-md-6">
 										<span class="col-md-8 col-sm-8" style="padding: 0px"> <select
 											class="form-control" id="co_info">
+											<option value="">Display All</option>
 
 										</select>
 										</span>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +44,14 @@ public class CustomerController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/listCus/{coID}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,@PathVariable("coID")int coID) {
-	
-		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging,coID) / paging.getPcnt()));
-		HashMap<String, Object> model = new HashMap<String, Object>();	
+	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
+			@RequestParam(name="coID" ,defaultValue="")String coID) {
+		
+		System.out.println("co id=-====================================="+coID);
+		
+		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt()));
+		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", customerImp.listCustomer(paging,coID));
 		model.put("PAGING", paging);
 		return model;
@@ -122,15 +126,12 @@ public class CustomerController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/customer_form_update", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit_customer", method = RequestMethod.GET)
 	public String customerFormUpdate(@RequestParam(value = "cuID", defaultValue = "") String cuID,
-			@RequestParam( value = "guID", defaultValue = "") String guID, Map<String, Object> model) {
-
-		model.put("customer", customerImp.listSpecificCustomer(cuID));
-		model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));
-
-		return "customer_form_update";
+			@RequestParam(value = "guID", defaultValue = "") String guID,Map<String, Object> model) {
+		 model.put("customer", customerImp.listSpecificCustomer(cuID));
+		 model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));
+		return "customer_form_edit";
 	}
 	
-
 }
