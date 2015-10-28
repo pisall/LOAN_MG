@@ -33,6 +33,22 @@ public class HomeController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="customer_information")
 	public String customerInformation(){
 		return "customer_information";
