@@ -42,7 +42,7 @@ public class CustomerOfficerDaoImp {
 	 */
 	
 	public List<CustomerOfficerDto> listCustomerOfficer(String brand) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		List<CustomerOfficerDto> list = null;
 		try {
 			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO Where CO.coBrand=? ");

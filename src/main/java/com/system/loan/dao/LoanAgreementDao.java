@@ -31,7 +31,7 @@ public class LoanAgreementDao {
 	// insert new Loan Agreement info
 	public boolean InsertNewCustomer(AcountInfoDto acodto, LoanAgreementDto loanAgreDto, GuarantorInfoDto guDto)
 			throws IllegalStateException {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		Transaction transection = null;
 		Integer co_id = null;
 		CoDto codto = null;
