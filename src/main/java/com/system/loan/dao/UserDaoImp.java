@@ -38,7 +38,7 @@ public class UserDaoImp implements UserDao {
 	 */
 	@Override
 	public Boolean updateUser(UserDto user) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		try {
 			UserDto usr = (UserDto) session.get(UserDto.class, user.getUsID());
 			usr.setUsNm(user.getUsNm());
@@ -62,7 +62,7 @@ public class UserDaoImp implements UserDao {
 	 * Update User Information if true return true else return false
 	 */
 	public Boolean updateUser1(UserDto user) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		try {
 			session.update(user);
 		} catch (HibernateException e) {
@@ -81,7 +81,7 @@ public class UserDaoImp implements UserDao {
 	 */
 	@Override
 	public Boolean insertUser(UserDto user) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			session.save(user);
@@ -101,7 +101,7 @@ public class UserDaoImp implements UserDao {
 	 */
 	@Override
 	public Boolean deleateUser(UserDto user) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 
@@ -125,7 +125,7 @@ public class UserDaoImp implements UserDao {
 	 */
 	@Override
 	public List<UserDto> listUser() {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		List<UserDto> list = null;
 		try {
@@ -147,7 +147,7 @@ public class UserDaoImp implements UserDao {
 	 */
 
 	public List<UserDto> listSpecificUser(Integer userID) {
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		List<UserDto> user = null;
 		try {
 			Query query = session.createQuery("From MfiUserDto Where usID=?");
