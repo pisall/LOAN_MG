@@ -38,7 +38,9 @@ public class CustomerOfficerDto implements Serializable {
 	@Column(name = "co_nm")
 	private String coName;
 	@Column(name = "co_first_nm")
-	private String coFirstname;
+	private String coFirstName;
+	@Column(name = "co_last_nm")
+	private String coLastName;
 	@Column(name = "co_sex")
 	private String coSex;
 	@Column(name = "co_national_id")
@@ -53,6 +55,8 @@ public class CustomerOfficerDto implements Serializable {
 	private String coDob;
 	@Column(name = "address")
 	private String coAddress;
+	
+
 
 	/**
 	 * @return the customer
@@ -102,8 +106,8 @@ public class CustomerOfficerDto implements Serializable {
 	/**
 	 * @return the coFirstname
 	 */
-	public String getCoFirstname() {
-		return coFirstname;
+	public String getCoFirstName() {
+		return coFirstName;
 	}
 
 	/**
@@ -111,7 +115,28 @@ public class CustomerOfficerDto implements Serializable {
 	 *            the coFirstname to set
 	 */
 	public void setCoFirstname(String coFirstname) {
-		this.coFirstname = coFirstname;
+		this.coFirstName = coFirstname;
+	}
+
+	/**
+	 * @return the coLastName
+	 */
+	public String getCoLastName() {
+		return coLastName;
+	}
+
+	/**
+	 * @param coLastName the coLastName to set
+	 */
+	public void setCoLastName(String coLastName) {
+		this.coLastName = coLastName;
+	}
+
+	/**
+	 * @param coFirstName the coFirstName to set
+	 */
+	public void setCoFirstName(String coFirstName) {
+		this.coFirstName = coFirstName;
 	}
 
 	/**

@@ -45,7 +45,7 @@ public class CustomerOfficerDaoImp {
 		Transaction tx=null;
 		try {
 			tx=session.beginTransaction();
-			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO Where CO.coBrand=? Order By CO.coID DESC");
+			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coFirstName AS coFirstName,CO.coLastName As coLastName) FROM CustomerOfficerDto CO Where CO.coBrand=? Order By CO.coID DESC");
 					query.setString(0, brand);
 			list = (ArrayList<CustomerOfficerDto>) query.list();	
 			tx.commit();
