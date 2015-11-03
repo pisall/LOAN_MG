@@ -110,10 +110,10 @@ f<%@include file="include/_head.jsp"%>
 										</div>
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="cu_id_card">ID
+											<label class="control-label col-sm-2" for="cu_national_id">ID
 												Card</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="cu_id_card"
+												<input type="text" class="form-control" id="cu_national_id"
 													placeholder="Enter National Card"
 													value="${cu.cuNationalID}">
 											</div>
@@ -168,7 +168,7 @@ f<%@include file="include/_head.jsp"%>
 								<span>
 									<c:if test="${not empty guarantor}">						
 									<select id="foundGuarantorByID" class="form-control" style="width: 57%;float: right;margin-top: -7px">
-										<option value="">-----Select Guarantor ID And Name-----</option>
+										<option value="0">-----Select Guarantor ID And Name-----</option>
 										<c:forEach items="${guarantor}" var="gu" >										
 											<option value="${gu.gu_id}">ID = ${gu.gu_id} , Name=${gu.gu_nm}</option>
 										</c:forEach>

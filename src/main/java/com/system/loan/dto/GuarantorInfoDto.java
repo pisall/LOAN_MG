@@ -74,6 +74,33 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="photo")
 	private String photo;
 	
+	
+
+	/**
+	 * @param gu_nm
+	 * @param gu_nick_nm
+	 * @param gu_sex
+	 * @param gu_national_id
+	 * @param gu_dob
+	 * @param gu_phone
+	 * @param gu_address
+	 * @param gu_pawn
+	 * @param gu_note
+	 * @param photo
+	 */
+	public void setGuarantorUpdate(String gu_nm, String gu_nick_nm, String gu_sex, String gu_national_id, String gu_dob,
+			String gu_phone, String gu_address, String gu_pawn, String gu_note, String photo) {
+		this.gu_nm = gu_nm;
+		this.gu_nick_nm = gu_nick_nm;
+		this.gu_sex = gu_sex;
+		this.gu_national_id = gu_national_id;
+		this.gu_dob = gu_dob;
+		this.gu_phone = gu_phone;
+		this.gu_address = gu_address;
+		this.gu_pawn = gu_pawn;
+		this.gu_note = gu_note;
+		this.photo = photo;
+	}
 
 	/**
 	 * @return the customerDto
