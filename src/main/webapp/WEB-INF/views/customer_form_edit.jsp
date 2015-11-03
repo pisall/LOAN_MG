@@ -191,7 +191,7 @@ f<%@include file="include/_head.jsp"%>
 										</span>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_name">Name</label>
+										<label class="control-label col-sm-2" for="gu_name">Name</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_name"
 												placeholder="Enter Name">
@@ -199,7 +199,7 @@ f<%@include file="include/_head.jsp"%>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
+										<label class="control-label col-sm-2" for="gu_nick_name">Nickname</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_nick_name"
 												placeholder="Enter Nickname">
@@ -209,7 +209,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="cu_sex">
+											<select class="form-control" id="gu_sex">
 												<c:if test="${gu.gu_sex=='f'} }">
 													<option value="f">Female</option>
 												</c:if>											
@@ -218,7 +218,7 @@ f<%@include file="include/_head.jsp"%>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
+										<label class="control-label col-sm-2" for="gu_dob">DOB</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_dob"
 												placeholder="Enter Date Of Birth">
@@ -226,7 +226,7 @@ f<%@include file="include/_head.jsp"%>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_id_card">ID
+										<label class="control-label col-sm-2" for="gu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_national_id"
@@ -234,7 +234,7 @@ f<%@include file="include/_head.jsp"%>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_phone">Phone</label>
+										<label class="control-label col-sm-2" for="gu_phone">Phone</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_phone"
 												placeholder="Enter Phone">
@@ -242,7 +242,7 @@ f<%@include file="include/_head.jsp"%>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_address">Address</label>
+										<label class="control-label col-sm-2" for="gu_address">Address</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="gu_address"
 												placeholder="Enter Address">
@@ -250,14 +250,14 @@ f<%@include file="include/_head.jsp"%>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
+										<label class="control-label col-sm-2" for="gu_pawn">Pawn</label>
 										<div class="col-sm-10">
 											<textarea class="form-control" rows="5" id="gu_pawn"></textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="cu_note">Note</label>
+										<label class="control-label col-sm-2" for="gu_note">Note</label>
 										<div class="col-sm-10">
 											<textarea class="form-control" rows="5" id="gu_note"></textarea>
 										</div>

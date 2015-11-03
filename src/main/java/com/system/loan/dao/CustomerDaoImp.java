@@ -38,11 +38,14 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Override
 	
-	public Boolean updateCustomer(CustomerDto customer) {
+	public Boolean updateCustomer(CustomerDto cus1) {
 		Session session = factory.getCurrentSession();
+		Transaction tx=null;
 		try {
-			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
-			session.update(cus);
+			tx=session.beginTransaction();
+			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, cus1.getCuID());
+			cus.setCustomerUpdate(cus1.getCuName(), cus1.getCuNickName(),cus1.getCuSex(),cus1.getCuDOB(),cus1.getCuNationalID(),cus1.getCuPhone(),cus1.getCuAddress(),cus1.getCuPawn(),cus1.getCuNote(),cus1.getCuPhoto());
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
@@ -106,6 +109,7 @@ public class CustomerDaoImp implements CustomerDao {
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuNickName) like '%"
 							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
@@ -140,6 +144,7 @@ public class CustomerDaoImp implements CustomerDao {
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
 							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuNickName) like '%"
 							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
