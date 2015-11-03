@@ -275,7 +275,7 @@ f<%@include file="include/_head.jsp"%>
 				</div>
 				<!-- End Row -->
 				<div style="text-align: center;">
-					<button type="submit" class="btn btn-primary">Update</button>
+					<button type="submit" class="btn btn-primary" id="updateCustomer">Update</button>
 					<button type="button" class="btn btn-danger" onclick="goBack()">Cancel</button>
 				</div>
 				<!-- End Form -->
@@ -297,6 +297,56 @@ f<%@include file="include/_head.jsp"%>
 	
 	<script type="text/javascript">
 		$(function(){
+			
+			$("#updateCustomer").click(function(){
+				
+				var guID=$("#foundGuarantorByID").val();
+				
+				var input={
+						cuID :$("#cu_id").val(),
+						cuName:$("#cu_name").val(),
+						cuNickName:$("#cu_nick_name").val(),
+						cuSex:$("#cu_sex").val(),
+						cuDOB:$("#cu_dob").val(),
+						cuNationalID:$("#cu_national_id").val(),
+						cuPhone:$("#cu_phone").val(),
+						cuAddress:$("#cu_address").val(),
+						cuPawn:$("#cu_pawn").val(),
+						cuNote:$("#cu_note").val(),
+						guarantorInfoDto:[{
+							gu_id :guID,
+							gu_nm:$("#gu_name").val(),
+							gu_nick_nm:$("#gu_nick_name").val(),
+							gu_sex:$("#gu_sex").val(),
+							gu_dob:$("#gu_dob").val(),
+							gu_national_id:$("#gu_national_id").val(),
+							gu_phone:$("#gu_phone").val(),
+							gu_address:$("#gu_address").val(),
+							gu_pawn:$("#gu_pawn").val(),
+							gu_note:$("#gu_note").val()
+						}]
+				} 				
+					console.log(input);
+					$.ajax({
+						url : BASE_URL + "/customer/update_customer",
+						type : 'POST',
+						dataType : 'JSON',
+						data : JSON.stringify(input),
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("Accept", "application/json");
+							xhr.setRequestHeader("Content-Type", "application/json");
+						},
+						success : function(data) {
+							console.log("success update====="+data);
+						},
+						error : function(data, status, er) {
+							console.log("error: " + data + " status: " + status + " er:" + er);
+						}
+					});					
+				
+		});
+			
+			
 			$("#foundGuarantorByID").change(function(){
 		
 					var guID=$(this).val();
@@ -319,7 +369,6 @@ f<%@include file="include/_head.jsp"%>
 								xhr.setRequestHeader("Content-Type", "application/json");
 							},
 							success : function(data) {
-								console.log(data);
 								if(data.length==1){
 									$(data).each(function(i,v){
 										

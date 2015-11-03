@@ -48,8 +48,6 @@ public class CustomerController {
 	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
 			@RequestParam(name="coID" ,defaultValue="")String coID) {
 		
-		System.out.println("co id=-====================================="+coID);
-		
 		paging.setTotalPage((int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt()));
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", customerImp.listCustomer(paging,coID));
@@ -88,11 +86,10 @@ public class CustomerController {
 	 * @param Customer
 	 * @return
 	 */
-	@RequestMapping(value = "/updateCustomer", method = RequestMethod.GET)
-	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto Customer) {
-
-		return customerImp.updateCustomer(Customer);
-
+	@RequestMapping(value = "/update_customer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus) {
+		
+		return customerImp.updateCustomer(cus);
 	}
 
 	/**

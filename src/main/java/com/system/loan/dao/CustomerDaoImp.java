@@ -45,6 +45,9 @@ public class CustomerDaoImp implements CustomerDao {
 			tx=session.beginTransaction();
 			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, cus1.getCuID());
 			cus.setCustomerUpdate(cus1.getCuName(), cus1.getCuNickName(),cus1.getCuSex(),cus1.getCuDOB(),cus1.getCuNationalID(),cus1.getCuPhone(),cus1.getCuAddress(),cus1.getCuPawn(),cus1.getCuNote(),cus1.getCuPhoto());
+			
+			System.out.println("customer ======================="+cus.toString());
+			
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
