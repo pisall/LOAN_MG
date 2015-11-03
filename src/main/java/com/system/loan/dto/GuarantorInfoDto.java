@@ -51,7 +51,7 @@ public class GuarantorInfoDto implements Serializable {
 	private String gu_sex;
 	
 	@Column(name="gu_national_id")
-	private String gu_national_id;
+	private int gu_national_id;
 	
 	@Column(name="gu_dob")
 	private String gu_dob;
@@ -88,7 +88,7 @@ public class GuarantorInfoDto implements Serializable {
 	 * @param gu_note
 	 * @param photo
 	 */
-	public void setGuarantorUpdate(String gu_nm, String gu_nick_nm, String gu_sex, String gu_national_id, String gu_dob,
+	public void setGuarantorUpdate(String gu_nm, String gu_nick_nm, String gu_sex, int gu_national_id, String gu_dob,
 			String gu_phone, String gu_address, String gu_pawn, String gu_note, String photo) {
 		this.gu_nm = gu_nm;
 		this.gu_nick_nm = gu_nick_nm;
@@ -180,11 +180,11 @@ public class GuarantorInfoDto implements Serializable {
 		this.gu_sex = gu_sex;
 	}
 
-	public String getGu_national_id() {
+	public int getGu_national_id() {
 		return gu_national_id;
 	}
 
-	public void setGu_national_id(String gu_national_id) {
+	public void setGu_national_id(int gu_national_id) {
 		this.gu_national_id = gu_national_id;
 	}
 
