@@ -12,9 +12,8 @@ $(function() {
 	});
 	
 	$("#co_info").change(function() {
-		parent.coID = $.trim($(this).val());
-		
-		parent.listCus(page_no);
+		parent.coID = $.trim($(this).val());	
+		parent.listCus(1);
 	});
 
 });
