@@ -218,7 +218,7 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
 											<select class="form-control" id="gu_sex">	
-												<option value=""></option>		
+												<option value=""></option>														
 												<c:if test="${gu.gu_sex !=''}">
 													<c:choose>
 														<c:when test="${gu.gu_sex=='f'}">
