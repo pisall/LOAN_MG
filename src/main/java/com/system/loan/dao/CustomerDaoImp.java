@@ -102,8 +102,11 @@ public class CustomerDaoImp implements CustomerDao {
 		try {
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
-					filter = " and  cast(C.cuID as string) like '%" + paging.getSw() + "%' Or C.cuName like '%"
-							+ paging.getSw() + "%' ";
+					filter = " and  cast(C.cuID as string) like '%" 
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
 			tx=session.beginTransaction();
@@ -133,7 +136,11 @@ public class CustomerDaoImp implements CustomerDao {
 
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
-					filter = " and (C.cuName like '%" + paging.getSw() + "%')";
+					filter = " and  cast(C.cuID as string) like '%" 
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
 			tx=session.beginTransaction();
