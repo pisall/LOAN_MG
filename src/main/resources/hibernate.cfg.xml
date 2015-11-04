@@ -53,6 +53,18 @@
 		<mapping class="com.system.loan.dto.CustomerOfficerDto" />
 
 		<mapping class="com.system.loan.dto.custDto" />
+		
+		
+		
+		<mapping class="com.system.loan.dto.LoanAgreementDto" />
+		
+		<mapping class="com.system.loan.dto.GuarantorInfoLoanerDto" />
+		
+		<mapping class="com.system.loan.dto.AcountInfoDto" />
+		
+		<mapping class="com.system.loan.dto.TransectionDto" />
+		
+		<mapping class="com.system.loan.dto.LoanApprovalDto" />
 
 	</session-factory>
 </hibernate-configuration>

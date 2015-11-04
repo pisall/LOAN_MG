@@ -1,5 +1,5 @@
 <%@include file="include/_head.jsp"%>
-
+  
 <body>
 
 	<div id="wrapper">
@@ -37,7 +37,7 @@
 				<div class="row" style="font-size: 12px;">
 
 					<!-- Form User Information -->
-				<form class="form-horizontal" action="newLoanAgreementGetData" method ="POST" role="form">
+				<form class="form-horizontal" id="loanAgreement" action="newLoanAgreementGetData" method ="POST" role="form">
 
 					<div class="col-md-6 col-lg-6">
 						<div class="panel panel-default">
@@ -59,13 +59,13 @@
 											Name:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="cu_nm" id="cu_nm"
-												placeholder="Full Name">
+												placeholder="Full Name" maxlength="50">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
-											Nickname:</label>
+											Nick name:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="cu_nick_nm" id="nick_name"
 												placeholder="Nick Name">
@@ -76,10 +76,10 @@
 										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
 										<div class="col-sm-10" name="cu_sex" id="cu_sex">
 											<label class="radio-inline"> 
-												<input type="radio"  name="optradio" checked="checked">Male
+												<input type="radio" value="Male" name="cu_sex" checked="checked">Male
 											</label>
 											 <label class="radio-inline"> 
-												<input type="radio" name="optradio">Female
+												<input type="radio" value="Female" name="cu_sex">Female
 											</label> 
 										</div>
 									</div>
@@ -113,7 +113,7 @@
 										<label class="control-label col-sm-2" for="text">
 											Address</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="6.5" name="cu_address" id="cu_address" placeholder="User Address"></textarea>
+											<textarea class="form-control" rows="3" name="cu_address" id="cu_address" placeholder="User Address"></textarea>
 										</div>
 									</div>
 
@@ -121,7 +121,7 @@
 										<label class="control-label col-sm-2" for="text">
 											Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="7" name="cu_pawn" id="user_pawn" placeholder="User Pawn"></textarea>
+											<textarea class="form-control" rows="3" name="cu_pawn" id="user_pawn" placeholder="User Pawn"></textarea>
 										</div>
 									</div>
 									
@@ -134,34 +134,20 @@
 											<input type="text" class="form-control" name="gu_nm" id="gu_name"
 												placeholder="Guarantor name">
 										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											Guarantor</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="gu_nick_nm" id="gu_nick_nm"
-												placeholder="Guarantor nick name">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											Sex</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="" id="gu_sex"
-												placeholder="Guarantor sex">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											DOB</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="gu_dob" id="gu_dob"
-												placeholder="Guarantor dob">
-										</div>
 									</div> 
+									
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
+										<div class="col-sm-10" name="cu_sex" id="cu_sex">
+											<label class="radio-inline"> 
+												<input type="radio" value="Male" name="gu_sex" checked="checked">Male
+											</label>
+											 <label class="radio-inline"> 
+												<input type="radio" value="Female" name="gu_sex">Female
+											</label> 
+										</div>
+									</div>
+									 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
@@ -177,44 +163,15 @@
 											<input type="text" class="form-control" name="gu_phone" id="gu_phone"
 												placeholder="Guarantor phone">
 										</div>
-									</div>
-									
+									</div> 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text">
-											Address</label>
+											Pawn</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="gu_address" id="gu_address"
-												placeholder="Guarantor address">
+											<textarea class="form-control" rows="3" name="gu_pawn" id="gu_pawn" placeholder="Guarantor Note"></textarea>
 										</div>
 									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											Date Time</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="gu_dtt" id="gu_dtt"
-												placeholder="Guarantor Date Time">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											Photo</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="photo" id="photo"
-												placeholder="Guarantor photo">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="text">
-											Note</label>
-										<div class="col-sm-10">
-											<textarea class="form-control" rows="3" name="gu_note" id="gu_note" placeholder="Guarantor Note"></textarea>
-										</div>
-									</div>
-									
-									 
+								 
 							</div>
 						</div>
 					</div>
@@ -250,32 +207,47 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+
+									 <div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
-											Type:</label>
+											Saving Amount:</label>
 										<div class="col-sm-10">
-											<select class="form-control">
-												<option>Day</option>
-												<option>Week</option>
-												<option>Month</option>
-												<option>Year</option>
+											<select class="form-control" name="ac_saving_amount">
+												<option>2500</option>
+												<option>5000</option>
+												<option>7500</option>
+												<option>10000</option>
 											</select>
 										</div>
 									</div>
-
-
+									
+									 <div class="form-group">
+										<label class="control-label col-sm-2" for="ls_nm">
+											Account Type:</label>
+										<div class="col-sm-10">
+											<select class="form-control" name="ac_type">
+												<option>Loan</option>
+												<option>Saving</option>
+												<option>PayRoll</option>
+												<option>Deposit</option>
+											</select>
+										</div>
+									</div>
+									
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
 											Period:</label>
 										<div class="col-sm-10">
-											<input type="email" class="form-control" id="ls_nm"
-												placeholder="Last Name" style="width: 80%; float: left">
-											<select class="form-control" style="width: 20%">
+											<input type="text" class="form-control" name="ac_period"
+												placeholder="Period" style="width: 80%; float: left">
+												
+											<select class="form-control" style="width: 20%" name="ac_period_type">
 												<option>Day</option>
 												<option>Week</option>
 												<option>Month</option>
 												<option>Year</option>
 											</select>
+											
 										</div>
 									</div>
 
@@ -283,27 +255,30 @@
 										<label class="control-label col-sm-2" for="ls_nm">
 											Start Date:</label>
 										<div class="col-sm-10">
-											<input type="email" class="form-control" id="ls_nm"
-												placeholder="Last Name">
-										</div>
+											<input type="date" name="ac_start_date" class="form-control" style="width: 40%; float: left"
+												placeholder="Start Date">
+												
+											<label class="control-label col-sm-2">EndDate:</label> 
+											<input type="date" class="form-control" name="ac_end_date" style="width: 40%; float: left"
+													placeholder="End Date">
+											
+										</div> 
+										
+										
 									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="ls_nm"> End
+									 <!-- <div class="form-group">
+										<label class="control-label col-sm-2" > End
 											Date:</label>
 										<div class="col-sm-10">
-											<input type="email" class="form-control" id="ls_nm"
-												placeholder="Last Name">
+											<input type="date" class="form-control" name="ac_end_date"
+												placeholder="End Date">
 										</div>
-									</div>
+									</div>  -->
 
 									<div class="pull-right">
-										<button type="submit" class="btn btn-primary">Register</button>
-										<button type="button" class="btn btn-default">Cancel</button>
-									</div>
-
-
-								 
+										<button type="submit" class="btn btn-primary">Int Query</button> 
+									</div> 
 							</div>
 						</div>
 					</div>
@@ -321,7 +296,20 @@
 
 	</div>
 	<!-- /#wrapper -->
-
+	<script>
+	// just for the demos, avoids form submit
+	jQuery.validator.setDefaults({
+	  debug: true,
+	  success: "valid"
+	});
+	$( "#loanAgreement" ).validate({
+	  rules: {
+	    field: {
+	      required: true,
+	     // maxlength: 4
+	    }
+	  }
+	});
 	<%@include file="include/_script.jsp"%>
 
 </body>

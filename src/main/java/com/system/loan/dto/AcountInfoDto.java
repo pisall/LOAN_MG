@@ -1,57 +1,55 @@
 package com.system.loan.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.annotation.Resource;
-import javax.management.Query;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+ 
  
 @Entity
 @Table(name="mfi_account")
-public class AcountInfoDto implements Serializable {
-	 @Resource(name="sessionFactory")
-	 private SessionFactory sessionFactory;
+public class AcountInfoDto implements Serializable { 
 	/*
 	 * account sequence
 	 */
-	@Autowired
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_AC_ID",name="ac_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
-	 
-	/*
-	 * acountinfo
-	 */
+	@GeneratedValue(generator="ac_id",strategy=GenerationType.SEQUENCE)
 	
 	@Column(name="ac_id")
-	private Integer AcId;
+	private Integer ac_id;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="us_id")
-	private LoanAgreementDto loanAgreementDto;
 	
-	@Column(name="us_id")
-	private Integer us_id;
+	@ManyToOne(targetEntity=LoanAgreementDto.class, cascade= CascadeType.ALL)
+	@JoinColumn(name="cu_id")
+	private LoanAgreementDto loanAGr;
 	
-	@Column(name="co_id")
-	private Integer co_id;
+	//@ElementCollection
+	@OneToMany(targetEntity=TransectionDto.class, cascade=CascadeType.ALL,mappedBy="account")
+	private Set<TransectionDto>transection = new HashSet<TransectionDto>();
+	
 	
 	@Column(name="ac_amount")
 	private float ac_amount;
-	
+	 
 	@Column(name="ac_rate")
 	private float ac_rate;
 	
@@ -73,34 +71,69 @@ public class AcountInfoDto implements Serializable {
 	@Column(name="ac_end_date")
 	private String ac_end_date;
 	
+	@Column(name="ac_saving_amount")
+	private float ac_saving_amount;
+	
+	
+	
+	
 	public AcountInfoDto(){
-		
+		 
+	} 
+	
+	
+	public AcountInfoDto(Integer ac_id, LoanAgreementDto loanAGr, float ac_amount, float ac_rate, String ac_type,
+			String ac_period, String ac_period_type, String ac_stat, String ac_start_date, String ac_end_date,
+			float ac_saving_amount) {
+		super();
+		this.ac_id = ac_id;
+		this.loanAGr = loanAGr;
+		this.ac_amount = ac_amount;
+		this.ac_rate = ac_rate;
+		this.ac_type = ac_type;
+		this.ac_period = ac_period;
+		this.ac_period_type = ac_period_type;
+		this.ac_stat = ac_stat;
+		this.ac_start_date = ac_start_date;
+		this.ac_end_date = ac_end_date;
+		this.ac_saving_amount = ac_saving_amount;
 	}
 
-	public Integer getAcId() {
-		return AcId;
+	public Integer getAc_id() {
+		return ac_id;
 	}
 
-	public void setAcId(Integer acId) {
-		AcId = acId;
+
+	public void setAc_id(Integer ac_id) {
+		this.ac_id = ac_id;
+	}
+	
+	public Set<TransectionDto> getTransection() {
+		return transection;
 	}
 
-	public Integer getUs_id() {
-		return us_id;
+	public void setTransection(Set<TransectionDto> transection) {
+		this.transection = transection;
 	}
 
-	public void setUs_id(Integer us_id) {
-		this.us_id = us_id;
+	public float getAc_saving_amount() {
+		return ac_saving_amount;
 	}
 
-	public Integer getCo_id() {
-		return co_id;
+	public void setAc_saving_amount(float ac_saving_amount) {
+		this.ac_saving_amount = ac_saving_amount;
 	}
 
-	public void setCo_id(Integer co_id) {
-		this.co_id = co_id;
+	public LoanAgreementDto getLoanAGr() {
+		return loanAGr;
 	}
 
+	public void setLoanAGr(LoanAgreementDto loanAGr) {
+		this.loanAGr = loanAGr;
+	}
+
+	
+	
 	public float getAc_amount() {
 		return ac_amount;
 	}
@@ -163,7 +196,5 @@ public class AcountInfoDto implements Serializable {
 
 	public void setAc_end_date(String ac_end_date) {
 		this.ac_end_date = ac_end_date;
-	}
-	 
-	 
+	} 
 }
