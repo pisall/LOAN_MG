@@ -150,7 +150,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_note">${cu.cuNickName}</textarea>
+											<textarea class="form-control" rows="5" id="cu_note">${cu.cuNote}</textarea>
 										</div>
 									</div>
 								</form>
