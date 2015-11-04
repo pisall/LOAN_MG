@@ -215,7 +215,7 @@ function getCustomerDetail(cuID){
 			$("#cu_phone").html(data.cuPhone);
 			$("#cu_note").html(data.cuNote);
 			$("#cu_pawn").html(data.cuPawn);
-			$("#cu_date_created").html(data.cuDtt);
+			$("#cu_date_created").html(moment(data.cuDtt,"YYYYMMDD hh:mm:ss").format("DD-MM-YYYY hh:mm:ss"));
 			
 		},
 		error : function(data, status, er) {
