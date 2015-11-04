@@ -6,7 +6,9 @@ var word="";
 
 $(function() {
 	datetimenow();
+	$("#word").val("");
 	listCus(page_no);
+	
 	
 	$("#record_num").change(function() {
 		listCus(1);
@@ -165,7 +167,7 @@ function listCus(pageNo) {
 									+ "&nbsp;"
 									+ "<a href='#none' onclick=\"return deleteCustomer("+cuID+")\"><span class='glyphicon glyphicon-trash'></span></a>"
 									+ "&nbsp;"
-									+ "<a href='#none'><span class='glyphicon glyphicon-random'></span></a>"
+									+ "<a href='#none'><span class='glyphicon glyphicon-random' onclick=\"return getCustomerTransaction("+cuID+")\"></span></a>"
 									+ "</td></tr>";
 						}
 
@@ -298,6 +300,15 @@ function addCustomer() {
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
+}
+
+/**
+ * Get Customer Transaction
+ * @param cuID
+ */
+
+function getCustomerTransaction(cuID){
+	location.href=BASE_URL+"/LoanAgreement/report/"+cuID;
 }
 
 /**
