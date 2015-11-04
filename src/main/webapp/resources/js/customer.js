@@ -2,14 +2,13 @@ var page_no = 1;
 var value = {};
 var totalPage = 1;
 var coID = $.trim(id);
-var word="";
+var word = "";
 
 $(function() {
 	datetimenow();
-	$("#word").val("");
+	clearWord();
 	listCus(page_no);
-	
-	
+
 	$("#record_num").change(function() {
 		listCus(1);
 	});
@@ -19,13 +18,12 @@ $(function() {
 	});
 
 	$("#word").keyup(function() {
-		word=$(this).val();
+		word = $(this).val();
 		listCus(1);
-		
-	});
-	
-});
 
+	});
+
+});
 
 function loadPaging() {
 	$("#paging").children("[name=p_index]").click(function() {
@@ -34,6 +32,10 @@ function loadPaging() {
 
 		listCus(page_no);
 	});
+}
+
+function clearWord() {
+	$("#word").val("");
 }
 
 /**
@@ -81,7 +83,7 @@ function pagePrevious() {
  */
 
 function showPaging(totalPage, curPage) {
-	
+
 	if (totalPage > 1) {
 		$("#paging")
 				.append(
@@ -104,7 +106,6 @@ function showPaging(totalPage, curPage) {
 	}
 }
 
-
 /**
  * List Customer
  * 
@@ -120,7 +121,7 @@ function listCus(pageNo) {
 	$
 			.ajax({
 
-				url : BASE_URL + "/customer/listCus?coID="+coID,
+				url : BASE_URL + "/customer/listCus?coID=" + coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
@@ -129,12 +130,13 @@ function listCus(pageNo) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
-				
+
 					value = data;
 					var result = "";
 					var paging = data.PAGING;
 					var curPage = paging.pageNo;
 					totalPage = parseInt(paging.totalPage);
+					
 					// clear paging
 					$("#paging").html("");
 
@@ -143,7 +145,7 @@ function listCus(pageNo) {
 					if (data.REC.length > 0) {
 
 						for (var i = 0; i < data.REC.length; i++) {
-							var cuID=data.REC[i].cuID;
+							var cuID = data.REC[i].cuID;
 							result += "<tr><td>"
 									+ cuID
 									+ "</td>"
@@ -163,23 +165,29 @@ function listCus(pageNo) {
 									+ data.REC[i].cuAddress
 									+ "</td>"
 									+ "<td>"
-									+ "<a href='"+BASE_URL+"/customer/edit_customer?cuID="+cuID+"'><span class='glyphicon glyphicon-pencil'></span></a>"
+									+ "<a href='"
+									+ BASE_URL
+									+ "/customer/edit_customer?cuID="
+									+ cuID
+									+ "'><span class='glyphicon glyphicon-pencil'></span></a>"
 									+ "&nbsp;"
-									+ "<a href='#none' onclick=\"return deleteCustomer("+cuID+")\"><span class='glyphicon glyphicon-trash'></span></a>"
+									+ "<a href='#none' onclick=\"return deleteCustomer("
+									+ cuID
+									+ ")\"><span class='glyphicon glyphicon-trash'></span></a>"
 									+ "&nbsp;"
-									+ "<a href='#none'><span class='glyphicon glyphicon-random' onclick=\"return getCustomerTransaction("+cuID+")\"></span></a>"
-									+ "</td></tr>";
+									+ "<a href='#none'><span class='glyphicon glyphicon-random' onclick=\"return getCustomerTransaction("
+									+ cuID + ")\"></span></a>" + "</td></tr>";
 						}
 
 					}
-					
+
 					$("#tableCustomer").html(result);
-					
-					$('.name').click( function(){
-						var cuID=$(this).parent().find("td:first").text();
+
+					$('.name').click(function() {
+						var cuID = $(this).parent().find("td:first").text();
 						getCustomerDetail(cuID);
 					});
-										
+
 					loadPaging();
 
 					pageNext();
@@ -193,9 +201,9 @@ function listCus(pageNo) {
 			});
 }
 
-function getCustomerDetail(cuID){
+function getCustomerDetail(cuID) {
 	$.ajax({
-		url : BASE_URL + "/customer/get_customer_detail/"+cuID,
+		url : BASE_URL + "/customer/get_customer_detail/" + cuID,
 		type : 'POST',
 		dataType : 'JSON',
 		beforeSend : function(xhr) {
@@ -215,12 +223,13 @@ function getCustomerDetail(cuID){
 			$("#cu_phone").html(data.cuPhone);
 			$("#cu_note").html(data.cuNote);
 			$("#cu_pawn").html(data.cuPawn);
-			$("#cu_date_created").html(moment(data.cuDtt,"YYYYMMDD hh:mm:ss").format("DD-MM-YYYY hh:mm:ss"));
-			
+			$("#cu_date_created").html(
+					moment(data.cuDtt, "YYYYMMDD hh:mm:ss").format(
+							"DD-MM-YYYY hh:mm:ss"));
+
 		},
 		error : function(data, status, er) {
-			console.log("error: " + data + " status: " + status
-					+ " er:" + er);
+			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
 }
@@ -237,7 +246,7 @@ function deleteCustomer(cusID) {
 		confirm : function() {
 			var input = {
 				"cuID" : $.trim(cusID),
-				"cuDelYn":$.trim("Y")
+				"cuDelYn" : $.trim("Y")
 			}
 			$.ajax({
 
@@ -250,6 +259,10 @@ function deleteCustomer(cusID) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
+					clearWord();
+					var totalPage=value.PAGING.totalPage;
+					var curPage=value.PAGING.pageNo;
+					console.log("delte======="+totalPage+"cur="+curPage);
 					listCus(page_no);
 				},
 				error : function(data, status, er) {
@@ -304,11 +317,12 @@ function addCustomer() {
 
 /**
  * Get Customer Transaction
+ * 
  * @param cuID
  */
 
-function getCustomerTransaction(cuID){
-	location.href=BASE_URL+"/LoanAgreement/report/"+cuID;
+function getCustomerTransaction(cuID) {
+	location.href = BASE_URL + "/LoanAgreement/report/" + cuID;
 }
 
 /**
