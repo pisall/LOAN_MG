@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Entity
+
 @Controller
-@RequestMapping(value="/Income")
+@RequestMapping(value="Income")
 public class IncomeController {   
 
 	@RequestMapping(value="/IncomeView", method=RequestMethod.GET)
