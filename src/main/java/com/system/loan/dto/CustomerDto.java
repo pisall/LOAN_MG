@@ -66,6 +66,31 @@ public class CustomerDto implements Serializable {
 
 	
 	/**
+	 * @param cuName
+	 * @param cuNickName
+	 * @param cuSex
+	 * @param cuDOB
+	 * @param cuNationalID
+	 * @param cuPhone
+	 * @param cuAddress
+	 * @param cuPawn
+	 * @param cuNote
+	 * @param cuPhoto
+	 */
+	public void setCustomerUpdate(String cuName, String cuNickName, String cuSex, String cuDOB, Integer cuNationalID,
+			String cuPhone, String cuAddress, String cuPawn, String cuNote, String cuPhoto) {
+		this.cuName = cuName;
+		this.cuNickName = cuNickName;
+		this.cuSex = cuSex;
+		this.cuDOB = cuDOB;
+		this.cuNationalID = cuNationalID;
+		this.cuPhone = cuPhone;
+		this.cuAddress = cuAddress;
+		this.cuPawn = cuPawn;
+		this.cuNote = cuNote;
+		this.cuPhoto = cuPhoto;
+	}
+	/**
 	 * @return the guarantorInfoDto
 	 */
 	public Set<GuarantorInfoDto> getGuarantorInfoDto() {

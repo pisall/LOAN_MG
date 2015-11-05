@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.CustomerDto;
+import com.system.loan.dto.GuarantorInfoDto;
 import com.system.loan.dto.pagingDto;
 
 @Service
@@ -38,11 +39,23 @@ public class CustomerDaoImp implements CustomerDao {
 	 */
 	@Override
 	
-	public Boolean updateCustomer(CustomerDto customer) {
+	public Boolean updateCustomer(CustomerDto cus1) {
 		Session session = factory.getCurrentSession();
+		Transaction tx=null;
 		try {
-			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, customer.getCuID());
-			session.update(cus);
+			tx=session.beginTransaction();
+			CustomerDto cus = (CustomerDto) session.get(CustomerDto.class, cus1.getCuID());
+			cus.setCustomerUpdate(cus1.getCuName(), cus1.getCuNickName(),cus1.getCuSex(),cus1.getCuDOB(),cus1.getCuNationalID(),cus1.getCuPhone(),cus1.getCuAddress(),cus1.getCuPawn(),cus1.getCuNote(),cus1.getCuPhoto());
+			
+			for (GuarantorInfoDto gu : cus1.getGuarantorInfoDto()) {
+				System.out.println("gu id============="+gu.getGu_id());
+				if(gu.getGu_id() !=0){
+					GuarantorInfoDto gu1=(GuarantorInfoDto)session.get(GuarantorInfoDto.class,gu.getGu_id());
+					gu1.setGuarantorUpdate(gu.getGu_nm(), gu.getGu_nick_nm(), gu.getGu_sex(), gu.getGu_national_id(), gu.getGu_dob(), gu.getGu_phone(), gu.getGu_address(), gu.getGu_pawn(), gu.getGu_note(), gu.getPhoto());
+				}
+			}
+			
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
@@ -102,8 +115,12 @@ public class CustomerDaoImp implements CustomerDao {
 		try {
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
-					filter = " and  cast(C.cuID as string) like '%" + paging.getSw() + "%' Or C.cuName like '%"
-							+ paging.getSw() + "%' ";
+					filter = " and  cast(C.cuID as string) like '%" 
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuNickName) like '%"
+							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
 			tx=session.beginTransaction();
@@ -133,7 +150,12 @@ public class CustomerDaoImp implements CustomerDao {
 
 			if (paging.getSw() != null) {
 				if (paging.getSw() != "") {
-					filter = " and (C.cuName like '%" + paging.getSw() + "%')";
+					filter = " and  cast(C.cuID as string) like '%" 
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuName) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuPhone) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuAddress) like '%"
+							+ paging.getSw().toLowerCase() + "%' Or lower(C.cuNickName) like '%"
+							+ paging.getSw().toLowerCase() + "%' ";
 				}
 			}
 			tx=session.beginTransaction();

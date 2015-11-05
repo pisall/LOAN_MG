@@ -10,7 +10,7 @@
 						<div class="col-lg-12">
 						
 							<h2 class="page-header" style="text-align:center">
-								Weekly Pay Schedule
+								Customer Officer Information(CO)
 							</h2>
 							
 						</div>
@@ -33,34 +33,45 @@
 										<tbody>
 											<tr>
 												<td>ID</td>
-												<td>83948</td>
+												<td><span id="co_id">1</span></td>
 											</tr>
 											<tr>
 												<td>Name</td>
-												<td>Prak Virak</td>
+												<td><span id="co_nm">Prak Virak</span></td>
 											</tr>
-											
 											<tr>
-												<td>Brand</td>
-												<td>Phone Penh</td>
+												<td>Gender</td>
+												<td><span id="sex">Male</span></td>
 											</tr>
-											
-											<tr>
-												<td>Brand</td>
-												<td>Phone Penh</td>
-											</tr>
-											
-											<tr>
-												<td>Sex</td>
-												<td>Male</td>
-											</tr>
-											
 											<tr>
 												<td>National ID</td>
-												<td>82748472382</td>
+												<td><span id="co_national_id">82748472382</span></td>
 											</tr>
+											
+											<tr>
+												<td>Brand</td>
+												<td><span id="brand">Phone Penh</span></td>
+											</tr>
+											
+											<tr>
+												<td>Phone</td>
+												<td><span id="co_phone">010-0873-047</span></td>
+											</tr>
+											
+											<tr>
+												<td>Office Phone</td>
+												<td><span id="office_phone">010-0873-047</span></td>
+											</tr>
+											
+											<tr>
+												<td>Office Phone</td>
+												<td><span id="office_phone">010-0873-047</span></td>
+											</tr>
+											
+											
 										</tbody>
 									</table>
+									 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 								</div>
 							</div>
 							
@@ -69,6 +80,7 @@
 					</div>
 				
 				</div>
+				
 
             </div>
             <!-- /.container-fluid -->

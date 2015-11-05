@@ -12,9 +12,8 @@ $(function() {
 	});
 	
 	$("#co_info").change(function() {
-		parent.coID = $.trim($(this).val());
-		
-		parent.listCus(page_no);
+		parent.coID = $.trim($(this).val());	
+		parent.listCus(1);
 	});
 
 });
@@ -77,6 +76,7 @@ function listCoByBrand() {
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
+			
 			$(data).each(
 					function(i, v) {
 						var selected = "";
@@ -85,7 +85,7 @@ function listCoByBrand() {
 						}
 						result += "<option value='" + v.coID + "'" + selected
 								+ ">CO ID : " + v.coID + " , CO Name : "
-								+ v.coName + " </option>";
+								+ v.coFirstName+" "+v.coLastName + " </option>";
 					});
 			$("#co_info").append(result);
 		},

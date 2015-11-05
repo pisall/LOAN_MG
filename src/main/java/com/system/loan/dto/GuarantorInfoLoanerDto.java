@@ -1,11 +1,13 @@
 package com.system.loan.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,32 +16,34 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name="mfi_guarantor")
-public class GuarantorInfoDto implements Serializable { 
+public class GuarantorInfoLoanerDto implements Serializable { 
 	/*
 	 * Guarantor info "this info not full need to modify later"
 	 * 
 	 */  
 	@Id
 	@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SQ_GU_ID",name="gu_id")
-	@GeneratedValue(generator="",strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(generator="gu_id",strategy=GenerationType.SEQUENCE)
 	
 	@Column(name="gu_id")
 	private Integer gu_id;
+	 
+	@ElementCollection
+	@ManyToOne(targetEntity=LoanAgreementDto.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="cu_id")  
+	private LoanAgreementDto loanAgre; 
 	
-	/*@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cu_id")
-	private LoanAgreementDto loanAgreementDto;*/
-	
-	@ManyToOne
-	@JoinColumn(name="cu_id")
-	private CustomerDto customerDto;
-	
-	/*@Column (name="cu_id")
-	private Integer cuID; */
+	public LoanAgreementDto getLoanAgre() {
+		return loanAgre;
+	} 
+	public void setLoanAgre(LoanAgreementDto loanAgre) {
+		this.loanAgre = loanAgre;
+	}
+
+/*	@Column (name="cu_id")
+	private Integer cu_id; */
 	
 	@Column(name="gu_nm")
 	private String gu_nm;
@@ -47,23 +51,18 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="gu_nick_nm")
 	private String gu_nick_nm;
 	
+
 	@Column(name="gu_sex")
 	private String gu_sex;
 	
 	@Column(name="gu_national_id")
-	private int gu_national_id;
-	
-	@Column(name="gu_dob")
-	private String gu_dob;
+	private Integer gu_national_id;
 	
 	@Column(name="gu_phone")
 	private String gu_phone;
 	
 	@Column(name="gu_address")
 	private String gu_address;
-	
-	@Column(name="gu_pawn")
-	private String gu_pawn;
 	
 	@Column(name="gu_note")
 	private String gu_note;
@@ -74,52 +73,29 @@ public class GuarantorInfoDto implements Serializable {
 	@Column(name="photo")
 	private String photo;
 	
+	@Column(name="gu_pawn")
+	private String gu_pawn;
 	
-
-	/**
-	 * @param gu_nm
-	 * @param gu_nick_nm
-	 * @param gu_sex
-	 * @param gu_national_id
-	 * @param gu_dob
-	 * @param gu_phone
-	 * @param gu_address
-	 * @param gu_pawn
-	 * @param gu_note
-	 * @param photo
-	 */
-	public void setGuarantorUpdate(String gu_nm, String gu_nick_nm, String gu_sex, int gu_national_id, String gu_dob,
-			String gu_phone, String gu_address, String gu_pawn, String gu_note, String photo) {
+	public GuarantorInfoLoanerDto(){
+		
+	} 
+	public GuarantorInfoLoanerDto(Integer gu_id, LoanAgreementDto loanAgre, String gu_nm, String gu_nick_nm, String gu_sex,
+			Integer gu_national_id, String gu_phone, String gu_address, String gu_note, String gu_dtt, String photo,
+			String gu_pawn) {
+		super();
+		this.gu_id = gu_id;
+		this.loanAgre = loanAgre;
 		this.gu_nm = gu_nm;
 		this.gu_nick_nm = gu_nick_nm;
 		this.gu_sex = gu_sex;
 		this.gu_national_id = gu_national_id;
-		this.gu_dob = gu_dob;
 		this.gu_phone = gu_phone;
 		this.gu_address = gu_address;
-		this.gu_pawn = gu_pawn;
 		this.gu_note = gu_note;
+		this.gu_dtt = gu_dtt;
 		this.photo = photo;
+		this.gu_pawn = gu_pawn;
 	}
-
-	/**
-	 * @return the customerDto
-	 */
-	public CustomerDto getCustomerDto() {
-		return customerDto;
-	}
-
-	/**
-	 * @param customerDto the customerDto to set
-	 */
-	public void setCustomerDto(CustomerDto customerDto) {
-		this.customerDto = customerDto;
-	}
-
-	public GuarantorInfoDto(){
-		
-	}
-
 	public Integer getGu_id() {
 		return gu_id;
 	}
@@ -127,15 +103,7 @@ public class GuarantorInfoDto implements Serializable {
 	public void setGu_id(Integer gu_id) {
 		this.gu_id = gu_id;
 	}
-
-/*	public Integer getCu_id() {
-		return cuID;
-	}
-
-	public void setCu_id(Integer cu_id) {
-		this.cuID = cu_id;
-	}*/
-
+  
 	public String getGu_nm() {
 		return gu_nm;
 	}
@@ -143,35 +111,12 @@ public class GuarantorInfoDto implements Serializable {
 	public void setGu_nm(String gu_nm) {
 		this.gu_nm = gu_nm;
 	}
-
-	/**
-	 * @return the gu_nick_nm
-	 */
 	public String getGu_nick_nm() {
 		return gu_nick_nm;
 	}
-
-	/**
-	 * @param gu_nick_nm the gu_nick_nm to set
-	 */
 	public void setGu_nick_nm(String gu_nick_nm) {
 		this.gu_nick_nm = gu_nick_nm;
 	}
-
-	/**
-	 * @return the gu_pawn
-	 */
-	public String getGu_pawn() {
-		return gu_pawn;
-	}
-
-	/**
-	 * @param gu_pawn the gu_pawn to set
-	 */
-	public void setGu_pawn(String gu_pawn) {
-		this.gu_pawn = gu_pawn;
-	}
-
 	public String getGu_sex() {
 		return gu_sex;
 	}
@@ -180,26 +125,12 @@ public class GuarantorInfoDto implements Serializable {
 		this.gu_sex = gu_sex;
 	}
 
-	public int getGu_national_id() {
+	public Integer getGu_national_id() {
 		return gu_national_id;
 	}
 
-	public void setGu_national_id(int gu_national_id) {
+	public void setGu_national_id(Integer gu_national_id) {
 		this.gu_national_id = gu_national_id;
-	}
-
-	/**
-	 * @return the gu_dob
-	 */
-	public String getGu_dob() {
-		return gu_dob;
-	}
-
-	/**
-	 * @param gu_dob the gu_dob to set
-	 */
-	public void setGu_dob(String gu_dob) {
-		this.gu_dob = gu_dob;
 	}
 
 	public String getGu_phone() {
@@ -241,8 +172,11 @@ public class GuarantorInfoDto implements Serializable {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
-	
-	
+	public String getGu_pawn() {
+		return gu_pawn;
+	}
+	public void setGu_pawn(String gu_pawn) {
+		this.gu_pawn = gu_pawn;
+	}
 	 
 }

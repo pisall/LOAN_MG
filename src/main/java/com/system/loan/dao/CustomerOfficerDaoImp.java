@@ -19,8 +19,6 @@ import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.CustomerOfficerDto;
 
 @Service
-@Repository
-@Transactional
 public class CustomerOfficerDaoImp {
 
 	public static SessionFactory factory = null;
@@ -44,18 +42,17 @@ public class CustomerOfficerDaoImp {
 	public List<CustomerOfficerDto> listCustomerOfficer(String brand) {
 		Session session = factory.getCurrentSession();
 		List<CustomerOfficerDto> list = null;
+		Transaction tx=null;
 		try {
-			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coName AS coName) FROM CustomerOfficerDto CO Where CO.coBrand=? ");
+			tx=session.beginTransaction();
+			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coFirstName AS coFirstName,CO.coLastName As coLastName) FROM CustomerOfficerDto CO Where CO.coBrand=? Order By CO.coID DESC");
 					query.setString(0, brand);
 			list = (ArrayList<CustomerOfficerDto>) query.list();	
+			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
-		} finally {
-			if (session.isOpen()) {
-				session.close();
-			}
-		}
+		} 
 		return list;
 	}
 
