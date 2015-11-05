@@ -22,7 +22,7 @@
 			<div class="container-fluid">
 
 				<!-- Page Heading -->
-				<div class="row">
+			<!-- 	<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
 							Dashboard <small>Statistics Overview</small>
@@ -63,7 +63,7 @@
 						class="form-control"> <br /> Address :<input type="text"
 						name="usAddress" id="usAddress" class="form-control"> <br />
 					<input type="submit" value="add" id="addUser"> <br />
-				</div>
+				</div> -->
 
 
 				<div class="row">
@@ -80,7 +80,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="img/cus_officer.png">
+												<img src="/controller/resources/img/Co_Info.png" height="150" width="250">
 												<!--  <i class="fa fa-shopping-cart fa-5x"></i> -->
 											</div>
 											<div class="col-xs-9 text-right">
@@ -113,7 +113,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="img/cus_info.png">
+												<img src="/controller/resources/img/Customers.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>
@@ -145,7 +145,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="img/income_info.png">
+												<img src="/controller/resources/img/Income.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>
@@ -177,7 +177,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="img/outcome_info.png">
+												<img src="/controller/resources/img/Outcome1.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>
