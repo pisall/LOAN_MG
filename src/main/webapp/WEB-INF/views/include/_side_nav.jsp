@@ -12,12 +12,12 @@
 	<li><a href="loan_agreement.html"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
 			Agreement</a></li>
-	<li><a href="bootstrap-elements.html"><span
-			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Month
-			Outcome</a></li>
-	<li><a href="bootstrap-grid.html"><span
+	<li><a href="${pageContext.request.contextPath}/Income/IncomeView"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Month
 			Income</a></li>
+	<li><a href="${pageContext.request.contextPath}/Outcome/OutcomeView"><span
+			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Month
+			Outcome</a></li>
 	<li><a href="bootstrap-grid.html"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Help</a>
 	</li>

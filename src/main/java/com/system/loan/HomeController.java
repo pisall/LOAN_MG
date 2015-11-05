@@ -32,23 +32,7 @@ public class HomeController {
 		return "home";
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 
 	@RequestMapping(value="customer_information")
 	public String customerInformation(){
 		return "customer_information";
@@ -63,15 +47,13 @@ public class HomeController {
 	@RequestMapping(value = "/listUser", produces = "application/json", consumes = "application/json", method = RequestMethod.GET)
 	public @ResponseBody java.util.List<UserDto> listUser() {
 		
-		return userImp.listUser();
-
+		//return userImp.listUser();
+		return null;
 	}
 
 	@RequestMapping(value = "/addUser", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody Boolean addUser(@RequestBody UserDto user) {
-
 		return userImp.insertUser(user);
-
 	}
 
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
