@@ -17,10 +17,7 @@ import com.system.loan.dto.LoanApprovalDto;
 @Controller
 @RequestMapping(value="loan")
 public class LoanApprovalsController implements Serializable{
-
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L;
 	LoanApprovalDao loanApproDao = null;
 	
