@@ -1,15 +1,18 @@
 package com.system.loan;
 
 import javax.persistence.Entity;
- 
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Entity
-@RequestMapping(value="Income")
+@Controller
+@RequestMapping(value="/Income")
 public class IncomeController {
 
-	@RequestMapping(value="/IncomeView")
+	@RequestMapping(value="/IncomeView", method=RequestMethod.GET)
 	String Income(){
-		return "Income/IncomeView";
+		return "IncomeView";
 	}
 }
