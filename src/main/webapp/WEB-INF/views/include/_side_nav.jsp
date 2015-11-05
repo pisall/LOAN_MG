@@ -5,11 +5,11 @@
 			Information</a></li>
 	<li><a href="charts.html"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
-			Agreement</a></li>
+			Information</a></li>
 	<li><a href="tables.html"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
 			Information</a></li>
-	<li><a href="loan_agreement.html"><span
+	<li><a href="${pageContext.request.contextPath}/LoanAgreement/newLoanAgreement"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
 			Agreement</a></li>
 	<li><a href="${pageContext.request.contextPath}/Income/IncomeView"><span

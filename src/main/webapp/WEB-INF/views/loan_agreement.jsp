@@ -310,7 +310,7 @@
 	    }
 	  }
 	});
-	<%@include file="include/_script.jsp"%>
+<%-- 	<%@include file="include/_script.jsp"%> --%>
 
 </body>
 
