@@ -1,3 +1,4 @@
+
 <%@include file="include/_head.jsp"%>
 
 <%
@@ -5,7 +6,6 @@
 	ses.setAttribute("id", "9");
 	ses.setAttribute("brand", "bb");
 %>
-
 <body>
 
 	<div id="wrapper">
@@ -53,7 +53,7 @@
 									<div class="col-md-6">
 										<span class="col-md-8 col-sm-8" style="padding: 0px"> <select
 											class="form-control" id="co_info">
-											<option value="">Display All</option>
+												<option value="">Display All</option>
 
 										</select>
 										</span>
@@ -85,11 +85,11 @@
 												<th>Nickname</th>
 												<th>Sex</th>
 												<th>Phone</th>
-												<th>Address</th>										
+												<th>Address</th>
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody id="tableCustomer" >
+										<tbody id="tableCustomer">
 
 
 										</tbody>
@@ -111,10 +111,10 @@
 				<div class="row">
 					<div class="col-md-1" id="select_num">
 						<select class='form-control' id='record_num' style='width: 100%'>
-						<option value='10'>10</option>
-						<option value='15'>15</option>
-						<option value='20'>20</option>
-						<option value='25'>25</option>
+							<option value='10'>10</option>
+							<option value='15'>15</option>
+							<option value='20'>20</option>
+							<option value='25'>25</option>
 						</select>
 					</div>
 					<div class="col-md-11" style="text-align: center;">
@@ -145,7 +145,7 @@
 
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
-		<script
+	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
 
 </body>

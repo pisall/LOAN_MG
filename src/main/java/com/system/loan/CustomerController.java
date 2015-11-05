@@ -1,29 +1,34 @@
 package com.system.loan;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.springcryptoutils.core.cipher.asymmetric.Cipherer;
 import com.system.loan.dao.CustomerDaoImp;
-import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
-
 import com.system.loan.dto.pagingDto;
+import com.system.loan.form.PhotoForm;
 
 /**
  * Handles requests for the application home page.
@@ -37,6 +42,8 @@ public class CustomerController {
 	@Inject
 	GuarantorDaoImp guarantorImp;
 
+	Cipherer decrypter;
+
 	/**
 	 * List Customer
 	 * 
@@ -46,19 +53,19 @@ public class CustomerController {
 
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
-			@RequestParam(name="coID" ,defaultValue="")String coID) {
-		int totaPage=0;
-		totaPage=(int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
+			@RequestParam(name = "coID", defaultValue = "") String coID) {
+		int totaPage = 0;
+		totaPage = (int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
 		paging.setTotalPage(totaPage);
-		if(paging.getTotalPage()<paging.getPageNo()){
+		if (paging.getTotalPage() < paging.getPageNo()) {
 			paging.setPageNo(paging.getTotalPage());
 		}
 		HashMap<String, Object> model = new HashMap<String, Object>();
-		model.put("REC", customerImp.listCustomer(paging,coID));
+		model.put("REC", customerImp.listCustomer(paging, coID));
 		model.put("PAGING", paging);
 		return model;
 	}
-	
+
 	/**
 	 * Get Customer Detail
 	 * 
@@ -72,29 +79,48 @@ public class CustomerController {
 	}
 
 	/**
-	 * Add New Customer
-	 * 
-	 * @param customer
-	 * @return
-	 */
-	@RequestMapping(value = "/addCustomer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean addCustomer(@RequestBody CustomerDto customer) {
-
-		return customerImp.insertCustomer(customer);
-
-	}
-
-	/**
 	 * Update Customer
 	 * 
 	 * @param Customer
 	 * @return
 	 */
 	@RequestMapping(value = "/update_customer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus) {
-		
+	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus,PhotoForm form, HttpServletRequest request ) {
+
 		return customerImp.updateCustomer(cus);
 	}
+	
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> uploadFile(
+	    @RequestParam("uploadfile") MultipartFile uploadfile,HttpServletRequest request) {
+		
+		System.out.println("33333333333333333333");
+	 try {
+	    // Get the filename and build the local file path (be sure that the 
+	    // application have write permissions on such directory)
+	    String filename = uploadfile.getOriginalFilename();
+	   //String directory = "D:/spring_project/SPRING_UPLOAD/src/main/webapp/resources/images/";
+	    String p="\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp12\\wtpwebapps";
+	    String directory=request.getRealPath("/src/main/webapp/resources/img/");
+	    String dir=directory.replace(p,"");
+	    String filepath = Paths.get(dir, filename).toString();
+	    
+	    System.out.println(filepath+"path=============");
+	    
+	    // Save the file locally
+	    BufferedOutputStream stream =
+	        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+	    stream.write(uploadfile.getBytes());
+	    stream.close();
+	  }
+	  catch (Exception e) {
+	    System.out.println(e.getMessage());
+	    return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+	  }
+	  
+	  return new ResponseEntity<Object>(HttpStatus.OK);
+	} 
 
 	/**
 	 * Delete Customer
@@ -107,20 +133,6 @@ public class CustomerController {
 
 		return customerImp.deleteCustomer(customer);
 
-	}
-
-	/**
-	 * Update Form
-	 * 
-	 * @param usID
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/updateForm/{usID}", method = RequestMethod.GET)
-	public String listSpecificCustomer(@PathVariable("usID") String usID, Map<String, Object> model) {
-
-		model.put("listSpecificCustomer", customerImp.listSpecificCustomer(usID));
-		return "update_Customer_test";
 	}
 
 	/**
@@ -141,10 +153,10 @@ public class CustomerController {
 	 */
 	@RequestMapping(value = "/edit_customer", method = RequestMethod.GET)
 	public String customerFormUpdate(@RequestParam(value = "cuID", defaultValue = "") String cuID,
-			@RequestParam(value = "guID", defaultValue = "") String guID,Map<String, Object> model) {
-		 model.put("customer", customerImp.listSpecificCustomer(cuID));
-		 model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));
+			@RequestParam(value = "guID", defaultValue = "") String guID, Map<String, Object> model) {
+		model.put("customer", customerImp.listSpecificCustomer(cuID));
+		model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));
 		return "customer_form_edit";
 	}
-	
+
 }
