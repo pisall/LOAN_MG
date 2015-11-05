@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Entity
 @Controller
 @RequestMapping(value="/Income")
-public class IncomeController {
+public class IncomeController {   
 
 	@RequestMapping(value="/IncomeView", method=RequestMethod.GET)
-	String Income(){
+	public String Income(){
 		return "IncomeView";
 	}
 }

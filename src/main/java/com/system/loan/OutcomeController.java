@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OutcomeController {
 	 
 		@RequestMapping(value="/OutcomeView", method=RequestMethod.GET)
-		String Income(){
+		public String Income(){
 			return "OutcomeView";
 		}
 	}
