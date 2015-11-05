@@ -9,7 +9,7 @@ public class OutcomeController {
 	@RequestMapping(value="Outcome")
 	public class IncomeController {
 
-		@RequestMapping(value="OutcomeView")
+		@RequestMapping(value="/OutcomeView")
 		String Income(){
 			return "Income/OutcomeView";
 		}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="Income")
 public class IncomeController {
 
-	@RequestMapping(value="IncomeView")
+	@RequestMapping(value="/IncomeView")
 	String Income(){
 		return "Income/IncomeView";
 	}
