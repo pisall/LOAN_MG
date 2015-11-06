@@ -15,7 +15,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
-                            <a href="#">
+                           <!--  <a href="#"> -->
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -27,10 +27,11 @@
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
-                            </a>
+                            <!-- </a> -->
                         </li>
                         <li class="message-preview">
-                            <a href="#">
+                        
+                           <!--  <a href="#"> -->
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -42,10 +43,10 @@
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
-                            </a>
+                           <!--  </a> -->
                         </li>
                         <li class="message-preview">
-                            <a href="#">
+                           <!--  <a href="#"> -->
                                 <div class="media">
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
@@ -57,7 +58,7 @@
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
-                            </a>
+                          <!--   </a> -->
                         </li>
                         <li class="message-footer">
                             <a href="#">Read All New Messages</a>
