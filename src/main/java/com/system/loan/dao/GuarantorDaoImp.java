@@ -10,13 +10,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.GuarantorInfoDto;
-import org.springframework.transaction.annotation.Transactional;
 @Service
 public class GuarantorDaoImp implements GuarantorDao {
 	public static SessionFactory factory = null;
@@ -33,6 +29,7 @@ public class GuarantorDaoImp implements GuarantorDao {
 			StandardServiceRegistryBuilder.destroy( registry );
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<GuarantorInfoDto> foundGuarantorByID(String cuID,String guID) {
 		Session session = factory.getCurrentSession();
