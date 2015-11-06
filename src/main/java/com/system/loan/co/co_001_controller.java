@@ -66,6 +66,7 @@ public class co_001_controller {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("customer_officer_edit");
 		modelAndView.addObject("id", id);
+		modelAndView.addObject("page_id","co_0003");
 		
 		return modelAndView;
 	}
