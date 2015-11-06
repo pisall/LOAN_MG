@@ -4,7 +4,6 @@
 package com.system.loan.dto;
 
 import java.io.Serializable;
-import java.io.ObjectOutputStream.PutField;
 
 /**
  * @author PC_VIRAK

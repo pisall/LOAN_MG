@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="mfi_customers")
 public class LoanAgreementDto implements Serializable {
@@ -37,10 +37,12 @@ public class LoanAgreementDto implements Serializable {
 	private CoDto coDto;
 	 
 	//@ElementCollection 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@OneToMany(targetEntity=AcountInfoDto.class, cascade=CascadeType.ALL, mappedBy="loanAGr")
 	private Set<AcountInfoDto> acountInfoHash= new HashSet();
 	
 //	@ElementCollection
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@OneToMany(targetEntity=GuarantorInfoLoanerDto.class, cascade=CascadeType.ALL, mappedBy="loanAgre")
 	private Set<GuarantorInfoLoanerDto> gurantorInfoHash = new HashSet();
 	
