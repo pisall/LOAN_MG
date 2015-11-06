@@ -262,9 +262,7 @@ function deleteCustomer(cusID) {
 				},
 				success : function(data) {
 					clearWord();
-					var totalPage=value.PAGING.totalPage;
-					var curPage=value.PAGING.pageNo;
-					console.log("delte======="+totalPage+"cur="+curPage);
+					word="";
 					listCus(page_no);
 				},
 				error : function(data, status, er) {

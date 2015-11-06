@@ -1,5 +1,7 @@
 
-<ul class="nav navbar-nav side-nav">
+
+
+<ul class="nav navbar-nav side-nav" id="nav">
 	<li><a href="#"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
 			&nbsp;Customer Officer(CO)</a></li>
@@ -25,3 +27,5 @@
 			class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a>
 	</li>
 </ul>
+
+ 
