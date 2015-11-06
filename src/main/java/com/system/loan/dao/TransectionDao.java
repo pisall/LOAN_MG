@@ -143,7 +143,7 @@ public static SessionFactory factory = null;
 	// select transaction info
 	@Override
 	public List<TransectionDto> Customer_Report(int cus_id) {
-		factory = new Configuration().configure().buildSessionFactory(); 
+		//factory = new Configuration().configure().buildSessionFactory(); 
 		Session session = factory.getCurrentSession();
 		Transaction tran = null;
 		

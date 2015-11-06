@@ -62,7 +62,22 @@ public class CustomerDaoImp implements CustomerDao {
 		return true;
 	}
 
+	/**
+	 * Add Customer Information if true return true else return false
+	 */
+	@Override
 	
+	public Boolean insertCustomer(CustomerDto Customer) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.save(Customer);
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Delete Customer Information if true return true else return false
