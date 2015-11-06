@@ -2,33 +2,24 @@ package com.system.loan;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.text.DateFormatter;
-
-import org.hibernate.Transaction;
-import org.hibernate.id.GUIDGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.system.loan.dao.LoanAgreementDao;
 import com.system.loan.dao.TransectionDao;
 import com.system.loan.dto.AcountInfoDto;
 import com.system.loan.dto.GuarantorInfoLoanerDto;
 import com.system.loan.dto.LoanAgreementDto;
-import com.system.loan.dto.TransectionDto;
-import com.system.loan.dto.UserDto; 
+import com.system.loan.dto.TransectionDto; 
 
 @Controller
 @RequestMapping(value="/LoanAgreement")
@@ -60,7 +51,7 @@ public class LoanAgreementController implements Serializable{
 			int   period = Integer.parseInt(acodto.getAc_period());
 			float saving_amount = acodto.getAc_saving_amount();
 			String  pay_period_type = acodto.getAc_period_type(); 
-			float principal_paid 	=	amount/period; //áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ 
+			float principal_paid 	=	amount/period; //Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å Ã¡Å¾Â¾Ã¡Å¾ËœÃ¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¼Ã¡Å¾Å“Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹ 
 			   
 			
 			float balance_remain 	= amount;
@@ -144,14 +135,14 @@ public class LoanAgreementController implements Serializable{
 			
 			tran = new TransectionDto();
 			
-			tran.setTr_balance(balance_remain);			//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜ážŠáŸ‚áž›áž“áŸ…ážŸáž›áŸ‹
-			tran.setTr_origin_amount(principal_paid);	//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹
-			tran.setTr_save_payment(saving_amount);		//áž”áŸ’ážšáž¶áž€áŸ‹ážŸáž“áŸ’ážŸáŸ†
-			tran.setTr_pay_amount(balance_payment);		//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ážŸážšáž»áž” áž�áž¶áž˜áž€áž›ážœáž·áž—áž¶áž‚
-			tran.setTr_total_rate(total_pay_rate);		//áž€áž¶ážšáž”áŸ’ážšáž¶áž€áŸ‹ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ 
-			tran.setPay_date(pay_date_time);			//áž�áŸ’áž„áŸƒáž�áŸ‚áž†áŸ’áž“áž¶áŸ†áž”áž„áŸ‹áž”áŸ’ážšáž¶áž€áŸ‹â€‹
-			tran.setPay_day(Pay_day_Str);				//áž�áŸ’áž„áŸƒáž”áž„áŸ‹áž”áŸ’ážšáž¶áž€áŸ‹
-			tran.setTr_dtt(dateimte);					//áž–áŸ�áž›ážœáŸ�áž›áž¶áž�áŸ’áž„áŸƒáž“áŸ�áŸ‡
+			tran.setTr_balance(balance_remain);			//Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å Ã¡Å¾Â¾Ã¡Å¾ËœÃ¡Å¾Å Ã¡Å¸â€šÃ¡Å¾â€ºÃ¡Å¾â€œÃ¡Å¸â€¦Ã¡Å¾Å¸Ã¡Å¾â€ºÃ¡Å¸â€¹
+			tran.setTr_origin_amount(principal_paid);	//Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å Ã¡Å¾Â¾Ã¡Å¾ËœÃ¡Å¾Å Ã¡Å¸â€šÃ¡Å¾â€ºÃ¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¼Ã¡Å¾Å“Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹
+			tran.setTr_save_payment(saving_amount);		//Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å¸Ã¡Å¾â€œÃ¡Å¸â€™Ã¡Å¾Å¸Ã¡Å¸â€ 
+			tran.setTr_pay_amount(balance_payment);		//Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å Ã¡Å¸â€šÃ¡Å¾â€ºÃ¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¼Ã¡Å¾Å“Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹Ã¡Å¾Å¸Ã¡Å¾Å¡Ã¡Å¾Â»Ã¡Å¾â€� Ã¡Å¾ï¿½Ã¡Å¾Â¶Ã¡Å¾ËœÃ¡Å¾â‚¬Ã¡Å¾â€ºÃ¡Å¾Å“Ã¡Å¾Â·Ã¡Å¾â€”Ã¡Å¾Â¶Ã¡Å¾â€š
+			tran.setTr_total_rate(total_pay_rate);		//Ã¡Å¾â‚¬Ã¡Å¾Â¶Ã¡Å¾Å¡Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¡Å¾Å Ã¡Å¸â€šÃ¡Å¾â€ºÃ¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¼Ã¡Å¾Å“Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹ 
+			tran.setPay_date(pay_date_time);			//Ã¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾â€žÃ¡Å¸Æ’Ã¡Å¾ï¿½Ã¡Å¸â€šÃ¡Å¾â€ Ã¡Å¸â€™Ã¡Å¾â€œÃ¡Å¾Â¶Ã¡Å¸â€ Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹Ã¢â‚¬â€¹
+			tran.setPay_day(Pay_day_Str);				//Ã¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾â€žÃ¡Å¸Æ’Ã¡Å¾â€�Ã¡Å¾â€žÃ¡Å¸â€¹Ã¡Å¾â€�Ã¡Å¸â€™Ã¡Å¾Å¡Ã¡Å¾Â¶Ã¡Å¾â‚¬Ã¡Å¸â€¹
+			tran.setTr_dtt(dateimte);					//Ã¡Å¾â€“Ã¡Å¸ï¿½Ã¡Å¾â€ºÃ¡Å¾Å“Ã¡Å¸ï¿½Ã¡Å¾â€ºÃ¡Å¾Â¶Ã¡Å¾ï¿½Ã¡Å¸â€™Ã¡Å¾â€žÃ¡Å¸Æ’Ã¡Å¾â€œÃ¡Å¸ï¿½Ã¡Å¸â€¡
 			tran.setTr_stts("1");
 			
 			tran.setAccount(acodto);
