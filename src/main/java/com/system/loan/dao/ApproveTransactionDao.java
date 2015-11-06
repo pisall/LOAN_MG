@@ -1,7 +1,5 @@
 package com.system.loan.dao;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
@@ -11,10 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
-import com.system.loan.dto.LoanAgreementDto;
-import com.system.loan.dto.TransectionDto;
 
 public class ApproveTransactionDao implements TransactionInterface {
 	public static SessionFactory factory = null;

@@ -11,7 +11,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.GuarantorInfoDto;
@@ -103,6 +102,7 @@ public class CustomerDaoImp implements CustomerDao {
 	/**
 	 * List Customer Information if true return List else return null
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CustomerDto> listCustomer(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub
@@ -139,6 +139,7 @@ public class CustomerDaoImp implements CustomerDao {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public int totalCus(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();

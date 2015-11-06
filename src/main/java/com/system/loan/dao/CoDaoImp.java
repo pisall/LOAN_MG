@@ -3,7 +3,6 @@
  */
 package com.system.loan.dao;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -15,7 +14,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +46,7 @@ public class CoDaoImp implements CoDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CoDto> listCo(pagingDto paging) {
 		// TODO Auto-generated method stub
@@ -76,6 +75,7 @@ public class CoDaoImp implements CoDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int totalRecord(pagingDto paging) {
 		// TODO Auto-generated method stub
@@ -106,6 +106,7 @@ public class CoDaoImp implements CoDao {
 		return cnt;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void testjoin(){
 		Session session=factory.getCurrentSession();
 		Transaction tx=null;
@@ -156,6 +157,7 @@ public class CoDaoImp implements CoDao {
 		return "yyy";
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public List testJson() {
 		Session session=factory.getCurrentSession();
 		List list=null;

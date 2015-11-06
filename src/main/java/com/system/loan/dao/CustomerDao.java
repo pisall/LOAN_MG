@@ -2,8 +2,6 @@ package com.system.loan.dao;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
