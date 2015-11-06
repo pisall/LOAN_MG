@@ -184,6 +184,7 @@
     <script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var ID="${id}>";
+		var PAGE_ID="${page_id}";
 		
 	</script>
     
