@@ -35,6 +35,7 @@ public class co_001_controller {
 		HashMap<String, Object> test=new HashMap<>();
 		test=coDao.findLogByLogMail("mnee");
 		System.out.println(test.get("log_email"));
+		
 		return "customer_officer_add";
 	}
 	/*
@@ -49,8 +50,11 @@ public class co_001_controller {
 	 * view customer officer list
 	 */
 	@RequestMapping(value="/co_0003",method=RequestMethod.GET)
-	public String co0003(){
-		return "customer_officer_list";
+	public ModelAndView co0003(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("customer_officer_list");
+		mv.addObject("page_id","co_0003");
+		return mv;
 	}
 	/*
 	 * view customer officer update

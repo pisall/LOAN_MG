@@ -18,6 +18,7 @@
      <script src="${pageContext.request.contextPath}/resources/js/moment.min.js"></script>
      
      <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/js/page/nav.js"></script>
      
      <%--  <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script> --%>
     

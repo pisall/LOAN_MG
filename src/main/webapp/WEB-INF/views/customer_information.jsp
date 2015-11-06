@@ -141,6 +141,7 @@
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var id="<%=ses.getAttribute("id")%>";
 		var brand="<%=ses.getAttribute("brand")%>";
+		var PAGE_ID="${page_id}";
 	</script>
 
 	<script

@@ -12,12 +12,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.system.loan.dto.UserDto;
 
@@ -101,8 +103,11 @@ public class HomeController {
 	
 	
 	@RequestMapping(value="customer_information")
-	public String customerInformation(){
-		return "customer_information";
+	public ModelAndView customerInformation(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("customer_information");
+		mv.addObject("page_id","customer_information");
+		return mv;
 	}
 
 	/*

@@ -299,18 +299,9 @@
 	<%@include file="include/_script.jsp"%>
 	<script>
 	// just for the demos, avoids form submit
-	jQuery.validator.setDefaults({
-	  debug: true,
-	  success: "valid"
-	});
-	$( "#loanAgreement" ).validate({
-	  rules: {
-	    field: {
-	      required: true,
-	     // maxlength: 4
-	    }
-	  }
-	});
+	var PAGE_ID="${page_id}";
+	
+	</script>
 <%-- 	<%@include file="include/_script.jsp"%> --%>
 
 </body>

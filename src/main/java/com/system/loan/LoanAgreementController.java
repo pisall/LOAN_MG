@@ -47,8 +47,11 @@ public class LoanAgreementController implements Serializable{
 	private static final long serialVersionUID = 1L;
 		LoanAgreementDao loanAgreDao = null;
 		@RequestMapping(value="/newLoanAgreement" , method=RequestMethod.GET)
-		public String newLoanAgreement(){ 
-			return "loan_agreement";
+		public ModelAndView newLoanAgreement(){ 
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("loan_agreement");
+			mv.addObject("page_id","loan_agreement");
+			return mv;
 		}
 		
 		@RequestMapping(value="/newLoanAgreementGetData" , method=RequestMethod.POST)
@@ -60,7 +63,7 @@ public class LoanAgreementController implements Serializable{
 			int   period = Integer.parseInt(acodto.getAc_period());
 			float saving_amount = acodto.getAc_saving_amount();
 			String  pay_period_type = acodto.getAc_period_type(); 
-			float principal_paid 	=	amount/period; //áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ 
+			float principal_paid 	=	amount/period; 
 			   
 			
 			float balance_remain 	= amount;
@@ -144,14 +147,14 @@ public class LoanAgreementController implements Serializable{
 			
 			tran = new TransectionDto();
 			
-			tran.setTr_balance(balance_remain);			//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜ážŠáŸ‚áž›áž“áŸ…ážŸáž›áŸ‹
-			tran.setTr_origin_amount(principal_paid);	//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáž¾áž˜ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹
-			tran.setTr_save_payment(saving_amount);		//áž”áŸ’ážšáž¶áž€áŸ‹ážŸáž“áŸ’ážŸáŸ†
-			tran.setTr_pay_amount(balance_payment);		//áž”áŸ’ážšáž¶áž€áŸ‹ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ážŸážšáž»áž” áž�áž¶áž˜áž€áž›ážœáž·áž—áž¶áž‚
-			tran.setTr_total_rate(total_pay_rate);		//áž€áž¶ážšáž”áŸ’ážšáž¶áž€áŸ‹ážŠáŸ‚áž›áž�áŸ’ážšáž¼ážœáž”áž„áŸ‹ 
-			tran.setPay_date(pay_date_time);			//áž�áŸ’áž„áŸƒáž�áŸ‚áž†áŸ’áž“áž¶áŸ†áž”áž„áŸ‹áž”áŸ’ážšáž¶áž€áŸ‹â€‹
-			tran.setPay_day(Pay_day_Str);				//áž�áŸ’áž„áŸƒáž”áž„áŸ‹áž”áŸ’ážšáž¶áž€áŸ‹
-			tran.setTr_dtt(dateimte);					//áž–áŸ�áž›ážœáŸ�áž›áž¶áž�áŸ’áž„áŸƒáž“áŸ�áŸ‡
+			tran.setTr_balance(balance_remain);			
+			tran.setTr_origin_amount(principal_paid);	
+			tran.setTr_save_payment(saving_amount);		
+			tran.setTr_pay_amount(balance_payment);		
+			tran.setTr_total_rate(total_pay_rate);		 
+			tran.setPay_date(pay_date_time);			
+			tran.setPay_day(Pay_day_Str);				
+			tran.setTr_dtt(dateimte);					
 			tran.setTr_stts("1");
 			
 			tran.setAccount(acodto);
