@@ -12,7 +12,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
 import com.system.loan.dto.LoanApprovalDto;
 
@@ -56,6 +55,7 @@ public static SessionFactory factory = null;
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean TranSac_Update(int tr_id, String tr_type) {
 		// TODO Auto-generated method stub
