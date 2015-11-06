@@ -3,8 +3,10 @@
  */
 
 $(document).ready(function(){
-	console.log("page_id="+PAGE_ID);
-	$("#nav").children("li[val="+PAGE_ID+"]").addClass("active");
+	if(typeof PAGE_ID!="undefined"){
+		$("#nav").children("li[val="+PAGE_ID+"]").addClass("active");
+	}
+	
 });
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
