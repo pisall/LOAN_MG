@@ -48,7 +48,6 @@ public class CustomerDaoImp implements CustomerDao {
 			cus.setCustomerUpdate(cus1.getCuName(), cus1.getCuNickName(),cus1.getCuSex(),cus1.getCuDOB(),cus1.getCuNationalID(),cus1.getCuPhone(),cus1.getCuAddress(),cus1.getCuPawn(),cus1.getCuNote(),cus1.getCuPhoto());
 			
 			for (GuarantorInfoDto gu : cus1.getGuarantorInfoDto()) {
-				System.out.println("gu id============="+gu.getGu_id());
 				if(gu.getGu_id() !=0){
 					GuarantorInfoDto gu1=(GuarantorInfoDto)session.get(GuarantorInfoDto.class,gu.getGu_id());
 					gu1.setGuarantorUpdate(gu.getGu_nm(), gu.getGu_nick_nm(), gu.getGu_sex(), gu.getGu_national_id(), gu.getGu_dob(), gu.getGu_phone(), gu.getGu_address(), gu.getGu_pawn(), gu.getGu_note(), gu.getPhoto());
