@@ -81,32 +81,22 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	@Override
 	public int countByLogId(String LogEmail) {
 		// TODO Auto-generated method stub
-		Session session=factory.openSession();
+		Session session=factory.getCurrentSession();
 		Transaction tx=null;
 		try{
+			tx=session.beginTransaction();
 			Query query=session.createQuery("select count(*) from LOGIN_DTO_001 where log_email=?");
 			query.setString(0, LogEmail);
 			Object count=query.uniqueResult();
 			int intc=Integer.parseInt(count.toString());
 			System.out.println("intc-"+intc);
-			if(session.isConnected()){
-				session.flush();
-				session.close();
-			}else{
-				System.out.println("close try");
-			}
+			tx.commit();
 			return intc;
 			
 			
 		}catch(HibernateException e){
 			System.out.println("IError::CO_DAO_001(Class)::countByLogId(function)");
 			e.printStackTrace();
-		}finally {
-			if(session.isConnected()){
-				session.flush();
-				session.close();
-			}else{
-			}
 		}
 		
 		return 0;
