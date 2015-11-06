@@ -29,6 +29,7 @@ import com.system.loan.dto.pagingDto;
 
 @RequestMapping("cocontroller")
 public class CoController {
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/co_list", method = RequestMethod.GET)
 	public String coList(Map<String,Object> model){
 		System.out.println("no parameter");
@@ -49,6 +50,7 @@ public class CoController {
 		return "customer_officer";
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/co_list/{pageNo}", method = RequestMethod.GET)
 	public String coList(@PathVariable("pageNo") Integer pno,Map<String,Object> model){
 		System.out.println("parameter page no");
@@ -108,6 +110,7 @@ public class CoController {
 		return null;
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/list_co_r001",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCo_R001(@RequestBody MFI_CO_I001 input ){
 		
@@ -121,6 +124,7 @@ public class CoController {
 		
 		return output;
 	}
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/list_co_r002",method=RequestMethod.POST)
 	public @ResponseBody List listCo_R002( ){
 		

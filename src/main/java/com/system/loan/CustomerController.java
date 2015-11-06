@@ -33,6 +33,7 @@ import com.system.loan.dto.pagingDto;
 /**
  * Handles requests for the application home page.
  */
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
@@ -89,6 +90,7 @@ public class CustomerController {
 		return customerImp.updateCustomer(cus);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> uploadFile(
