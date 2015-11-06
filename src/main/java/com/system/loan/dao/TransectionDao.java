@@ -37,11 +37,13 @@ public static SessionFactory factory = null;
 	
 	@Override
 	public boolean InsertTransection(TransectionDto tranDto) {
-		Session session = factory.openSession(); 
+		Session session = factory.getCurrentSession();
 		 
 		Date datetime = new Date();
 		SimpleDateFormat date = new SimpleDateFormat();
+		Transaction tx=null;
 		try{
+		tx=session.beginTransaction();
 		String nowDate = date.format(datetime);
 		// get data from object 
 		tranDto.getTr_origin_amount();
@@ -52,7 +54,9 @@ public static SessionFactory factory = null;
 		tranDto.setTr_dtt(nowDate);
 		
 		session.save(tranDto);
+		tx.commit();
 		}catch(HibernateException  e){
+			tx.rollback();
 			e.printStackTrace();
 		}
 		return true;
