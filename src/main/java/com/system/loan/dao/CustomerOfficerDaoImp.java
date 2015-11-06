@@ -1,9 +1,7 @@
 package com.system.loan.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -13,12 +11,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.CustomerOfficerDto;
 
 @Service
@@ -45,6 +39,7 @@ public class CustomerOfficerDaoImp {
 	 * List Customer Information if true return List else return null
 	 */
 	
+	@SuppressWarnings("unchecked")
 	public List<CustomerOfficerDto> listCustomerOfficer(String brand) {
 		Session session = factory.getCurrentSession();
 		List<CustomerOfficerDto> list = null;
