@@ -28,7 +28,6 @@ import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
-import com.system.loan.form.PhotoForm;
 
 /**
  * Handles requests for the application home page.
@@ -84,11 +83,7 @@ public class CustomerController {
 	 * @param Customer
 	 * @return
 	 */
-	@RequestMapping(value = "/update_customer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus,PhotoForm form, HttpServletRequest request ) {
-
-		return customerImp.updateCustomer(cus);
-	}
+	
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
