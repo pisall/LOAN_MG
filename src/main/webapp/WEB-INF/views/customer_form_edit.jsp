@@ -64,15 +64,18 @@ f<%@include file="include/_head.jsp"%>
 								<c:set value="${customer}" var="cu" />
 								<input type="hidden" value="${cu.cuID}" id="cu_id">
 								<!-- Start From -->
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal" id="upload-file-form" role="form">
 									<div>
 										<div>
 											<span class="glyphicon glyphicon-user"
 												style="font-size: 90px;"></span>
 										</div>
+								
 										<span class="btn btn-default btn-file btn-sm"> Browse <input
-											type="file">
+											id="upload-file-input" type="file" name="uploadfile"
+											accept="*" />
 										</span>
+
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_name">Name</label>
@@ -94,16 +97,16 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_sex">Sex</label>
 										<div class="col-sm-10">
 											<select class="form-control" id="cu_sex">
-												
+
 												<c:choose>
 													<c:when test="${cu.cuSex=='f'}">
-   														<option value="f">Female</option>
-   														<option value="m">Male</option>
- 													</c:when>
+														<option value="f">Female</option>
+														<option value="m">Male</option>
+													</c:when>
 													<c:otherwise>
-   														<option value="m">Male</option>
-   														<option value="f">Female</option>
- 													</c:otherwise>
+														<option value="m">Male</option>
+														<option value="f">Female</option>
+													</c:otherwise>
 												</c:choose>
 											</select>
 										</div>
@@ -217,21 +220,21 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="gu_sex">	
-												<option value=""></option>														
+											<select class="form-control" id="gu_sex">
+												<option value=""></option>
 												<c:if test="${gu.gu_sex !=''}">
 													<c:choose>
 														<c:when test="${gu.gu_sex=='f'}">
-	   														<option value="f">Female</option>
-	   														<option value="m">Male</option>
-	 													</c:when>
+															<option value="f">Female</option>
+															<option value="m">Male</option>
+														</c:when>
 														<c:otherwise>
-	   														<option value="m">Male</option>
-	   														<option value="f">Female</option>
-	 													</c:otherwise>
+															<option value="m">Male</option>
+															<option value="f">Female</option>
+														</c:otherwise>
 													</c:choose>
-												</c:if>					
-												
+												</c:if>
+
 											</select>
 										</div>
 									</div>
@@ -311,14 +314,14 @@ f<%@include file="include/_head.jsp"%>
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 	</script>
-
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
-			console.log("gu sex======="+ $("#gu_sex").val());
 			$("#updateCustomer").click(
-					function() {
 
+					function() {
 						var guID = $("#foundGuarantorByID").val();
 
 						var input = {
@@ -358,7 +361,9 @@ f<%@include file="include/_head.jsp"%>
 										"application/json");
 							},
 							success : function(data) {
-								if(data==true)goBack();
+								uploadFile();
+								if (data == true)
+									goBack();
 							},
 							error : function(data, status, er) {
 								console.log("error: " + data + " status: "
@@ -367,6 +372,25 @@ f<%@include file="include/_head.jsp"%>
 						});
 
 					});
+			function uploadFile() {
+					console.log(new FormData($("#upload-file-form")[0]));
+				$
+						.ajax({
+							url : "${pageContext.request.contextPath}/customer/uploadFile",
+							type : "POST",
+							data : new FormData($("#upload-file-form")[0]),
+							enctype : 'multipart/form-data',
+							processData : false,
+							contentType : false,
+							cache : false,
+							success : function(data) {
+								console.log(data);
+							},
+							error : function() {
+
+							}
+						});
+			}
 
 			$("#foundGuarantorByID")
 					.change(

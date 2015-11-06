@@ -8,6 +8,8 @@ $(function() {
 	datetimenow();
 	clearWord();
 	listCus(page_no);
+	
+	console.log(encodeURIComponent("11111"));
 
 	$("#record_num").change(function() {
 		listCus(1);

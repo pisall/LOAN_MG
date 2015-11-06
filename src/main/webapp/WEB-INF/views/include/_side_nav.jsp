@@ -1,14 +1,14 @@
 
 <ul class="nav navbar-nav side-nav">
+	<li><a href="#"><span
+			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
+			&nbsp;Customer Officer(CO)</a></li>
 	<li class="active"><a href="${pageContext.request.contextPath}/customer_information"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
 			Information</a></li>
-	<li><a href="charts.html"><span
-			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
-			Information</a></li>
-	<li><a href="tables.html"><span
+	<!-- <li><a href="tables.html"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
-			Information</a></li>
+			Information</a></li> -->
 	<li><a href="${pageContext.request.contextPath}/LoanAgreement/newLoanAgreement"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
 			Agreement</a></li>
