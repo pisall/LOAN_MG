@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @author VIRAK_PC
  *
  */
+@SuppressWarnings("serial")
 public class co_0002_in implements Serializable{
 	
 	public co_0002_in(){
