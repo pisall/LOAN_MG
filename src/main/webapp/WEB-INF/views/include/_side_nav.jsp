@@ -3,7 +3,7 @@
 
 
 <ul class="nav navbar-nav side-nav" id="nav">
-	<li><a href="#"><span
+	<li><a href="${pageContext.request.contextPath}/co_001_controller/co_0003"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
 			&nbsp;Customer Officer(CO)</a></li>
 	<li><a href="${pageContext.request.contextPath}/customer_information"><span
