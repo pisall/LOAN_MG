@@ -28,6 +28,7 @@ import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
+
 /**
  * Handles requests for the application home page.
  */
@@ -81,31 +82,31 @@ public class CustomerController {
 	 * @param Customer
 	 * @return
 	 */
-	
+	@RequestMapping(value = "/update_customer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus, HttpServletRequest request ) {
+
+		return customerImp.updateCustomer(cus);
+	}
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> uploadFile(
 	    @RequestParam("uploadfile") MultipartFile uploadfile,HttpServletRequest request) {
 		
-		System.out.println("33333333333333333333");
 	 try {
-	    // Get the filename and build the local file path (be sure that the 
-	    // application have write permissions on such directory)
 	    String filename = uploadfile.getOriginalFilename();
-	   //String directory = "D:/spring_project/SPRING_UPLOAD/src/main/webapp/resources/images/";
+	    byte bytes[]=uploadfile.getBytes();
 	    String p="\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp12\\wtpwebapps";
 	    String directory=request.getRealPath("/src/main/webapp/resources/img/");
 	    String dir=directory.replace(p,"");
 	    String filepath = Paths.get(dir, filename).toString();
-	    
-	    System.out.println(filepath+"path=============");
-	    
+	  
 	    // Save the file locally
 	    BufferedOutputStream stream =
 	        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-	    stream.write(uploadfile.getBytes());
+	    stream.write(bytes);
 	    stream.close();
+	    
 	  }
 	  catch (Exception e) {
 	    System.out.println(e.getMessage());
