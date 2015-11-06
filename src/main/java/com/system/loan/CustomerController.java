@@ -3,6 +3,7 @@ package com.system.loan;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +29,11 @@ import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
+
 /**
  * Handles requests for the application home page.
  */
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
@@ -81,35 +84,43 @@ public class CustomerController {
 	 * @param Customer
 	 * @return
 	 */
+	@RequestMapping(value = "/update_customer", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody Boolean updateCustomer(@RequestBody CustomerDto cus, HttpServletRequest request ) {
+
+		return customerImp.updateCustomer(cus);
+	}
 	
-	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> uploadFile(
 	    @RequestParam("uploadfile") MultipartFile uploadfile,HttpServletRequest request) {
-		
-		System.out.println("33333333333333333333");
+		BufferedOutputStream stream = null;	
 	 try {
-	    // Get the filename and build the local file path (be sure that the 
-	    // application have write permissions on such directory)
 	    String filename = uploadfile.getOriginalFilename();
-	   //String directory = "D:/spring_project/SPRING_UPLOAD/src/main/webapp/resources/images/";
+	    byte bytes[]=uploadfile.getBytes();
 	    String p="\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp12\\wtpwebapps";
 	    String directory=request.getRealPath("/src/main/webapp/resources/img/");
 	    String dir=directory.replace(p,"");
 	    String filepath = Paths.get(dir, filename).toString();
-	    
-	    System.out.println(filepath+"path=============");
-	    
+	  
 	    // Save the file locally
-	    BufferedOutputStream stream =
+	    stream =
 	        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-	    stream.write(uploadfile.getBytes());
-	    stream.close();
+	    stream.write(bytes);
+	    
 	  }
 	  catch (Exception e) {
 	    System.out.println(e.getMessage());
 	    return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+	  }finally{
+		  try {
+			stream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
 	  }
 	  
 	  return new ResponseEntity<Object>(HttpStatus.OK);

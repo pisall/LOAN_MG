@@ -80,7 +80,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="/controller/resources/img/Co_Info.png" height="150" width="250">
+												<img src="${pageContext.request.contextPath}/resources/img/Co_Info.png" height="150" width="250">
 												<!--  <i class="fa fa-shopping-cart fa-5x"></i> -->
 											</div>
 											<div class="col-xs-9 text-right">
@@ -113,7 +113,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="/controller/resources/img/Customers.png" height="150" width="250">
+												<img src="${pageContext.request.contextPath}/resources/img/Customers.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>
@@ -145,7 +145,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="/controller/resources/img/Income.png" height="150" width="250">
+												<img src="${pageContext.request.contextPath}/resources/img/Income.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>
@@ -177,7 +177,7 @@
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-3">
-												<img src="/controller/resources/img/Outcome1.png" height="150" width="250">
+												<img src="${pageContext.request.contextPath}/resources/img/Outcome1.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
 												<div class="huge">124</div>

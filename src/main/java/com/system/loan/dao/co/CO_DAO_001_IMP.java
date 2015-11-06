@@ -15,7 +15,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
-import com.system.loan.dto.co.in.co_0001_in;
 
 public class CO_DAO_001_IMP implements CO_DAO_001{
 	private SessionFactory factory=null;
@@ -78,6 +77,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return result;
 		
 	}
+	@SuppressWarnings("unused")
 	@Override
 	public int countByLogId(String LogEmail) {
 		// TODO Auto-generated method stub
@@ -124,6 +124,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return null;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List coList() {
 		// TODO Auto-generated method stub
@@ -151,6 +152,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return null;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public HashMap<String, Object> findCoById2(int id) {
 		// TODO Auto-generated method stub
@@ -194,6 +196,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return null;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public HashMap<String, Object> findLogByLogMail(String email) {
 		// TODO Auto-generated method stub

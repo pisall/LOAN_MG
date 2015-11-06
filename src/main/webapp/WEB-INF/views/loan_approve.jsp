@@ -136,27 +136,27 @@
 						</table>
 						
 					</div>
-					<form rol="form" class="form-horizontal"> 
+					<form  class="form-horizontal"> 
 					<div class="col-lg-12">
 						
 							<div class="row">
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
 										 
-										<label class="control-label col-sm-4" for="paid_amount" name="paid_amount"> Paid Amount:</label>
+										<label class="control-label col-sm-4" for="paid_amount" > Paid Amount:</label>
 										<div class="col-sm-8">
 										  <input type="text" class="form-control" id="paid_amount" placeholder="0.0">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine" name="amount_fine">Amount fine:</label>
+										<label class="control-label col-sm-4" for="amount-fine" >Amount fine:</label>
 										<div class="col-sm-8">
 										  <input type="text" class="form-control" id="amount_fine" placeholder="0.0">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount_fine" name="tr_type">Transection Type:</label>
+										<label class="control-label col-sm-4" for="amount_fine" >Transection Type:</label>
 										<div class="col-sm-8" >
 										  <select class="form-control" id="tr_type">
 											<option>--select--</option>
@@ -184,9 +184,11 @@
 									 
 								</div>
 							</div>
+							</div>
 						</form>
 					</div>
                 </div>
+               
 				<!-- //list -->
 
 
@@ -196,7 +198,7 @@
         </div>
         <!-- /#page-wrapper -->
 
-    </div> 
+    
 </body>
 
 </html>

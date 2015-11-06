@@ -3,7 +3,6 @@ package com.system.loan.dao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -11,7 +10,9 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.system.loan.dto.TransectionDto; 
 
@@ -19,24 +20,28 @@ public class TransectionDao implements Trandsection {
 public static SessionFactory factory = null;
 	
 	public TransectionDao(){
-		try{
-			factory = new Configuration().configure().buildSessionFactory(); 
-		}catch(HibernateException e){
-			System.out.println(e.toString());
-			e.printStackTrace();
-			if(e.getCause()!=null){
-				System.out.println(e.getCause().getMessage());
-			}
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.configure() // configures settings from hibernate.cfg.xml
+				.build();
+		try {
+			factory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+		}
+		catch (Exception e) {
+			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy( registry );
 		}
 	}
 	
 	@Override
 	public boolean InsertTransection(TransectionDto tranDto) {
-		Session session = factory.openSession(); 
+		Session session = factory.getCurrentSession();
 		 
 		Date datetime = new Date();
 		SimpleDateFormat date = new SimpleDateFormat();
+		Transaction tx=null;
 		try{
+		tx=session.beginTransaction();
 		String nowDate = date.format(datetime);
 		// get data from object 
 		tranDto.getTr_origin_amount();
@@ -47,18 +52,21 @@ public static SessionFactory factory = null;
 		tranDto.setTr_dtt(nowDate);
 		
 		session.save(tranDto);
+		tx.commit();
 		}catch(HibernateException  e){
+			tx.rollback();
 			e.printStackTrace();
 		}
 		return true;
 	}
 
 	// select transaction list
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<TransectionDto> ShowReport(int cus_id) {
 		// TODO Auto-generated method stub
-		factory = new Configuration().configure().buildSessionFactory(); 
-		Session session = factory.openSession();
+		//factory = new Configuration().configure().buildSessionFactory(); 
+		Session session = factory.getCurrentSession();
 		Transaction tran = null;
 		List listData =null;
 		try{
@@ -124,9 +132,6 @@ public static SessionFactory factory = null;
 			if(tran!=null) tran.rollback();
 			hne.printStackTrace();
 			return null;
-		}finally{
-			session.close();
-			factory.close();
 		}
 		return listData;
 	}
@@ -135,10 +140,11 @@ public static SessionFactory factory = null;
 	
 	
 	// select transaction info
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<TransectionDto> Customer_Report(int cus_id) {
-		factory = new Configuration().configure().buildSessionFactory(); 
-		Session session = factory.openSession();
+		//factory = new Configuration().configure().buildSessionFactory(); 
+		Session session = factory.getCurrentSession();
 		Transaction tran = null;
 		
 		List listData =null;
@@ -195,9 +201,6 @@ public static SessionFactory factory = null;
 			if(tran!=null) tran.rollback();
 			hne.printStackTrace();
 			return null;
-		}finally{
-			session.close();
-			factory.close();
 		}
 		return listData;
 	}

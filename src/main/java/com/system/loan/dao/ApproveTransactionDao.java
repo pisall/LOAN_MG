@@ -1,30 +1,29 @@
 package com.system.loan.dao;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
-import com.system.loan.dto.LoanAgreementDto;
-import com.system.loan.dto.TransectionDto;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class ApproveTransactionDao implements TransactionInterface {
 	public static SessionFactory factory = null;
 	
 	public ApproveTransactionDao(){
-		try{
-			factory = new Configuration().configure().buildSessionFactory(); 
-		}catch(HibernateException e){
-			System.out.println(e.toString());
-			e.printStackTrace();
-			if(e.getCause()!=null){
-				System.out.println(e.getCause().getMessage());
-			}
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.configure() // configures settings from hibernate.cfg.xml
+				.build();
+		try {
+			factory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+		}
+		catch (Exception e) {
+			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy( registry );
 		}
 	}
 	 
@@ -32,7 +31,7 @@ public class ApproveTransactionDao implements TransactionInterface {
 	public 	Object Schadule_Payment(int tr_id, int cus_id) {
 		// TODO Auto-generated method stub
 		
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		Transaction tran = null;
 		
 		Object Data =null;
@@ -95,8 +94,6 @@ public class ApproveTransactionDao implements TransactionInterface {
 			if(tran!=null) tran.rollback();
 			hne.printStackTrace();
 			return null;
-		}finally{
-			session.close();
 		}
 		return Data; 
 	}

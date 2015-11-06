@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -173,6 +172,7 @@ public class co_001_controller {
 	/*
 	 * list customer officer
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/co_l0001",method=RequestMethod.POST)
 	@ResponseBody
 	public List coL0001(){

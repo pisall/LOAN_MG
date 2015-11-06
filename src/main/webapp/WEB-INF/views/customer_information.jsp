@@ -115,6 +115,8 @@
 							<option value='15'>15</option>
 							<option value='20'>20</option>
 							<option value='25'>25</option>
+							<option value='50'>50</option>
+							<option value='100'>100</option>
 						</select>
 					</div>
 					<div class="col-md-11" style="text-align: center;">

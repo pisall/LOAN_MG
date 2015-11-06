@@ -2,7 +2,6 @@ package com.system.loan;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.CustomerOfficerDaoImp;
-import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.CustomerOfficerDto;
 
 /**
