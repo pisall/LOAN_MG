@@ -5,7 +5,7 @@
 	<li><a href="#"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
 			&nbsp;Customer Officer(CO)</a></li>
-	<li class="active"><a href="${pageContext.request.contextPath}/customer_information"><span
+	<li><a href="${pageContext.request.contextPath}/customer_information"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
 			Information</a></li>
 	<!-- <li><a href="tables.html"><span

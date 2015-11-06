@@ -296,6 +296,7 @@
 
 	</div>
 	<!-- /#wrapper -->
+	<%@include file="include/_script.jsp"%>
 	<script>
 	// just for the demos, avoids form submit
 	jQuery.validator.setDefaults({
