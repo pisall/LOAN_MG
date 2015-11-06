@@ -38,5 +38,11 @@
      		width: 22%;
      	}
      </style> 
+     
+    <script>
+    	$(function(){
+    		alert();
+    	});
+    </script>
     
 </head>
