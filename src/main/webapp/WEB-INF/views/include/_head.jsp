@@ -39,10 +39,6 @@
      	}
      </style> 
      
-    <script>
-    	$(function(){
-    		alert();
-    	});
-    </script>
+   
     
 </head>
