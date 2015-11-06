@@ -81,6 +81,8 @@ public static SessionFactory factory = null;
 			if(tran!=null) tran.rollback();
 			e.printStackTrace();
 			return false;
+		}finally{
+			session.close();
 		}
 		return true;
 	}
