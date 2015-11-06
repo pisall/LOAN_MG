@@ -3,6 +3,7 @@ package com.system.loan;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class CustomerController {
 	@ResponseBody
 	public ResponseEntity<?> uploadFile(
 	    @RequestParam("uploadfile") MultipartFile uploadfile,HttpServletRequest request) {
-		
+		BufferedOutputStream stream = null;	
 	 try {
 	    String filename = uploadfile.getOriginalFilename();
 	    byte bytes[]=uploadfile.getBytes();
@@ -102,15 +103,22 @@ public class CustomerController {
 	    String filepath = Paths.get(dir, filename).toString();
 	  
 	    // Save the file locally
-	    BufferedOutputStream stream =
+	    stream =
 	        new BufferedOutputStream(new FileOutputStream(new File(filepath)));
 	    stream.write(bytes);
-	    stream.close();
 	    
 	  }
 	  catch (Exception e) {
 	    System.out.println(e.getMessage());
 	    return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+	  }finally{
+		  try {
+			stream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
 	  }
 	  
 	  return new ResponseEntity<Object>(HttpStatus.OK);
