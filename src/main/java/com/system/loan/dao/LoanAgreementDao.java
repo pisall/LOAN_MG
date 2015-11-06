@@ -1,7 +1,7 @@
 package com.system.loan.dao;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,13 +10,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
-import com.system.loan.dto.AcountInfoDto;
 import com.system.loan.dto.CoDto;
-import com.system.loan.dto.GuarantorInfoDto;
 import com.system.loan.dto.LoanAgreementDto;
-import com.system.loan.dto.TransectionDto;
 
 public class LoanAgreementDao implements LoanAgreement{
 	public static SessionFactory factory = null;
@@ -35,6 +31,7 @@ public class LoanAgreementDao implements LoanAgreement{
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean InsertNewCustomer( LoanAgreementDto loanAgreDto) { 
 		Session session = factory.getCurrentSession();
