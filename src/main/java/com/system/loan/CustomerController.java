@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.springcryptoutils.core.cipher.asymmetric.Cipherer;
 import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.GuarantorDaoImp;
 import com.system.loan.dto.CustomerDto;
@@ -41,7 +40,6 @@ public class CustomerController {
 	@Inject
 	GuarantorDaoImp guarantorImp;
 
-	Cipherer decrypter;
 
 	/**
 	 * List Customer
