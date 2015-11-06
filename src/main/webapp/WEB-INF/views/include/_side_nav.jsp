@@ -4,10 +4,10 @@
 
 <ul class="nav navbar-nav side-nav" id="nav">
 	<li><a href="${pageContext.request.contextPath}/co_001_controller/co_0003"><span
-			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
+			class="glyphicon glyphicon-user" aria-hidden="true"></span>
 			&nbsp;Customer Officer(CO)</a></li>
 	<li><a href="${pageContext.request.contextPath}/customer_information"><span
-			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
+			class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Customer
 			Information</a></li>
 	<!-- <li><a href="tables.html"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Loan
