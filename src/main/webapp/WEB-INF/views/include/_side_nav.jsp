@@ -1,7 +1,5 @@
 
 
-
-
 <ul class="nav navbar-nav side-nav" id="nav">
 	<li cont_name="cont_1" val="co_0003"><a href="${pageContext.request.contextPath}/co_001_controller/co_0003"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
