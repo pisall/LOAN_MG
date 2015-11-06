@@ -29,13 +29,16 @@ public class co_001_controller {
 	 * view add new customer
 	 */
 	@RequestMapping(value="/co_0001",method=RequestMethod.GET)
-	public String co001(){
+	public ModelAndView co001(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("customer_officer_add");
+		mv.addObject("page_id", "co_0003");
 		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> test=new HashMap<>();
 		test=coDao.findLogByLogMail("mnee");
 		System.out.println(test.get("log_email"));
 		
-		return "customer_officer_add";
+		return mv;
 	}
 	/*
 	 * view customer officer detail
