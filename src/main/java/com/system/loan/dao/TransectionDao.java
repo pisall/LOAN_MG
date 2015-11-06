@@ -3,7 +3,6 @@ package com.system.loan.dao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -14,7 +13,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
 import com.system.loan.dto.TransectionDto; 
 
@@ -63,6 +61,7 @@ public static SessionFactory factory = null;
 	}
 
 	// select transaction list
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<TransectionDto> ShowReport(int cus_id) {
 		// TODO Auto-generated method stub
@@ -141,6 +140,7 @@ public static SessionFactory factory = null;
 	
 	
 	// select transaction info
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<TransectionDto> Customer_Report(int cus_id) {
 		//factory = new Configuration().configure().buildSessionFactory(); 
