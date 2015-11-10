@@ -25,7 +25,7 @@
 	<li cont_name="cont_6" val="cont_6"><a href="#"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Help</a>
 	</li>
-	<li cont_name="cont_7" val="cont_7"><a href="#"><span
+	<li cont_name="cont_7" val="cont_7"><a href="${pageContext.request.contextPath}/logout"><span
 			class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a>
 	</li>
 </ul>
