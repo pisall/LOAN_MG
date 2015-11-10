@@ -195,9 +195,9 @@ ul.alert-dropdown {
 }
 
 .panel-red > .panel-heading {
-    border-color: #d9534f;
+    border-color: #B40F0F;
     color: #fff;
-    background-color: #d9534f;
+    background-color: #B40F0F;
 }
 
 .panel-red > a {
@@ -213,9 +213,9 @@ ul.alert-dropdown {
 }
 
 .panel-yellow > .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #4E74F0;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #4E74F0;
 }
 
 .panel-yellow > a {

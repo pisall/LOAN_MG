@@ -100,7 +100,7 @@
 		<div id="page-wrapper">
 
 			<div class="container-fluid"> 
-					<div class="col-lg-6" style="width:685px;height: 500px;">
+					<div class="col-lg-6" style="width:589px;height: 500px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
@@ -116,10 +116,10 @@
 												<!-- <img src="/controller/resources/img/Outcome1.png" height="150" width="250"> -->
 											<canvas id="cvs" width="500" height="300">[No canvas support]</canvas>
 											</div>
-											<div class="col-xs-9 text-right">
+											<!-- <div class="col-xs-9 text-right">
 												<div class="huge">124</div>
 												<div>New Orders!</div>
-											</div>
+											</div> -->
 										</div>
 									</div> 
 								</div>
