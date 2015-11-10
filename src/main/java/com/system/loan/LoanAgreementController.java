@@ -93,7 +93,7 @@ public class LoanAgreementController implements Serializable{
 		    }  
 		    
 		    //pay_date_time for pay on schedule 
-		    dateformate = new SimpleDateFormat("yyyyMMddhhHHmmss");
+		    dateformate = new SimpleDateFormat("YYYYMMDDHH24MISS");
 		    pay_date_time=dateformate.format(DatePayTime); 
 		    // day pay on schedule 
 		    String Pay_day_Str= ""+pay_day; 
@@ -134,7 +134,7 @@ public class LoanAgreementController implements Serializable{
 			
 			// set data to Transection Object
 			Date date = new Date (); 
-			dateformate = new SimpleDateFormat("yyyyMMddhhHHmmss"); 
+			dateformate = new SimpleDateFormat("YYYYMMDDHH24MISS"); 
 			String dateimte = dateformate.format(date.getTime());
 			
 			tran = new TransectionDto();
