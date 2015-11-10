@@ -78,7 +78,7 @@
 							<div class="panel panel-body">
 								<div class="table-responsive">
 									<table class="table table-hover table-striped">
-										<thead>
+										<thead class="style2">
 											<tr class="active">
 												<th>ID</th>
 												<th>Name</th>
