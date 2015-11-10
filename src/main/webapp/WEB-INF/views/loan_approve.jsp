@@ -1,55 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page session="false" %>
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Loan Agreement System</title>
-	<script type="text/javascript">
-    	var BASE_URL="${pageContext.request.contextPath}";
-    </script>
-    
-		<!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
-    
-    <!-- Bootstrap Core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    <!-- Loan approval javascript  -->  
-    <script src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
-    
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
-     <style type="text/css">
-     	table tr th{
-     		    background-color: #638BE0 !important;
-    			color: #fff;
-     	}
-     </style>
-    <%--  <%
-	int tr_id = Integer.parseInt(request.getParameter("tr_id"));
-	int cu_id = Integer.parseInt(request.getParameter("cu_id")); 
-	 %> --%>
-     </head>
-
+<%@include file="include/_head.jsp"%>
 <body>
  
 	
@@ -197,8 +146,12 @@
 
         </div>
         <!-- /#page-wrapper -->
+        <%@include file="include/_script.jsp"%>
 
-    
+    <script src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
+    <script type="text/javascript">
+    	var BASE_URL="${pageContext.request.contextPath}";
+    </script>
 </body>
 
 </html>
