@@ -1,4 +1,5 @@
-
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="org.springframework.security.core.GrantedAuthority" %>
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -31,5 +32,12 @@
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
    </head>
+   
+   <%
+	Date  now = new Date();
+	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+	
+	String datetime = date.format(now);
+	%>
     
 
