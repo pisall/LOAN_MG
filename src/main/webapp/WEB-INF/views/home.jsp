@@ -105,7 +105,7 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									<!-- <i class="fa fa-money fa-fw"> -->
-									</i>Customer Information
+									</i>Customer Information <%=session.getAttribute("username")/* session.getAttribute("username") */%>
 								</h3>
 							</div>
 							<div class="panel-body">
@@ -213,7 +213,7 @@
 	<%@include file="include/_script.jsp"%>
 	<script type="text/javascript">
 	var userId = "${pageContext.request.userPrincipal.principal.username}";
-	console.log("user id="+userID);
+	console.log("user id="+userId);
 	</script>
 
 	<script type="text/javascript">

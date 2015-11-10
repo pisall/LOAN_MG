@@ -1,11 +1,14 @@
 package com.system.loan;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,20 +17,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sun.net.httpserver.HttpContext;
+import com.system.loan.dto.session.USER_SESSION;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value ={"/","home"}, method = RequestMethod.GET)
-	public String home() {
+	public String home(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+		String test=user.getCoNm();
+		System.out.println("session naem="+test);
 			
 		return "home";
 		

@@ -210,5 +210,30 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		
 		return null;
 	}
+	
+	public HashMap<String, Object> findCobyUserId(String userid){
+		Session session=null;
+		Transaction tx=null;
+		try{
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createQuery("select new map(co_id as co_id,co_first_nm as co_first_nm,co_last_nm as co_last_nm) from CO_DTO_001 where loginDTO.log_email=?");
+			query.setString(0, userid);
+			List list=(List)query.list();
+			tx.commit();
+			HashMap<String, Object> user=new HashMap<>();
+			if(list.size()>0){
+				user=(HashMap<String, Object>) list.get(0);
+				return user;
+			}else{
+				return null;
+			}
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }
