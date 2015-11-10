@@ -35,13 +35,24 @@
                 <!-- Page Heading -->
                 <div class="row">
 					
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-sm-12 col-md-12 co-xs-12">
 					
                         <h2 class="page-header">
-                            New CO<small>(Cuctomer Officer Agreement)</small>
+                        	<div class="row">
+                        		<div class="ccol-lg-6 col-sm-6 col-md-6 co-xs-6">
+                        		 	New CO<small>(Cuctomer Officer Agreement)</small>
+                        		</div>
+                        	
+                        		<div class="ccol-lg-6 col-sm-6 col-md-6 co-xs-6">
+			                    	<a class="btn btn-primary pull-right" href="${pageContext.request.contextPath}/co_001_controller/co_0003" ><span class="glyphicon glyphicon-list"></span>&nbsp; List</a>
+			                    </div>
+                        	</div>
+                           
+                            
                         </h2>
                         
                     </div>
+                    
 					
                 </div>
 				
@@ -192,7 +203,7 @@
 						    <br/>
 						    <div class="pull-right">
 									  		<a href="#none" id="btn_save" class="btn btn-primary"><span>Register</span></a>
-										  <button type="button" class="btn btn-default">Cancel</button>
+										  <a class="btn btn-default" href="${pageContext.request.contextPath}/co_001_controller/co_0003">Cancel</a>
 									  </div>
 						    
 							</div>
