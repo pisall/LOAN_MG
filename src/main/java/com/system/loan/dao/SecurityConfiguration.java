@@ -31,12 +31,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN","DBA");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
+	@Override
+	public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**");
+	};
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuu");
 		http.authorizeRequests()
-		.antMatchers("/", "/home").authenticated()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/", "/**").authenticated()
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
         .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
         .and().formLogin().loginPage("/login")
