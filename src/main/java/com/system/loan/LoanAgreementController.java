@@ -151,9 +151,7 @@ public class LoanAgreementController implements Serializable{
 			
 			tran.setAccount(acodto);
 			tran.setLoanAgreement(loanAgreDto); 
-			
-			
-			
+			 
 			transections.add(tran); 
 			acodto.setLoanAGr(loanAgreDto);
 			guiloanernfoDto.setLoanAgre(loanAgreDto);
