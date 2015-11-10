@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+ <%@page import="com.system.loan.dto.session.USER_SESSION"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -33,11 +34,24 @@
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
    </head>
    
+ 
+   
    <%
 	Date  now = new Date();
 	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 	
 	String datetime = date.format(now);
+	
+	
+
+ 	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+ 		int strCoId;
+ 		String strCoNm="";
+ 	if(user!=null){
+ 		strCoId=user.getCoId();
+ 		strCoNm=user.getCoNm();
+ 		
+ 	}
 	%>
     
 
