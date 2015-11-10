@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +28,12 @@ import com.system.loan.dto.co.in.co_0002_in;
 @RequestMapping("co_001_controller")
 public class co_001_controller {
 	
+	
 	/*
 	 * view add new customer
 	 */
 	@RequestMapping(value="/co_0001",method=RequestMethod.GET)
-	public ModelAndView co001(){
+	public ModelAndView co001(HttpServletRequest req){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("customer_officer_add");
 		mv.addObject("page_id", "co_0003");
@@ -44,7 +48,7 @@ public class co_001_controller {
 	 * view customer officer detail
 	 */
 	@RequestMapping(value="/co_0002",method=RequestMethod.GET)
-	public String co0001(){
+	public String co0001(HttpServletRequest req){
 		return "customer_officer_detail";
 	}
 	
@@ -52,7 +56,7 @@ public class co_001_controller {
 	 * view customer officer list
 	 */
 	@RequestMapping(value="/co_0003",method=RequestMethod.GET)
-	public ModelAndView co0003(){
+	public ModelAndView co0003(HttpServletRequest req){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("customer_officer_list");
 		mv.addObject("page_id","co_0003");
@@ -62,7 +66,7 @@ public class co_001_controller {
 	 * view customer officer update
 	 */
 	@RequestMapping(value="/co_0004/{id}",method=RequestMethod.GET)
-	public ModelAndView co0004(@PathVariable int id ){
+	public ModelAndView co0004(@PathVariable int id,HttpServletRequest req){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("customer_officer_edit");
 		modelAndView.addObject("id", id);
@@ -75,7 +79,7 @@ public class co_001_controller {
 	 * insert new  customer officer
 	 */
 	@RequestMapping(value="/co_c0001",method=RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> coR0001(@RequestBody co_0001_in input){
+	public @ResponseBody HashMap<String, Object> coR0001(@RequestBody co_0001_in input,HttpServletRequest req){
 		HashMap<String, Object> result=new HashMap<String, Object>();
 		System.out.println("controller::co_001_controller/co_c0001");
 		
@@ -179,9 +183,11 @@ public class co_001_controller {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/co_l0001",method=RequestMethod.POST)
 	@ResponseBody
-	public List coL0001(){
+	public List coL0001(HttpServletRequest req){
 		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
-		
+		HttpSession session=req.getSession();
+		String test=(String)session.getAttribute("username");
+		System.out.println("session naem="+test);
 		return coDao.coList();
 	}
 	
@@ -191,7 +197,7 @@ public class co_001_controller {
 	
 	@RequestMapping(value="/co_l0002",method=RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String , Object> coL002(@RequestBody co_0002_in input){
+	public HashMap<String , Object> coL002(@RequestBody co_0002_in input,HttpServletRequest req){
 		System.out.println("controller::co_001_controller/co_c0001");
 		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> result=coDao.findCoById2(input.getCo_id());

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.system.loan.CustomAuthenticationSuccessHandler;
 import com.system.loan.service.MyUserDetailsService;
 
 
@@ -19,6 +20,7 @@ import com.system.loan.service.MyUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	private CustomAuthenticationSuccessHandler suc=new CustomAuthenticationSuccessHandler();
 	//@Autowired
 	//@Qualifier("MYuserDetailsService")
 	UserDetailsService  userDetailsService = new MyUserDetailsService();
@@ -42,10 +44,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuu");
 		http.authorizeRequests()
 		.antMatchers("/login").permitAll()
-		.antMatchers("/", "/**").authenticated()
+		.antMatchers("/", "/home").authenticated()
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
         .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-        .and().formLogin().loginPage("/login")
+        .and().formLogin().loginPage("/login").successHandler(suc)
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf().disable()
         .exceptionHandling().accessDeniedPage("/Access_Denied");

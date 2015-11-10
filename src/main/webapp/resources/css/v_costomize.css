@@ -70,7 +70,6 @@ body{
 	border-top:none;
 }
 .side-nav>li.dashboard>a{
-	font-size:18px;
 }
 .side-nav>li.dashboard>a:hover,.side-nav>li.dashboard>a:focus{
 	background-color:#C33E51 !important;

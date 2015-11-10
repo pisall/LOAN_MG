@@ -1,5 +1,16 @@
 
             <!-- Brand and toggle get grouped for better mobile display -->
+            <%@page import="com.system.loan.dto.session.USER_SESSION"%>
+<%
+            	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+            		int strCoId;
+            		String strCoNm="";
+            	if(user!=null){
+            		strCoId=user.getCoId();
+            		strCoNm=user.getCoNm();
+            		
+            	}
+            %>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -14,7 +25,7 @@
                 
                 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <%=strCoNm %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>

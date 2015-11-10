@@ -2,7 +2,7 @@
 
 <ul class="nav navbar-nav side-nav" id="nav">
 	<li class="dashboard">
-          <a href="${pageContext.request.contextPath}/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+          <a href="${pageContext.request.contextPath}/"><i class="fa fa-fw fa-dashboard" style="font-size: 28px;"></i> Dashboard</a>
     </li>
 	<li cont_name="cont_1" val="co_0003"><a href="${pageContext.request.contextPath}/co_001_controller/co_0003"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
