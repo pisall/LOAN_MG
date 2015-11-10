@@ -43,7 +43,7 @@
 						<c:forEach var ="entry" items="${Customer}">
 							<div class="panel panel-heading">
 								<div class="row">
-									<div class="col-md-4"> 
+									<div class="col-md-4 col-sm-4 col-xs-4"> 
 										<table class="table">
 											<tbody>
 											  <tr>
@@ -63,7 +63,7 @@
 										</table>
 											
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4 col-sm-4 col-xs-4">
 										<table class="table">
 											
 											<tbody>
@@ -84,20 +84,20 @@
 										</table>
 											
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4 col-sm-4 col-xs-4">
 											<table class="table">
 											
 											<tbody>
 											  <tr>
-												<td style="border:0px">Customer Officer IDP :</td>
+												<td style="border:0px">CO IDP :</td>
 												<td style="border:0px">${entry.co_id}</td>
 											  </tr>
 											  <tr>
-												<td>Customer offer Name :</td>
+												<td>CO Name :</td>
 												<td>${entry.co_first_nm} &nbsp; ${entry.co_last_nm}</td>
 											  </tr>
 											  <tr>
-												<td>Customer offer Phone :</td>
+												<td>CO Phone :</td>
 												<td>${entry.co_phone} &nbsp; ${entry.co_cpm_phone}</td>
 											  </tr>
 											 
@@ -113,7 +113,7 @@
 							<div class="panel panel-body"> 
 								<div class="table-responsive">
 									<table class="table table-hover table-striped">
-										<thead>
+										<thead class="style2">
 											<tr class="tr-heading">
 												<th>No</th>
 												<th>Date Time</th>
@@ -129,7 +129,7 @@
 										<tbody>
 										
 										<c:forEach items="${list}" var="entry" varStatus="idcount">
-											<tr class="tr-safe" >
+											<tr >
 												<td>${idcount.count}</td>
 												<td>${entry.pay_date}</td>
 												<td>${entry.pay_day}</td>

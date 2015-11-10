@@ -95,9 +95,7 @@ table thead.style2 tr th{
 #customer_detail th{
 	width: 22%;
 }
-.tr-heading{
-	background-color:#D45466 !important;
-}
+
 .tr-warning{
 	background-color:#F1BCB5 !important;
 }
@@ -140,3 +138,14 @@ table thead.style2 tr th{
     display: block;
 }
 /* f */
+
+@media print
+   {
+      td{
+      	font-size:11px;
+      	white-space: nowrap;
+      }
+      .panel-default{
+      	border:none;
+      }
+   }
