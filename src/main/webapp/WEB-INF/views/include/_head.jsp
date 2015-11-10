@@ -30,19 +30,5 @@
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
-     <style type="text/css">
-     	table thead.style1 tr th{
-     		    background-color: #D45466 !important;
-    			color: #fff;
-     	}
-     	table thead.style2 tr th{
-     		 background-color: #136686  !important;
-     		 color: #fff;
-     	}
-     	#customer_detail th{
-     		width: 22%;
-     	}
-     </style> 
- 
     
-</head>
+
