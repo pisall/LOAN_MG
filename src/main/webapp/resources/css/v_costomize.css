@@ -84,6 +84,17 @@ body{
 
 /* //layout */
 /* table style 1 */
+table thead.style1 tr th{
+	background-color: #D45466 !important;
+	color: #fff;
+}
+table thead.style2 tr th{
+	background-color: #136686  !important;
+	color: #fff;
+}
+#customer_detail th{
+	width: 22%;
+}
 .tr-heading{
 	background-color:#D45466 !important;
 }
