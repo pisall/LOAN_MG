@@ -211,6 +211,10 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
+	<script type="text/javascript">
+	var userId = "${pageContext.request.userPrincipal.principal.username}";
+	console.log("user id="+userID);
+	</script>
 
 	<script type="text/javascript">
 		$(function() {
