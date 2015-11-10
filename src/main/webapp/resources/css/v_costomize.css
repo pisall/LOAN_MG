@@ -57,6 +57,21 @@ body{
 .navbar-inverse .navbar-nav>li.active>a{
 	background-color:#0D485F;
 }
+.navbar-inverse .navbar-nav>li.dashboard>a{
+	background-color:#D45466;
+	color:#fff;
+}
+.side-nav>li.dashboard{
+	border-top:none;
+}
+.side-nav>li.dashboard>a{
+	font-size:18px;
+}
+.side-nav>li.dashboard>a:hover,.side-nav>li.dashboard>a:focus{
+	background-color:#C33E51 !important;
+	color:#FFF !important;
+}
+
 
 <!--logo-->
 .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
@@ -66,7 +81,7 @@ body{
 /* //layout */
 /* table style 1 */
 .tr-heading{
-	background-color:#A6C1CC !important;
+	background-color:#D45466 !important;
 }
 .tr-warning{
 	background-color:#F1BCB5 !important;
@@ -109,5 +124,3 @@ body{
     cursor: inherit;
     display: block;
 }
-
-/* //input file style */
