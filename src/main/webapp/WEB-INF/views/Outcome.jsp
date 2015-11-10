@@ -88,7 +88,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 			<!-- Fixed Up Navigation -->
-			<%@include file="include/_fixed_up_nav.jsp"%>
+			<%-- <%@include file="include/_fixed_up_nav.jsp"%> --%>
 
 			<!-- Side Bar Navigation -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -108,6 +108,7 @@
 									Outcome Information
 								</h3>
 							</div>
+							
 							<div class="panel-body">
 								<div class="panel panel-red">
 									<div class="panel-heading">
