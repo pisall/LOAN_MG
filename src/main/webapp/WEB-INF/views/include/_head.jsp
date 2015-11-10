@@ -1,10 +1,12 @@
-
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="org.springframework.security.core.GrantedAuthority" %>
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+ <%@page import="com.system.loan.dto.session.USER_SESSION"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -30,19 +32,26 @@
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
-     <style type="text/css">
-     	table thead.style1 tr th{
-     		    background-color: #D45466 !important;
-    			color: #fff;
-     	}
-     	table thead.style2 tr th{
-     		 background-color: #136686  !important;
-     		 color: #fff;
-     	}
-     	#customer_detail th{
-     		width: 22%;
-     	}
-     </style> 
+   </head>
+   
  
+   
+   <%
+	Date  now = new Date();
+	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+	
+	String datetime = date.format(now);
+	
+	
+
+ 	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+ 		int strCoId;
+ 		String strCoNm="";
+ 	if(user!=null){
+ 		strCoId=user.getCoId();
+ 		strCoNm=user.getCoNm();
+ 		
+ 	}
+	%>
     
-</head>
+
