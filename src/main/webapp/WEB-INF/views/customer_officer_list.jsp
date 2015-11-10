@@ -61,6 +61,14 @@
 							<div class="panel panel-body">
 								<div class="table-responsive">
 									<table class="table table-hover table-striped" id="list">
+										<colgroup>
+											<col >
+											<col >
+											<col >
+											<col >
+											<col >
+											<col style="width: 50px;">
+										</colgroup>
 										<thead class="style2">
 											<tr>
 												<th>ID</th>
