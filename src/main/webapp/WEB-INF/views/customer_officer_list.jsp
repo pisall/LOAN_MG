@@ -29,7 +29,7 @@
                         <h2 class="page-header">
                         	<div class="row">
                         		<div class="col-lg-6 col-md-6">CO <small>Customer Officer Infomation</small></div>
-                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right"><a class="btn btn-primary" href="#none"><span>New</span></a></div>
+                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right"><a class="btn btn-primary" href="${pageContext.request.contextPath}/co_001_controller/co_0001"><span class="glyphicon glyphicon-plus">&nbsp;New</span></a></div>
                         		
                         	</div>
                             
@@ -61,7 +61,7 @@
 							<div class="panel panel-body">
 								<div class="table-responsive">
 									<table class="table table-hover table-striped" id="list">
-										<thead>
+										<thead class="style2">
 											<tr>
 												<th>ID</th>
 												<th>Name</th>
