@@ -44,7 +44,7 @@
 	
 
  	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
- 		int strCoId;
+ 		int strCoId=0;
  		String strCoNm="";
  	if(user!=null){
  		strCoId=user.getCoId();
