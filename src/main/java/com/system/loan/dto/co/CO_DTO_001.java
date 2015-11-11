@@ -73,7 +73,7 @@ public class CO_DTO_001 {
 	private int reg_co_id;*/
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade={CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
 	@JoinColumn(name="reg_co_id")
 	private CO_DTO_001 regCo;
 	

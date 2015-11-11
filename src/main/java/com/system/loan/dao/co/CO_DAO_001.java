@@ -14,5 +14,6 @@ public interface CO_DAO_001 {
 	public List coList();
 	public HashMap<String, Object> findCoById2(int id);
 	public HashMap<String, Object> findLogByLogMail(String email);
+	public HashMap<String, Object> updateEnabledUser(int id,boolean enabled);
 
 }

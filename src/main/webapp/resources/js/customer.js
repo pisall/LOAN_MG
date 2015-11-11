@@ -127,11 +127,12 @@ function listCus(pageNo) {
 				dataType : 'JSON',
 				data : JSON.stringify(input),
 				beforeSend : function(xhr) {
+					startLoading();
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
-
+					stopLoading();
 					value = data;
 					var result = "";
 					var paging = data.PAGING;

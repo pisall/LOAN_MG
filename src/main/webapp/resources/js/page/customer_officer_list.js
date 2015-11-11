@@ -9,6 +9,7 @@ $(document).ready(function(){
 });
 
 function listCo(){
+	
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_l0001",
 		type : 'POST',
@@ -16,11 +17,14 @@ function listCo(){
 		//data : JSON.stringify(input),
 		contentType : 'application/json; charset=utf-8',
 	      dataType : 'json',
-		/*beforeSend : function(xhr) {
+		beforeSend : function(xhr) {
+			startLoading();
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("Content-Type", "application/json");
-		},*/
+		},
 		success : function(data) {
+			stopLoading();
+			$("#list tbody").html("");
 			var tbody="";
 			$.each(data,function(i,v){
 				var tr="";
@@ -33,7 +37,7 @@ function listCo(){
 					tr+='<td>';
 						tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'"><span class="glyphicon glyphicon-pencil"></span></a>';
 						tr+='&nbsp;';
-						tr+='<a href="#none"><span class="glyphicon glyphicon-trash"></span></a>';
+						tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'"><span class="glyphicon glyphicon-trash"></span></a>';
 					tr+='</td>';
 				tr+='</tr>';
 				tbody+=tr;
@@ -49,12 +53,42 @@ function listCo(){
 					
 				});
 			});
+			$("[name=btn_disabled]").each(function(){
+				$(this).click(function(){
+					var input={};
+					input["co_id"]=$(this).attr("val");
+					input["enabled"]=false;
+					disabledUser(input);
+					
+				});
+			});
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
 	
+}
+function disabledUser(input){
+	$.ajax({
+		url : BASE_URL + "/co_001_controller/co_u0001",
+		type : 'POST',
+		dataType : 'JSON',
+		data : JSON.stringify(input),
+		beforeSend : function(xhr) {
+			startLoading();
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(data) {
+			stopLoading();
+			if(data.CODE=="0000"){
+				
+				listCo();
+				
+			}
+		}
+	});
 }
 function viewCustomer(id){
 	var input={};

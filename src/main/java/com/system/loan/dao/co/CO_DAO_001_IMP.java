@@ -130,7 +130,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "co_phone as co_phone,"
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
-					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001");
+					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true");
 			
 			List result=(List)query.list();
 			tx.commit();
@@ -233,6 +233,31 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			e.printStackTrace();
 		}
 		
+		return null;
+	}
+	
+	@Override
+	public HashMap<String, Object> updateEnabledUser(int id, boolean enabled) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		Transaction tx=null;
+		HashMap<String, Object> result=new HashMap<>();
+		try{
+			
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, id);
+			co.getLoginDTO().setEnabled(enabled);
+			session.update(co);
+
+			tx.commit();
+			result.put("ERROR", false);
+			return result;
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		result.put("ERROR", true);
 		return null;
 	}
 
