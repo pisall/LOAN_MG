@@ -3,8 +3,7 @@
 <%@ page import="org.springframework.security.core.GrantedAuthority" %>
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <%@page import="com.system.loan.dto.session.USER_SESSION"%>
 <!DOCTYPE html>

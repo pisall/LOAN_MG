@@ -1,8 +1,12 @@
-
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page import="org.springframework.security.core.GrantedAuthority" %>
 <%@page import="org.springframework.context.annotation.Import"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+ <%@page import="com.system.loan.dto.session.USER_SESSION"%>
+ 
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,7 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Income</title>
+    <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -28,13 +32,27 @@
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
-      
-      
-      <!-- RGraph Libraries -->
-   <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script>  
-   <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.bar.js"></script>
+   </head>
    
-</head>
+ 
+   
+   <%
+	Date  now = new Date();
+	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+	
+	String datetime = date.format(now);
+	
+	
+
+ 	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+ 		int strCoId;
+ 		String strCoNm="";
+ 	if(user!=null){
+ 		strCoId=user.getCoId();
+ 		strCoNm=user.getCoNm();
+ 		
+ 	}
+	%>
 
 <body>
 	<div id="wrapper">
@@ -43,7 +61,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 			<!-- Fixed Up Navigation -->
-			<%-- <%@include file="include/_fixed_up_nav.jsp"%> --%>
+			<%@include file="include/_fixed_up_nav.jsp"%>
 
 			<!-- Side Bar Navigation -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -90,6 +108,10 @@
 			</div> 
 
 		</div> 
+	<%@include file="include/_script.jsp"%> 
+	<!-- RGraph Libraries -->
+    <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script> 
+	<script src="${pageContext.request.contextPath}/resources/libraries/RGraph.bar.js"></script>
 	<script>
     window.onload = function ()
     { 
@@ -117,8 +139,9 @@
         }).wave({frames: 60});
     };
 </script>
-	<%@include file="include/_script.jsp"%> 
+	
 </body>
 
 </html>
 
+</html>
