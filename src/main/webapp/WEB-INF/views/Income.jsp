@@ -108,6 +108,12 @@
 			</div> 
 
 		</div> 
+		<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
+		 <script type="text/javascript">   
+			var BASE_URL = "${pageContext.request.contextPath}"; 
+			var PAGE_ID="${page_id}";
+			console.log("ppp="+PAGE_ID);
+		</script>
 	<%@include file="include/_script.jsp"%> 
 	<!-- RGraph Libraries -->
     <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script> 

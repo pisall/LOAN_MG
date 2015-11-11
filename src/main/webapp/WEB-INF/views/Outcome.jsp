@@ -130,9 +130,15 @@
 				</div>  
 			</div>  
 		</div>
-		 
+		<script src="${pageContext.request.contextPath}/resources/js/outcome.js"></script>
+		 <script type="text/javascript">   
+			var BASE_URL = "${pageContext.request.contextPath}"; 
+			var PAGE_ID="${page_id}";
+			console.log("ppp="+PAGE_ID);
+		</script>
+		
 	<%@include file="include/_script.jsp"%> 
-	
+	 
 	
 		
 </body>

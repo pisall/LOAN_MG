@@ -187,8 +187,9 @@
 	    <!-- Reprot schadule payment  -->
 	    <script src="${pageContext.request.contextPath}/resources/js/report_payment.js"></script>
 	    
-	    <script type="text/javascript">
-			var BASE_URL = "${pageContext.request.contextPath}";
+	    <script type="text/javascript"> 
+	    
+		var BASE_URL = "${pageContext.request.contextPath}"; 
 			var PAGE_ID="${page_id}";
 			console.log("ppp="+PAGE_ID);
 		</script>
