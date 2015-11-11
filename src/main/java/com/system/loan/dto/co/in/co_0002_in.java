@@ -18,6 +18,7 @@ public class co_0002_in implements Serializable{
 	
 	private int co_id;
 	private String co_nm;
+	private boolean enabled;
 	
 	
 	
@@ -50,7 +51,22 @@ public class co_0002_in implements Serializable{
 	public void setCo_nm(String co_nm) {
 		this.co_nm = co_nm;
 	}
+	
 
+
+	/**
+	 * @return the enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * @param enabled the enabled to set
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	@Override
 	public String toString() {
@@ -58,6 +74,7 @@ public class co_0002_in implements Serializable{
 		StringBuffer result=new StringBuffer();
 		result.append("co_id:"+this.co_id+",\n");
 		result.append("co_nm:"+this.co_nm+"\n");
+		result.append("enabled:"+this.enabled+"\n");
 		
 		return result.toString();
 	}

@@ -23,6 +23,7 @@ import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
 import com.system.loan.dto.co.in.co_0001_in;
 import com.system.loan.dto.co.in.co_0002_in;
+import com.system.loan.dto.session.USER_SESSION;
 
 @Controller
 @RequestMapping("co_001_controller")
@@ -204,6 +205,41 @@ public class co_001_controller {
 		HashMap<String, Object> result=coDao.findCoById2(input.getCo_id());
 		
 		return result;
+	}
+	/*
+	 * disable or enable user by update filed enabled in table mfi_login
+	 */
+	
+	@RequestMapping(value="/co_u00001",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coU0001(@RequestBody co_0002_in input,HttpServletRequest req){
+		HttpSession session=req.getSession();
+		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+		int sesCoId=user.getCoId();
+		
+		HashMap<String, Object> result=new HashMap<>();
+		result.put("CODE", "0000");
+		result.put("MESSAGE","");
+		
+		int coId=input.getCo_id();
+		if(coId==0){
+			result.put("CODE", "0001");
+			result.put("MESSAGE","national id is required");
+		}else if(coId>0){
+			if(sesCoId==coId){
+				result.put("CODE", "0001");
+				result.put("MESSAGE","Request is not avaliable.");
+			}
+		}
+		
+		if(result.get("CODE").toString().equals("0001")){
+		
+		}
+		
+		
+		
+		
+		return null;
 	}
 	
 

@@ -235,5 +235,30 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		
 		return null;
 	}
+	
+	@Override
+	public HashMap<String, Object> updateEnabledUser(CO_DTO_001 CO, boolean enabled) {
+		// TODO Auto-generated method stub
+		Session session=factory.getCurrentSession();
+		Transaction tx=null;
+		HashMap<String, Object> result=new HashMap<>();
+		try{
+			tx=session.beginTransaction();
+			int coId=CO.getCo_id();
+			CO_DTO_001 CO_SEL=(CO_DTO_001)session.get(CO_DTO_001.class, coId);
+			LOGIN_DTO_001 login=CO_SEL.getLoginDTO();
+			login.setEnabled(enabled);
+			session.update(login);
+			tx.commit();
+			result.put("ERROR", false);
+			return result;
+			
+		}catch(HibernateException e){
+			tx.rollback();
+			e.printStackTrace();
+		}
+		result.put("ERROR", true);
+		return null;
+	}
 
 }
