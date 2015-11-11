@@ -17,8 +17,7 @@
 
     <title>Outcome</title>
 		 <script type="text/javascript">   
-			var BASE_URL = "${pageContext.request.contextPath}"; 
-			var PAGE_ID="${page_id}"; 
+			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	
     <script src="${pageContext.request.contextPath}/resources/js/outcome.js"></script>
@@ -139,7 +138,9 @@
 		
 		
 	<%@include file="include/_script.jsp"%> 
-	 
+	 <script type="text/javascript">
+	 var PAGE_ID="${page_id}"; 
+	 </script>
 	
 		
 </body>

@@ -19,10 +19,11 @@
     <meta name="author" content="">
 
     <title>Income</title>
+    
 		 <script type="text/javascript">   
-			var BASE_URL = "${pageContext.request.contextPath}"; 
-			var PAGE_ID="${page_id}"; 
+			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
+		
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	
 	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
 		
@@ -146,7 +147,9 @@
         }).wave({frames: 60});
     };
 </script>
-	
+<script type="text/javascript">
+var PAGE_ID="${page_id}"; 
+</script>	
 </body>
 
 </html>
