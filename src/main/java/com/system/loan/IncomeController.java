@@ -15,7 +15,7 @@ import com.system.loan.dao.IncomeDao;
 @RequestMapping(value="/Income")
 public class IncomeController {   
 	@RequestMapping(value="/IncomeDao", produces="application/json", consumes="application/json", method = RequestMethod.POST)
-	public @ResponseBody List<Object> IncomeDao(){
+	public @ResponseBody Object IncomeDao(){
 		IncomeDao income = new IncomeDao(); 
 		return income.Income(); 
 	}
