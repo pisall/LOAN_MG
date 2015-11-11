@@ -12,9 +12,9 @@ import com.system.loan.dao.IncomeDao;
 
 @Entity
 @Controller
-@RequestMapping(value="Income")
+@RequestMapping(value="/Income")
 public class IncomeController {   
-	@RequestMapping(value="/IncomeDao", produces="application/json",consumes="aplplication/json",method=RequestMethod.POST)
+	@RequestMapping(value="/IncomeDao", produces="application/json", consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody List<Object> IncomeDao(){
 		IncomeDao income = new IncomeDao(); 
 		return income.Income(); 

@@ -13,10 +13,10 @@ import com.system.loan.dao.OutcomeDao;
  
 @Entity
 @Controller
-@RequestMapping(value="Outcome")
+@RequestMapping(value="/Outcome")
 public class OutcomeController {
-	 	@RequestMapping(value="/OutcomeDao", produces="application/json",consumes="application/json",method=RequestMethod.POST)
-	 	public @ResponseBody List<Object>OutcomeDao(){
+	 	@RequestMapping(value="/OutcomeDao", produces="application/json", consumes="application/json", method = RequestMethod.POST)
+	 	public @ResponseBody Object OutcomeDao(){
 	 		OutcomeDao outcome = new OutcomeDao();
 	 		return outcome.Outcome();
 	 	}

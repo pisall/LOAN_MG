@@ -29,7 +29,7 @@ public class IncomeDao implements IncomeInterface{
 	}
 	
 	@Override
-	public List<Object> Income() {
+	public Object Income() {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		Transaction tran = null;
@@ -67,7 +67,7 @@ public class IncomeDao implements IncomeInterface{
 				+ "(select  sum(paid_amount) as in2 from mfi_loanapproval where  cast(tr_dtt as bigint) <= cast(to_char( (now()-interval '11 month'),'YYYYMMDDHHMISS') as bigint) and  cast(tr_dtt as bigint)  >= cast(to_char( (now()-interval '12 month'),'YYYYMMDDHHMISS') as bigint)),"
 				+ "(select to_char(CURRENT_DATE-INTERVAL'11 month','Month') as mon12) "
 				+ "from "
-				+ "mfi_loanapproval " 
+				+ "mfi_loanapproval  " 
 				+ "where 1=1 limit 12";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP); 

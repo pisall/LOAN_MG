@@ -5,5 +5,5 @@ import java.util.List;
 import com.system.loan.dto.TransectionDto;
 
 public interface IncomeInterface {
-public  List<Object>Income();
+public  Object Income();
 }
