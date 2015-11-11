@@ -40,14 +40,14 @@ public class CustomerOfficerDaoImp {
 	 */
 	
 	@SuppressWarnings("unchecked")
-	public List<CustomerOfficerDto> listCustomerOfficer(String brand) {
+	public List<CustomerOfficerDto> listCustomerOfficer() {
 		Session session = factory.getCurrentSession();
 		List<CustomerOfficerDto> list = null;
 		Transaction tx=null;
 		try {
 			tx=session.beginTransaction();
-			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coFirstName AS coFirstName,CO.coLastName As coLastName) FROM CustomerOfficerDto CO Where CO.coBrand=? Order By CO.coID DESC");
-					query.setString(0, brand);
+			Query query = session.createQuery("SELECT new map(CO.coID AS coID,CO.coFirstName AS coFirstName,CO.coLastName As coLastName) FROM CustomerOfficerDto CO Order By CO.coID DESC");
+	
 			list = (ArrayList<CustomerOfficerDto>) query.list();	
 			tx.commit();
 		} catch (HibernateException e) {

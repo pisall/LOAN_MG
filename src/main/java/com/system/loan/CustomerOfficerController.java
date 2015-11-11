@@ -26,9 +26,9 @@ public class CustomerOfficerController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/list_co/{brand}", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody List<CustomerOfficerDto> listCustomer(@PathVariable("brand")String brand) {	
-		return coImp.listCustomerOfficer(brand);
+	@RequestMapping(value = "/list_co", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public @ResponseBody List<CustomerOfficerDto> listCustomer() {	
+		return coImp.listCustomerOfficer();
 	}
 	
 	

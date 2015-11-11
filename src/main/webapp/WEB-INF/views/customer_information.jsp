@@ -6,10 +6,10 @@
 	ses.setAttribute("id", "9");
 	ses.setAttribute("brand", "bb");
 %>
+
 <body>
 
 	<div id="wrapper">
-
 		<!-- Navigation -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
@@ -139,8 +139,8 @@
 
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
-		var id="<%=ses.getAttribute("id")%>";
-		var brand="<%=ses.getAttribute("brand")%>";
+		var id="<%=strCoId%>";
+	<%-- 	var brand="<%=ses.getAttribute("brand")%>"; --%>
 		var PAGE_ID="${page_id}";
 	</script>
 

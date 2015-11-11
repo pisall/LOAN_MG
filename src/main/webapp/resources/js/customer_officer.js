@@ -1,7 +1,6 @@
 /**
  * 
  */
-var co_brand = brand;
 $(function() {
 	listCoByBrand();
 	$("#test").click(function() {
@@ -68,7 +67,7 @@ function listCo2(pageNo) {
 function listCoByBrand() {
 	var result="";
 	$.ajax({
-		url : BASE_URL + "/customer_officer/list_co/"+co_brand,
+		url : BASE_URL + "/customer_officer/list_co",
 		type : 'POST',
 		dataType : 'JSON',
 		beforeSend : function(xhr) {
@@ -76,7 +75,7 @@ function listCoByBrand() {
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			
+			console.log(data);
 			$(data).each(
 					function(i, v) {
 						var selected = "";

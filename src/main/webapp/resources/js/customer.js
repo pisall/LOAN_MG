@@ -114,7 +114,6 @@ function showPaging(totalPage, curPage) {
  * @param pageNo
  */
 function listCus(pageNo) {
-	console.log(coID);
 	var input = {
 		"pageNo" : $.trim(pageNo),
 		"pcnt" : $.trim($("#record_num").val()),
