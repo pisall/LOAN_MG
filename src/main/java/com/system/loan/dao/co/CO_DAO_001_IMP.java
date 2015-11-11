@@ -194,7 +194,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		Transaction tx=null;
 		try{
 			tx=session.beginTransaction();
-			Query query=session.createQuery("select new map(log_email as log_email,log_password as log_password,log_type as log_type) from LOGIN_DTO_001 where log_email=?");
+			Query query=session.createQuery("select new map(log_email as log_email,log_password as log_password,log_type as log_type,enabled as enabled) from LOGIN_DTO_001 where log_email=?");
 			query.setString(0, email);
 			List list=query.list();
 			tx.commit();

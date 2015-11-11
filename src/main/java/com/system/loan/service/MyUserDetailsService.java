@@ -43,15 +43,16 @@ public class MyUserDetailsService implements UserDetailsService {
 	// org.springframework.security.core.userdetails.User
 	private User buildUserForAuthentication(HashMap<String, Object> user, 
 		List<GrantedAuthority> authorities) {
+		System.out.println((boolean)user.get("enabled")+"==========================");
 		return new User(user.get("log_email").toString(), user.get("log_password").toString(), 
-			true, true, true, true, authorities);
+				(boolean)user.get("enabled"), true, true, true, authorities);
 	}
 
 	private List<GrantedAuthority> buildUserAuthority(String userRoles) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
-			setAuths.add(new SimpleGrantedAuthority(userRoles));
+		setAuths.add(new SimpleGrantedAuthority(userRoles));
 
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 

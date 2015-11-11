@@ -36,6 +36,9 @@ public class LOGIN_DTO_001 {
 	@Column(name="log_type")
 	private String log_type;
 	
+	@Column(name="enabled")
+	private boolean enabled;
+	
 	/*@Column(name="co_id", unique=true, nullable=false)
     @GeneratedValue(generator="generator")
 	@GenericGenerator(name = "generator", strategy = "foreign",	parameters =@Parameter(name="property",value="co")) 
@@ -113,6 +116,20 @@ public class LOGIN_DTO_001 {
 	 */
 	public void setCoDTO(CO_DTO_001 coDTO) {
 		this.coDTO = coDTO;
+	}
+
+	/**
+	 * @return the enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * @param enabled the enabled to set
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	

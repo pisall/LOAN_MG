@@ -161,6 +161,7 @@ public class co_001_controller {
 		log.setLog_email(input.getLog_email());
 		log.setLog_password(hashedPassword);
 		log.setLog_type("ROLE_ADMIN");
+		log.setEnabled(true);
 		
 		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		
