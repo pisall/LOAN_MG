@@ -230,8 +230,12 @@
 		      
 		    </div>
 		 </div>
+		  
 
     </div>
+    
+<!-- Code snippet -->
+
     
     <!-- script -->
    <%@include file="include/_script.jsp"%>

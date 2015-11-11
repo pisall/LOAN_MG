@@ -210,7 +210,7 @@ public class co_001_controller {
 	 * disable or enable user by update filed enabled in table mfi_login
 	 */
 	
-	@RequestMapping(value="/co_u00001",method=RequestMethod.POST)
+	@RequestMapping(value="/co_u0001",method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> coU0001(@RequestBody co_0002_in input,HttpServletRequest req){
 		HttpSession session=req.getSession();
@@ -231,15 +231,20 @@ public class co_001_controller {
 				result.put("MESSAGE","Request is not avaliable.");
 			}
 		}
+		HashMap<String, Object> exe=new HashMap<>();
+		CO_DAO_001_IMP co=new CO_DAO_001_IMP();
 		
-		if(result.get("CODE").toString().equals("0001")){
-		
+		if(result.get("CODE").toString().equals("0000")){
+			System.out.println("start exe");
+			exe=co.updateEnabledUser(input.getCo_id(), false);
+			if((boolean)exe.get("ERROR")){
+				result.put("CODE", "0001");
+				result.put("MESSAGE","False to process.");
+			}
 		}
 		
 		
-		
-		
-		return null;
+		return result;
 	}
 	
 
