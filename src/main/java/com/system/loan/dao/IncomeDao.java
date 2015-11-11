@@ -72,6 +72,7 @@ public class IncomeDao implements IncomeInterface{
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP); 
 			listIntcome = query.list();  
+			System.out.println("Inn8888888888::"+listIntcome);
 			tran.commit();
 		}catch(HibernateException e){
 			e.printStackTrace();

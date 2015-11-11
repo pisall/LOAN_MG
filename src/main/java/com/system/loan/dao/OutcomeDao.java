@@ -69,6 +69,7 @@ public class OutcomeDao implements OutcomeInferface{
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP); 
 			listOutcome = query.list();  
+			System.out.println("99999999999:"+listOutcome);
 			tran.commit();
 		}catch(HibernateException e){
 			e.printStackTrace();
