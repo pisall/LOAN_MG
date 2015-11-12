@@ -24,7 +24,6 @@
 			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
 		
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	
 	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
 		
     <!-- Bootstrap Core CSS -->
@@ -148,6 +147,7 @@
     };
 </script>
 <script type="text/javascript">
+<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
 var PAGE_ID="${page_id}"; 
 </script>	
 </body>
