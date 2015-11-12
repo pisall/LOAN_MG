@@ -23,7 +23,7 @@
 		 <script type="text/javascript">   
 			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
-		
+
 		
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -118,6 +118,7 @@
 	<!-- RGraph Libraries -->
     <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script> 
 	<script src="${pageContext.request.contextPath}/resources/libraries/RGraph.bar.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
 	<script>
     window.onload = function ()
     { 
@@ -145,12 +146,7 @@
         }).wave({frames: 60});
     };
 </script>
-<script type="text/javascript">
-<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
-var PAGE_ID="${page_id}"; 
-</script>	
-</body>
 
-</html>
+</body>
 
 </html>
