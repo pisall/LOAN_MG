@@ -60,6 +60,36 @@
 	%>
 
 <body>
+
+<input type ="hidden" id="in1" value=""/>
+<input type ="hidden" id="in2" value=""/>
+<input type ="hidden" id="in3" value=""/>
+<input type ="hidden" id="in4" value=""/>
+<input type ="hidden" id="in5" value=""/>
+<input type ="hidden" id="in6" value=""/>
+<input type ="hidden" id="in7" value=""/>
+<input type ="hidden" id="in8" value=""/>
+<input type ="hidden" id="in9" value=""/>
+<input type ="hidden" id="in10" value=""/>
+<input type ="hidden" id="in11" value=""/>
+<input type ="hidden" id="in12" value=""/>
+
+<input type ="hidden" id="mon1" value=""/>
+<input type ="hidden" id="mon2" value=""/>
+<input type ="hidden" id="mon3" value=""/>
+<input type ="hidden" id="mon4" value=""/>
+<input type ="hidden" id="mon5" value=""/>
+<input type ="hidden" id="mon6" value=""/>
+<input type ="hidden" id="mon7" value=""/>
+<input type ="hidden" id="mon8" value=""/>
+<input type ="hidden" id="mon9" value=""/>
+<input type ="hidden" id="mon10" value=""/>
+<input type ="hidden" id="mon11" value=""/>
+<input type ="hidden" id="mon12" value=""/>
+
+
+
+
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -82,7 +112,7 @@
 
 				 
 				 
-					<div class="col-lg-6" style="width:589px;height:320px;">
+					<div class="col-lg-6" style="width:600px;height:550px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
@@ -119,10 +149,53 @@
     <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script> 
 	<script src="${pageContext.request.contextPath}/resources/libraries/RGraph.bar.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
+	 
+	 
+	 
 	<script>
     window.onload = function ()
-    { 
-        var data = [40,80,60,30,50,20,60,80,40,50,70,10];
+    {  
+    	var in1 = document.getElementById('in1').value;
+    	var inco1 = in1.slice(0,3);
+    	var in2 = document.getElementById('in2').value;
+    	var inco2 = in2.slice(0,3);
+    	var in3 = document.getElementById('in3').value;
+    	var inco3 = in3.slice(0,3);
+    	var in4 = document.getElementById('in4').value;
+    	var inco4 = in4.slice(0,3);
+    	var in5 = document.getElementById('in5').value;
+    	var inco5 = in5.slice(0,3);
+    	var in6 = document.getElementById('in6').value;
+    	var inco6 = in6.slice(0,3);
+    	var in7 = document.getElementById('in7').value;
+    	var inco7 = in7.slice(0,3);
+    	var in8 = document.getElementById('in8').value;
+    	var inco8 = in8.slice(0,3);
+    	var in9 = document.getElementById('in9').value;
+    	var inco9 = in9.slice(0,3);
+    	var in10 = document.getElementById('in10').value;
+    	var inco10 = in10.slice(0,3);
+    	var in11 = document.getElementById('in11').value;
+    	var inco11 = in11.slice(0,3);
+    	var in12 = document.getElementById('in12').value;
+    	var inco12 = in12.slice(0,3); 
+    	
+    	// get month
+    	var mon1 = document.getElementById('mon1').value;
+    	var mon2 = document.getElementById('mon2').value;
+    	var mon3 = document.getElementById('mon3').value;
+    	var mon4 = document.getElementById('mon4').value;
+    	var mon5 = document.getElementById('mon5').value;
+    	var mon6 = document.getElementById('mon6').value;
+    	var mon7 = document.getElementById('mon7').value;
+    	var mon8 = document.getElementById('mon8').value;
+    	var mon9 = document.getElementById('mon9').value;
+    	var mon10 = document.getElementById('mon10').value;
+    	var mon11 = document.getElementById('mon11').value;
+    	var mon12 = document.getElementById('mon12').value; 
+    	
+    	
+        var data = [inco12,inco11,inco10,inco9,inco8,inco7,inco6,inco5,inco4,inco3,inco2,inco1];
 
         var bar = new RGraph.Bar({
             id: 'cvs',
@@ -133,15 +206,15 @@
                 shadow: false,
                 hmargin: 6,
                 colors: ['Gradient(blue:blue:green)', 'Gradient(green:#0f0)'],
-                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                labels: [mon12,mon11,mon10,mon9,mon8,mon7,mon6,mon5,mon4,mon3,mon2,mon1],
                 clearto: 'white',
                 variant: '3d',
 				ymin:0,
-				ymax: 100,
+				ymax: 1000,
 				gutterTop: 30,
-				gutterLeft: 30,
+				gutterLeft:50,
 				title:'Monthly Outcome គិតជាលានរៀល',
-                gutterBottom: 90
+                gutterBottom:70
             }
         }).wave({frames: 60});
     };

@@ -29,7 +29,7 @@ public class OutcomeDao implements OutcomeInferface{
 	}
 	
 	 
-	public Object Outcome() {
+	public List<List> Outcome() {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		Transaction tran = null;
@@ -40,35 +40,34 @@ public class OutcomeDao implements OutcomeInferface{
 					+ "ac_id,"
 					+ "cu_id," 
 					+ "(select  sum(ac_amount) as out1 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '0 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '1 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'0 month','Month') as mon1),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'0 month','Mon') as mon1),"
 					+ "(select  sum(ac_amount) as out2 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '1 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '2 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'1 month','Month') as mon2),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'1 month','Mon') as mon2),"
 					+ "(select  sum(ac_amount) as out3 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '2 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '3 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'2 month','Month') as mon3),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'2 month','Mon') as mon3),"
 					+ "(select  sum(ac_amount) as out4 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '3 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '4 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'3 month','Month') as mon4),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'3 month','Mon') as mon4),"
 					+ "(select  sum(ac_amount) as out5 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '4 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '5 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'4 month','Month') as mon5),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'4 month','Mon') as mon5),"
 					+ "(select  sum(ac_amount) as out6 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '5 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '6 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'5 month','Month') as mon6),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'5 month','Mon') as mon6),"
 					+ "(select  sum(ac_amount) as out7 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '6 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '7 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'6 month','Month') as mon7),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'6 month','Mon') as mon7),"
 					+ "(select  sum(ac_amount) as out8 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '7 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '7 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'7 month','Month') as mon8),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'7 month','Mon') as mon8),"
 					+ "(select  sum(ac_amount) as out9 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '8 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '8 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'8 month','Month') as mon9),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'8 month','Mon') as mon9),"
 					+ "(select  sum(ac_amount) as out10 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '9 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '10 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'9 month','Month') as mon10),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'9 month','Mon') as mon10),"
 					+ "(select  sum(ac_amount) as out11 from mfi_account where cast(ac_start_date as bigint) <= cast(to_char( (now()-interval '10 month'),'YYYYMMDDHHMISS') as bigint)  and  cast(ac_start_date as bigint)  >= cast(to_char( (now()-interval '11 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'10 month','Month') as mon11),"
-					+ "(select  sum(paid_amount) as in12 from mfi_loanapproval where  cast(tr_dtt as bigint) <= cast(to_char( (now()-interval '11 month'),'YYYYMMDDHHMISS') as bigint) and  cast(tr_dtt as bigint)  >= cast(to_char( (now()-interval '12 month'),'YYYYMMDDHHMISS') as bigint)),"
-					+ "(select to_char(CURRENT_DATE-INTERVAL'11 month','Month') as mon12)"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'10 month','Mon') as mon11),"
+					+ "(select  sum(paid_amount) as out12 from mfi_loanapproval where  cast(tr_dtt as bigint) <= cast(to_char( (now()-interval '11 month'),'YYYYMMDDHHMISS') as bigint) and  cast(tr_dtt as bigint)  >= cast(to_char( (now()-interval '12 month'),'YYYYMMDDHHMISS') as bigint)),"
+					+ "(select to_char(CURRENT_DATE-INTERVAL'11 month','Mon') as mon12)"
 					+ "from mfi_account  "
 					+ "where 1=1 limit 12";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP); 
-			listOutcome = query.list();  
-			System.out.println("99999999999:"+listOutcome);
+			listOutcome = query.list();   
 			tran.commit();
 		}catch(HibernateException e){
 			e.printStackTrace();
