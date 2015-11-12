@@ -9,7 +9,6 @@ $(function() {
 	clearWord();
 	listCus(page_no);
 	
-	console.log(encodeURIComponent("11111"));
 
 	$("#record_num").change(function() {
 		listCus(1);
@@ -213,7 +212,7 @@ function getCustomerDetail(cuID) {
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			console.log(data);
+			
 			$('#myModal').modal('show');
 			$("#cu_id").html(data.cuID);
 			$("#cu_name").html(data.cuName);
