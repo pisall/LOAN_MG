@@ -21,7 +21,10 @@
      <script src="${pageContext.request.contextPath}/resources/js/page/nav.js"></script>
      <script src="${pageContext.request.contextPath}/resources/js/page/common.js"></script>
      
-     <%--  <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script> --%>
+     <!-- Jquery validation -->
+     <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/js/additional-methods.min.js"></script>
+     
     
   
   
