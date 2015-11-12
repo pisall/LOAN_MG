@@ -43,7 +43,7 @@ public class co_001_controller {
 		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> test=new HashMap<>();
 		test=coDao.findLogByLogMail("mnee");
-		System.out.println(test.get("log_email"));
+		System.out.println(test.get("log_email"));//
 		
 		return mv;
 	}
