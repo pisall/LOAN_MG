@@ -62,9 +62,9 @@ f<%@include file="include/_head.jsp"%>
 							<div class="panel-body">
 
 								<c:set value="${customer}" var="cu" />
-								<input type="hidden" value="${cu.cuID}" id="cu_id">
+								<input type="hidden" value="${cu.cuID}" name="cu_id" id="cu_id">
 								<!-- Start From -->
-								<form class="form-horizontal" id="upload-file-form" role="form">
+								<form class="form-horizontal" id="upload-file-form">
 									<div>
 										<div>
 											<span class="glyphicon glyphicon-user"
@@ -80,23 +80,23 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_name"
-												placeholder="Enter Name" value="${cu.cuName}">
+											<input type="text" class="form-control" name="cu_name" id="cu_name"
+												placeholder="Enter Name" value="${cu.cuName}" required="required" maxlength="50">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_nick_name"
-												placeholder="Enter Nickname" value="${cu.cuNickName}">
+											<input type="text" name="cu_nick_name" class="form-control" id="cu_nick_name"
+												placeholder="Enter Nickname" value="${cu.cuNickName}" required="required" maxlength="50">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_sex">Sex</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="cu_sex">
+											<select class="form-control" name="cu_sex" id="cu_sex">
 
 												<c:choose>
 													<c:when test="${cu.cuSex=='f'}">
@@ -114,8 +114,8 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_dob"
-												placeholder="Enter Date Of Birth" value="${cu.cuDOB}">
+											<input type="text" name="cu_dob" class="form-control" id="cu_dob"
+												placeholder="Enter Date Of Birth" value="${cu.cuDOB}" required="required">
 										</div>
 									</div>
 
@@ -123,41 +123,41 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_national_id"
-												placeholder="Enter National Card" value="${cu.cuNationalID}">
+											<input type="text" name="cu_national_id" class="form-control check_number" id="cu_national_id"
+												placeholder="Enter National Card" value="${cu.cuNationalID}" maxlength="10" required="required">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_phone"
-												placeholder="Enter Phone" value="${cu.cuPhone}">
+											<input type="text" name="cu_phone" class="form-control check_number" id="cu_phone"
+												placeholder="Enter Phone" value="${cu.cuPhone}" maxlength="10" required="required">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="cu_address"
-												placeholder="Enter Address" value="${cu.cuAddress}">
+											<input type="text" name="cu_address" class="form-control" id="cu_address"
+												placeholder="Enter Address" value="${cu.cuAddress}" required="required" maxlength="100">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_pawn">Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_pawn">${cu.cuPawn}</textarea>
+											<textarea class="form-control" name="cu_pawn" rows="5" id="cu_pawn"  maxlength="100">${cu.cuPawn}</textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="cu_note">${cu.cuNote}</textarea>
+											<textarea class="form-control" name="cu_note" rows="5" id="cu_note" maxlength="250">${cu.cuNote}</textarea>
 										</div>
 									</div>
+							
 								</form>
-
 								<!-- End Form -->
 							</div>
 							<!-- End Panel Body -->
@@ -191,7 +191,8 @@ f<%@include file="include/_head.jsp"%>
 							<!-- Panel Body -->
 							<div class="panel-body">
 								<!-- Start Form -->
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal">
+								<!-- <form class="form-horizontal" role="form"> -->
 									<div>
 										<div>
 											<span class="glyphicon glyphicon-user"
@@ -283,8 +284,7 @@ f<%@include file="include/_head.jsp"%>
 											<textarea class="form-control" rows="5" id="gu_note"></textarea>
 										</div>
 									</div>
-
-								</form>
+								</form>					
 								<!-- End Form -->
 							</div>
 							<!-- End Panel Body -->
@@ -299,6 +299,7 @@ f<%@include file="include/_head.jsp"%>
 					<button type="submit" class="btn btn-primary" id="updateCustomer">Update</button>
 					<button type="button" class="btn btn-danger" onclick="goBack()">Cancel</button>
 				</div>
+	
 				<!-- End Form -->
 				<br />
 			</div>
@@ -319,59 +320,82 @@ f<%@include file="include/_head.jsp"%>
 
 	<script type="text/javascript">
 		$(function() {
-			$("#updateCustomer").click(
+			jQuery.validator.setDefaults({
+				  debug: true,
+				  success: "valid"
+			});
+			 $.validator.addMethod("check_number", $.validator.methods.number,
+			   "Please input only number");
+	   		 $.validator.addClassRules("check_number", { check_number: true});
+	 			
+	   		 var validator=$("#upload-file-form").validate({	 
+	 			 errorPlacement: function(label, element) {
+		           label.addClass('arrow');
+		           label.insertAfter(element);
+				  },
+				  wrapper: 'div',
+	 			 submitHandler: function(form) {	 		
+			 		updateCustomer();
+				}
+			});
+	   		
+	   		 
+			$("#updateCustomer").click(function() {
+				$("#upload-file-form").submit();	
+			});
+			
+			
+			function updateCustomer(){
+				 var guID = $("#foundGuarantorByID").val();
 
-					function() {
-						var guID = $("#foundGuarantorByID").val();
-
-						var input = {
-							cuID : $("#cu_id").val(),
-							cuName : $("#cu_name").val(),
-							cuNickName : $("#cu_nick_name").val(),
-							cuSex : $("#cu_sex").val(),
-							cuDOB : $("#cu_dob").val(),
-							cuNationalID : $("#cu_national_id").val(),
-							cuPhone : $("#cu_phone").val(),
-							cuAddress : $("#cu_address").val(),
-							cuPawn : $("#cu_pawn").val(),
-							cuNote : $("#cu_note").val(),
-							guarantorInfoDto : [ {
-								gu_id : guID,
-								gu_nm : $("#gu_name").val(),
-								gu_nick_nm : $("#gu_nick_name").val(),
-								gu_sex : $("#gu_sex").val(),
-								gu_dob : $("#gu_dob").val(),
-								gu_national_id : $("#gu_national_id").val(),
-								gu_phone : $("#gu_phone").val(),
-								gu_address : $("#gu_address").val(),
-								gu_pawn : $("#gu_pawn").val(),
-								gu_note : $("#gu_note").val()
-							} ]
+					var input = {
+						cuID : $("#cu_id").val(),
+						cuName : $("#cu_name").val(),
+						cuNickName : $("#cu_nick_name").val(),
+						cuSex : $("#cu_sex").val(),
+						cuDOB : $("#cu_dob").val(),
+						cuNationalID : $("#cu_national_id").val(),
+						cuPhone : $("#cu_phone").val(),
+						cuAddress : $("#cu_address").val(),
+						cuPawn : $("#cu_pawn").val(),
+						cuNote : $("#cu_note").val(),
+						guarantorInfoDto : [ {
+							gu_id : guID,
+							gu_nm : $("#gu_name").val(),
+							gu_nick_nm : $("#gu_nick_name").val(),
+							gu_sex : $("#gu_sex").val(),
+							gu_dob : $("#gu_dob").val(),
+							gu_national_id : $("#gu_national_id").val(),
+							gu_phone : $("#gu_phone").val(),
+							gu_address : $("#gu_address").val(),
+							gu_pawn : $("#gu_pawn").val(),
+							gu_note : $("#gu_note").val()
+						} ]
+					}
+					console.log(input);
+					$.ajax({
+						url : BASE_URL + "/customer/update_customer",
+						type : 'POST',
+						dataType : 'JSON',
+						data : JSON.stringify(input),
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader("Accept",
+									"application/json");
+							xhr.setRequestHeader("Content-Type",
+									"application/json");
+						},
+						success : function(data) {
+							uploadFile();
+							if (data == true)
+								goBack();
+						},
+						error : function(data, status, er) {
+							console.log("error: " + data + " status: "
+									+ status + " er:" + er);
 						}
-						console.log(input);
-						$.ajax({
-							url : BASE_URL + "/customer/update_customer",
-							type : 'POST',
-							dataType : 'JSON',
-							data : JSON.stringify(input),
-							beforeSend : function(xhr) {
-								xhr.setRequestHeader("Accept",
-										"application/json");
-								xhr.setRequestHeader("Content-Type",
-										"application/json");
-							},
-							success : function(data) {
-								uploadFile();
-								if (data == true)
-									goBack();
-							},
-							error : function(data, status, er) {
-								console.log("error: " + data + " status: "
-										+ status + " er:" + er);
-							}
-						});
-
 					});
+			}
+			
 			function uploadFile() {
 					console.log(new FormData($("#upload-file-form")[0]));
 				$
