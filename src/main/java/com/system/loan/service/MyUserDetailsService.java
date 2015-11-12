@@ -22,9 +22,6 @@ import com.system.loan.dao.co.CO_DAO_001_IMP;
 @Service("MYuserDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
 
-	//get user from the database, via Hibernate
-	//@Autowired
-	//@Qualifier("userDaoImp")
 	private CO_DAO_001 login = new CO_DAO_001_IMP();
 
 	@Transactional(readOnly=true)

@@ -12,10 +12,11 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
-
+@Service
 public class CO_DAO_001_IMP implements CO_DAO_001{
 	private SessionFactory factory=null;
 	
@@ -131,6 +132,8 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
 					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true");
+			
+			/*Query query=session.createQuery("from CO_DTO_001 where loginDTO.enabled=true");*/
 			
 			List result=(List)query.list();
 			tx.commit();

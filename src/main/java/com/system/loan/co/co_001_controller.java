@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +29,8 @@ import com.system.loan.dto.session.USER_SESSION;
 @Controller
 @RequestMapping("co_001_controller")
 public class co_001_controller {
-	
+	@Inject 
+	CO_DAO_001_IMP coDao;
 	
 	/*
 	 * view add new customer
@@ -38,7 +40,7 @@ public class co_001_controller {
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("customer_officer_add");
 		mv.addObject("page_id", "co_0003");
-		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
+		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> test=new HashMap<>();
 		test=coDao.findLogByLogMail("mnee");
 		System.out.println(test.get("log_email"));
@@ -186,7 +188,7 @@ public class co_001_controller {
 	@RequestMapping(value="/co_l0001",method=RequestMethod.POST)
 	@ResponseBody
 	public List coL0001(HttpServletRequest req){
-		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
+		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HttpSession session=req.getSession();
 		String test=(String)session.getAttribute("username");
 		System.out.println("session naem="+test);
@@ -245,6 +247,15 @@ public class co_001_controller {
 		
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/co_u0002",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coU0002(@RequestBody co_0001_in input){
+		System.out.println("service::co_u0002");
+		System.out.println(input.toString());
+		
+		return null;
 	}
 	
 

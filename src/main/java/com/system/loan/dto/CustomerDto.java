@@ -32,7 +32,7 @@ public class CustomerDto implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="co_id")
-	@JsonBackReference
+	//@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;
 	
 /*	@Column(name="co_id")

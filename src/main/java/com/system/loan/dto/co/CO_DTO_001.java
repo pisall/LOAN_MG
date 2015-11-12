@@ -73,11 +73,11 @@ public class CO_DTO_001 {
 	private int reg_co_id;*/
 	
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="reg_co_id")
 	private CO_DTO_001 regCo;
 	
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="regCo")
+	@OneToMany(mappedBy="regCo")
 	private Set<CO_DTO_001> subordinats=new HashSet<CO_DTO_001>();
 	
 	
