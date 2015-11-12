@@ -17,7 +17,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="mfi_customers")
 public class CustomerDto implements Serializable {
@@ -32,7 +31,7 @@ public class CustomerDto implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="co_id")
-	//@JsonBackReference
+	@JsonBackReference
 	private CustomerOfficerDto customerOfficerDto;
 	
 /*	@Column(name="co_id")

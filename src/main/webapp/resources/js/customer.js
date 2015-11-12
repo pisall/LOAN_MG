@@ -251,7 +251,6 @@ function deleteCustomer(cusID) {
 				"cuDelYn" : $.trim("Y")
 			}
 			$.ajax({
-
 				url : BASE_URL + "/customer/deleteCustomer",
 				type : 'POST',
 				dataType : 'JSON',
