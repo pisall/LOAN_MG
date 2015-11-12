@@ -18,8 +18,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
-
+    <title>Income</title>
+    
+		 <script type="text/javascript">   
+			var BASE_URL = "${pageContext.request.contextPath}";  
+		</script>
+		
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	
+	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
+		
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -108,6 +115,7 @@
 			</div> 
 
 		</div> 
+		
 	<%@include file="include/_script.jsp"%> 
 	<!-- RGraph Libraries -->
     <script src="${pageContext.request.contextPath}/resources/libraries/RGraph.common.core.js"></script> 
@@ -139,7 +147,9 @@
         }).wave({frames: 60});
     };
 </script>
-	
+<script type="text/javascript">
+var PAGE_ID="${page_id}"; 
+</script>	
 </body>
 
 </html>
