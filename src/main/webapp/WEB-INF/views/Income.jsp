@@ -24,7 +24,6 @@
 			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
 		
-	<script src="${pageContext.request.contextPath}/resources/js/income.js"></script>
 		
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
