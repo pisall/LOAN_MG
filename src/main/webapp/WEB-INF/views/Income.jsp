@@ -59,37 +59,7 @@
  	}
 	%>
 
-<body>
-
-<input type ="hidden" id="in1" value=""/>
-<input type ="hidden" id="in2" value=""/>
-<input type ="hidden" id="in3" value=""/>
-<input type ="hidden" id="in4" value=""/>
-<input type ="hidden" id="in5" value=""/>
-<input type ="hidden" id="in6" value=""/>
-<input type ="hidden" id="in7" value=""/>
-<input type ="hidden" id="in8" value=""/>
-<input type ="hidden" id="in9" value=""/>
-<input type ="hidden" id="in10" value=""/>
-<input type ="hidden" id="in11" value=""/>
-<input type ="hidden" id="in12" value=""/>
-
-<input type ="hidden" id="mon1" value=""/>
-<input type ="hidden" id="mon2" value=""/>
-<input type ="hidden" id="mon3" value=""/>
-<input type ="hidden" id="mon4" value=""/>
-<input type ="hidden" id="mon5" value=""/>
-<input type ="hidden" id="mon6" value=""/>
-<input type ="hidden" id="mon7" value=""/>
-<input type ="hidden" id="mon8" value=""/>
-<input type ="hidden" id="mon9" value=""/>
-<input type ="hidden" id="mon10" value=""/>
-<input type ="hidden" id="mon11" value=""/>
-<input type ="hidden" id="mon12" value=""/>
-
-
-
-
+<body> 
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -163,11 +133,9 @@
     			xhr.setRequestHeader("Accept", "application/json");
     			xhr.setRequestHeader("Content-Type", "application/json");
     		},
-    		success:function(dat){
-    			console.log(dat);   
+    		success:function(dat){ 
     			for(var i=0;i<dat.length;i++){  
-    				var inco1 = dat[0].in1; 
-    				console.log("000:in1="+in1);
+    				var inco1 = dat[0].in1;  
  					var inco2 = dat[1].in2; 
  					var inco3 = dat[2].in3; 
  					var inco4 = dat[3].in4; 
@@ -213,7 +181,7 @@
     					ymax: 6000000,
 						gutterTop: 30,
 						gutterLeft: 95,
-						title:'Monthly Outcome រៀល',
+						title:'Monthly Income រៀល',
 		                gutterBottom:70
     	            }
     	        }).wave({frames: 60});
