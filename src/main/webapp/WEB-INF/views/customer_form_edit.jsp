@@ -115,7 +115,7 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<div class="col-sm-10">
 											<input type="text" name="cu_dob" class="form-control required" id="cu_dob"
-												placeholder="Enter Date Of Birth" value="${cu.cuDOB}" >
+												placeholder="Enter Date Of Birth" maxlength="50" value="${cu.cuDOB}" >
 										</div>
 									</div>
 
@@ -153,7 +153,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" name="cu_note" rows="5" id="cu_note" maxlength="250">${cu.cuNote}</textarea>
+											<textarea class="form-control" name="cu_note" rows="5" id="cu_note" maxlength="255">${cu.cuNote}</textarea>
 										</div>
 									</div>
 							
@@ -206,7 +206,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" name="gu_name" id="gu_name"
+											<input type="text" maxlength="50" class="form-control required" name="gu_name" id="gu_name"
 												placeholder="Enter Name" >
 										</div>
 									</div>
@@ -214,7 +214,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control  required" name="gu_nick_name" id="gu_nick_name"
+											<input type="text" maxlength="50" class="form-control  required" name="gu_nick_name" id="gu_nick_name"
 												placeholder="Enter Nickname" >
 										</div>
 									</div>
@@ -243,7 +243,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" name="gu_dob" id="gu_dob"
+											<input type="text" maxlength="50" class="form-control required" name="gu_dob" id="gu_dob"
 												placeholder="Enter Date Of Birth" >
 										</div>
 									</div>
@@ -252,14 +252,14 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="gu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control check_number required" name="gu_national_id" id="gu_national_id"
+											<input type="text" maxlength="10" class="form-control check_number required" name="gu_national_id" id="gu_national_id"
 												placeholder="Enter National Card" >
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control check_number required" name="gu_phone" id="gu_phone"
+											<input type="text" maxlength="10" class="form-control check_number required" name="gu_phone" id="gu_phone"
 												placeholder="Enter Phone" >
 										</div>
 									</div>
@@ -267,7 +267,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" name="gu_address" id="gu_address"
+											<input type="text" maxlength="100" class="form-control required" name="gu_address" id="gu_address"
 												placeholder="Enter Address" >
 										</div>
 									</div>
@@ -275,14 +275,14 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_pawn">Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" name="gu_pawn" id="gu_pawn"></textarea>
+											<textarea class="form-control" maxlength="100" rows="5" name="gu_pawn" id="gu_pawn"></textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" name="gu_note" id="gu_note"></textarea>
+											<textarea class="form-control" maxlength="500" rows="5" name="gu_note" id="gu_note"></textarea>
 										</div>
 									</div>
 								</form>					
