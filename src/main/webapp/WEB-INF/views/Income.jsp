@@ -155,70 +155,73 @@
 	<script>
     window.onload = function ()
     {  
-    	var in1 = document.getElementById('in1').value;
-    	var inco1 = in1.slice(0,3);
-    	var in2 = document.getElementById('in2').value;
-    	var inco2 = in2.slice(0,3);
-    	var in3 = document.getElementById('in3').value;
-    	var inco3 = in3.slice(0,3);
-    	var in4 = document.getElementById('in4').value;
-    	var inco4 = in4.slice(0,3);
-    	var in5 = document.getElementById('in5').value;
-    	var inco5 = in5.slice(0,3);
-    	var in6 = document.getElementById('in6').value;
-    	var inco6 = in6.slice(0,3);
-    	var in7 = document.getElementById('in7').value;
-    	var inco7 = in7.slice(0,3);
-    	var in8 = document.getElementById('in8').value;
-    	var inco8 = in8.slice(0,3);
-    	var in9 = document.getElementById('in9').value;
-    	var inco9 = in9.slice(0,3);
-    	var in10 = document.getElementById('in10').value;
-    	var inco10 = in10.slice(0,3);
-    	var in11 = document.getElementById('in11').value;
-    	var inco11 = in11.slice(0,3);
-    	var in12 = document.getElementById('in12').value;
-    	var inco12 = in12.slice(0,3); 
-    	console.log("11111111::="+inco1);
-    	console.log("777777777::="+inco7);
-    	console.log("999999999::="+inco9);
-    	// get month
-    	var mon1 = document.getElementById('mon1').value;
-    	var mon2 = document.getElementById('mon2').value;
-    	var mon3 = document.getElementById('mon3').value;
-    	var mon4 = document.getElementById('mon4').value;
-    	var mon5 = document.getElementById('mon5').value;
-    	var mon6 = document.getElementById('mon6').value;
-    	var mon7 = document.getElementById('mon7').value;
-    	var mon8 = document.getElementById('mon8').value;
-    	var mon9 = document.getElementById('mon9').value;
-    	var mon10 = document.getElementById('mon10').value;
-    	var mon11 = document.getElementById('mon11').value;
-    	var mon12 = document.getElementById('mon12').value; 
-    	
-    	
-        var data = [inco12,inco11,inco10,inco9,inco8,inco7,inco6,inco5,inco4,inco3,inco2,inco1];
+    	$.ajax({
+    		url:BASE_URL+'/Income/IncomeDao',
+    		type:'POST',
+    		datatype:'JSON',
+    		beforeSend : function(xhr) {
+    			xhr.setRequestHeader("Accept", "application/json");
+    			xhr.setRequestHeader("Content-Type", "application/json");
+    		},
+    		success:function(dat){
+    			console.log(dat);   
+    			for(var i=0;i<dat.length;i++){  
+    				var inco1 = dat[0].in1; 
+    				console.log("000:in1="+in1);
+ 					var inco2 = dat[1].in2; 
+ 					var inco3 = dat[2].in3; 
+ 					var inco4 = dat[3].in4; 
+ 					var inco5 = dat[4].in5; 
+ 					var inco6 = dat[5].in6; 
+ 					var inco7 = dat[6].in7; 
+ 					var inco8 = dat[7].in8; 
+ 					var inco9 = dat[8].in9; 
+ 					var inco10 = dat[9].in10; 
+ 					var inco11 = dat[10].in11; 
+ 					var inco12 = dat[11].in12; 
+ 					
+ 					var mon1 = dat[0].mon1;
+ 					var mon2 = dat[1].mon2; 
+ 					var mon3 = dat[2].mon3; 
+ 					var mon4 = dat[3].mon4; 
+ 					var mon5 = dat[4].mon5; 
+ 					var mon6 = dat[5].mon6; 
+ 					var mon7 = dat[6].mon7; 
+ 					var mon8 = dat[7].mon8; 
+ 					var mon9 = dat[8].mon9; 
+ 					var mon10 = dat[9].mon10; 
+ 					var mon11 = dat[10].mon11; 
+ 					var mon12 = dat[11].mon12; 
+    			}
+    			
+    			
+    			var data = [inco12,inco11,inco10,inco9,inco8,inco7,inco6,inco5,inco4,inco3,inco2,inco1];
 
-        var bar = new RGraph.Bar({
-            id: 'cvs',
-            data: data,
-            options: {
-                backgroundGridAutofitNumvlines: 0,
-                linewidth: 0,
-                shadow: false,
-                hmargin: 6,
-                colors: ['Gradient(blue:blue:green)', 'Gradient(green:#0f0)'],
-                labels: [mon12,mon11,mon10,mon9,mon8,mon7,mon6,mon5,mon4,mon3,mon2,mon1],
-                clearto: 'white',
-                variant: '3d',
-				ymin:0,
-				ymax: 1000,
-				gutterTop: 30,
-				gutterLeft:50,
-				title:'Monthly Outcome គិតជាលានរៀល',
-                gutterBottom:70
-            }
-        }).wave({frames: 60});
+    	        var bar = new RGraph.Bar({
+    	            id: 'cvs',
+    	            data: data,
+    	            options: {
+    	                backgroundGridAutofitNumvlines: 0,
+    	                linewidth: 0,
+    	                shadow: false,
+    	                hmargin: 6,
+    	                colors: ['Gradient(blue:blue:green)', 'Gradient(green:#0f0)'],
+    	                labels: [mon12,mon11,mon10,mon9,mon8,mon7,mon6,mon5,mon4,mon3,mon2,mon1],
+    	                clearto: 'white',
+    	                variant: '3d',
+    					ymin:0,
+    					ymax: 6000000,
+						gutterTop: 30,
+						gutterLeft: 95,
+						title:'Monthly Outcome រៀល',
+		                gutterBottom:70
+    	            }
+    	        }).wave({frames: 60});
+    	        
+    		}
+    	});
+    	
+        
     };
 </script>
 

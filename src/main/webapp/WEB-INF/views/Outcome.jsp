@@ -105,10 +105,10 @@
 				                clearto: 'white',
 				                variant: '3d',
 								ymin:0,
-								ymax: 20000000,
+								ymax: 6000000,
 								gutterTop: 30,
-								gutterLeft: 90,
-								title:'Monthly Outcome គិតជាលានរៀល',
+								gutterLeft: 95,
+								title:'Monthly Outcome រៀល',
 				                gutterBottom:70
 				            }
 				        }).wave({frames: 60});
