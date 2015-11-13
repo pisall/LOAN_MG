@@ -82,7 +82,7 @@
 
 				 
 				 
-					<div class="col-lg-6" style="width:600px;height:550px;">
+					<div class="col-lg-6" style="width:700px;height:600px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
@@ -97,7 +97,7 @@
 										<div class="row">
 											<div class="col-xs-3">
 												<!-- <img src="/controller/resources/img/Income.png" height="150" width="250"> -->
-											 <canvas id="cvs" width="500" height="300">[No canvas support]</canvas>
+											 <canvas id="cvs" width="600" height="500">[No canvas support]</canvas>
 											</div>
 											<!-- <div class="col-xs-9 text-right">
 												<div class="huge">124</div>
@@ -178,11 +178,11 @@
     	                clearto: 'white',
     	                variant: '3d',
     					ymin:0,
-    					ymax: 6000000,
+    					ymax: 999000000,
 						gutterTop: 30,
-						gutterLeft: 95,
+						gutterLeft: 100,
 						title:'Monthly Income រៀល',
-		                gutterBottom:70
+		                gutterBottom:80
     	            }
     	        }).wave({frames: 60});
     	        
