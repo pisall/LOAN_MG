@@ -179,7 +179,9 @@
     	var inco11 = in11.slice(0,3);
     	var in12 = document.getElementById('in12').value;
     	var inco12 = in12.slice(0,3); 
-    	
+    	console.log("11111111::="+inco1);
+    	console.log("777777777::="+inco7);
+    	console.log("999999999::="+inco9);
     	// get month
     	var mon1 = document.getElementById('mon1').value;
     	var mon2 = document.getElementById('mon2').value;

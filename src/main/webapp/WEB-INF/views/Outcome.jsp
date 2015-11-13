@@ -63,6 +63,12 @@
 <input type ="hidden" id="out11" value=""/>
 <input type ="hidden" id="out12" value=""/>
 
+
+
+
+
+
+
 <input type ="hidden" id="mon1" value=""/>
 <input type ="hidden" id="mon2" value=""/>
 <input type ="hidden" id="mon3" value=""/>
@@ -102,10 +108,14 @@
 	    	var out11 = document.getElementById('out11').value;
 	    	var outco11 = out11.slice(0,3);
 	    	var out12 = document.getElementById('out12').value;
-	    	var outco12 = out12.slice(0,3); 
+	    	var outco12 = out12.slice(0,3);  
 	    	
-	    	console.log("outco1:=="+outco1);
-	    	console.log("outco2:=="+outco2);
+	    	console.log("11111111out::="+out1);
+	    	console.log("2out222::="+out2);
+	    	console.log("33out333333::="+out3);
+	    	console.log("11111111::="+outco1);
+	    	console.log("2222::="+outco2);
+	    	console.log("33333333::="+outco3);
 	    	
 	    	// get month
 	    	var mon1 = document.getElementById('mon1').value;
