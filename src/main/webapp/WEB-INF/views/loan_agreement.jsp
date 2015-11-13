@@ -287,9 +287,8 @@
 			          console.log(element);
 					  },
 				 /* wrapper: 'div', */
-				  submitHandler: function(form) {
-					 
-				    $(form).submit();
+				  submitHandler: function(form) { 
+				   	form.submit();
 				  }
 				 });
 		})
