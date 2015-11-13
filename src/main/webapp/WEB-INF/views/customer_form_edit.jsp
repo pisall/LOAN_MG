@@ -64,7 +64,7 @@ f<%@include file="include/_head.jsp"%>
 								<c:set value="${customer}" var="cu" />
 								<input type="hidden" value="${cu.cuID}" name="cu_id" id="cu_id">
 								<!-- Start From -->
-								<form class="form-horizontal" id="upload-file-form">
+								<form class="form-horizontal" id="form_cu">
 									<div>
 										<div>
 											<span class="glyphicon glyphicon-user"
@@ -202,11 +202,11 @@ f<%@include file="include/_head.jsp"%>
 											type="file">
 										</span>
 									</div>
-									<input type="hidden" value="0" id="gu_id">
+									<input type="hidden" value="0" id="gu_id" name="gu_id">
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" id="gu_name"
+											<input type="text" class="form-control required" name="gu_name" id="gu_name"
 												placeholder="Enter Name" >
 										</div>
 									</div>
@@ -214,7 +214,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" id="gu_nick_name"
+											<input type="text" class="form-control  required" name="gu_nick_name" id="gu_nick_name"
 												placeholder="Enter Nickname" >
 										</div>
 									</div>
@@ -222,7 +222,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="gu_sex" >
+											<select class="form-control" id="gu_sex" name="gu_sex" >
 												<option value=""></option>
 												<c:if test="${gu.gu_sex !=''}">
 													<c:choose>
@@ -243,7 +243,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" id="gu_dob"
+											<input type="text" class="form-control required" name="gu_dob" id="gu_dob"
 												placeholder="Enter Date Of Birth" >
 										</div>
 									</div>
@@ -252,14 +252,14 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="gu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control check_number required" id="gu_national_id"
+											<input type="text" class="form-control check_number required" name="gu_national_id" id="gu_national_id"
 												placeholder="Enter National Card" >
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control check_number required" id="gu_phone"
+											<input type="text" class="form-control check_number required" name="gu_phone" id="gu_phone"
 												placeholder="Enter Phone" >
 										</div>
 									</div>
@@ -267,7 +267,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" id="gu_address"
+											<input type="text" class="form-control required" name="gu_address" id="gu_address"
 												placeholder="Enter Address" >
 										</div>
 									</div>
@@ -275,14 +275,14 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_pawn">Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="gu_pawn"></textarea>
+											<textarea class="form-control" rows="5" name="gu_pawn" id="gu_pawn"></textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" rows="5" id="gu_note"></textarea>
+											<textarea class="form-control" rows="5" name="gu_note" id="gu_note"></textarea>
 										</div>
 									</div>
 								</form>					
@@ -323,7 +323,26 @@ f<%@include file="include/_head.jsp"%>
 		
 		$(function() {
 			var error;
-			disableForm("#form_gu");					
+			var valid=false;
+			disableForm("#form_gu");		
+			$("#form_cu").validate();
+			
+			$("#form_gu").validate({
+				 errorPlacement: function(label, element) {
+					 $("#form_cu").valid();
+			           label.addClass('arrow');
+			           label.insertAfter(element);
+					  },
+				  submitHandler: function(form) { 
+				   	 updateCustomer();
+				  }
+			});
+			
+			$("#updateCustomer").click(function(){	
+				if($("#form_cu").valid()) {
+					$("#form_gu").submit();
+		        } 
+			});
 			
 			function updateCustomer(){
 				  guID = $("#foundGuarantorByID").val();
@@ -398,9 +417,13 @@ f<%@include file="include/_head.jsp"%>
 			
 			function disableForm(formName){
 				$(formName).find('input, textarea, button, select').attr('disabled','disabled');
+				valid=true;
+				return valid;
 			}
 			function enableForm(formName){
 				$(formName).find('input, textarea, button, select').attr('disabled',false);
+				valid=false;
+				return valid;
 			}
 
 			$("#foundGuarantorByID")
