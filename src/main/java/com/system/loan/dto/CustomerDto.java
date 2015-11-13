@@ -46,7 +46,7 @@ public class CustomerDto implements Serializable {
 	@Column(name="cu_dob")
 	private String cuDOB;
 	@Column(name="cu_national_id")
-	private Integer cuNationalID;
+	private String cuNationalID;
 	@Column(name="cu_phone")
 	private String cuPhone;	
 	@Column(name="cu_address")
@@ -76,7 +76,7 @@ public class CustomerDto implements Serializable {
 	 * @param cuNote
 	 * @param cuPhoto
 	 */
-	public void setCustomerUpdate(String cuName, String cuNickName, String cuSex, String cuDOB, Integer cuNationalID,
+	public void setCustomerUpdate(String cuName, String cuNickName, String cuSex, String cuDOB, String cuNationalID,
 			String cuPhone, String cuAddress, String cuPawn, String cuNote, String cuPhoto) {
 		this.cuName = cuName;
 		this.cuNickName = cuNickName;
@@ -189,13 +189,13 @@ public class CustomerDto implements Serializable {
 	/**
 	 * @return the cuNationalID
 	 */
-	public Integer getCuNationalID() {
+	public String getCuNationalID() {
 		return cuNationalID;
 	}
 	/**
 	 * @param cuNationalID the cuNationalID to set
 	 */
-	public void setCuNationalID(Integer cuNationalID) {
+	public void setCuNationalID(String cuNationalID) {
 		this.cuNationalID = cuNationalID;
 	}
 	/**

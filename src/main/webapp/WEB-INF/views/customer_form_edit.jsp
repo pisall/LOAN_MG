@@ -267,7 +267,7 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="100" class="form-control required" name="gu_address" id="gu_address"
+											<input type="text" maxlength="255" class="form-control required" name="gu_address" id="gu_address"
 												placeholder="Enter Address" >
 										</div>
 									</div>
@@ -275,14 +275,14 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_pawn">Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" maxlength="100" rows="5" name="gu_pawn" id="gu_pawn"></textarea>
+											<textarea class="form-control" maxlength="255" rows="5" name="gu_pawn" id="gu_pawn"></textarea>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_note">Note</label>
 										<div class="col-sm-10">
-											<textarea class="form-control" maxlength="500" rows="5" name="gu_note" id="gu_note"></textarea>
+											<textarea class="form-control" maxlength="255" rows="5" name="gu_note" id="gu_note"></textarea>
 										</div>
 									</div>
 								</form>					

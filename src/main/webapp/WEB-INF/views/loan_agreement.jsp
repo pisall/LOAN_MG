@@ -96,7 +96,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="10"  class="form-control required check_number" name="cu_national_id" id="cu_id_card"
+											<input type="text" maxlength="11"  class="form-control required check_number" name="cu_national_id" id="cu_id_card"
 												placeholder="Enter National Card">
 										</div>
 									</div>
@@ -104,7 +104,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											Phone</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="10"  class="form-control required check_number" name="cu_phone" id="cu_phone"
+											<input type="text" maxlength="11"  class="form-control required check_number" name="cu_phone" id="cu_phone"
 												placeholder="User Phone number">
 										</div>
 									</div>
@@ -152,7 +152,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="10" class="form-control required check_number"  name="gu_national_id" id="gu_id_card"
+											<input type="text" maxlength="11" class="form-control required check_number"  name="gu_national_id" id="gu_id_card"
 												placeholder="Guarantor National Card">
 										</div>
 									</div>
@@ -160,7 +160,7 @@
 										<label class="control-label col-sm-2" for="text">
 											Phone</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="10" class="form-control required check_number" name="gu_phone" id="gu_phone"
+											<input type="text" maxlength="11" class="form-control required check_number" name="gu_phone" id="gu_phone"
 												placeholder="Guarantor phone">
 										</div>
 									</div> 
