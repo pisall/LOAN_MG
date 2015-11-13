@@ -94,20 +94,20 @@
 										 
 										<label class="control-label col-sm-4" for="paid_amount" > Paid Amount:</label>
 										<div class="col-sm-8">
-										  <input type="text" class="form-control check_number required" id="paid_amount" placeholder="0.0">
+										  <input type="text" class="form-control check_number required" name="paid_amount" id="paid_amount" placeholder="0.0">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="amount-fine" >Amount fine:</label>
 										<div class="col-sm-8">
-										  <input type="text" class="form-control check_number required" id="amount_fine" placeholder="0.0">
+										  <input type="text" class="form-control check_number required" name="amount_fine" id="amount_fine" placeholder="0.0">
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount_fine" >Transection Type:</label>
+										<label class="control-label col-sm-4" for="tr_type" >Transection Type:</label>
 										<div class="col-sm-8" >
-										  <select class="form-control" id="tr_type">
+										  <select class="form-control" id="tr_type" name="tr_type">
 											<option value="2">Complete</option>
 											<option value="3">Area</option>
 											<option value="4">Finished</option> 
@@ -117,9 +117,9 @@
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="email">Note:</label>
+										<label class="control-label col-sm-4" for="note">Note:</label>
 										<div class="col-sm-8">
-										  <textarea class="form-control" id="tr_note"></textarea>
+										  <textarea class="form-control" id="tr_note" name="note"></textarea>
 										</div>
 									</div>
 									
