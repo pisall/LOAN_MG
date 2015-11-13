@@ -18,8 +18,8 @@
 		 <script type="text/javascript">   
 			var BASE_URL = "${pageContext.request.contextPath}";  
 		</script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	
-    <script src="${pageContext.request.contextPath}/resources/js/outcome.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>	 
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/outcome.js"></script> --%>
 		
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -48,116 +48,76 @@
      	}
      </style>  
 </head>
-<body>
 
-<input type ="hidden" id="out1" value=""/>
-<input type ="hidden" id="out2" value=""/>
-<input type ="hidden" id="out3" value=""/>
-<input type ="hidden" id="out4" value=""/>
-<input type ="hidden" id="out5" value=""/>
-<input type ="hidden" id="out6" value=""/>
-<input type ="hidden" id="out7" value=""/>
-<input type ="hidden" id="out8" value=""/>
-<input type ="hidden" id="out9" value=""/>
-<input type ="hidden" id="out10" value=""/>
-<input type ="hidden" id="out11" value=""/>
-<input type ="hidden" id="out12" value=""/>
-
-
-
-
-
-
-
-<input type ="hidden" id="mon1" value=""/>
-<input type ="hidden" id="mon2" value=""/>
-<input type ="hidden" id="mon3" value=""/>
-<input type ="hidden" id="mon4" value=""/>
-<input type ="hidden" id="mon5" value=""/>
-<input type ="hidden" id="mon6" value=""/>
-<input type ="hidden" id="mon7" value=""/>
-<input type ="hidden" id="mon8" value=""/>
-<input type ="hidden" id="mon9" value=""/>
-<input type ="hidden" id="mon10" value=""/>
-<input type ="hidden" id="mon11" value=""/>
-<input type ="hidden" id="mon12" value=""/>
+<body>   
  
-	<script>
-	    window.onload = function ()
-	    { 
-	    	var out1 = document.getElementById('out1').value;
-	    	var outco1 = out1.slice(0,3);
-	    	var out2 = document.getElementById('out2').value;
-	    	var outco2 = out2.slice(0,3);
-	    	var out3 = document.getElementById('out3').value;
-	    	var outco3 = out3.slice(0,3);
-	    	var out4 = document.getElementById('out4').value;
-	    	var outco4 = out4.slice(0,3);
-	    	var out5 = document.getElementById('out5').value;
-	    	var outco5 = out5.slice(0,3);
-	    	var out6 = document.getElementById('out6').value;
-	    	var outco6 = out6.slice(0,3);
-	    	var out7 = document.getElementById('out7').value;
-	    	var outco7 = out7.slice(0,3);
-	    	var out8 = document.getElementById('out8').value;
-	    	var outco8 = out8.slice(0,3);
-	    	var out9 = document.getElementById('out9').value;
-	    	var outco9 = out9.slice(0,3);
-	    	var out10 = document.getElementById('out10').value;
-	    	var outco10 = out10.slice(0,3);
-	    	var out11 = document.getElementById('out11').value;
-	    	var outco11 = out11.slice(0,3);
-	    	var out12 = document.getElementById('out12').value;
-	    	var outco12 = out12.slice(0,3);  
-	    	
-	    	console.log("11111111out::="+out1);
-	    	console.log("2out222::="+out2);
-	    	console.log("33out333333::="+out3);
-	    	console.log("11111111::="+outco1);
-	    	console.log("2222::="+outco2);
-	    	console.log("33333333::="+outco3);
-	    	
-	    	// get month
-	    	var mon1 = document.getElementById('mon1').value;
-	    	var mon2 = document.getElementById('mon2').value;
-	    	var mon3 = document.getElementById('mon3').value;
-	    	var mon4 = document.getElementById('mon4').value;
-	    	var mon5 = document.getElementById('mon5').value;
-	    	var mon6 = document.getElementById('mon6').value;
-	    	var mon7 = document.getElementById('mon7').value;
-	    	var mon8 = document.getElementById('mon8').value;
-	    	var mon9 = document.getElementById('mon9').value;
-	    	var mon10 = document.getElementById('mon10').value;
-	    	var mon11 = document.getElementById('mon11').value;
-	    	var mon12 = document.getElementById('mon12').value; 
-	    	
-	    	
-	        var data = [outco12,outco11,outco10,outco9,outco8,outco7,outco6,outco5,outco4,outco3,outco2,outco1];
-	
-	        var bar = new RGraph.Bar({
-	            id: 'cvs',
-	            data: data,
-	            options: {
-	                backgroundGridAutofitNumvlines: 0,
-	                linewidth: 0,
-	                shadow: false,
-	                hmargin: 6,
-	                colors: ['Gradient(pink:red:#f33)', 'Gradient(green:#0f0)'],
-	                labels: [mon12,mon11,mon10,mon9,mon8,mon7,mon6,mon5,mon4,mon3,mon2,mon1],
-	                clearto: 'white',
-	                variant: '3d',
-					ymin:0,
-					ymax: 1000,
-					gutterTop: 30,
-					gutterLeft: 50,
-					title:'Monthly Outcome គិតជាលានរៀល',
-	                gutterBottom:70
-	            }
-	        }).wave({frames: 60});
-	    };
+ 		<script>
+	    $(function () 
+		    {  
+		 		$.ajax({
+		 			url:BASE_URL+'/Outcome/OutcomeDao',
+		 			type:'POST',
+		 			datatype:'JSON',
+		 			beforeSend : function(xhr) {
+		 				xhr.setRequestHeader("Accept", "application/json");
+		 				xhr.setRequestHeader("Content-Type", "application/json");
+		 			},
+		 			success:function(dat){  
+		 				for(var i=0;i<dat.length;i++){
+		 					var out1 = dat[0].out1;
+		 					var out2 = dat[1].out2; 
+		 					var out3 = dat[2].out3; 
+		 					var out4 = dat[3].out4; 
+		 					var out5 = dat[4].out5; 
+		 					var out6 = dat[5].out6; 
+		 					var out7 = dat[6].out7; 
+		 					var out8 = dat[7].out8; 
+		 					var out9 = dat[8].out9; 
+		 					var out10 = dat[9].out10; 
+		 					var out11 = dat[10].out11; 
+		 					var out12 = dat[11].out12; 
+		 					
+		 					var mon1 = dat[0].mon1;
+		 					var mon2 = dat[1].mon2; 
+		 					var mon3 = dat[2].mon3; 
+		 					var mon4 = dat[3].mon4; 
+		 					var mon5 = dat[4].mon5; 
+		 					var mon6 = dat[5].mon6; 
+		 					var mon7 = dat[6].mon7; 
+		 					var mon8 = dat[7].mon8; 
+		 					var mon9 = dat[8].mon9; 
+		 					var mon10 = dat[9].mon10; 
+		 					var mon11 = dat[10].mon11; 
+		 					var mon12 = dat[11].mon12; 
+		 					
+		 				}
+		 				var data=[out12,out11,out10,out9,out8,out7,out6,out5,out4,out3,out2,out1];
+				        var bar = new RGraph.Bar({
+				            id: 'cvs',
+				            data: data,
+				            options: {
+				                backgroundGridAutofitNumvlines: 0,
+				                linewidth: 0,
+				                shadow: false,
+				                hmargin: 6,
+				                colors: ['Gradient(pink:red:#f33)', 'Gradient(green:#0f0)'],
+				                labels: [mon12,mon11,mon10,mon9,mon8,mon7,mon6,mon5,mon4,mon3,mon2,mon1],
+				                clearto: 'white',
+				                variant: '3d',
+								ymin:0,
+								ymax: 20000000,
+								gutterTop: 30,
+								gutterLeft: 90,
+								title:'Monthly Outcome គិតជាលានរៀល',
+				                gutterBottom:70
+				            }
+				        }).wave({frames: 60});
+				      
+		 			} 
+		        
+		 		});
+		    });
 		</script>
-		
-		
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -210,7 +170,7 @@
 		
 	<%@include file="include/_script.jsp"%> 
 	 <script type="text/javascript">
-	 var PAGE_ID="${page_id}"; 
+	 var PAGE_ID="${page_id}";
 	 </script>
 	
 		
