@@ -108,7 +108,7 @@
 								ymax: 999000000,
 								gutterTop: 30,
 								gutterLeft: 100,
-								title:'Monthly Income រៀល',
+								title:'Monthly Outcome រៀល',
 				                gutterBottom:80
 				            }
 				        }).wave({frames: 60});
