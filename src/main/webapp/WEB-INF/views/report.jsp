@@ -72,7 +72,7 @@
 												<td style="border:0px">${entry.ac_period} &nbsp; ${entry.ac_period_type}</td>
 											  </tr>
 											  <tr>
-												<td>Full Amont :</td>
+												<td>Full Amount :</td>
 												<td>${entry.ac_amount} R</td>
 											  </tr>
 											  <tr>

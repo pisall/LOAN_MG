@@ -85,7 +85,7 @@
 						</table>
 						
 					</div>
-					<form  class="form-horizontal"> 
+					<form  class="form-horizontal" id="form_approve"> 
 					<div class="col-lg-12">
 						
 							<div class="row">
@@ -94,13 +94,13 @@
 										 
 										<label class="control-label col-sm-4" for="paid_amount" > Paid Amount:</label>
 										<div class="col-sm-8">
-										  <input type="text" class="form-control" id="paid_amount" placeholder="0.0">
+										  <input type="text" class="form-control check_number required" id="paid_amount" placeholder="0.0">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="amount-fine" >Amount fine:</label>
 										<div class="col-sm-8">
-										  <input type="text" class="form-control" id="amount_fine" placeholder="0.0">
+										  <input type="text" class="form-control check_number required" id="amount_fine" placeholder="0.0">
 										</div>
 									</div>
 									
@@ -108,7 +108,6 @@
 										<label class="control-label col-sm-4" for="amount_fine" >Transection Type:</label>
 										<div class="col-sm-8" >
 										  <select class="form-control" id="tr_type">
-											<option>--select--</option>
 											<option value="2">Complete</option>
 											<option value="3">Area</option>
 											<option value="4">Finished</option> 
@@ -152,6 +151,7 @@
     <script type="text/javascript">
     	var BASE_URL="${pageContext.request.contextPath}";
     </script>
+   
 </body>
 
 </html>
