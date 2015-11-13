@@ -80,16 +80,16 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="cu_name" id="cu_name"
-												placeholder="Enter Name" value="${cu.cuName}" required="required" maxlength="50">
+											<input type="text" class="form-control required" name="cu_name" id="cu_name"
+												placeholder="Enter Name" value="${cu.cuName}"  maxlength="50" required>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_nick_name" class="form-control" id="cu_nick_name"
-												placeholder="Enter Nickname" value="${cu.cuNickName}" required="required" maxlength="50">
+											<input type="text" name="cu_nick_name" class="form-control required" id="cu_nick_name"
+												placeholder="Enter Nickname" value="${cu.cuNickName}"  maxlength="50">
 										</div>
 									</div>
 
@@ -114,8 +114,8 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_dob" class="form-control" id="cu_dob"
-												placeholder="Enter Date Of Birth" value="${cu.cuDOB}" required="required">
+											<input type="text" name="cu_dob" class="form-control required" id="cu_dob"
+												placeholder="Enter Date Of Birth" value="${cu.cuDOB}" >
 										</div>
 									</div>
 
@@ -123,23 +123,23 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_national_id" class="form-control check_number" id="cu_national_id"
-												placeholder="Enter National Card" value="${cu.cuNationalID}" maxlength="10" required="required">
+											<input type="text" name="cu_national_id" class="form-control check_number required" id="cu_national_id"
+												placeholder="Enter National Card" value="${cu.cuNationalID}" maxlength="10" >
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_phone" class="form-control check_number" id="cu_phone"
-												placeholder="Enter Phone" value="${cu.cuPhone}" maxlength="10" required="required">
+											<input type="text" name="cu_phone" class="form-control check_number required" id="cu_phone"
+												placeholder="Enter Phone" value="${cu.cuPhone}" maxlength="10" >
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_address" class="form-control" id="cu_address"
-												placeholder="Enter Address" value="${cu.cuAddress}" required="required" maxlength="100">
+											<input type="text" name="cu_address" class="form-control required" id="cu_address"
+												placeholder="Enter Address" value="${cu.cuAddress}"  maxlength="100">
 										</div>
 									</div>
 
@@ -191,7 +191,7 @@ f<%@include file="include/_head.jsp"%>
 							<!-- Panel Body -->
 							<div class="panel-body">
 								<!-- Start Form -->
-								<form class="form-horizontal">
+								<form class="form-horizontal" id="form_gu">
 								<!-- <form class="form-horizontal" role="form"> -->
 									<div>
 										<div>
@@ -202,26 +202,27 @@ f<%@include file="include/_head.jsp"%>
 											type="file">
 										</span>
 									</div>
+									<input type="hidden" value="0" id="gu_id">
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_name">Name</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_name"
-												placeholder="Enter Name">
+											<input type="text" class="form-control required" id="gu_name"
+												placeholder="Enter Name" >
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_nick_name">Nickname</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_nick_name"
-												placeholder="Enter Nickname">
+											<input type="text" class="form-control required" id="gu_nick_name"
+												placeholder="Enter Nickname" >
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_sex">Sex</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="gu_sex">
+											<select class="form-control" id="gu_sex" >
 												<option value=""></option>
 												<c:if test="${gu.gu_sex !=''}">
 													<c:choose>
@@ -242,8 +243,8 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_dob"
-												placeholder="Enter Date Of Birth">
+											<input type="text" class="form-control required" id="gu_dob"
+												placeholder="Enter Date Of Birth" >
 										</div>
 									</div>
 
@@ -251,23 +252,23 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="gu_national_id">ID
 											Card</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_national_id"
-												placeholder="Enter National Card">
+											<input type="text" class="form-control check_number required" id="gu_national_id"
+												placeholder="Enter National Card" >
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_phone">Phone</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_phone"
-												placeholder="Enter Phone">
+											<input type="text" class="form-control check_number required" id="gu_phone"
+												placeholder="Enter Phone" >
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="gu_address">Address</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="gu_address"
-												placeholder="Enter Address">
+											<input type="text" class="form-control required" id="gu_address"
+												placeholder="Enter Address" >
 										</div>
 									</div>
 
@@ -319,34 +320,13 @@ f<%@include file="include/_head.jsp"%>
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 
 	<script type="text/javascript">
+		
 		$(function() {
-			jQuery.validator.setDefaults({
-				  debug: true,
-				  success: "valid"
-			});
-			 $.validator.addMethod("check_number", $.validator.methods.number,
-			   "Please input only number");
-	   		 $.validator.addClassRules("check_number", { check_number: true});
-	 			
-	   		 var validator=$("#upload-file-form").validate({	 
-	 			 errorPlacement: function(label, element) {
-		           label.addClass('arrow');
-		           label.insertAfter(element);
-				  },
-				  wrapper: 'div',
-	 			 submitHandler: function(form) {	 		
-			 		updateCustomer();
-				}
-			});
-	   		
-	   		 
-			$("#updateCustomer").click(function() {
-				$("#upload-file-form").submit();	
-			});
-			
+			var error;
+			disableForm("#form_gu");					
 			
 			function updateCustomer(){
-				 var guID = $("#foundGuarantorByID").val();
+				  guID = $("#foundGuarantorByID").val();
 
 					var input = {
 						cuID : $("#cu_id").val(),
@@ -397,7 +377,7 @@ f<%@include file="include/_head.jsp"%>
 			}
 			
 			function uploadFile() {
-					console.log(new FormData($("#upload-file-form")[0]));
+					
 				$
 						.ajax({
 							url : "${pageContext.request.contextPath}/customer/uploadFile",
@@ -415,13 +395,19 @@ f<%@include file="include/_head.jsp"%>
 							}
 						});
 			}
+			
+			function disableForm(formName){
+				$(formName).find('input, textarea, button, select').attr('disabled','disabled');
+			}
+			function enableForm(formName){
+				$(formName).find('input, textarea, button, select').attr('disabled',false);
+			}
 
 			$("#foundGuarantorByID")
 					.change(
 							function() {
-
-								var guID = $(this).val();
-
+								var  guID = $(this).val();
+							
 								var input = {
 									"customerDto" : {
 										"cuID" : $("#cu_id").val(),
@@ -430,6 +416,14 @@ f<%@include file="include/_head.jsp"%>
 								}
 
 								if (guID != 0) {
+									enableForm("#form_gu");
+									gu_form = $("#form_gu").validate({
+										 errorPlacement: function(label, element) {
+									           label.addClass('arrow');
+									           label.insertAfter(element);
+											  },
+											  wrapper: 'div',
+									});		
 									$
 											.ajax({
 												url : BASE_URL
@@ -445,7 +439,8 @@ f<%@include file="include/_head.jsp"%>
 															"Content-Type",
 															"application/json");
 												},
-												success : function(data) {
+												success : function(data) {																								
+														
 													if (data.length == 1) {
 														$(data)
 																.each(
@@ -490,6 +485,7 @@ f<%@include file="include/_head.jsp"%>
 																					.val(
 																							v.gu_note);
 																		});
+														
 													}
 												},
 												error : function(data, status,
@@ -511,6 +507,8 @@ f<%@include file="include/_head.jsp"%>
 									$("#gu_address").val("");
 									$("#gu_pawn").val("");
 									$("#gu_note").val("");
+									$("#gu_id").val("");
+									disableForm("#form_gu");
 								}
 							});
 

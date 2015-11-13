@@ -107,8 +107,13 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	@Override
 	public CO_DTO_001 findCoById(int id) {
 		// TODO Auto-generated method stub
+		Session session=factory.getCurrentSession();
+		Transaction tx=null;
 		 try{
-			   return factory.getCurrentSession().get(CO_DTO_001.class, id);
+			 tx=session.beginTransaction();
+			   CO_DTO_001 co_001 =(CO_DTO_001) session.get(CO_DTO_001.class, id);
+			  tx.commit();
+			  return co_001;
 		 }catch(Exception ex){
 			   ex.printStackTrace();
 		 }
