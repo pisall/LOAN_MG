@@ -27,9 +27,10 @@ function listCo(){
 		},
 		success : function(data) {
 			stopLoading();
+			console.log(data);
 			$("#list tbody").html("");
 			var tbody="";
-			$.each(data,function(i,v){
+			$.each(data.REC,function(i,v){
 				var tr="";
 				tr+='<tr>';
 					tr+='<td name="co_id">'+v.co_id+'</td>';

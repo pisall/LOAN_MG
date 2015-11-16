@@ -301,6 +301,8 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			co.setCo_pb_address(input.getCo_pb_address());
 			co.setCo_phone(input.getCo_phone());
 			co.setCo_cpm_phone(input.getCo_cpm_phone());
+			co.setCo_brand(input.getCo_brand());
+			System.out.println("brand="+input.getCo_brand());
 			session.update(co);
 			System.out.println("finsihed");
 			tx.commit();
@@ -322,15 +324,33 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
 			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001");
-			System.out.println(query.uniqueResult().toString());
+			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
+			if(pcount>0){
+				System.out.println("pcount>");
+				int totalPage=(int) Math.ceil((float) pcount/paging.getPcnt());
+				if(totalPage<paging.getPageNo()){
+					paging.setTotalPage(totalPage);
+					paging.setTotal(pcount);
+					paging.setTotalPage(totalPage);
+				}else{
+					paging.setTotal(pcount);
+					paging.setTotalPage(totalPage);
+				}
+				
+			}else{
+				paging.setPageNo(1);
+				paging.setTotal(0);
+				paging.setTotalPage(0);
+			}
 			
 			tx.commit();
+			return paging;
 			
 		}catch(HibernateException e){
 			e.printStackTrace();
 		}
 		
-		return null;
+		return paging;
 	}
 
 }

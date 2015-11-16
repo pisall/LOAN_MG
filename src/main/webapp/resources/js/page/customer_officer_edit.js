@@ -24,7 +24,6 @@ function getCoById(input){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			console.log(data);
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
@@ -137,6 +136,7 @@ function coupdate(){
 		},
 		success : function(data) {
 			if(!data.ERROR){
+				console.log(data);
 				alert("Successful update!.");
 				//viewCustomer(ID);
 				window.location.href = BASE_URL+"/co_001_controller/co_0003";
@@ -184,6 +184,7 @@ function viewCustomer(id){
 			$("#cpm_phone").val(data.co_cpm_phone);
 			$("#pb_adress").val(data.co_pb_address);
 			$("#address").val(data.address);
+			$("#brand").val(data.co_brand);
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

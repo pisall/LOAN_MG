@@ -189,14 +189,18 @@ public class co_001_controller {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/co_l0001",method=RequestMethod.POST)
 	@ResponseBody
-	public List coL0001(@RequestBody pagingDto paging,HttpServletRequest req){
+	public HashMap<String, Object> coL0001(@RequestBody pagingDto paging,HttpServletRequest req){
 		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
+		HashMap<String, Object> result=new HashMap<>();
 		HttpSession session=req.getSession();
 		String test=(String)session.getAttribute("username");
 		System.out.println("session naem="+test);
 		pagingDto newpaging=new pagingDto();
 		newpaging=coDao.getPaging(paging);
-		return coDao.coList(paging);
+		result.put("PAGING", newpaging);
+		List rec=coDao.coList(newpaging);
+		result.put("REC", rec);
+		return result;
 	}
 	
 	/*
