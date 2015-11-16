@@ -41,8 +41,7 @@
 									<table class="table table-hover table-striped">
 										<thead class="style2">
 											<tr class="active">
-												<th>Name</th>
-												<th>Sex</th>
+												<th>Name</th>										
 												<th>Phone</th>
 												<th>NIN</th>
 											</tr>
@@ -65,8 +64,7 @@
 									<table class="table table-hover table-striped">
 										<thead class="style2">
 											<tr class="active">
-												<th>Name</th>
-												<th>Sex</th>
+												<th>Name</th>												
 												<th>Phone</th>
 												<th>NIN</th>
 											</tr>
@@ -90,8 +88,7 @@
 									<table class="table table-hover table-striped">
 										<thead class="style2">
 											<tr class="active">
-												<th>Name</th>
-												<th>Sex</th>
+												<th>Name</th>											
 												<th>Phone</th>
 												<th>NIN</th>
 											</tr>
