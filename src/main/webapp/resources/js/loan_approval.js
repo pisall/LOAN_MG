@@ -36,59 +36,12 @@ $(document).ready(function(){
 			AC_ID= dat.ac_id;
 			TR_ID=dat.tr_id;
 			
-			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_sex+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
-			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_sex+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
-			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_sex+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
+			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
+			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
+			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
 			
-				$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);
+			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);
 			
-			var customer_info='<tr>';
-			customer_info+='<td colspan="4" style="text-align:center;background-color:#FFF"><h4>Customer Officer Info (CO Info)</h4></td>';
-				customer_info+='</tr>';
-				customer_info+='<tr>'; 
-					customer_info+='<td>Name : <span class="label label-primary">'+dat.co_first_nm+' '+dat.co_last_nm+'</span></td>';
-					customer_info+='<td>Sex : <span class="label label-primary">'+dat.co_sex+'</span></td>';
-					customer_info+='<td>Phone : <span class="label label-primary">'+dat.co_phone+'</span></td>';
-					customer_info+='<td>National ID: <span class="label label-primary">'+dat.gu_national_id+'</span></td>	';								
-				customer_info+='</tr>';
-			customer_info+='<tr>';
-			customer_info+='<td colspan="4" style="text-align:center;background-color:#FFF"><h4>Customer Infomation</h4></td>';
-				customer_info+='</tr>';
-				customer_info+='<tr>';
-					customer_info+='<td>Name : <span class="label label-primary">'+dat.cu_nm+'</span></td>';
-					customer_info+='<td>Sex : <span class="label label-primary">'+dat.cu_sex+'</span></td>';
-					customer_info+='<td>Phone : <span class="label label-primary">'+dat.cu_phone+'</span></td>';
-					customer_info+='<td>National ID: <span class="label label-primary">'+dat.cu_national_id+'</span></td>	';								
-				customer_info+='</tr>';
-
-				customer_info+='<tr>';
-					customer_info+='<td colspan="4" style="text-align:center;background-color:#FFF;"><h4>Loan Information</h4></td>';
-				customer_info+='</tr>';
-				customer_info+='<tr>';
-					customer_info+='<td>Pay Type : <span class="label label-primary" name="">'+dat.ac_period_type+'</span></td>';
-					customer_info+='<td>Total : <span class="label label-primary">'+dat.ac_amount+' R</span></td>';
-					customer_info+='<td>Date : <span class="label label-primary">'+dat.pay_date+'</span></td>',
-					customer_info+='<td>Transaction Amount<br/>';
-						customer_info+='&nbsp;- Pay Amount : <span class="label label-primary">'+dat.tr_pay_amount+'R</span><br/>';
-						customer_info+='&nbsp;- Balance : <span class="label label-primary">'+dat.tr_balance+'R</span>';
-					customer_info+='</td>';									
-					customer_info+='</tr>';
-				customer_info+='<tr>';
-					customer_info+='<td colspan="4" style="border:0px;">Pawn: <span class="label label-primary">'+dat.cu_pawn+'</span></td>';
-				customer_info+='</tr>';
-				customer_info+='<tr>';
-					customer_info+='<td colspan="4" style="text-align:center;background-color:#FFF"><h4>Guarantor</h4></td>';
-				customer_info+='</tr>';
-				customer_info+='<tr>';
-					customer_info+='<td>Name : <span class="label label-primary">'+dat.gu_nm+'</span></td>';
-					customer_info+='<td>Sex : <span class="label label-primary">'+dat.gu_sex+'</span></td>';
-					customer_info+='<td>Phone : <span class="label label-primary">'+dat.gu_phone+'</span></td>';
-					customer_info+='<td>National ID: <span class="label label-primary">'+dat.gu_national_id+'</span></td>';									
-				customer_info+='</tr>';
-				customer_info+='<tr>								<tr>';
-					customer_info+='<td colspan="4" style="border:0px;">Pawn: <span class="label label-primary">'+dat.gu_pawn+'</span></td>';
-				customer_info+='</tr>';
-			$("#customer_info").append(customer_info);
 		}
 	 });
 	 
