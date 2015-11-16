@@ -44,8 +44,8 @@
 				<div class="row" style="font-size:12px">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div class="panel panel-default">
-							<div class="panel-heading">Customer Information</div>
-							<div class="panel-body">
+							<div class="panel-heading">Customer Officer Information</div>
+							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
 										<thead class="style2">
@@ -56,7 +56,7 @@
 												<th>NIN</th>
 											</tr>
 										</thead>
-										<tbody id="cus_info">
+										<tbody id="co_info">
 											
 										</tbody>
 									</table>
@@ -68,8 +68,8 @@
 					</div>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div class="panel panel-default">
-							<div class="panel-heading">Gurantor Information</div>
-							<div class="panel-body">
+							<div class="panel-heading">Customer Information</div>
+							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
 										<thead class="style2">
@@ -80,7 +80,7 @@
 												<th>NIN</th>
 											</tr>
 										</thead>
-										<tbody id="gu_info">
+										<tbody id="cu_info">
 											
 										</tbody>
 									</table>
@@ -98,8 +98,8 @@
 						</table> -->
 						<!-- panel body -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Customer Officer Information</div>
-							<div class="panel-body">
+							<div class="panel-heading">Gurantor Information</div>
+							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
 										<thead class="style2">
@@ -110,7 +110,7 @@
 												<th>NIN</th>
 											</tr>
 										</thead>
-										<tbody id="co_info">
+										<tbody id="gu_info">
 											
 										</tbody>
 									</table>
