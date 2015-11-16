@@ -37,7 +37,7 @@
 	 
 	/*  $.validator.addMethod("check_required", $.validator.methods.required,
 	   "This file is needed");
-	 $.validator.addClassRules("required", { check_required: true}); */
+	 $.validator.addClassRules("required", { check_required: true}); -*/
 		
 	</script>
      
