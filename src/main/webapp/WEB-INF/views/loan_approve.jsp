@@ -40,7 +40,6 @@
 
 				</div>
 
-
 				<div class="row" style="font-size:12px">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div class="panel panel-default">
