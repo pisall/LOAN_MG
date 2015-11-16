@@ -37,10 +37,8 @@ public class HomeController {
 		HttpSession session=req.getSession();
 		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
 		String test=user.getCoNm();
-		System.out.println("session naem="+test);
-			
-		return "home";
-		
+		System.out.println("session naem="+test); 
+		return "home"; 
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -88,22 +86,9 @@ public class HomeController {
 		}
 		return userName;
 	}
+	 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/*
 	
 	@RequestMapping(value="customer_information")
 	public ModelAndView customerInformation(){
@@ -113,11 +98,11 @@ public class HomeController {
 		return mv;
 	}
 
-	/*
+	
 	 * @RequestMapping(value="/addUser", method=RequestMethod.POST) public
 	 * String addUser(@ModelAttribute MfiUserDto user){ userImp=new
 	 * MfiUserDaoImp(); userImp.insertUser(user); return "redirect:/"; }
-	 */
+	 
 	
 
 
@@ -131,7 +116,7 @@ public class HomeController {
 	public String loanAgreement() {
 
 		return "loan_agreement";
-	}
+	}*/
 	
 	
 }
