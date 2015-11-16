@@ -281,13 +281,21 @@ public class co_001_controller {
 		HashMap<String, Object> result=coDao.findCoById2(sesCoId);
 		return result;
 	}
-	
+	/*
+	 * update co by id
+	 */
 	@RequestMapping(value="/co_u0003",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> coU0003(@RequestBody co_0001_in input,HttpServletRequest req){
 		System.out.println(input.toString());
-		coDao.updateCo(input);
-	
-		return null;
+		HashMap<String , Object> result=new HashMap<>();
+		HashMap<String, Object> updateResule=new HashMap<>();
+		updateResule=coDao.updateCo(input);
+		if((boolean)updateResule.get("ERROR")){
+			result.put("ERROR", true);
+		}else{
+			result.put("ERROR", false);
+		}
+		return result;
 	}
 	
 

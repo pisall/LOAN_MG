@@ -285,28 +285,32 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	public HashMap<String, Object> updateCo(co_0001_in input){
 		Session session=null;
 		Transaction tx=null;
+		HashMap<String, Object> result=new HashMap<>();
 		try{
-			
-		session=factory.getCurrentSession();
-		tx=session.beginTransaction();
-		CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
-		System.out.println("firstNam="+co.getCo_first_nm());
-		co.setCo_first_nm(input.getCo_first_nm());
-		co.setCo_last_nm(input.getCo_last_nm());
-		co.setCo_sex(input.getCo_sex());
-		co.setDob(input.getDob());
-		co.setCo_national_id(input.getCo_national_id());
-		co.setAddress(input.getAddress());
-		co.setCo_pb_address(input.getCo_pb_address());
-		co.setCo_phone(input.getCo_phone());
-		session.update(co);
-		System.out.println("finsihed");
-		tx.commit();
+			result.put("ERROR", true);
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
+			System.out.println("firstNam="+co.getCo_first_nm());
+			co.setCo_first_nm(input.getCo_first_nm());
+			co.setCo_last_nm(input.getCo_last_nm());
+			co.setCo_sex(input.getCo_sex());
+			co.setDob(input.getDob());
+			co.setCo_national_id(input.getCo_national_id());
+			co.setAddress(input.getAddress());
+			co.setCo_pb_address(input.getCo_pb_address());
+			co.setCo_phone(input.getCo_phone());
+			co.setCo_cpm_phone(input.getCo_cpm_phone());
+			session.update(co);
+			System.out.println("finsihed");
+			tx.commit();
+			result.put("ERROR", false);
+			return result;
 		
 		}catch(HibernateException e){
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 	
 	@Override

@@ -136,7 +136,13 @@ function coupdate(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			console.log(data);
+			if(!data.ERROR){
+				alert("Successful update!.");
+				viewCustomer(ID);
+			}else{
+				alert("upating is fail.");
+			}
+			
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
