@@ -295,7 +295,7 @@ public class co_001_controller {
 		}else{
 			result.put("ERROR", false);
 		}
-		return result;
+		return result;//test
 	}
 	
 
