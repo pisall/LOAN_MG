@@ -1,6 +1,7 @@
 /* layout */
 body{
 	background-color:#FFF;
+   
 }
 .navbar-inverse{
 	background-color:#fff;
@@ -176,14 +177,9 @@ table thead.style2 tr th{
       .panel-default{
       	border:none;
       }
-      .head-print{
-      	padding:0px;
-      	margin:0px;
-      }
-      
-      
+      body{ margin: 0px;  }
    }
-   @page  
+@page  
 { 
     size: auto;   /* auto is the initial value */ 
 
@@ -191,8 +187,3 @@ table thead.style2 tr th{
     margin: 25mm 25mm 25mm 25mm;  
 } 
 
-body  
-{ 
-    /* this affects the margin on the content before sending to printer */ 
-    margin: 0px;  
-} 
