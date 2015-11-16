@@ -9,6 +9,18 @@ $(document).ready(function(){
 	 var cu_id = document.getElementById('cu_id').value;
 	// alert("wtf tr_id:="+tr_id+"==cu_id:=="+cu_id);
 	 
+	 // validation 
+	 
+	 $("#form_approve").validate({
+			 errorPlacement: function(label, element) {
+		           label.addClass('arrow');
+		           label.insertAfter(element);
+				  },
+			  submitHandler: function(form) { 
+				  LoanApprove(); 				 
+			  }
+		});
+	 
 	 $.ajax({
 		url:BASE_URL+'/schadule_payment/schadule/'+tr_id+"/"+cu_id,
 		type:'POST',
@@ -76,8 +88,7 @@ $(document).ready(function(){
 	 
 	 
 	 $("#btnApprovale").click(function(){ 
-		LoanApprove(); 
-		 
+		 $("#form_approve").submit();
 	 });
 });
 

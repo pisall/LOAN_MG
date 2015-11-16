@@ -25,13 +25,7 @@ import com.system.loan.dto.TransectionDto;
 @Controller
 @RequestMapping(value="/LoanAgreement")
 public class LoanAgreementController implements Serializable{
-		 
-		//String username = request.getParameter("us_name"); 
-		
-		/**
-	 * 
-	 */
-	
+		  
 	int cus_id=0;
 	
 	TransectionDao tranDao = null;

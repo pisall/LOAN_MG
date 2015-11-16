@@ -1,5 +1,4 @@
 
-     
 	
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script> 
@@ -22,7 +21,23 @@
      <script src="${pageContext.request.contextPath}/resources/js/page/common.js"></script>
      <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
      
-     <%--  <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script> --%>
-    
-  
-  
+     <!-- Jquery validation -->
+     <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/js/additional-methods.min.js"></script>
+     
+ 
+	<script type="text/javascript">
+	jQuery.validator.setDefaults({
+		  debug: true,
+		  success: "valid"
+	});
+	 $.validator.addMethod("check_number", $.validator.methods.number,
+	   "Please input only number");
+	 $.validator.addClassRules("check_number", { check_number: true});
+	 
+	/*  $.validator.addMethod("check_required", $.validator.methods.required,
+	   "This file is needed");
+	 $.validator.addClassRules("required", { check_required: true}); */
+		
+	</script>
+     

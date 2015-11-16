@@ -12,7 +12,11 @@ $(document).ready(function(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
-			console.log(dat);
+			console.log(dat);  
+			
+			for(var i=0;i<dat.length;i++){  
+				 
+			}
 		}
 	});
 });
