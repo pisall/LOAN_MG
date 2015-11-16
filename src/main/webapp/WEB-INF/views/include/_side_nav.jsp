@@ -7,7 +7,7 @@
 	<li cont_name="cont_1" val="co_0003"><a href="${pageContext.request.contextPath}/co_001_controller/co_0003"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
 			&nbsp;Customer Officer(CO)</a></li>
-	<li cont_name="cont_2" val="customer_information"><a href="${pageContext.request.contextPath}/customer_information"><span
+	<li cont_name="cont_2" val="customer_information"><a href="${pageContext.request.contextPath}/customer/home_customer"><span
 			class="glyphicon glyphicon-user" aria-hidden="true"></span></i>&nbsp;Customer
 			Information</a></li>
 	<!-- <li><a href="tables.html"><span

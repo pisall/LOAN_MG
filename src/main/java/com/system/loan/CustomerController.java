@@ -43,7 +43,11 @@ public class CustomerController {
 	@Inject
 	GuarantorDaoImp guarantorImp;
 
-
+	@RequestMapping(value = "/home_customer")
+	public String home_customer() {
+		return "customer_information";
+	}
+	
 	/**
 	 * List Customer
 	 * 
