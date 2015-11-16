@@ -76,10 +76,10 @@
 										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
 										<div class="col-sm-10" name="cu_sex" id="cu_sex">
 											<label class="radio-inline"> 
-												<input type="radio" value="Male" name="cu_sex" checked="checked">Male
+												<input type="radio" value="m" name="cu_sex" checked="checked">Male
 											</label>
 											 <label class="radio-inline"> 
-												<input type="radio" value="Female" name="cu_sex">Female
+												<input type="radio" value="f" name="cu_sex">Female
 											</label> 
 										</div>
 									</div>
@@ -96,7 +96,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="11"  class="form-control required check_number" name="cu_national_id" id="cu_id_card"
+											<input type="text" maxlength="9"  class="form-control required check_number" name="cu_national_id" id="cu_id_card"
 												placeholder="Enter National Card">
 										</div>
 									</div>
@@ -104,7 +104,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											Phone</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="11"  class="form-control required check_number" name="cu_phone" id="cu_phone"
+											<input type="text" maxlength="10"  class="form-control required check_number" name="cu_phone" id="cu_phone"
 												placeholder="User Phone number">
 										</div>
 									</div>
@@ -140,10 +140,10 @@
 										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
 										<div class="col-sm-10" name="cu_sex" id="cu_sex">
 											<label class="radio-inline"> 
-												<input type="radio" value="Male" name="gu_sex" checked="checked">Male
+												<input type="radio" value="f" name="gu_sex" checked="checked">Male
 											</label>
 											 <label class="radio-inline"> 
-												<input type="radio" value="Female" name="gu_sex">Female
+												<input type="radio" value="m" name="gu_sex">Female
 											</label> 
 										</div>
 									</div>
@@ -152,7 +152,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="11" class="form-control required check_number"  name="gu_national_id" id="gu_id_card"
+											<input type="text" maxlength="9" class="form-control required check_number"  name="gu_national_id" id="gu_id_card"
 												placeholder="Guarantor National Card">
 										</div>
 									</div>
@@ -160,7 +160,7 @@
 										<label class="control-label col-sm-2" for="text">
 											Phone</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="11" class="form-control required check_number" name="gu_phone" id="gu_phone"
+											<input type="text" maxlength="10" class="form-control required check_number" name="gu_phone" id="gu_phone"
 												placeholder="Guarantor phone">
 										</div>
 									</div> 
@@ -201,7 +201,7 @@
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
 												<input type="text" class="form-control required check_number" name="ac_rate" id="rate"
-													placeholder="Rate" maxlength="4">
+													placeholder="Rate" maxlength="5">
 												<!-- <div class="input-group-addon">%</div> -->
 											<!-- </div> -->
 										</div>

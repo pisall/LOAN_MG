@@ -130,6 +130,7 @@ public class CustomerDaoImp implements CustomerDao {
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list = (List<CustomerDto>) query.list();
+			
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();

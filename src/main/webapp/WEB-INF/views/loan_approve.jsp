@@ -35,7 +35,7 @@
 				<div class="row" style="font-size:12px">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div class="panel panel-default">
-							<div class="panel-heading">Customer Officer Information</div>
+							<div class="panel-heading"><b>Customer Officer Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
@@ -58,7 +58,7 @@
 					</div>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div class="panel panel-default">
-							<div class="panel-heading">Customer Information</div>
+							<div class="panel-heading"><b>Customer Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
@@ -82,7 +82,7 @@
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 				
 						<div class="panel panel-default">
-							<div class="panel-heading">Gurantor Information</div>
+							<div class="panel-heading"><b>Gurantor Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">
@@ -105,7 +105,7 @@
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Loan Information</div>
+							<div class="panel-heading"><b>Loan Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
 									<table class="table table-hover table-striped">

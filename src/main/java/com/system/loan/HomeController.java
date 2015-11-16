@@ -3,6 +3,7 @@ package com.system.loan;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.net.httpserver.HttpContext;
+import com.system.loan.dao.CustomerDaoImp;
+import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.session.USER_SESSION;
 
 /**
@@ -29,15 +32,18 @@ import com.system.loan.dto.session.USER_SESSION;
 @Controller
 public class HomeController {
 
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value ={"/","home"}, method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
+	
 		HttpSession session=req.getSession();
 		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
 		String test=user.getCoNm();
-		System.out.println("session naem="+test); 
+		CustomerDto cus=new CustomerDto();
+		System.out.println("customer dto total========"+cus.getTotalCus());
 		return "home"; 
 	}
 	
