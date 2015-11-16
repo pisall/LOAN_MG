@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuu");
 		http.authorizeRequests()
 		.antMatchers("/login").permitAll()
-		.antMatchers("/", "/**").authenticated()
+		.antMatchers("/", "/home").authenticated()
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
         .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
         .and().formLogin().loginPage("/login").successHandler(suc)

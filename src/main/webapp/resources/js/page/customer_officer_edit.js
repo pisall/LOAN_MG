@@ -4,10 +4,10 @@
 
 $(document).ready(function(){
 	//blur event
-	/*onblur();
+	onblur();
 	$("#btn_save").click(function(){
-		//coInsert();
-	});*/
+		coupdate();
+	});
 	viewCustomer(ID);
 	//console.log("id==="+ID);
 	
@@ -86,18 +86,18 @@ function validation(input){
 	/*--  Phone  --*/
 	if(input.co_phone){
 		if(input.co_phone!=""){
-			$("#national_id").parents(".form-group").removeClass("has-error");
-			$("#national_id").siblings(".help-block").hide();
+			$("#phone").parents(".form-group").removeClass("has-error");
+			$("#phone").siblings(".help-block").hide();
 		}else{
 			error=true;
-			$("#national_id").parents(".form-group").addClass("has-error");
-			$("#national_id").siblings(".help-block").show();
+			$("#phone").parents(".form-group").addClass("has-error");
+			$("#phone").siblings(".help-block").show();
 			
 		}
 	}else{
 		error=true;
-		$("#national_id").parents(".form-group").addClass("has-error");
-		$("#national_id").siblings(".help-block").show();
+		$("#phone").parents(".form-group").addClass("has-error");
+		$("#phone").siblings(".help-block").show();
 		
 	}
 	/*--  //Phone  --*/
@@ -106,7 +106,7 @@ function validation(input){
 }
 function coupdate(){
 	var input={};
-	input['co_id']=2
+	input['co_id']=ID;
 	input['co_first_nm']=$("#first_nm").val();
 	input['co_last_nm']=$("#last_nm").val();
 	input['co_sex']=$("input:radio[name=sex]:checked").val();
@@ -114,8 +114,9 @@ function coupdate(){
 	input['co_brand']=$("#brand").val();
 	input['co_phone']=$("#phone").val();
 	input['co_cpm_phone']=$("#cpm_phone").val();
-	input['dob']=$("#dob").val();
+	input['dob']=$("#dob").val().replace(/-/g, '');
 	input['address']=$("#address").val();
+	input['co_pb_address']=$('#pb_adress').val();
 	
 	console.log(input);
 	//pb_adress
@@ -126,7 +127,7 @@ function coupdate(){
 	}
 	console.log("start");
 	$.ajax({
-		url : BASE_URL + "/co_001_controller/co_u0001",
+		url : BASE_URL + "/co_001_controller/co_u0003",
 		type : 'POST',
 		dataType : 'JSON',
 		data : JSON.stringify(input),
@@ -172,11 +173,10 @@ function viewCustomer(id){
 			}
 			strDat=strDat.substring(0,4)+"-"+strDat.substring(4,6)+"-"+strDat.substring(6,8);
 			$("#dob").val(strDat);
-			
-			
-			
-			
-			
+			$("#phone").val(data.co_phone);
+			$("#cpm_phone").val(data.co_cpm_phone);
+			$("#pb_adress").val(data.co_pb_address);
+			$("#address").val(data.address);
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

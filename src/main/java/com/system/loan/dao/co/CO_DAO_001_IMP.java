@@ -4,6 +4,7 @@ package com.system.loan.dao.co;
 import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,8 +15,10 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Service;
 
+import com.system.loan.dto.pagingDto;
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
+import com.system.loan.dto.co.in.co_0001_in;
 @Service
 public class CO_DAO_001_IMP implements CO_DAO_001{
 	private SessionFactory factory=null;
@@ -117,7 +120,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List coList() {
+	public List coList(pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session=factory.getCurrentSession();
 		Transaction tx=null;
@@ -134,6 +137,8 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true");
 			
 			/*Query query=session.createQuery("from CO_DTO_001 where loginDTO.enabled=true");*/
+			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
+			query.setMaxResults(paging.getPcnt());
 			
 			List result=(List)query.list();
 			tx.commit();
@@ -249,9 +254,17 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, id);
-			co.getLoginDTO().setEnabled(enabled);
-			session.update(co);
+//			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, id);
+//			co.getLoginDTO().setEnabled(enabled);
+//			session.update(co);
+			
+			String sql="update mfi_login set enabled=? where co_id=?";
+			Query query=session.createSQLQuery(sql);
+			query.setBoolean(0, enabled);
+			query.setInteger(1, id);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			int count=query.executeUpdate();
+			System.out.println(count);
 
 			tx.commit();
 			result.put("ERROR", false);
@@ -261,6 +274,53 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			e.printStackTrace();
 		}
 		result.put("ERROR", true);
+		return null;
+	}
+	
+	public HashMap<String, Object> updateCo(co_0001_in input){
+		Session session=null;
+		Transaction tx=null;
+		try{
+			
+		session=factory.getCurrentSession();
+		tx=session.beginTransaction();
+		CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
+		System.out.println("firstNam="+co.getCo_first_nm());
+		co.setCo_first_nm(input.getCo_first_nm());
+		co.setCo_last_nm(input.getCo_last_nm());
+		co.setCo_sex(input.getCo_sex());
+		co.setDob(input.getDob());
+		co.setCo_national_id(input.getCo_national_id());
+		co.setAddress(input.getAddress());
+		co.setCo_pb_address(input.getCo_pb_address());
+		co.setCo_phone(input.getCo_phone());
+		session.update(co);
+		System.out.println("finsihed");
+		tx.commit();
+		
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public pagingDto getPaging(pagingDto paging) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		Transaction tx=null;
+		try{
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001");
+			System.out.println(query.uniqueResult().toString());
+			
+			tx.commit();
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

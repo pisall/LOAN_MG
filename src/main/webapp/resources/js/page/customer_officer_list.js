@@ -9,12 +9,15 @@ $(document).ready(function(){
 });
 
 function listCo(){
+	var input={};
+	input.pageNo=1;
+	input.pcnt=4;
 	
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_l0001",
 		type : 'POST',
 		dataType : 'JSON',
-		//data : JSON.stringify(input),
+		data : JSON.stringify(input),
 		contentType : 'application/json; charset=utf-8',
 	      dataType : 'json',
 		beforeSend : function(xhr) {
@@ -58,7 +61,18 @@ function listCo(){
 					var input={};
 					input["co_id"]=$(this).attr("val");
 					input["enabled"]=false;
-					disabledUser(input);
+					//disabledUser(input);
+					
+					$.confirm({
+						text : "Are you sure want to disable this user?<br/>click ok to disable.",
+						confirm : function() {
+							disabledUser(input);
+
+						},
+						cancel : function() {
+							
+						}
+					});
 					
 				});
 			});

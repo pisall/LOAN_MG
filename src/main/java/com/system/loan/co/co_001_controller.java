@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.system.loan.dao.co.CO_DAO_001_IMP;
+import com.system.loan.dto.pagingDto;
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
 import com.system.loan.dto.co.in.co_0001_in;
@@ -187,12 +189,14 @@ public class co_001_controller {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/co_l0001",method=RequestMethod.POST)
 	@ResponseBody
-	public List coL0001(HttpServletRequest req){
+	public List coL0001(@RequestBody pagingDto paging,HttpServletRequest req){
 		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HttpSession session=req.getSession();
 		String test=(String)session.getAttribute("username");
 		System.out.println("session naem="+test);
-		return coDao.coList();
+		pagingDto newpaging=new pagingDto();
+		newpaging=coDao.getPaging(paging);
+		return coDao.coList(paging);
 	}
 	
 	/*
@@ -203,7 +207,6 @@ public class co_001_controller {
 	@ResponseBody
 	public HashMap<String , Object> coL002(@RequestBody co_0002_in input,HttpServletRequest req){
 		System.out.println("controller::co_001_controller/co_c0001");
-		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> result=coDao.findCoById2(input.getCo_id());
 		
 		return result;
@@ -255,6 +258,35 @@ public class co_001_controller {
 		System.out.println("service::co_u0002");
 		System.out.println(input.toString());
 		
+		return null;
+	}
+	
+	/*
+	 * profile detail
+	 */
+	
+	@RequestMapping(value="/co_0005",method=RequestMethod.GET)
+	public ModelAndView co0004(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("profile_detail");
+		mv.addObject("page_id","co_0005");
+		return mv;
+	}
+	@RequestMapping(value="/co_l0003",method=RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> coL0003(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+		int sesCoId=user.getCoId();
+		
+		HashMap<String, Object> result=coDao.findCoById2(sesCoId);
+		return result;
+	}
+	
+	@RequestMapping(value="/co_u0003",method=RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> coU0003(@RequestBody co_0001_in input,HttpServletRequest req){
+		System.out.println(input.toString());
+		coDao.updateCo(input);
+	
 		return null;
 	}
 	

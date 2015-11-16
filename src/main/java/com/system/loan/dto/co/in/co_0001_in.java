@@ -7,6 +7,7 @@ public class co_0001_in implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -8043769834783119119L;
+	private int co_id;
 	private String co_first_nm;
 	private String co_last_nm;
 	private String co_sex;
@@ -21,6 +22,21 @@ public class co_0001_in implements Serializable{
 	private String log_password;
 	private String log_email;
 	private String confirm_password;
+	
+	
+	
+	/**
+	 * @return the co_id
+	 */
+	public int getCo_id() {
+		return co_id;
+	}
+	/**
+	 * @param co_id the co_id to set
+	 */
+	public void setCo_id(int co_id) {
+		this.co_id = co_id;
+	}
 	/**
 	 * @return the co_first_nm
 	 */

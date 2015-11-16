@@ -18,7 +18,13 @@
         </nav>
 
         <div id="page-wrapper">
-
+			<div class="container-fluid" style="    height: 200px; position: absolute;">
+				<div class="row">
+					<div class="col-md-6">
+					</div>
+				</div>
+				
+			</div>
             <div class="container-fluid">
 
                 <!-- Page Heading -->

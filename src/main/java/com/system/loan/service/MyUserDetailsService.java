@@ -34,6 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
 		return buildUserForAuthentication(user, authorities);
 		
+		
 	}
 
 	// Converts com.mkyong.users.model.User user to
