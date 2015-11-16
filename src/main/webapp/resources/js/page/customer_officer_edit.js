@@ -138,7 +138,8 @@ function coupdate(){
 		success : function(data) {
 			if(!data.ERROR){
 				alert("Successful update!.");
-				viewCustomer(ID);
+				//viewCustomer(ID);
+				window.location.href = BASE_URL+"/co_001_controller/co_0003";
 			}else{
 				alert("upating is fail.");
 			}
