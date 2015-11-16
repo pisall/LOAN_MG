@@ -120,14 +120,7 @@
 											</tr>
 										</thead>
 										<tbody id="loan_info">
-											<tr>
-												<td>Day</td>
-												<td>9000</td>
-												<td>903;/334/4</td>
-												<td>3543</td>
-												<td>43432</td>
-												<td>fdsf</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -192,7 +185,21 @@
 							</div>
 						</div>
 					</form>
+					
+					
+						<div style="float: left;margin-left: 18px;"><b>Approved by</b><br/><br/><span id="admin_app_date"></span><br/><br/>Account
+							<br/><br/><br/><br/>
+							<span>Name :......................................... </span>
+						</div>
+						
+						<div style="float: right;margin-right: 162px">
+						<b>Client's Fingerprint</b><br/><br/><span id="client_app_date"></span><br/><br/>
+							<br/><br/><br/><br/>
+							<span id="cu_name"></span>
+						</div>
+						
 					</div>
+					
 					
 				</div>
 			</div>

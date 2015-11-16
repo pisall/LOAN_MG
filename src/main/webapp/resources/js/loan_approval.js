@@ -17,6 +17,8 @@ $(document).ready(function(){
 		           label.insertAfter(element);
 				  },
 			  submitHandler: function(form) { 
+				  $("#btnApprovale").hide();
+				  window.print();
 				  LoanApprove(); 				 
 			  }
 		});
@@ -31,6 +33,8 @@ $(document).ready(function(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
+			console.log(dat);
+			var date_now=moment().format('DD/MM/YYYY');
 			CO_ID=dat.co_id;
 			CU_ID=dat.cu_id;
 			AC_ID= dat.ac_id;
@@ -39,14 +43,18 @@ $(document).ready(function(){
 			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
 			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
 			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
-			
-			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);
+			var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+dat.ac_amount+"</td><td>"+date_now+"</td><td>"+dat.tr_pay_amount+"</td><td>"+dat.tr_balance+"</td><td>"+dat.gu_pawn+"</td></tr>";
+			$("#cu_name").html(dat.cu_nm);
+			$("#admin_app_date").html(date_now);
+			$("#client_app_date").html(date_now);
+			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
 			
 		}
 	 });
 	 
 	 
 	 $("#btnApprovale").click(function(){ 
+		
 		 $("#form_approve").submit();
 	 });
 });
