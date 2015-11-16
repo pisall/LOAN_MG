@@ -18,26 +18,18 @@
 
 		</nav>
 		<!-- End Navigation -->
-
 		<div id="page-wrapper">
-
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
-				<div class="row">
-
-					<div class="col-lg-12">
-
+				<div class="row" >
+					<div class="col-lg-12 head-print">
 						<input type="hidden" id="tr_id"
 							value="<%=request.getParameter("tr_id")%>" /> <input
 							type="hidden" id="cu_id"
 							value="<%=request.getParameter("cu_id")%>" />
-
 						<h2 class="page-header" style="text-align: center">Loan
 							Approval</h2>
-
 					</div>
-
 				</div>
 
 				<div class="row" style="font-size:12px">
@@ -90,12 +82,7 @@
 
 					</div>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<!-- <table class="table" style="background-color:#F5ECEC">
-							<tbody id="customer_info">
-							
-							</tbody>
-						</table> -->
-						<!-- panel body -->
+				
 						<div class="panel panel-default">
 							<div class="panel-heading">Gurantor Information</div>
 							<div class="panel-body" style="padding:10px">
@@ -119,6 +106,40 @@
 						</div>
 
 					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Loan Information</div>
+							<div class="panel-body" style="padding:10px">
+								<div >
+									<table class="table table-hover table-striped">
+										<thead class="style2">
+											<tr class="active">
+												<th>Pay Type</th>
+												<th>Total</th>
+												<th>Date</th>
+												<th>Pay Amount</th>
+												<th>Balance</th>
+												<th>Pawn</th>
+											</tr>
+										</thead>
+										<tbody id="loan_info">
+											<tr>
+												<td>Day</td>
+												<td>9000</td>
+												<td>903;/334/4</td>
+												<td>3543</td>
+												<td>43432</td>
+												<td>fdsf</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<form class="form-horizontal" id="form_approve">
 						<div class="col-lg-12">
 
@@ -174,6 +195,8 @@
 							</div>
 						</div>
 					</form>
+					</div>
+					
 				</div>
 			</div>
 
