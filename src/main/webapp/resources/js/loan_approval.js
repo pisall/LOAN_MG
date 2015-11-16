@@ -36,6 +36,12 @@ $(document).ready(function(){
 			AC_ID= dat.ac_id;
 			TR_ID=dat.tr_id;
 			
+			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_sex+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
+			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_sex+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
+			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_sex+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
+			
+				$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);
+			
 			var customer_info='<tr>';
 			customer_info+='<td colspan="4" style="text-align:center;background-color:#FFF"><h4>Customer Officer Info (CO Info)</h4></td>';
 				customer_info+='</tr>';
