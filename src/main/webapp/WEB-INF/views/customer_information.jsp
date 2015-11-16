@@ -1,11 +1,11 @@
 
 <%@include file="include/_head.jsp"%>
 
-<%
+<%-- <%
 	HttpSession ses = request.getSession(false);
 	ses.setAttribute("id", "9");
 	ses.setAttribute("brand", "bb");
-%>
+%> --%>
 
 <body>
 
@@ -140,8 +140,7 @@
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var id="<%=strCoId%>";
-	<%-- 	var brand="<%=ses.getAttribute("brand")%>"; --%>
-		var PAGE_ID="${page_id}";
+		//var PAGE_ID="${page_id}";
 	</script>
 
 	<script
