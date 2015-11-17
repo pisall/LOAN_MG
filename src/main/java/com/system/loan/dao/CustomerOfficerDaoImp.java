@@ -56,5 +56,20 @@ public class CustomerOfficerDaoImp {
 		} 
 		return list;
 	}
+	public long getTotalCustomerOfficer() {
+		Session session = factory.getCurrentSession();
+		long cnt = 0;
+		Transaction tx=null;
+		try {
+			tx=session.beginTransaction();
+			Query query = session.createQuery("Select count(*) as cnt From CO_DTO_001 where loginDTO.enabled=true");
+			cnt=(long) query.uniqueResult();
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		} 
+		return cnt;
+	}
 
 }

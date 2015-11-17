@@ -196,4 +196,21 @@ public class CustomerDaoImp implements CustomerDao {
 		return cus;
 	}
 
+
+	public long getTotalCustomer() {
+		Session session = factory.getCurrentSession();
+		long cnt = 0;
+		Transaction tx=null;
+		try {
+			tx=session.beginTransaction();
+			Query query = session.createQuery("Select Count(*) From CustomerDto c Where c.cuDelYn='N'");
+			cnt=(long) query.uniqueResult();
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		} 
+		return cnt;
+	}
+
 }
