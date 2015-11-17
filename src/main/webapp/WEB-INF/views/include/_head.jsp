@@ -18,7 +18,8 @@
     <meta name="author" content="">
 
     <title>Loan_Approve</title>
-
+	    <!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
