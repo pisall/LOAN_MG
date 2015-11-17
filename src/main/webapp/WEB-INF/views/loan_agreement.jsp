@@ -88,8 +88,7 @@
 										<label class="control-label col-sm-2" for="nt_card">
 											DOB</label>
 										<div class="col-sm-10">
-											<input type="text" maxlength="10" class="form-control required" name="cu_dob" id="cu_dob"
-												placeholder="use date of birth">
+											<input data-provide="datepicker"  maxlength="50"  type="date" class="form-control datepicker required" id="cu_dob" placeholder="Date of Birth">
 										</div>
 									</div>
 									<div class="form-group">

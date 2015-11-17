@@ -63,6 +63,7 @@ f<%@include file="include/_head.jsp"%>
 
 								<c:set value="${customer}" var="cu" />
 								<input type="hidden" value="${cu.cuID}" name="cu_id" id="cu_id">
+								<input type="hidden" value="${cu.cuDOB}" id="cu_dob">
 								<!-- Start From -->
 								<form class="form-horizontal" id="form_cu">
 									<div>
@@ -114,8 +115,8 @@ f<%@include file="include/_head.jsp"%>
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<div class="col-sm-10">
-											<input type="text" name="cu_dob" class="form-control required" id="cu_dob"
-												placeholder="Enter Date Of Birth" maxlength="50" value="${cu.cuDOB}" >
+										<input data-provide="datepicker"  maxlength="50"  type="date" class="form-control datepicker required" id="cu_dob1" placeholder="Date of Birth">
+											
 										</div>
 									</div>
 
@@ -325,6 +326,7 @@ f<%@include file="include/_head.jsp"%>
 			var error;
 			var valid=false;
 			disableForm("#form_gu");		
+			//$("#cu_dob1").val("1990-12-12");
 			$("#form_cu").validate();
 			
 			$("#form_gu").validate({
