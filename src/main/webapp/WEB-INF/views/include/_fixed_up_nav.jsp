@@ -15,7 +15,7 @@
                 
                 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <%=strCoNm %> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <%-- <%=strCoNm %>  --%><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="${pageContext.request.contextPath}/co_001_controller/co_0005"><i class="fa fa-fw fa-user"></i> Profile</a>
