@@ -36,9 +36,28 @@
 	   "Please input only number");
 	 $.validator.addClassRules("check_number", { check_number: true});
 	 
-	/*  $.validator.addMethod("check_required", $.validator.methods.required,
-	   "This file is needed");
-	 $.validator.addClassRules("required", { check_required: true}); -*/
+	 <script type="text/javascript">
+		$(function(){
+			$("#back_up").click(function(){
+				startLoading();
+				$.ajax({
+					url :"${pageContext.request.contextPath}/backupandrestore/backup",
+					type : 'GET',
+					success : function(data) {
+						stopLoading();
+						if(data==0){
+							alert("successfully backup");
+						}
+					},
+					error : function(data, status, er) {
+						console.log("error: " + data + " status: " + status
+								+ " er:" + er);
+					}
+				});
+			});
+		});
+	
+	</script>
 		
 	</script>
      

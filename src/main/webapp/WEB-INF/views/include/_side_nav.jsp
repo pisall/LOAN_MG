@@ -22,12 +22,16 @@
 	<li cont_name="cont_5" val="cont_5"><a href="${pageContext.request.contextPath}/Outcome/OutcomeView"><span
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Month
 			Outcome</a></li>
-	<li cont_name="cont_6" val="cont_6"><a href="#"><span
-			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Area Lists</a>
+	<li cont_name="cont_6" val="cont_6"><a href="#none" id="back_up"><span id="back_up"
+			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Backup Data
+			</a></li>
+	<li cont_name="cont_7" val="cont_7"><a href="${pageContext.request.contextPath}/Outcome/OutcomeView"><span
+			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;
+			Restore Data</a></li>
+	<li cont_name="cont_8" val="cont_8"><a href="#"><span
+			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Help</a>
 	</li>
-	<li cont_name="cont_7" val="cont_7"><a href="${pageContext.request.contextPath}/logout"><span
+	<li cont_name="cont_9" val="cont_9"><a href="${pageContext.request.contextPath}/logout"><span
 			class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a>
 	</li>
 </ul>
-
- 
