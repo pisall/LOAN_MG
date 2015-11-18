@@ -35,8 +35,10 @@
 	 $.validator.addMethod("check_number", $.validator.methods.number,
 	   "Please input only number");
 	 $.validator.addClassRules("check_number", { check_number: true});
-	 
-	 <script type="text/javascript">
+	 	
+	</script>
+     
+      <script type="text/javascript">
 		$(function(){
 			$("#back_up").click(function(){
 				startLoading();
@@ -58,6 +60,3 @@
 		});
 	
 	</script>
-		
-	</script>
-     
