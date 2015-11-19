@@ -65,6 +65,11 @@
 			      changeYear: true,
 			      dateFormat:"dd-mm-yy"
 			    });
+			 
+			 function formatStringToDateTime(date,time){
+				return  moment(date, "YYYYMMDD"+time).format(
+					"DD-MM-YYYY"+time)
+			 }
 		});
 	
 	</script>

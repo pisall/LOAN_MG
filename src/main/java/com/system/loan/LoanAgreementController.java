@@ -184,7 +184,9 @@ public class LoanAgreementController implements Serializable{
 			 
 			//tranDao = new TransectionDao();
 			model.put("list", tranDao.ShowReport(id));
+			
 			model.put("Customer", tranDao.Customer_Report(id));
+			model.put("page_id","report");
 			return "report"; 
 		}  
 }
