@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +24,8 @@ import com.system.loan.dao.TransectionDao;
 import com.system.loan.dto.AcountInfoDto;
 import com.system.loan.dto.GuarantorInfoLoanerDto;
 import com.system.loan.dto.LoanAgreementDto;
-import com.system.loan.dto.TransectionDto; 
+import com.system.loan.dto.TransectionDto;
+import com.system.loan.dto.session.USER_SESSION; 
 
 @Controller
 @RequestMapping(value="/LoanAgreement")
@@ -50,7 +53,12 @@ public class LoanAgreementController implements Serializable{
 		}
 		
 		@RequestMapping(value="/newLoanAgreementGetData" , method=RequestMethod.POST)
-		public String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto,Map<String,Object>  model){
+		public String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
+			
+			HttpSession session_user=req.getSession();
+			USER_SESSION user=(USER_SESSION)session_user.getAttribute("USER_SESSION");
+			int co_id = user.getCoId();  
+			
 			
 			Set<TransectionDto> transections = new HashSet<TransectionDto>();
 			float amount = acodto.getAc_amount();
@@ -172,7 +180,7 @@ public class LoanAgreementController implements Serializable{
 		acodto.setTransection(transections);
 		
 		//loanAgreDao =new LoanAgreementDao();
-		loanAgreDao.InsertNewCustomer(loanAgreDto); 
+		loanAgreDao.InsertNewCustomer(loanAgreDto,co_id); 
 		
 		cus_id= loanAgreDto.getCu_id(); 
 		 return  "redirect:/LoanAgreement/report/"+cus_id;

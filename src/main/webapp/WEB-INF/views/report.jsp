@@ -50,6 +50,10 @@
 														<td style="border: 0px">${entry.cu_nm}</td>
 													</tr>
 													<tr>
+														<td style="border: 0px">Phone:</td>
+														<td style="border: 0px">${entry.cu_phone}</td>
+													</tr>
+													<tr>
 														<td>Date Time :</td>
 														<td><%=datetime%></td>
 													</tr>

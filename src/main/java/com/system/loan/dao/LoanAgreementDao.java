@@ -3,6 +3,9 @@ package com.system.loan.dao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,10 +17,11 @@ import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.CoDto;
 import com.system.loan.dto.LoanAgreementDto;
+import com.system.loan.dto.session.USER_SESSION;
 
 @Service
-public class LoanAgreementDao implements LoanAgreement{
-	public static SessionFactory factory = null;
+public  class LoanAgreementDao implements LoanAgreement{
+	public static SessionFactory factory = null;  
 	
 	public LoanAgreementDao(){
 		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -34,21 +38,17 @@ public class LoanAgreementDao implements LoanAgreement{
 	}
 
 	@SuppressWarnings("unused")
-	@Override
-	public boolean InsertNewCustomer( LoanAgreementDto loanAgreDto) { 
+	public boolean InsertNewCustomer( LoanAgreementDto loanAgreDto, int co_id) { 
 		Session session = factory.getCurrentSession();
-		Transaction transection = null;  
+		Transaction transection = null;
 		CoDto codto =null;
-		LoanAgreementDto loancus=null; 
-	  
-		
+		LoanAgreementDto loancus=null;  
 		try{  
 				transection= session.beginTransaction();   
 				Date curDate =new Date();
 		        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss"); 
-		        String DateToStr = format.format(curDate); 
-		        
-				codto = (CoDto) session.get(CoDto.class,8); //get COID
+		        String DateToStr = format.format(curDate);  
+				codto = (CoDto) session.get(CoDto.class,co_id); //get COID
 				//loancus=(LoanAgreementDto)session.get(LoanAgreementDto.class, 42);// get customer ID 
 				
 				loanAgreDto.setCoDto(codto);  
@@ -65,6 +65,6 @@ public class LoanAgreementDao implements LoanAgreement{
 			return false;
 		}
 		return true;
-	}
+	} 
    
 }
