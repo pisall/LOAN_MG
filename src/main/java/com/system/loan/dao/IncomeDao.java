@@ -10,8 +10,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;  
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Service;  
 
+@Service
 public class IncomeDao implements IncomeInterface{
 	public static SessionFactory factory = null;
 	public IncomeDao(){

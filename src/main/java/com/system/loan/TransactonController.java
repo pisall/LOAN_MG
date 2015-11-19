@@ -2,6 +2,8 @@ package com.system.loan;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,9 @@ import com.system.loan.dao.ApproveTransactionDao;
 @Controller
 @RequestMapping(value="/schadule_payment")
 public class TransactonController implements Serializable {
-
+	
+	@Inject
+	ApproveTransactionDao schaPay;
 	/**
 	 * 
 	 */
@@ -23,7 +27,7 @@ public class TransactonController implements Serializable {
 	
 	@RequestMapping(value="/schadule/{tr_id}/{cu_id}", produces="application/json", consumes="application/json", method = RequestMethod.POST)
 	public @ResponseBody Object SchadulePayment(@PathVariable("tr_id") Integer  tr_id , @PathVariable("cu_id") Integer  cu_id) {  
-		ApproveTransactionDao schaPay = new ApproveTransactionDao(); 
+		//ApproveTransactionDao schaPay = new ApproveTransactionDao(); 
 		return schaPay.Schadule_Payment(tr_id, cu_id);
 	} 
 	

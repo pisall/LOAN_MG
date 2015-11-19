@@ -69,6 +69,9 @@ public class CustomerController {
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", customerImp.listCustomer(paging, coID));
 		model.put("PAGING", paging);
+		
+		
+		
 		return model;
 	}
 

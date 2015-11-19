@@ -4,6 +4,7 @@
 	</script>
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script> 
+     <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script> 
     <script src="${pageContext.request.contextPath}/resources/js/jquery-dateFormat.js"></script> 
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
@@ -36,10 +37,42 @@
 	 $.validator.addMethod("check_number", $.validator.methods.number,
 	   "Please input only number");
 	 $.validator.addClassRules("check_number", { check_number: true});
-	 
-	/*  $.validator.addMethod("check_required", $.validator.methods.required,
-	   "This file is needed");
-	 $.validator.addClassRules("required", { check_required: true}); -*/
-		
+	 	
 	</script>
      
+      <script type="text/javascript">
+		$(function(){
+			$("#back_up").click(function(){
+				startLoading();
+				$.ajax({
+					url :"${pageContext.request.contextPath}/backupandrestore/backup",
+					type : 'GET',
+					success : function(data) {
+						stopLoading();
+						if(data==0){
+							alert("successfully backup");
+						}
+					},
+					error : function(data, status, er) {
+						console.log("error: " + data + " status: " + status
+								+ " er:" + er);
+					}
+				});
+			});
+		
+			 $( "#dob" ).datepicker({
+			      showOtherMonths: true,
+			      selectOtherMonths: true,
+			      changeMonth: true,
+			      changeYear: true,
+			      dateFormat:"dd-mm-yy"
+			    });
+			 
+			 function formatStringToDateTime(date,time){
+				return  moment(date, "YYYYMMDD"+time).format(
+					"DD-MM-YYYY"+time)
+			 }
+		});
+	
+	</script>
+	

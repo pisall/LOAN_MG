@@ -9,7 +9,9 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ApproveTransactionDao implements TransactionInterface {
 	public static SessionFactory factory = null;
 	

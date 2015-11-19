@@ -64,7 +64,7 @@ public class LoanAgreementDto implements Serializable {
 	private String cu_dob;
 	
 	@Column(name="cu_national_id")
-	private Integer cu_national_id;
+	private String cu_national_id;
 	
 	@Column(name="cu_phone")
 	private String cu_phone;
@@ -91,7 +91,7 @@ public class LoanAgreementDto implements Serializable {
 		
 	} 
 	public LoanAgreementDto(Integer cu_id, CoDto coDto, String cu_nm, String cu_nick_nm, String cu_sex, String cu_dob,
-			Integer cu_national_id, String cu_phone, String cu_address, String cu_pawn, String cu_dtt, String cu_note,
+			String cu_national_id, String cu_phone, String cu_address, String cu_pawn, String cu_dtt, String cu_note,
 			String cu_photo,String cu_del_yn) {
 		super();
 		this.cu_id = cu_id;
@@ -197,13 +197,13 @@ public class LoanAgreementDto implements Serializable {
 
 
 
-	public Integer getCu_national_id() {
+	public String getCu_national_id() {
 		return cu_national_id;
 	}
 
 
 
-	public void setCu_national_id(Integer cu_national_id) {
+	public void setCu_national_id(String cu_national_id) {
 		this.cu_national_id = cu_national_id;
 	}
 

@@ -20,82 +20,32 @@
 		<div id="page-wrapper">
 
 			<div class="container-fluid">
-
-				<!-- Page Heading -->
-			<!-- 	<div class="row">
-					<div class="col-lg-12">
-						<h1 class="page-header">
-							Dashboard <small>Statistics Overview</small>
-						</h1>
-						
-					</div>
-				</div>
-				
-				<div>
-
-					<h2>Users</h2>
-					<table class="table table-default">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Sex</th>
-								<th>Phone</th>
-								<th>Email</th>
-								<th>Address</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody id="tableUser">
-
-						</tbody>
-
-					</table>
-
-					<div id="success"></div>
-					<h2>Add User</h2>
-
-					NM :<input type="text" name="usNm" id="usNm" class="form-control">
-					<br /> Sex :<input type="text" name="usSex" id="usSex"
-						class="form-control"> <br /> Phone :<input type="text"
-						name="usPhone" id="usPhone" class="form-control"> <br />
-					Email :<input type="text" name="usEmail" id="usEmail"
-						class="form-control"> <br /> Address :<input type="text"
-						name="usAddress" id="usAddress" class="form-control"> <br />
-					<input type="submit" value="add" id="addUser"> <br />
-				</div> -->
-
-
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									<!-- <i class="fa fa-money fa-fw"></i>  -->
+								<h3 class="panel-title">								
 									Customer Officer Information
 								</h3>
 							</div>
 							<div class="panel-body">
 								<div class="panel panel-primary">
-									<div class="panel-heading">
+									<div class="panel-heading" id="customer_officer_info" style="cursor: pointer;">
 										<div class="row">
 											<div class="col-xs-3">
 												<img src="${pageContext.request.contextPath}/resources/img/Co_Info.png" height="150" width="250">
-												<!--  <i class="fa fa-shopping-cart fa-5x"></i> -->
+											
 											</div>
 											<div class="col-xs-9 text-right">
-												<div class="huge">124</div>
-												<div>New Orders!</div>
+												<div class="huge">
+													<c:if test="${not empty totalCo}">
+														<c:out value="${totalCo}"/>
+													</c:if>
+												</div>
 											</div>
 										</div>
 									</div>
-									<!--  <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a> -->
+									
 								</div>
 							</div>
 						</div>
@@ -103,31 +53,28 @@
 					<div class="col-lg-6">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									<!-- <i class="fa fa-money fa-fw"> -->
-									</i>Customer Information <%=session.getAttribute("username")/* session.getAttribute("username") */%>
+								<h3 class="panel-title"> 								
+									Customer Information
 								</h3>
 							</div>
 							<div class="panel-body">
 								<div class="panel panel-green">
-									<div class="panel-heading">
+									<div class="panel-heading" id="customer_info" style="cursor: pointer;">
 										<div class="row">
 											<div class="col-xs-3">
 												<img src="${pageContext.request.contextPath}/resources/img/Customers.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
-												<div class="huge">124</div>
-												<div>New Orders!</div>
+												<div class="huge">
+													<c:if test="${not empty totalCu}">
+														<c:out value="${totalCu}"/>
+													</c:if>
+												</div>
+												
 											</div>
 										</div>
 									</div>
-									<!--  <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a> -->
+								
 								</div>
 							</div>
 						</div>
@@ -142,24 +89,18 @@
 							</div>
 							<div class="panel-body">
 								<div class="panel panel-yellow">
-									<div class="panel-heading">
+									<div class="panel-heading" id="income_chart" style="cursor: pointer;">
 										<div class="row">
 											<div class="col-xs-3">
 												<img src="${pageContext.request.contextPath}/resources/img/Income.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
-												<div class="huge">124</div>
-												<div>New Orders!</div>
+												<div class="huge"></div>
+												
 											</div>
 										</div>
 									</div>
-									<!--  <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a> -->
+									
 								</div>
 							</div>
 						</div>
@@ -174,14 +115,14 @@
 							</div>
 							<div class="panel-body">
 								<div class="panel panel-red">
-									<div class="panel-heading">
+									<div class="panel-heading" id="outcome_chart" style="cursor: pointer;">
 										<div class="row">
 											<div class="col-xs-3">
 												<img src="${pageContext.request.contextPath}/resources/img/Outcome1.png" height="150" width="250">
 											</div>
 											<div class="col-xs-9 text-right">
-												<div class="huge">124</div>
-												<div>New Orders!</div>
+												<div class="huge"></div>
+												
 											</div>
 										</div>
 									</div>
@@ -205,7 +146,24 @@
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
-	
+	<script type="text/javascript">
+			$(function(){  
+				$("#customer_officer_info").click(function(){
+				
+					location.href="${pageContext.request.contextPath}/co_001_controller/co_0003";
+				});
+				$("#customer_info").click(function(){
+					location.href="${pageContext.request.contextPath}/customer/home_customer";
+				});
+				$("#income_chart").click(function(){					
+					location.href="${pageContext.request.contextPath}/Income/IncomeView";
+				});
+				$("#outcome_chart").click(function(){					
+					location.href="${pageContext.request.contextPath}/Outcome/OutcomeView";
+				});
+			})
+			
+	</script>
 </body>
 
 </html>

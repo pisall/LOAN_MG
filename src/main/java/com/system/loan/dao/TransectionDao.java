@@ -13,9 +13,11 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.TransectionDto; 
 
+@Service
 public class TransectionDao implements Trandsection {
 public static SessionFactory factory = null;
 	
@@ -97,7 +99,7 @@ public static SessionFactory factory = null;
 					+ " gua.gu_phone,"
 					+ " gua.gu_address,"
 					+ " trn.tr_id,"
-					+ " trn.pay_date,"
+					+ " to_char(to_date(trn.pay_date, 'YYYYMMDDHH24MISS'),'DD-MM-YYYY') As pay_date , "
 					+ " trn.pay_day,"
 					+ " trn.tr_origin_amount,"
 					+ " trn.tr_balance,"
@@ -127,6 +129,7 @@ public static SessionFactory factory = null;
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			query.setParameter(0, cus_id);
 			 listData = query.list();  
+			 System.out.println("00000000000::"+listData);
 			tran.commit();
 		}catch(HibernateException hne){
 			if(tran!=null) tran.rollback();

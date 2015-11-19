@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -61,9 +63,21 @@ public class CustomerDto implements Serializable {
 	private String cuPhoto;
 	@Column(name="cu_del_yn")
 	private String cuDelYn;
+	@Formula(value = "(select count(*) from mfi_customers)")
+	private int totalCus;
 	
-
-	
+	/**
+	 * @return the totalCus
+	 */
+	public int getTotalCus() {
+		return totalCus;
+	}
+	/**
+	 * @param totalCus the totalCus to set
+	 */
+	public void setTotalCus(int totalCus) {
+		this.totalCus = totalCus;
+	}
 	/**
 	 * @param cuName
 	 * @param cuNickName
