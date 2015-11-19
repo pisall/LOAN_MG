@@ -39,7 +39,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	
 
 	@Override
-	public HashMap<String, Object> newCoLog(CO_DTO_001 CO,LOGIN_DTO_001 LOG,int REG_CO_ID) {
+	public HashMap<String, Object> newCoLog(CO_DTO_001 CO,LOGIN_DTO_001 LOG,int REG_CO_ID) {//test
 		// TODO Auto-generated method stub
 		
 		HashMap<String, Object> result=new HashMap<>();
