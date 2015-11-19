@@ -131,6 +131,7 @@ function listCus(pageNo) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
+					console.log("customer"+"=================+"+data);
 					stopLoading();
 					value = data;
 					var result = "";
@@ -146,24 +147,24 @@ function listCus(pageNo) {
 					if (data.REC.length > 0) {
 
 						for (var i = 0; i < data.REC.length; i++) {
-							var cuID = data.REC[i].cuID;
+							var cuID = data.REC[i].cu_id;
 							result += "<tr><td>"
 									+ cuID
 									+ "</td>"
 									+ "<td style='cursor: pointer;' class='name'>"
-									+ data.REC[i].cuName
+									+ data.REC[i].cu_nm
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuNickName
+									+ data.REC[i].cu_national_id
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuSex
+									+ data.REC[i].cu_sex
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuPhone
+									+ data.REC[i].cu_phone
 									+ "</td>"
 									+ "<td>"
-									+ data.REC[i].cuAddress
+									+ data.REC[i].cu_address
 									+ "</td>"
 									+ "<td>"
 									+ "<a href='"

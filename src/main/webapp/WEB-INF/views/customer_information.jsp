@@ -33,9 +33,9 @@
 
 						<h2 class="page-header">
 
-							<span></span>Customer Infomation
-							<!-- <button style="float: right;" type="button" class="btn btn-info" data-toggle="modal"
-							data-target="#myModal">Add Customer</button> -->
+							<span>Customer Infomation</span>
+							<span>							
+							</span>
 						</h2>
 
 					</div>
@@ -48,16 +48,26 @@
 						<div class="panel panel-default">
 							<div class="panel panel-heading">
 								<div class="row">
-									<div class="col-md-6">
-										<span class="col-md-8 col-sm-8" style="padding: 0px"> <select
+									<div class="col-md-5 col-sm-5">
+										<!-- <span class="col-md-8 col-sm-8" style="padding: 0px">  -->
+										<select
 											class="form-control" id="co_info">
 												<option value="">Display All</option>
 
 										</select>
-										</span>
+										
+										<!-- </span> -->
 
 									</div>
-									<div class="col-md-6 col-sm-6 pull-right">
+									<div  class="col-md-2 col-sm-2">
+										<select class="form-control">
+											<option value="1">All</option>
+											<option value="2">Area</option>
+											<option value="3">Complete</option>
+											<option value="3">Finish</option>
+										</select>
+									</div>
+									<div class="col-md-5 col-sm-5 pull-right">
 
 										<div class="form-group input-group">
 											<input class="form-control" type="text" id="word"
