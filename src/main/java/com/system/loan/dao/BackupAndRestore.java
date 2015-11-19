@@ -25,7 +25,7 @@ import com.system.loan.dto.CustomerDto;
 public class BackupAndRestore {
 	public int backup() {
 		String date = new SimpleDateFormat("ddMMyyyy").format(new Date());
-		String executeCmd = "C:\\Program Files\\PostgreSQL\\9.5\\bin\\pg_dump -h 192.168.178.78  -U postgres -d postgres -w -c -f D:\\"
+		String executeCmd = "C:\\Program Files\\PostgreSQL\\9.5\\bin\\pg_dump -h 192.168.178.78  -U postgres -d loanSystem -w -c -f D:\\"
 				+ date + ".sql";
 		Process runtimeProcess;
 		int processComplete = 0;

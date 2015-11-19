@@ -10,10 +10,12 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.CoDto;
 import com.system.loan.dto.LoanAgreementDto;
 
+@Service
 public class LoanAgreementDao implements LoanAgreement{
 	public static SessionFactory factory = null;
 	

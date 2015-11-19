@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +27,20 @@ import com.system.loan.dto.TransectionDto;
 @Controller
 @RequestMapping(value="/LoanAgreement")
 public class LoanAgreementController implements Serializable{
-		  
+	
+	@Inject 
+	TransectionDao tranDao;
+	@Inject
+	LoanAgreementDao loanAgreDao;
+		
+	
 	int cus_id=0;
 	
-	TransectionDao tranDao = null;
+	//TransectionDao tranDao = null;
+	
 	
 	private static final long serialVersionUID = 1L;
-		LoanAgreementDao loanAgreDao = null;
+		//LoanAgreementDao loanAgreDao = null;
 		@RequestMapping(value="/newLoanAgreement" , method=RequestMethod.GET)
 		public ModelAndView newLoanAgreement(){ 
 			ModelAndView mv=new ModelAndView();
@@ -162,7 +171,7 @@ public class LoanAgreementController implements Serializable{
 		loanAgreDto.getAcountInfoHash().add(acodto);
 		acodto.setTransection(transections);
 		
-		loanAgreDao =new LoanAgreementDao();
+		//loanAgreDao =new LoanAgreementDao();
 		loanAgreDao.InsertNewCustomer(loanAgreDto); 
 		
 		cus_id= loanAgreDto.getCu_id(); 
@@ -173,7 +182,7 @@ public class LoanAgreementController implements Serializable{
 		@RequestMapping(value="/report/{id}",method = RequestMethod.GET)
 		public  String ShowReport(@PathVariable("id") int id, Map<String ,Object>model) {  
 			 
-			tranDao = new TransectionDao();
+			//tranDao = new TransectionDao();
 			model.put("list", tranDao.ShowReport(id));
 			model.put("Customer", tranDao.Customer_Report(id));
 			return "report"; 
