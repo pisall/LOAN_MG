@@ -15,8 +15,6 @@
 
 			<!-- Fixed Up Navigation -->
 			<%@include file="include/_fixed_up_nav.jsp"%>
-
-			<!-- Side Bar Navigation -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<%@include file="include/_side_nav.jsp"%>
 			</div>
