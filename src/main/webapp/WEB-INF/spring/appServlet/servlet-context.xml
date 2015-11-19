@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:s="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -21,6 +22,7 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
+	
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -34,7 +36,7 @@
 		
 	<beans:bean id="customAuthenticationSuccessHandler" class="com.system.loan.CustomAuthenticationSuccessHandler"/>
 	
-
+	
 	<annotation-driven>
 		<message-converters>
 			<!-- Use the HibernateAware mapper instead of the default -->
@@ -46,6 +48,8 @@
 			</beans:bean>
 		</message-converters>
 	</annotation-driven>
+	
+	
 	
 	
 

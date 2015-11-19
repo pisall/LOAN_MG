@@ -7,7 +7,10 @@ $(document).ready(function(){
 	onblur();
 	
 	$("#btn_save").click(function(){
-		coInsert();
+		coInsert(false);
+	});
+	$("#btn_save_new").click(function(){
+		coInsert(true);
 	});
 	
 });
@@ -157,25 +160,25 @@ function validation(input){
 	/*--  Phone  --*/
 	if(input.co_phone){
 		if(input.co_phone!=""){
-			$("#national_id").parents(".form-group").removeClass("has-error");
-			$("#national_id").siblings(".help-block").hide();
+			$("#phone").parents(".form-group").removeClass("has-error");
+			$("#phone").siblings(".help-block").hide();
 		}else{
 			error=true;
-			$("#national_id").parents(".form-group").addClass("has-error");
-			$("#national_id").siblings(".help-block").show();
+			$("#phone").parents(".form-group").addClass("has-error");
+			$("#phone").siblings(".help-block").show();
 			
 		}
 	}else{
 		error=true;
-		$("#national_id").parents(".form-group").addClass("has-error");
-		$("#national_id").siblings(".help-block").show();
+		$("#phone").parents(".form-group").addClass("has-error");
+		$("#phone").siblings(".help-block").show();
 		
 	}
 	/*--  //Phone  --*/
 	
 	return error;
 }
-function coInsert(){
+function coInsert(isNew){
 	var input={};
 	input['co_first_nm']=$("#first_nm").val();
 	input['co_last_nm']=$("#last_nm").val();
@@ -198,7 +201,6 @@ function coInsert(){
 	if(validation(input)){
 		return;
 	}
-	console.log("start");
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_c0001",
 		type : 'POST',
@@ -209,7 +211,12 @@ function coInsert(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			console.log(data);
+			alert("New CO creating is successfully!")
+			if(isNew){
+				window.location.href = BASE_URL+"/co_001_controller/co_0001";
+			}else{
+				window.location.href = BASE_URL+"/co_001_controller/co_0003";
+			}
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

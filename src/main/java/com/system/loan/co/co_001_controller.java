@@ -86,6 +86,10 @@ public class co_001_controller {
 	@RequestMapping(value="/co_c0001",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> coR0001(@RequestBody co_0001_in input,HttpServletRequest req){
 		HashMap<String, Object> result=new HashMap<String, Object>();
+		HttpSession session=req.getSession();
+		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+		int sesCoId=user.getCoId();
+		
 		System.out.println("controller::co_001_controller/co_c0001");
 		
 		String regDate="";
@@ -168,10 +172,9 @@ public class co_001_controller {
 		log.setLog_type("ROLE_ADMIN");
 		log.setEnabled(true);
 		
-		CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		
 		//insert process
-		HashMap<String, Object>  insertResult=coDao.newCoLog(co,log);
+		HashMap<String, Object>  insertResult=coDao.newCoLog(co,log,sesCoId);
 		
 		if((boolean) insertResult.get("ERROR")){
 			result.put("CODE", "0001");
@@ -241,11 +244,10 @@ public class co_001_controller {
 			}
 		}
 		HashMap<String, Object> exe=new HashMap<>();
-		CO_DAO_001_IMP co=new CO_DAO_001_IMP();
 		
 		if(result.get("CODE").toString().equals("0000")){
 			System.out.println("start exe");
-			exe=co.updateEnabledUser(input.getCo_id(), false);
+			exe=coDao.updateEnabledUser(input.getCo_id(), false);
 			if((boolean)exe.get("ERROR")){
 				result.put("CODE", "0001");
 				result.put("MESSAGE","False to process.");

@@ -20,8 +20,8 @@
                         <li>
                             <a href="${pageContext.request.contextPath}/co_001_controller/co_0005"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <li id="setting">
+                            <a href="#none<%-- ${pageContext.request.contextPath}/log_0001 --%>"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li>

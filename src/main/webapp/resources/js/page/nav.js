@@ -7,6 +7,8 @@ $(document).ready(function(){
 		$("#nav").children("li[val="+PAGE_ID+"]").addClass("active");
 	}
 	
+	click_setting();
+	
 });
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -29,4 +31,32 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function click_setting(){
+	$("#setting").click(function(){
+		//alert("test");
+		var input={};
+		input["oldPassword"]="12345";
+		input["newPassword"]="123";
+		input["confirmNewPassword"]="1234";
+		
+		
+		$.ajax({
+			url : BASE_URL + "/changePassword",
+			type : 'POST',
+			dataType : 'JSON',
+			data : JSON.stringify(input),
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+			},
+			success : function(data) {
+				
+			},
+			error : function(data, status, er) {
+				console.log("error: " + data + " status: " + status + " er:" + er);
+			}
+		});
+	});
 }

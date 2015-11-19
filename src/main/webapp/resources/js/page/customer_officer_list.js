@@ -4,14 +4,11 @@
 
 $(document).ready(function(){
 	//blur event
-	listCo();
+	listCo({pageNo:1,pcnt:10});
 	
 });
 
-function listCo(){
-	var input={};
-	input.pageNo=1;
-	input.pcnt=4;
+function listCo(input){
 	
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_l0001",
@@ -30,7 +27,22 @@ function listCo(){
 			console.log(data);
 			$("#list tbody").html("");
 			var tbody="";
+			$("#paging").html("");
+			var paging=data.PAGING;
+			if(paging.totalPage>0){
+				$("#paging").append('<li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
+				for(var i=1;i<=paging.totalPage;i++){
+					$("#paging").append('<li val="'+i+'"><a href="#">'+i+'</a></li>');
+				}
+				$("#paging").append(' <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
+				$("#paging").children("li[val="+paging.pageNo+"]").addClass("active");
+				$("#paging").children("li").click(function(){
+					listCo({pageNo:$(this).attr("val"),pcnt:10});
+				});
+			}
+			
 			$.each(data.REC,function(i,v){
+				
 				var tr="";
 				tr+='<tr>';
 					tr+='<td name="co_id">'+v.co_id+'</td>';
@@ -98,8 +110,8 @@ function disabledUser(input){
 		success : function(data) {
 			stopLoading();
 			if(data.CODE=="0000"){
-				
-				listCo();
+				var pageNo=$("#paging").children("li[class=active]").attr("val");
+				listCo({pageNo:pageNo,pcnt:10});
 				
 			}
 		}

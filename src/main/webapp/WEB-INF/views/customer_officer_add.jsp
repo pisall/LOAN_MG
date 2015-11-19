@@ -83,7 +83,7 @@
 										<div class="form-group required">
 											<label class="control-label col-sm-2" for="fst_nm">Password</label>
 											<div class="col-sm-10 ">
-											  <input type="email" class="form-control" id="password" placeholder="User name">
+											  <input type="password" class="form-control" id="password" placeholder="User name">
 											  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
 											</div>
 											
@@ -92,7 +92,7 @@
 										<div class="form-group required">
 											<label class="control-label col-sm-2" for="fst_nm">Confirm password</label>
 											<div class="col-sm-10 ">
-											  <input type="email" class="form-control" id="c_password" placeholder="User name">
+											  <input type="password" class="form-control" id="c_password" placeholder="User name">
 											  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
 											</div>
 											
@@ -114,14 +114,14 @@
 									  <div class="form-group">
 										<label class="control-label col-sm-2" for="fst_nm">First Name:</label>
 										<div class="col-sm-10 ">
-										  <input type="email" class="form-control" id="first_nm" placeholder="First Name">
+										  <input type="text" class="form-control" id="first_nm" placeholder="First Name">
 										</div>
 									  </div>
 									  
 									  <div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">Last Name:</label>
 										<div class="col-sm-10">
-										  <input type="email" class="form-control" id="last_nm" placeholder="Last Name">
+										  <input type="text" class="form-control" id="last_nm" placeholder="Last Name">
 										</div>
 									  </div>
 									  
@@ -148,7 +148,7 @@
 									  <div class="form-group required">
 										<label class="control-label col-sm-2" for="nt_card">National Card</label>
 										<div class="col-sm-10">
-										  <input type="email" class="form-control" id="national_id" placeholder="Enter National Card">
+										  <input type="text" class="form-control" id="national_id" placeholder="Enter National Card">
 										</div>
 									  </div>
 									  
@@ -168,7 +168,7 @@
 									  <div class="form-group required">
 										<label class="control-label col-sm-2" for="ph_1">Mobile</label>
 										<div class="col-sm-10">
-										  <input type="email" class="form-control" id="phone" placeholder="Enter Phone">
+										  <input type="text" class="form-control" id="phone" placeholder="Enter Phone">
 										  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
 										</div>
 									  </div>
@@ -176,7 +176,7 @@
 									  <div class="form-group">
 										<label class="control-label col-sm-2" for="ph_2">Office Phone</label>
 										<div class="col-sm-10">
-										  <input type="email" class="form-control" id="cpm_phone" placeholder="Enter Second phone">
+										  <input type="text" class="form-control" id="cpm_phone" placeholder="Enter Second phone">
 										</div>
 									  </div>
 									  
@@ -201,10 +201,11 @@
 						    </div>
 						    <!-- //general information -->
 						    <br/>
-						    <div class="pull-right">
-									  		<a href="#none" id="btn_save" class="btn btn-primary"><span>Register</span></a>
-										  <a class="btn btn-default" href="${pageContext.request.contextPath}/co_001_controller/co_0003">Cancel</a>
-									  </div>
+							    <div class="pull-right">
+				    				<a href="#none" id="btn_save_new" class="btn btn-primary"><span>Register & New</span></a>&nbsp;&nbsp;&nbsp;
+							  		<a href="#none" id="btn_save" class="btn btn-primary"><span>Register</span></a>
+								  	<a class="btn btn-default" href="${pageContext.request.contextPath}/co_001_controller/co_0003">Cancel</a>
+								</div>
 						    
 							</div>
 							<!-- //panel-group -->

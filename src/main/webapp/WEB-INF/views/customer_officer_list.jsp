@@ -113,7 +113,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-md-offset-3" style="text-align:center">
-								<ul class="pagination">
+								<ul class="pagination" id="paging">
 								   <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
 								  <li class="active"><a href="#">1</a></li>
 								  <li><a href="#">2</a></li>

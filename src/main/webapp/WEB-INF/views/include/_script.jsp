@@ -1,5 +1,7 @@
 
-	
+	<script>
+	var BASE_URL = "${pageContext.request.contextPath}";
+	</script>
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script> 
     <script src="${pageContext.request.contextPath}/resources/js/jquery-dateFormat.js"></script> 
