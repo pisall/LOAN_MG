@@ -357,6 +357,14 @@ f<%@include file="include/_head.jsp"%>
 					updateCustomer();
 				}
 			});
+			
+			 $( "#dob" ).datepicker({
+			      showOtherMonths: true,
+			      selectOtherMonths: true,
+			      changeMonth: true,
+			      changeYear: true,
+			      dateFormat:"dd-mm-yy"
+			    });
 
 			$("#updateCustomer").click(function() {
 				 if ($("#form_cu").valid()) {

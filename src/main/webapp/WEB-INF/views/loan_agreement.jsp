@@ -290,6 +290,13 @@
 				   	form.submit();
 				  }
 				 });
+			 $( "#dob" ).datepicker({
+			      showOtherMonths: true,
+			      selectOtherMonths: true,
+			      changeMonth: true,
+			      changeYear: true,
+			      dateFormat:"dd-mm-yy"
+			    });
 		})
 	</script>
 

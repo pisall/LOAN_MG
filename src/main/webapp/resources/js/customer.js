@@ -247,7 +247,7 @@ function deleteCustomer(cusID) {
 		confirm : function() {
 			var input = {
 				"cuID" : $.trim(cusID),
-				"cuDelYn" : $.trim("Y")
+				"cuDelYn" : $.trim("N")
 			}
 			$.ajax({
 				url : BASE_URL + "/customer/deleteCustomer",

@@ -124,7 +124,7 @@ public class CustomerDaoImp implements CustomerDao {
 			}
 			tx=session.beginTransaction();
 			Query query = session
-					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='N'  And cast(C.customerOfficerDto.coID as text) Like  ?  "
+					.createQuery("From CustomerDto C where 1=1 And C.cuDelYn='Y'  And cast(C.customerOfficerDto.coID as text) Like  ?  "
 							+ filter + orderRec);
 			query.setString(0, "%"+coID+"%");
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
@@ -161,7 +161,7 @@ public class CustomerDaoImp implements CustomerDao {
 			}
 			tx=session.beginTransaction();
 			Query query = session.createQuery(
-					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='N' And cast(C.customerOfficerDto.coID as text) like ?  "
+					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='Y' And cast(C.customerOfficerDto.coID as text) like ?  "
 							+ filter);
 
 			query.setString(0, "%"+coID+"%");

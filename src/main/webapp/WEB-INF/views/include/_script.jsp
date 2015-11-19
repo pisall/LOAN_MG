@@ -60,13 +60,6 @@
 				});
 			});
 		
-			 $( "#dob" ).datepicker({
-			      showOtherMonths: true,
-			      selectOtherMonths: true,
-			      changeMonth: true,
-			      changeYear: true,
-			      dateFormat:"dd-mm-yy"
-			    });
 			 
 			 function formatStringToDateTime(date,time){
 				return  moment(date, "YYYYMMDD"+time).format(
