@@ -48,10 +48,10 @@
 													<tr>
 														<td style="border: 0px">Customer Name :</td>
 														<td style="border: 0px">${entry.cu_nm}</td>
-													</tr>
+													</tr> 
 													<tr>
-														<td style="border: 0px">Phone:</td>
-														<td style="border: 0px">${entry.cu_phone}</td>
+														<td>Phone:</td>
+														<td>${entry.cu_phone}</td>
 													</tr>
 													<tr>
 														<td>Date Time :</td>
