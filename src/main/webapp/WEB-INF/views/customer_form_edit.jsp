@@ -119,7 +119,7 @@ f<%@include file="include/_head.jsp"%>
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<input type="hidden" value="${cu.cuDOB}" id="cu_dob">
 										<div class="col-sm-10">
-											<input maxlength="50"  type="text" class="form-control  required" id="datepicker" placeholder="Date of Birth">
+											<input maxlength="50"  type="text" class="form-control  required" id="dob" placeholder="Date of Birth">
 										</div>
 									</div>
 
@@ -332,17 +332,7 @@ f<%@include file="include/_head.jsp"%>
 	<!-- /#wrapper -->
 
 	<%@include file="include/_script.jsp"%>
-	<script>
-		$(function() {
-			 $( "#datepicker" ).datepicker({
-			      showOtherMonths: true,
-			      selectOtherMonths: true,
-			      changeMonth: true,
-			      changeYear: true,
-			      dateFormat:"dd-mm-yy"
-			    });
-		});
-	</script>
+	
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 	</script>
@@ -354,7 +344,7 @@ f<%@include file="include/_head.jsp"%>
 			var error;
 			var valid = false;
 			disableForm("#form_gu");
-			$("#datepicker").val(moment($("#cu_dob").val(), "YYYYMMDD").format("DD-MM-YYYY"));
+			$("#dob").val(moment($("#cu_dob").val(), "YYYYMMDD").format("DD-MM-YYYY"));
 			$("#form_cu").validate();
 
 			$("#form_gu").validate({
