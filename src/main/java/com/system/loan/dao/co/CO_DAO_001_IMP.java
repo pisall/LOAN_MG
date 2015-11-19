@@ -39,7 +39,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	
 
 	@Override
-	public HashMap<String, Object> newCoLog(CO_DTO_001 CO,LOGIN_DTO_001 LOG) {
+	public HashMap<String, Object> newCoLog(CO_DTO_001 CO,LOGIN_DTO_001 LOG,int REG_CO_ID) {
 		// TODO Auto-generated method stub
 		
 		HashMap<String, Object> result=new HashMap<>();
@@ -59,11 +59,13 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 				result.put("MESSAGE", "duplicated record");
 				return result;
 			}
+			CO_DTO_001 reg_co=findCoById(REG_CO_ID);
+			
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
 			tx.setTimeout(5);
 			CO.setLoginDTO(LOG);
-			CO.setRegCo(findCoById(8));
+			CO.setRegCo(reg_co);
 			LOG.setCoDTO(CO);
 			session.save(CO);
 			session.save(LOG);
@@ -85,6 +87,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	@Override
 	public int countByLogId(String LogEmail) {
 		// TODO Auto-generated method stub
+		System.out.println("function::countByLogId");
 		Session session=factory.getCurrentSession();
 		Transaction tx=null;
 		try{
@@ -323,19 +326,17 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		try{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001");
+			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=true");
 			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
 			if(pcount>0){
 				System.out.println("pcount>");
 				int totalPage=(int) Math.ceil((float) pcount/paging.getPcnt());
 				if(totalPage<paging.getPageNo()){
-					paging.setTotalPage(totalPage);
-					paging.setTotal(pcount);
-					paging.setTotalPage(totalPage);
-				}else{
-					paging.setTotal(pcount);
-					paging.setTotalPage(totalPage);
+					paging.setPageNo(totalPage);
 				}
+				
+				paging.setTotal(pcount);
+				paging.setTotalPage(totalPage);
 				
 			}else{
 				paging.setPageNo(1);
