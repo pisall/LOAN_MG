@@ -153,6 +153,14 @@ table thead.style2 tr th{
     -moz-animation: spinm .7s infinite linear;
 }
 
+.ellipsis {
+    display: inline-block;
+    width: 99%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 @keyframes spin {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
