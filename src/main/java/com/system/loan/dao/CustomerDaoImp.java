@@ -221,7 +221,7 @@ public class CustomerDaoImp implements CustomerDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("Select Count(*) From CustomerDto c Where c.cuDelYn='N'");
+			Query query = session.createQuery("Select Count(*) From CustomerDto c Where c.cuDelYn='Y'");
 			cnt = (long) query.uniqueResult();
 			tx.commit();
 		} catch (HibernateException e) {
