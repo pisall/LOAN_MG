@@ -89,11 +89,11 @@
 										<thead class="style2">
 											<tr class="active">
 												<th>ID</th>
-												<th>Name</th>
+												<th style="width: 12%">Name</th>
 												<th>Nickname</th>
 												<th>Sex</th>
 												<th>Phone</th>
-												<th>Address</th>
+												<th style="width: 45%">Address</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -160,7 +160,7 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
 	
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		$(function(){
 			$("#pop").click(function(){
 				newwindow=window.open("process_bar",'','height=50,width=1000');
@@ -168,7 +168,7 @@
 				return false;
 			});		
 		})
-	</script> -->
+	</script>
 </body>
 
 </html>

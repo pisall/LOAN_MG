@@ -43,33 +43,35 @@
      
       <script type="text/javascript">
 		$(function(){
-			$("#back_up").click(function(){
-				//startLoading();
+			$("#back_up").click(function(){		
+				startLoading();
+			/* $("#myModal3").modal({backdrop: "static"});			
+				 //startLoading();
 				var bufferIntObj = {
 					template: 2, // type number
 					start: true,  // start it now
-					parent: 'div:last' 
+					parent: '#show_process' 
 				};
-				var bufferProgress = new Mprogress(bufferIntObj);
+				var bufferProgress = new Mprogress(bufferIntObj); */
 				$.ajax({
 					url :"${pageContext.request.contextPath}/backupandrestore/backup",
 					type : 'GET',
 					success : function(data) {
-						//stopLoading();
-						bufferProgress.end();
+						stopLoading();
+						//bufferProgress.end();
 						if(data==0){
 							alert("successfully backup");
 						}else{
 							alert("error update,try again");
-							bufferProgress.end();
+							//bufferProgress.end();
 						}
 					},
 					error : function(data, status, er) {
-						bufferProgress.end();
+						//bufferProgress.end();
 						console.log("error: " + data + " status: " + status
 								+ " er:" + er);
 					}
-				});
+				}); 
 			});
 		
 			 
@@ -88,4 +90,5 @@
 		}
 	
 	</script>
+
 	

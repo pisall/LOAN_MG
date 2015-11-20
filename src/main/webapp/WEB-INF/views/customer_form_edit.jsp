@@ -419,7 +419,7 @@ f<%@include file="include/_head.jsp"%>
 					success : function(data) {
 						//uploadFile();
 						if (data == true) 
-							goBack();
+							goBack("customer","home_customer");
 					},
 					error : function(data, status, er) {
 						console.log("error: " + data + " status: " + status
