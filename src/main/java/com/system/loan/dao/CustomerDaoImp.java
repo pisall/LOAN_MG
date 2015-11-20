@@ -173,7 +173,7 @@ public class CustomerDaoImp implements CustomerDao {
 				}
 			}
 			tx = session.beginTransaction();
-			String sql="select  count(*) as cnt from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cast(cus.co_id  as text) like ?  " + filter +"";
+			String sql="select  count(*) as cnt from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cus.cu_del_yn='Y' and cast(cus.co_id  as text) like ?  " + filter +"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			/*Query query = session.createQuery(
