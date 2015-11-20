@@ -159,7 +159,7 @@ function listCus(pageNo) {
 									+ cuID
 									+ "</td>"
 									+ "<td style='cursor: pointer;' class='name'>"
-									+ data.REC[i].cu_nm
+									+ "<span class='ellipsis' title='"+data.REC[i].cu_nm+"'>"+data.REC[i].cu_nm+"</span>"
 									+ "</td>"
 									+ "<td>"
 									+ data.REC[i].cu_national_id
@@ -170,8 +170,8 @@ function listCus(pageNo) {
 									+ "<td>"
 									+ data.REC[i].cu_phone
 									+ "</td>"
-									+ "<td>"
-									+ data.REC[i].cu_address
+									+ "<td style='max-width:0px'>"
+									+ "<span class='ellipsis' title='"+data.REC[i].cu_address+"'>"+data.REC[i].cu_address+"</span>"
 									+ "</td>"
 									+ "<td>"
 									+ "<a href='"
