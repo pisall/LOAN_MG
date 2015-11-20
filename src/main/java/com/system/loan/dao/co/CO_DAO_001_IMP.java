@@ -184,7 +184,9 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "update_dtt as update_dtt,"
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
-					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where co_id=?");
+					+ "regCo.co_last_nm as reg_co_last_nm,"
+					+ "loginDTO.log_email as log_email,"
+					+ "loginDTO.log_type as log_type) from CO_DTO_001 where co_id=?");
 			query.setInteger(0, id);
 			
 			HashMap<String, Object> result=new HashMap();

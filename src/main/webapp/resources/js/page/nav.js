@@ -7,7 +7,7 @@ $(document).ready(function(){
 		$("#nav").children("li[val="+PAGE_ID+"]").addClass("active");
 	}
 	
-	click_setting();
+	//click_setting();
 	
 });
 function deleteAllCookies() {
@@ -37,9 +37,9 @@ function click_setting(){
 	$("#setting").click(function(){
 		//alert("test");
 		var input={};
-		input["oldPassword"]="12345";
+		input["oldPassword"]="124";
 		input["newPassword"]="123";
-		input["confirmNewPassword"]="1234";
+		input["confirmNewPassword"]="123";
 		
 		
 		$.ajax({

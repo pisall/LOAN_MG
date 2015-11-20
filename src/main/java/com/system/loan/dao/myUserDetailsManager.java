@@ -2,6 +2,7 @@ package com.system.loan.dao;
 
 import java.nio.file.AccessDeniedException;
 
+import javax.inject.Inject;
 import javax.security.sasl.AuthenticationException;
 
 import org.apache.commons.logging.Log;
@@ -13,12 +14,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 import com.system.loan.dao.login.LOGIN_DAO_001_IMP;
 import com.system.loan.service.MyUserDetailsService;
 
+
 public class myUserDetailsManager  implements UserDetailsManager{
+	//@Inject AuthenticationManager authenticationManager;
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -59,8 +64,17 @@ public class myUserDetailsManager  implements UserDetailsManager{
 			
 			
 			String username=currentUser.getName();
+			Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String password=((UserDetails)principal).getPassword();
+			PasswordEncoder encoder = new BCryptPasswordEncoder();
+			if(encoder.matches(oldPassword, password)){
+				logger.info("password is match");
+			}else{
+				logger.info("password is not match!");
+				throw new AccessDeniedException("Can't change password as no Authentication object found in context for current user.");
+			}
+			logger.info("userName="+username+"; oldPassword="+oldPassword+";currentpassword="+password);
 			
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
 			
 			if(authenticationManager !=null){
 				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
@@ -102,6 +116,21 @@ public class myUserDetailsManager  implements UserDetailsManager{
 	
 	public void setAuthenticationManager(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
+	}
+	public boolean isValidePass(String oldPass){
+		Authentication currentUser=SecurityContextHolder.getContext().getAuthentication();
+		String username=currentUser.getName();
+		Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String password=((UserDetails)principal).getPassword();
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		if(encoder.matches(oldPass, password)){
+			logger.info("password is match");
+			return true;
+		}else{
+			logger.info("password is not match!");
+			return false;
+		}
+		
 	}
 
 }

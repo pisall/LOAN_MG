@@ -3,6 +3,14 @@
 </head>
 
 <body>
+	<style>
+		.modal-header{
+			border-bottom: 1px solid #FFFFFF;
+		    background-color: #136686;
+		    box-shadow: 0px 1px 2px #797777;
+		    color:#fff;
+		}
+	</style>
 
     <div id="wrapper">
 
@@ -138,6 +146,8 @@
 
         </div>
         <!-- /#page-wrapper -->
+        
+        <!-- model user detail -->
         <div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
 		    
@@ -236,6 +246,7 @@
 		      
 		    </div>
 		 </div>
+		 <!-- //model user detail -->
 		  
 
     </div>

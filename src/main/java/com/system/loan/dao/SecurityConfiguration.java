@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 //		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN","DBA");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.eraseCredentials(false);
 	}
 	@Override
 	public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
