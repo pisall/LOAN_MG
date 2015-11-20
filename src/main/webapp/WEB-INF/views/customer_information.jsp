@@ -139,6 +139,10 @@
 
 		</div>
 		<!-- /#page-wrapper -->
+		<button id="pop">
+			Popup
+		</button>
+</div>
 	</div>
 	<!-- /#wrapper -->
 	<%@include file="customer_detail.jsp"%>
@@ -155,7 +159,16 @@
 		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
-
+	
+	<!-- <script type="text/javascript">
+		$(function(){
+			$("#pop").click(function(){
+				newwindow=window.open("process_bar",'','height=50,width=1000');
+				if (window.focus) {newwindow.focus()}
+				return false;
+			});		
+		})
+	</script> -->
 </body>
 
 </html>

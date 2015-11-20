@@ -13,7 +13,6 @@ function startLoading(){
 	
 	var ele=$('[data=iloading]');
 	if(ele.length>0){
-		
 	}else{
 		$("body").append(strload);
 	}

@@ -128,18 +128,17 @@ function listCus(pageNo) {
 	console.log(input);
 	$
 			.ajax({
-
 				url : BASE_URL + "/customer/listCus?coID=" + coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
 				beforeSend : function(xhr) {
-					startLoading();
+					if(word=="" || word==null)startLoading();
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
-					console.log("customer"+"=================+"+data);
+					
 					stopLoading();
 					value = data;
 					var result = "";
