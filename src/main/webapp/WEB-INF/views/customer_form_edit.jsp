@@ -41,7 +41,7 @@ f<%@include file="include/_head.jsp"%>
 				<!-- Go Back -->
 				<div class="row">
 					<div class="col-md-12 col-lg-12">
-						<button class="btn btn-primary" onclick="goBack()">
+						<button class="btn btn-primary" onclick="return goBack('customer','home_customer');">
 							<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
 						</button>
 					</div>
@@ -573,12 +573,7 @@ f<%@include file="include/_head.jsp"%>
 							});
 
 		});
-		/**
-		 * Go Back
-		 */
-		function goBack() {
-			window.history.back();
-		}
+		
 	</script>
 
 </body>

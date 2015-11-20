@@ -65,7 +65,15 @@
 				return  moment(date, "YYYYMMDD"+time).format(
 					"DD-MM-YYYY"+time)
 			 }
+			 
 		});
+		 /**
+		 * Go Back
+		 */
+		function goBack(controller,functionname) {
+			 location.href="${pageContext.request.contextPath}/"+controller+"/"+functionname+"";
+			//window.history.back();
+		}
 	
 	</script>
 	

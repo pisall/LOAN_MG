@@ -60,11 +60,11 @@
 
 									</div>
 									<div  class="col-md-2 col-sm-2">
-										<select class="form-control">
+										<select class="form-control" id="tr_type">
 											<option value="1">All</option>
-											<option value="2">Area</option>
-											<option value="3">Complete</option>
-											<option value="3">Finish</option>
+											<option value="3">Area</option>
+											<option value="2">Complete</option>
+											<option value="4">Finish</option>
 										</select>
 									</div>
 									<div class="col-md-5 col-sm-5 pull-right">
