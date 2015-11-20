@@ -64,6 +64,7 @@ public class CustomerOfficerDaoImp {
 			tx=session.beginTransaction();
 			Query query = session.createQuery("Select count(*) as cnt From CO_DTO_001 where loginDTO.enabled=true");
 			cnt=(long) query.uniqueResult();
+			System.out.println("cnt==========="+cnt);
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");

@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.net.httpserver.HttpContext;
+import com.system.loan.dao.CustomerDaoImp;
+import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dao.LdapUserDetailsManager;
 import com.system.loan.dao.myUserDetailsManager;
 import com.system.loan.dao.login.LOGIN_DAO_001_IMP;
@@ -46,16 +49,22 @@ import com.system.loan.dto.session.USER_SESSION;
 public class HomeController {
 	@Inject 
 	LOGIN_DAO_001_IMP loginDao;
+	@Inject
+		CustomerOfficerDaoImp co;
+	@Inject
+		CustomerDaoImp cu;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value ={"/","home"}, method = RequestMethod.GET)
-	public String home(HttpServletRequest req) {
+	public String home(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
 		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
 		String test=user.getCoNm();
-		System.out.println("session naem="+test); 
+		model.addAttribute("totalCo",co.getTotalCustomerOfficer());
+		model.addAttribute("totalCu",cu.getTotalCustomer());
+		
 		return "home"; 
 	}
 	
