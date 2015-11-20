@@ -345,8 +345,12 @@ f<%@include file="include/_head.jsp"%>
 			var valid = false;
 			disableForm("#form_gu");
 			$("#dob").val(moment($("#cu_dob").val(), "YYYYMMDD").format("DD-MM-YYYY"));
-			$("#form_cu").validate();
-
+			$("#form_cu").validate({
+				errorPlacement : function(label, element) {
+					console.log(label);
+				},
+			});
+			
 			$("#form_gu").validate({
 				errorPlacement : function(label, element) {
 					$("#form_cu").valid();

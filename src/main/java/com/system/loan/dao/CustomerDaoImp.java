@@ -1,5 +1,6 @@
 package com.system.loan.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -172,7 +173,7 @@ public class CustomerDaoImp implements CustomerDao {
 				}
 			}
 			tx = session.beginTransaction();
-			String sql="select  count(cus.cu_id) from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cast(cus.co_id like as text) like ?  " + filter +"";
+			String sql="select  count(*) as cnt from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cast(cus.co_id  as text) like ?  " + filter +"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			/*Query query = session.createQuery(
@@ -180,10 +181,13 @@ public class CustomerDaoImp implements CustomerDao {
 							+ filter);*/
 
 			query.setString(0, "%" + coID + "%");
-			List<Object> list = (List<Object>) query.list();
+			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
+			cnt=Integer.parseInt(result.get("cnt").toString());
+			
+			/*List<Object> list = (List<Object>) query.list();
 			for (Object ob : list) {
 				cnt = Integer.parseInt(ob.toString());
-			}
+			}*/
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");

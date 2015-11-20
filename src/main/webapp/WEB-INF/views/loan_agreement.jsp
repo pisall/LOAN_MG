@@ -54,7 +54,7 @@
 										
 									</span>
 
-									<div class="form-group">
+									<div class="form-group ">
 										<label class="control-label col-sm-2" for="fst_nm">
 											Name:</label>
 										<div class="col-sm-10">
