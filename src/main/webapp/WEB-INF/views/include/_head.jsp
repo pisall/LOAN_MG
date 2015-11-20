@@ -32,7 +32,10 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mprogress.min.css">
+   
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
+   
    	<style type="text/css">
    		label.error{
    			color:red;

@@ -1,5 +1,6 @@
 package com.system.loan.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -114,37 +115,30 @@ public class CustomerDaoImp implements CustomerDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CustomerDto> listCustomer(pagingDto paging, String coID) {
-		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		List<CustomerDto> list = null;
 		String filter = "";
 		String orderRec = " Order By cus.cu_id DESC";
 		Transaction tx = null;
 		try {
-			if (paging.getSw() != null) {
-				if (paging.getSw() != "") {
-					filter = " and  cast(cus.cu_id as string) like '%" + paging.getSw().toLowerCase()
+			if (paging.getSw() != null || paging.getTr_type()!=null) {
+				if (paging.getSw() != "" || paging.getTr_type()!="") {
+					filter =  " and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()
+							+ "%' ) and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()
-							+ "%' ";
+							+ "%' )";
 				}
 			}
 			tx = session.beginTransaction();
-			String sql="select cus.cu_id,cus.cu_nm,cus.cu_sex,cus.cu_phone,cus.cu_national_id,cus.cu_address,loa.tr_id,loa.tr_type from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cus.cu_del_yn='Y' and cast(cus.co_id as text) like ? " + filter +" "+ orderRec+"";
+			String sql="select DISTINCT cus.cu_id,cus.cu_nm,cus.cu_sex,cus.cu_phone,cus.cu_national_id,cus.cu_address from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id as text) like ?) " + filter +" "+ orderRec+"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			/*Query query = session.createQuery(
-					"select cus.cu_id,cus.cu_nm,cus.cu_sex, cus.cu_phone,cus.cu_national_id,cus.cu_address,loa.tr_id,loa.tr_typefrom mfi_customers cus ,mfi_loanapproval loawhere 1=1 and cus.cu_id=loa.cu_idand cast(cus.co_id as text) like ?"
-							// .createQuery("From CustomerDto C where 1=1 And
-							// C.cuDelYn='Y' And cast(C.customerOfficerDto.coID
-							// as text) Like ? "
-							+ filter + orderRec);*/
 			query.setString(0, "%" + coID + "%");
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
 			query.setMaxResults(paging.getPcnt());
 			list = (List<CustomerDto>) query.list();
-
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -162,17 +156,18 @@ public class CustomerDaoImp implements CustomerDao {
 		Transaction tx = null;
 		try {
 
-			if (paging.getSw() != null) {
-				if (paging.getSw() != "") {
-					filter = " and  cast(cus.cu_id as string) like '%" + paging.getSw().toLowerCase()
+			if (paging.getSw() != null || paging.getTr_type()!=null) {
+				if (paging.getSw() != "" || paging.getTr_type()!="") {
+					filter =  " and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()
+							+ "%' ) and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
 							+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()
-							+ "%' ";
+							+ "%' )";
 				}
 			}
 			tx = session.beginTransaction();
-			String sql="select  count(cus.cu_id) from mfi_customers cus ,mfi_loanapproval loa where 1=1 and cus.cu_id=loa.cu_id and cast(cus.co_id like as text) like ?  " + filter +"";
+			String sql="select count(*) as cnt from (select DISTINCT cus.cu_id from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id  as text) like ?)  " + filter +") total";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			/*Query query = session.createQuery(
@@ -180,10 +175,13 @@ public class CustomerDaoImp implements CustomerDao {
 							+ filter);*/
 
 			query.setString(0, "%" + coID + "%");
-			List<Object> list = (List<Object>) query.list();
+			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
+			cnt=Integer.parseInt(result.get("cnt").toString());
+			
+			/*List<Object> list = (List<Object>) query.list();
 			for (Object ob : list) {
 				cnt = Integer.parseInt(ob.toString());
-			}
+			}*/
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");
@@ -217,7 +215,7 @@ public class CustomerDaoImp implements CustomerDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("Select Count(*) From CustomerDto c Where c.cuDelYn='N'");
+			Query query = session.createQuery("Select Count(*) From CustomerDto c Where c.cuDelYn='Y'");
 			cnt = (long) query.uniqueResult();
 			tx.commit();
 		} catch (HibernateException e) {

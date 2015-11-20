@@ -20,6 +20,20 @@ public class pagingDto implements Serializable{
 	private int total;
 	private int totalPage;
 	private String sw;
+	private String tr_type;
+	
+	/**
+	 * @return the tr_type
+	 */
+	public String getTr_type() {
+		return tr_type;
+	}
+	/**
+	 * @param tr_type the tr_type to set
+	 */
+	public void setTr_type(String tr_type) {
+		this.tr_type = tr_type;
+	}
 	/**
 	 * @return the pageNo
 	 */

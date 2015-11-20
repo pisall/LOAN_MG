@@ -60,11 +60,11 @@
 
 									</div>
 									<div  class="col-md-2 col-sm-2">
-										<select class="form-control">
+										<select class="form-control" id="tr_type">
 											<option value="1">All</option>
-											<option value="2">Area</option>
-											<option value="3">Complete</option>
-											<option value="3">Finish</option>
+											<option value="3">Area</option>
+											<option value="2">Complete</option>
+											<option value="4">Finish</option>
 										</select>
 									</div>
 									<div class="col-md-5 col-sm-5 pull-right">
@@ -139,6 +139,10 @@
 
 		</div>
 		<!-- /#page-wrapper -->
+		<button id="pop">
+			Popup
+		</button>
+</div>
 	</div>
 	<!-- /#wrapper -->
 	<%@include file="customer_detail.jsp"%>
@@ -155,7 +159,16 @@
 		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
-
+	
+	<!-- <script type="text/javascript">
+		$(function(){
+			$("#pop").click(function(){
+				newwindow=window.open("process_bar",'','height=50,width=1000');
+				if (window.focus) {newwindow.focus()}
+				return false;
+			});		
+		})
+	</script> -->
 </body>
 
 </html>

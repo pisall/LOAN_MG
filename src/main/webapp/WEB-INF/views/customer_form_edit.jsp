@@ -41,7 +41,7 @@ f<%@include file="include/_head.jsp"%>
 				<!-- Go Back -->
 				<div class="row">
 					<div class="col-md-12 col-lg-12">
-						<button class="btn btn-primary" onclick="goBack()">
+						<button class="btn btn-primary" onclick="return goBack('customer','home_customer');">
 							<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
 						</button>
 					</div>
@@ -345,8 +345,12 @@ f<%@include file="include/_head.jsp"%>
 			var valid = false;
 			disableForm("#form_gu");
 			$("#dob").val(moment($("#cu_dob").val(), "YYYYMMDD").format("DD-MM-YYYY"));
-			$("#form_cu").validate();
-
+			$("#form_cu").validate({
+				errorPlacement : function(label, element) {
+					console.log(label);
+				},
+			});
+			
 			$("#form_gu").validate({
 				errorPlacement : function(label, element) {
 					$("#form_cu").valid();
@@ -569,12 +573,7 @@ f<%@include file="include/_head.jsp"%>
 							});
 
 		});
-		/**
-		 * Go Back
-		 */
-		function goBack() {
-			window.history.back();
-		}
+		
 	</script>
 
 </body>

@@ -3,6 +3,7 @@ var value = {};
 var totalPage = 1;
 var coID = $.trim(id);
 var word = "";
+var tr_type="";
 
 $(function() {
 	datetimenow();
@@ -20,6 +21,11 @@ $(function() {
 
 	$("#word").keyup(function() {
 		word = $(this).val();
+		listCus(1);
+
+	});
+	$("#tr_type").change(function() {
+		tr_type = $(this).val();
 		listCus(1);
 
 	});
@@ -117,21 +123,22 @@ function listCus(pageNo) {
 		"pageNo" : $.trim(pageNo),
 		"pcnt" : $.trim($("#record_num").val()),
 		"sw" : $.trim(word),
+		"tr_type":$.trim(tr_type)
 	}
+	console.log(input);
 	$
 			.ajax({
-
 				url : BASE_URL + "/customer/listCus?coID=" + coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
 				beforeSend : function(xhr) {
-					startLoading();
+					if(word=="" || word==null)startLoading();
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {
-					console.log("customer"+"=================+"+data);
+					
 					stopLoading();
 					value = data;
 					var result = "";

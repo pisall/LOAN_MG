@@ -128,8 +128,7 @@ public static SessionFactory factory = null;
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			query.setParameter(0, cus_id);
-			 listData = query.list();  
-			 System.out.println("00000000000::"+listData);
+			 listData = query.list();   
 			tran.commit();
 		}catch(HibernateException hne){
 			if(tran!=null) tran.rollback();

@@ -25,10 +25,15 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-12">
-
-						<h2 class="page-header" style="text-align: center;">Schedule
-							Payments</h2>
+					<div class="col-lg-12">				
+						
+						<h2 class="page-header" style="text-align: center;"><button style="float: left;" class="btn btn-primary" onclick=" return goBack('customer','home_customer');">
+								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
+							</button> Schedule
+							Payments </h2>
+						<span >
+							
+						</span>
 					</div>
 
 				</div>
@@ -195,6 +200,8 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
+
+	<%@include file="include/_script.jsp"%>
 
 	<!-- Loan Report javascript  -->
 	<script type="text/javascript">

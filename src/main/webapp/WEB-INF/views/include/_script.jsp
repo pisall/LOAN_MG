@@ -27,6 +27,7 @@
      <!-- Jquery validation -->
      <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
      <script src="${pageContext.request.contextPath}/resources/js/additional-methods.min.js"></script>
+      <script src="${pageContext.request.contextPath}/resources/js/mprogress.min.js"></script>
      
  
 	<script type="text/javascript">
@@ -43,17 +44,28 @@
       <script type="text/javascript">
 		$(function(){
 			$("#back_up").click(function(){
-				startLoading();
+				//startLoading();
+				var bufferIntObj = {
+					template: 2, // type number
+					start: true,  // start it now
+					parent: 'div:last' 
+				};
+				var bufferProgress = new Mprogress(bufferIntObj);
 				$.ajax({
 					url :"${pageContext.request.contextPath}/backupandrestore/backup",
 					type : 'GET',
 					success : function(data) {
-						stopLoading();
+						//stopLoading();
+						bufferProgress.end();
 						if(data==0){
 							alert("successfully backup");
+						}else{
+							alert("error update,try again");
+							bufferProgress.end();
 						}
 					},
 					error : function(data, status, er) {
+						bufferProgress.end();
 						console.log("error: " + data + " status: " + status
 								+ " er:" + er);
 					}
@@ -65,7 +77,15 @@
 				return  moment(date, "YYYYMMDD"+time).format(
 					"DD-MM-YYYY"+time)
 			 }
+			 
 		});
+		 /**
+		 * Go Back
+		 */
+		function goBack(controller,functionname) {
+			 location.href="${pageContext.request.contextPath}/"+controller+"/"+functionname+"";
+			//window.history.back();
+		}
 	
 	</script>
 	

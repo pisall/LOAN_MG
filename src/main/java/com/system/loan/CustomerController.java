@@ -171,5 +171,10 @@ public class CustomerController {
 		model.put("guarantor", guarantorImp.foundGuarantorByID(cuID, guID));
 		return "customer_form_edit";
 	}
+	
+	@RequestMapping(value = "/process_bar", method = RequestMethod.GET)
+	public String processBar(){
+		return "process_bar";
+	}
 
 }
