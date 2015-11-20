@@ -138,7 +138,13 @@ public class HomeController {
 		//UserDetails matchingUser=user
 		
 		UserDetailsManager userMg=new myUserDetailsManager();
-		userMg.changePassword(input.getOldPassword(), input.getNewPassword());
+		if(((myUserDetailsManager) userMg).isValidePass(input.getOldPassword())){
+			userMg.changePassword(input.getOldPassword(), input.getNewPassword());
+			result.put("ERROR", false);
+		}else{
+			result.put("ERROR", true);
+		}
+		
 		
 		
 		return result;
@@ -149,6 +155,7 @@ public class HomeController {
 	public ModelAndView log0001(){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("account_setting");
+		mv.addObject("page_id", "account_setting");
 		return mv;
 	}
 	 
