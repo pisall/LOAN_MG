@@ -118,33 +118,6 @@ public class HomeController {
 	public HashMap<String , Object> changePassword(@RequestBody login_0001_in input){
 		
 		HashMap<String, Object> result=new HashMap<>();
-//		Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		String userName=principal.toString();
-//		if(principal instanceof UserDetails){
-//			userName=((UserDetails)principal).getUsername();
-//			System.out.println("userName="+userName+ ","+((UserDetails)principal).getPassword());
-//			
-//		}
-//		
-//		HashMap<String, Object> changeResult=loginDao.changePassword(input, userName);
-//		if((boolean)changeResult.get("ERROR")){
-//			result.put("ERROR", true);
-//		}else{
-//			result.put("ERROR", false);
-//		}
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		AuthenticationManager au=new 
-//		
-//		String name = SecurityContextHolder.getContext().getAuthentication().toString();
-//
-//		try {
-//			auth.isAuthenticated();
-//		    // Update password here with your dao
-//		} catch (AuthenticationException e) {
-//		    // Old password was wrong
-//		}
-		
-		//UserDetails matchingUser=user
 		
 		UserDetailsManager userMg=new myUserDetailsManager();
 		if(((myUserDetailsManager) userMg).isValidePass(input.getOldPassword())){
@@ -166,6 +139,20 @@ public class HomeController {
 		mv.setViewName("account_setting");
 		mv.addObject("page_id", "account_setting");
 		return mv;
+	}
+	@RequestMapping(value="/change_user_name",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> changeUserName(@RequestBody login_0001_in input){
+		HashMap<String, Object> result=new HashMap<>();
+		
+		UserDetailsManager userMg=new myUserDetailsManager();
+		if(((myUserDetailsManager) userMg).isValidePass(input.getOldPassword())){
+			result=((myUserDetailsManager) userMg).changeUserName(input.getUserName(), input.getOldPassword());
+		}else{
+			result.put("ERROR", true);
+			result.put("MESSAGE", "Password is not match.");
+		}
+		return result;
 	}
 	 
 	

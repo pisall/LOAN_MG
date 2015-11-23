@@ -13,6 +13,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.internal.CriteriaImpl;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.stereotype.Service;
 
 import com.system.loan.dto.pagingDto;
@@ -191,6 +193,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			
 			HashMap<String, Object> result=new HashMap();
 			List list=query.list();
+			System.out.println("list size="+list.size());
 			if(list.size()>0){
 				result=(HashMap<String, Object>)list.get(0);
 			}
@@ -354,6 +357,39 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		}
 		
 		return paging;
+	}
+	
+	
+	public HashMap<String, Object> getCoLeftJoinLogById(int id){
+		
+		Session session=null;
+		Transaction tx=null;
+		try{
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createSQLQuery("select co_id,"
+					+ "co_first_nm,"
+					+ "co_last_nm,"
+					+ "co_sex,"
+					+ "co_brand,"
+					+ "co_phone,"
+					+ "co_cpm_phone,"
+					+ "address "
+					+ " from mfi_co where co_id=?");
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			query.setInteger(0, id);
+			
+			HashMap<String, Object> result=(HashMap<String, Object>)query.uniqueResult();
+			
+			tx.commit();
+			return result;
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 
 }

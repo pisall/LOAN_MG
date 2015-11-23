@@ -68,14 +68,63 @@ $(document).ready(function(){
 		}
 	});
 	
+	//check user Name;
+	$("#btn_change_username_confirm").click(function(){
+		var input={oldPassword:"",newPassword:"",confirmNewPassword:""};
+		input["userName"]=$("#change_user_nm").val();
+		input["oldPassword"]=$("#user_nm_change_password").val();
+		var isError=false;
+		
+		if(input.userName.length==0){
+			$("#change_user_nm").parent(".form-group").addClass("has-error");
+			isError=true;
+		}else{
+			$("#change_user_nm").parent(".form-group").removeClass("has-error");
+		}
+		
+		if(input.oldPassword.length==0){
+			$("#user_nm_change_password").parent(".form-group").addClass("has-error");
+			isError=true;
+		}else{
+			$("#user_nm_change_password").parent(".form-group").removeClass("has-error");
+		}
+		
+		if(isError){
+			return;
+		}
+	
+		console.log(input);
+		sendChangeUserName(input);
+		
+	});
+	
+	//event on hide of modal change password
 	$("#myModal").on('hidden.bs.modal', function () {
         $("#old_pass").val("");
         $("#new_pass").val("");
         $("#conf_new_pass").val("");
 	});
 	
+	// event on hide of modal change user name
+	$("#user_change").on('hidden.bs.modal', function () {
+        $("#change_user_nm").val("");
+        $("#user_nm_change_password").val("");
+	});
+	
 	$("#reg_co_nm").click(function(){
 		$("#reg_modal").modal("show");
+	});
+	
+	$("#modal_close").click(function(){
+		$("#reg_modal").modal("hide");
+	});
+	
+	$("#reg_co_nm").click(function(){
+		viewReg();
+	});
+	
+	$("#opt_change_username").click(function(){
+		$("#user_change").modal("show");
 	});
 		
 });
@@ -141,6 +190,79 @@ function sendChangPassword(input){
 		},
 		error : function(data, status, er) {
 			stopLoading();
+			console.log("error: " + data + " status: " + status + " er:" + er);
+		}
+	});
+}
+function sendChangeUserName(input){
+	$.ajax({
+		url : BASE_URL + "/change_user_name",
+		type : 'POST',
+		dataType : 'JSON',
+		data : JSON.stringify(input),
+		beforeSend : function(xhr) {
+			startLoading();
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(data) {
+			stopLoading();
+			console.log(data);
+			if(data.ERROR){
+				$("#change_user_nm").val("");
+				$("#user_nm_change_password").val("");
+				alert(data.MESSAGE);
+				
+			}else{
+				alert(data.MESSAGE);
+				$("#user_change").modal("hide");
+			}
+			
+		},
+		error : function(data, status, er) {
+			stopLoading();
+			console.log("error: " + data + " status: " + status + " er:" + er);
+		}
+	});
+}
+
+function viewReg(){
+	var id=$("#reg_co_id").val();
+	console.log("id="+id);
+	var input={};
+	input["co_id"]=id;
+	$.ajax({
+		url : BASE_URL + "/co_001_controller/co_l0004",
+		type : 'POST',
+		dataType : 'JSON',
+		data : JSON.stringify(input),
+		beforeSend : function(xhr) {
+			startLoading();
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success : function(data) {
+			stopLoading();
+			console.log(data);
+			var proNm="";
+			if(data.co_sex=="M"){
+				proNm+="Mr.";
+			}else{
+				proNm+="Mrs.";
+			}
+			
+			proNm+=(data.co_first_nm+" "+ data.co_last_nm).replace(/\b./g, function(m){ return m.toUpperCase(); });
+			console.log("proName="+proNm);
+			$("#view_reg_co_nm").text(proNm);
+			$("#view_reg_co_brand").text(data.co_brand);
+			$("#view_reg_co_phone").text(data.co_phone);
+			$("#view_reg_co_cmp_phone").text(data.co_cpm_phone);
+			$("#view_reg_address").text(data.address);
+			
+			
+			
+		},
+		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});

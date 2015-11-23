@@ -3,6 +3,7 @@ package com.system.loan.dao.login;
 import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -110,6 +111,51 @@ private SessionFactory factory=null;
 		result.put("ERROR", true);
 		return result;
 	}
+	public HashMap<String,Object> changeUserName(String UserName,String NewUserName){
+		HashMap<String, Object> result=new HashMap<>();
+		Session session =null;
+		Transaction tx=null;
+		try{
+			//check duplicate user name
+			if(countUserByUserName(NewUserName)>0){
+				result.put("ERROR", true);
+				result.put("MESSAGE", "user name is already exist.");
+				return result;
+			}
+			
+			//check if user name is exist
+			if(countUserByUserName(UserName)>0){
+				LOGIN_DTO_001 login=getLoginByUserName(UserName);
+				session=factory.getCurrentSession();
+				tx=session.beginTransaction();
+				login.setLog_email(NewUserName);
+				session.update(login);
+				tx.commit();
+				result.put("ERROR", false);
+				
+				//check if update is effect
+				if(countUserByUserName(NewUserName)>0){
+					result.put("ERROR", false);
+					result.put("MESSAGE", "changing user name is successful.");
+				}else{
+					result.put("ERROR", true);
+					result.put("MESSAGE", "changing user name is fail.");
+				}
+				
+			}else{
+				result.put("ERROR", true);
+				result.put("MESSAGE", "user name is not found.");
+			}
+			
+			
+			
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
 	
 	public void changePassword(String newpassword,String username){
 		Session session=null;
@@ -130,6 +176,24 @@ private SessionFactory factory=null;
 			e.printStackTrace();
 		}
 		
+	}
+	public int countUserByUserName(String userName){
+		Session session=null;
+		Transaction tx=null;
+		int rcnt=0;
+		try{
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createSQLQuery("select count(*) cnt from mfi_login where log_email=?");
+			query.setString(0, userName);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			HashMap<String, Object> result=(HashMap<String, Object>)query.uniqueResult();
+			tx.commit();
+			rcnt=Integer.parseInt(result.get("cnt").toString());
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return rcnt;
 	}
 }
 

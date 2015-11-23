@@ -303,6 +303,16 @@ public class co_001_controller {
 		}
 		return result;//test
 	}
+	/*
+	 * view who register profile
+	 */
+	@RequestMapping(value="/co_l0004",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coL0003(@RequestBody co_0002_in input ){
+		HashMap<String, Object> result=new HashMap<>();
+		result=coDao.getCoLeftJoinLogById(input.getCo_id());
+		return result;
+	}
 	
 
 }

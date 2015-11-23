@@ -1,9 +1,23 @@
 package com.system.loan.dto.login.in;
 
 public class login_0001_in {
+	private String userName;
 	private String oldPassword;
 	private String newPassword;
 	private String confirmNewPassword;
+	
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	/**
 	 * @return the oldPassword
 	 */

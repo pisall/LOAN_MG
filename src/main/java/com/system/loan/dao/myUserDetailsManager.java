@@ -1,6 +1,7 @@
 package com.system.loan.dao;
 
 import java.nio.file.AccessDeniedException;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.security.sasl.AuthenticationException;
@@ -56,7 +57,6 @@ public class myUserDetailsManager  implements UserDetailsManager{
 	public void changePassword(String oldPassword, String newPassword){
 		// TODO Auto-generated method stub
 		Authentication currentUser=SecurityContextHolder.getContext().getAuthentication();
-		AuthenticationManager authOld;
 		try {
 			if(currentUser==null){
 				throw new AccessDeniedException("Can't change password as no Authentication object found in context for current user.");
@@ -107,6 +107,60 @@ public class myUserDetailsManager  implements UserDetailsManager{
 
 		return newAuthentication;
 	}
+	
+	public HashMap<String, Object> changeUserName(String newUserName,String enterPassword){
+		Authentication currentUser=SecurityContextHolder.getContext().getAuthentication();
+		try {
+			if(currentUser==null){
+				throw new AccessDeniedException("Can't change password as no Authentication object found in context for current user.");
+			}
+			
+			String username=currentUser.getName();
+			Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String password=((UserDetails)principal).getPassword();
+			PasswordEncoder encoder = new BCryptPasswordEncoder();
+			if(encoder.matches(enterPassword, password)){
+				logger.info("password is match");
+			}else{
+				logger.info("password is not match!");
+				throw new AccessDeniedException("Can't change password as no Authentication object found in context for current user.");
+			}
+			
+			
+			if(authenticationManager !=null){
+				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, enterPassword));
+				//boolean test=authenticationManager==authOld.authenticate(currentUser);
+				logger.info("yes have ");
+			}else{
+				logger.info("No authentication manager set. Password won't be re-checked.");
+			}
+			
+			LOGIN_DAO_001_IMP log=new LOGIN_DAO_001_IMP();
+			HashMap<String , Object> result=new HashMap<>();
+			result=log.changeUserName(username, newUserName);
+			if(!(boolean)result.get("ERROR")){
+				SecurityContextHolder.getContext().setAuthentication(createNewAuthenticationByUserName(currentUser,newUserName));
+			}
+			
+			return result;
+		}catch (AccessDeniedException e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	
+	
+	protected Authentication createNewAuthenticationByUserName(Authentication currentAuth,String userName){
+		MyUserDetailsService myUser=new MyUserDetailsService();
+		UserDetails user = myUser.loadUserByUsername(userName);
+		
+
+		UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(
+				user, null, user.getAuthorities());
+		newAuthentication.setDetails(currentAuth.getDetails());
+
+		return newAuthentication;
+	}
 
 	@Override
 	public boolean userExists(String username) {
@@ -118,8 +172,6 @@ public class myUserDetailsManager  implements UserDetailsManager{
 		this.authenticationManager = authenticationManager;
 	}
 	public boolean isValidePass(String oldPass){
-		Authentication currentUser=SecurityContextHolder.getContext().getAuthentication();
-		String username=currentUser.getName();
 		Object principal=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String password=((UserDetails)principal).getPassword();
 		PasswordEncoder encoder = new BCryptPasswordEncoder();

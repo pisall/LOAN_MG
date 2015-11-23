@@ -132,8 +132,8 @@
 		 </div>
 		 <!-- //model change password -->
 		 
-		 <!-- model view register-->
-        <div class="modal fade" id="reg_modal" role="dialog">
+		 <!-- model change user name -->
+        <div class="modal fade" id="user_change" role="dialog">
 		    <div class="modal-dialog">
 		    
 		      <!-- Modal content-->
@@ -144,27 +144,58 @@
 		        </div>
 		        <!-- //modal body -->
 		        <div class="modal-body">	
+		        	 <div>
+		        	 	<div class="form-group required">
+					      <input id="change_user_nm" type="text" class="form-control has-error" placeholder="New User Name" aria-describedby="basic-addon1">
+					    </div>
+					      <br/>
+					      <div class="form-group required">
+					      	<input id="user_nm_change_password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+					      </div>
+					     
+				      </div>				    
+		        </div>
+		        <!-- //modal body -->
+		        <div class="modal-footer">
+		        <a href="#none" class="btn btn-primary" id="btn_change_username_confirm">Confirm change</a>
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		 </div>
+		 <!-- //model change password -->
+		 
+		 <!-- model view register-->
+        <div class="modal fade" id="reg_modal" role="dialog">
+		    <div class="modal-dialog">
+		    	
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		       <button type="button" id="modal_close" class="close" style="position: absolute;right: 5px;z-index: 100; cursor: pointer;">&times;</button>
+		        <!-- //modal body -->
+		        <div class="modal-body">	
 		        	 <div class="row">
 		        	 	<div class="col-lg-4 co-sm-4 col-md-4 col-xs-4">
 		        	 		<img src="/controller/resources/img/png/user_default.png" class="img-responsive">
 		        	 	</div>
 		        	 	<div class="col-lg-8 co-sm-8 col-md-8 col-xs-8">
 		        	 		<div style="margin-bottom: 5px;padding-bottom:3px; border-bottom:1px 1px solid #fff;">
-		        	 			<div><span style="color: #136686;font-weight: bold;">Mr.Prak Virak</span></div>
-		        	 			<div><span style="color: #878788;">Brand 1</span></div>
+		        	 			<div><span style="color: #136686;font-weight: bold;" id="view_reg_co_nm"></span></div>
+		        	 			<div><span style="color: #878788;" id="view_reg_co_brand"></span></div>
 		        	 		</div>
 		        	 		
 		        	 		
-		        	 		<div><span class="glyphicon glyphicon-phone" style="margin-right:3px;"></span><span>010 939 938</span></div>
-		        	 		<div><span class="glyphicon glyphicon-earphone" style="margin-right:3px;"></span><span>010 939 938</span></div>
+		        	 		<div><span class="glyphicon glyphicon-phone" style="margin-right:3px;"></span><span id="view_reg_co_phone"></span></div>
+		        	 		<div><span class="glyphicon glyphicon-earphone" style="margin-right:3px;"></span><span id="view_reg_co_cmp_phone"></span></div>
+		        	 		<div><span style="margin-right:3px;">Address :  </span><span id="view_reg_address"></span></div>
 		        	 	</div>
 		        	 	
 				      </div>				    
 		        </div>
 		        <!-- //modal body -->
-		        <div class="modal-footer">
-		        <a href="#none" class="btn btn-primary" id="btn_change_pass_confirm">Confirm change</a>
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <div class="modal-footer" style="background-color: #EEF0F5;">
+		          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
 		        </div>
 		      </div>
 		      
