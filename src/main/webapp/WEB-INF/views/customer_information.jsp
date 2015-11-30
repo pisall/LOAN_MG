@@ -1,6 +1,7 @@
 
 <%@include file="include/_head.jsp"%>
 
+
 <%-- <%
 	HttpSession ses = request.getSession(false);
 	ses.setAttribute("id", "9");
@@ -8,8 +9,8 @@
 %> --%>
 
 <body>
-
 	<div id="wrapper">
+	
 		<!-- Navigation -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
@@ -61,7 +62,9 @@
 									</div>
 									<div  class="col-md-2 col-sm-2">
 										<select class="form-control" id="tr_type">
+											
 											<option value="1">All</option>
+											<option value="0">Pay Today</option>
 											<option value="3">Area</option>
 											<option value="2">Complete</option>
 											<option value="4">Finish</option>

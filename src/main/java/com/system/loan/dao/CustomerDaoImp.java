@@ -1,5 +1,8 @@
 package com.system.loan.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -116,23 +119,13 @@ public class CustomerDaoImp implements CustomerDao {
 	@Override
 	public List<CustomerDto> listCustomer(pagingDto paging, String coID) {
 		Session session = factory.getCurrentSession();
-		List<CustomerDto> list = null;
-		String filter = "";
+		List<CustomerDto> list = null;	
 		String orderRec = " Order By cus.cu_id DESC";
 		Transaction tx = null;
+		String now="";				
 		try {
-			if (paging.getSw() != null || paging.getTr_type()!=null) {
-				if (paging.getSw() != "" || paging.getTr_type()!="") {
-					filter =  " and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()
-							+ "%' ) and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()
-							+ "%' )";
-				}
-			}
 			tx = session.beginTransaction();
-			String sql="select DISTINCT cus.cu_id,cus.cu_nm,cus.cu_sex,cus.cu_phone,cus.cu_national_id,cus.cu_address from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id as text) like ?) " + filter +" "+ orderRec+"";
+			String sql="select DISTINCT cus.cu_id,cus.cu_nm,cus.cu_sex,cus.cu_phone,cus.cu_national_id,cus.cu_address from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id as text) like ?) " + getQuery(paging) +" "+ orderRec+"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			query.setString(0, "%" + coID + "%");
@@ -146,42 +139,49 @@ public class CustomerDaoImp implements CustomerDao {
 		}
 		return list;
 	}
+	
+	public String getQuery(pagingDto paging){
+		String status="";
+		String filter = "";
+		if (paging.getSw() != null || paging.getTr_type()!=null) {
+		if (paging.getSw() != "" || paging.getTr_type()!="") {
+			if(paging.getTr_type().equals("0")){
+				status=" and (to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') LIKE '%"+getDateNow()+"%' and tr.tr_stts in ('1','3'))";
+			}else{
+				status="and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()+ "%')";
+			}
+		 	filter = status + "and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
+					+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
+					+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
+					+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()
+					+ "%' )";
+		}
+		}
+		return filter;
+	}
+	
+	public String getDateNow(){
+		String now="";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		now=dateFormat.format(date);
+		return now;
+	}
 
 	@SuppressWarnings("unchecked")
 	public int totalCus(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
-		int cnt = 0;
-		String filter = "";
-		Transaction tx = null;
-		try {
-
-			if (paging.getSw() != null || paging.getTr_type()!=null) {
-				if (paging.getSw() != "" || paging.getTr_type()!="") {
-					filter =  " and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()
-							+ "%' ) and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
-							+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()
-							+ "%' )";
-				}
-			}
+		int cnt = 0;	
+		Transaction tx = null;	
+		try {		
 			tx = session.beginTransaction();
-			String sql="select count(*) as cnt from (select DISTINCT cus.cu_id from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id  as text) like ?)  " + filter +") total";
+			String sql="select count(*) as cnt from (select DISTINCT cus.cu_id from mfi_customers cus , mfi_transection tr  where 1=1 and (cus.cu_id=tr.tr_cu_id) and (cus.cu_del_yn='Y') and (cast(cus.co_id  as text) like ?)  " + getQuery(paging) +") total";
 			SQLQuery query = session.createSQLQuery(sql);
-			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			/*Query query = session.createQuery(
-					"Select Count(C.cuID) From CustomerDto C where 1=1 and C.cuDelYn='Y' And cast(C.customerOfficerDto.coID as text) like ?  "
-							+ filter);*/
-
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);			
 			query.setString(0, "%" + coID + "%");
 			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
-			cnt=Integer.parseInt(result.get("cnt").toString());
-			
-			/*List<Object> list = (List<Object>) query.list();
-			for (Object ob : list) {
-				cnt = Integer.parseInt(ob.toString());
-			}*/
+			cnt=Integer.parseInt(result.get("cnt").toString());		
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");
