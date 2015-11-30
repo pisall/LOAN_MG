@@ -365,6 +365,9 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			tx=session.beginTransaction();
 			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=true");
 			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
+			if(paging.getPageNo()<1){
+				paging.setPageNo(1);
+			}
 			if(pcount>0){
 				System.out.println("pcount>");
 				int totalPage=(int) Math.ceil((float) pcount/paging.getPcnt());
