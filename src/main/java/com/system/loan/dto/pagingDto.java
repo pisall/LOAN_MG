@@ -21,6 +21,8 @@ public class pagingDto implements Serializable{
 	private int totalPage;
 	private String sw;
 	private String tr_type;
+	private String startDate;
+	private String endDate;
 	
 	/**
 	 * @return the tr_type
@@ -96,6 +98,30 @@ public class pagingDto implements Serializable{
 		this.sw = sw;
 	}
 	
+	/**
+	 * @return the startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	/**
+	 * @return the endDate
+	 */
+	public String getEndDate() {
+		return endDate;
+	}
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	@Override
 	public String toString(){
 		StringBuffer buff=new StringBuffer();

@@ -143,14 +143,19 @@ public class CustomerDaoImp implements CustomerDao {
 	public String getQuery(pagingDto paging){
 		String status="";
 		String filter = "";
-		if (paging.getSw() != null || paging.getTr_type()!=null) {
-		if (paging.getSw() != "" || paging.getTr_type()!="") {
+		String date="";
+		if (paging.getSw() != null || paging.getTr_type()!=null || paging.getStartDate()!=null || paging.getEndDate()!=null ) {
+		if (paging.getSw() != "" || paging.getTr_type()!="" || paging.getStartDate() !="" || paging.getEndDate()!="") {
 			if(paging.getTr_type().equals("0")){
 				status=" and (to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') LIKE '%"+getDateNow()+"%' and tr.tr_stts in ('1','3'))";
 			}else{
 				status="and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()+ "%')";
 			}
-		 	filter = status + "and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
+			if(paging.getStartDate() !="" &&  paging.getEndDate()!=""){
+				System.out.println(paging.getStartDate()+"==========="+paging.getEndDate());
+				date=" and(to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') 	BETWEEN '"+paging.getStartDate()+"'  AND '"+paging.getEndDate()+"' )";
+			}
+		 	filter = status + date + " and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()
 					+ "%' Or lower(cus.cu_nm) like '%" + paging.getSw().toLowerCase()
 					+ "%' Or lower(cus.cu_phone) like '%" + paging.getSw().toLowerCase()
 					+ "%' Or lower(cus.cu_address) like '%" + paging.getSw().toLowerCase()

@@ -4,6 +4,8 @@ var totalPage = 1;
 var coID = $.trim(id);
 var word = "";
 var tr_type="";
+var startDate="";
+var endDate="";
 
 $(function() {
 	datetimenow();
@@ -29,8 +31,35 @@ $(function() {
 		listCus(1);
 
 	});
+	$( "#from" ).datepicker({
+	      defaultDate: "+1w",
+	      changeMonth: true,
+	      numberOfMonths:1,
+	      dateFormat: 'dd-mm-yy',
+	      onClose: function( selectedDate ) {
+	        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+	      }
+	    });
+	    $( "#to" ).datepicker({
+	      defaultDate: "+1w",
+	      changeMonth: true,
+	      numberOfMonths: 1,
+	      dateFormat: 'dd-mm-yy',
+	      onClose: function( selectedDate ) {
+	    	startDate= dateFormate( $("#from").val()); endDate=dateFormate($("#to").val());
+	    	if(startDate=="" || endDate==""){
+	    		startDate="";endDate="";
+	    	}
+	        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+	        listCus(1);
+	      }
+	    });
 
 });
+
+function dateFormate(date){
+ return moment(date, "DD-MM-YYYY").format("YYYY-MM-DD")
+}
 
 function loadPaging() {
 	$("#paging").children("[name=p_index]").click(function() {
@@ -123,7 +152,9 @@ function listCus(pageNo) {
 		"pageNo" : $.trim(pageNo),
 		"pcnt" : $.trim($("#record_num").val()),
 		"sw" : $.trim(word),
-		"tr_type":$.trim(tr_type)
+		"tr_type":$.trim(tr_type),
+		"startDate":$.trim(startDate),
+		"endDate":$.trim(endDate)		
 	}
 	console.log(input);
 	$

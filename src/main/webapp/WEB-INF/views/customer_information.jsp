@@ -1,16 +1,9 @@
 
 <%@include file="include/_head.jsp"%>
 
-
-<%-- <%
-	HttpSession ses = request.getSession(false);
-	ses.setAttribute("id", "9");
-	ses.setAttribute("brand", "bb");
-%> --%>
-
 <body>
 	<div id="wrapper">
-	
+
 		<!-- Navigation -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
@@ -34,9 +27,7 @@
 
 						<h2 class="page-header">
 
-							<span>Customer Infomation</span>
-							<span>							
-							</span>
+							<span>Customer Infomation</span> <span> </span>
 						</h2>
 
 					</div>
@@ -49,20 +40,13 @@
 						<div class="panel panel-default">
 							<div class="panel panel-heading">
 								<div class="row">
-									<div class="col-md-5 col-sm-5">
-										<!-- <span class="col-md-8 col-sm-8" style="padding: 0px">  -->
-										<select
-											class="form-control" id="co_info">
-												<option value="">Display All</option>
-
+									<div class="col-md-3 col-sm-3">
+										<select class="form-control" id="co_info">
+											<option value="">Display All</option>
 										</select>
-										
-										<!-- </span> -->
-
 									</div>
-									<div  class="col-md-2 col-sm-2">
+									<div class="col-md-2 col-sm-2">
 										<select class="form-control" id="tr_type">
-											
 											<option value="1">All</option>
 											<option value="0">Pay Today</option>
 											<option value="3">Area</option>
@@ -70,8 +54,11 @@
 											<option value="4">Finish</option>
 										</select>
 									</div>
-									<div class="col-md-5 col-sm-5 pull-right">
-
+									<div class="col-md-3 col-sm-3">
+										 <input class="form-control" type="text" id="from" name="from">
+										 <input class="form-control" type="text" id="to" name="to">
+									</div>
+									<div class="col-md-4 col-sm-4 pull-right">
 										<div class="form-group input-group">
 											<input class="form-control" type="text" id="word"
 												placeholder="Search Customer By ID Card or Name"> <span
@@ -80,7 +67,6 @@
 													<i class="fa fa-search"></i>
 												</button></span>
 										</div>
-
 									</div>
 								</div>
 
@@ -101,8 +87,6 @@
 											</tr>
 										</thead>
 										<tbody id="tableCustomer">
-
-
 										</tbody>
 									</table>
 								</div>
@@ -111,8 +95,6 @@
 							<!-- //panel body -->
 
 						</div>
-
-
 						<!--//panel top -->
 
 					</div>
@@ -142,10 +124,10 @@
 
 		</div>
 		<!-- /#page-wrapper -->
-		<button id="pop">
-			Popup
-		</button>
-</div>
+		<!-- <label for="from" class="label-control">From</label> <input class="form-control" type="text" id="from"
+			name="from"> <label class="form-control" for="to">to</label> <input class="form-control" type="text"
+			id="to" name="to"> -->
+	</div>
 	</div>
 	<!-- /#wrapper -->
 	<%@include file="customer_detail.jsp"%>
@@ -162,14 +144,18 @@
 		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
-	
+
 	<script type="text/javascript">
-		$(function(){
-			$("#pop").click(function(){
-				newwindow=window.open("process_bar",'','height=50,width=1000');
-				if (window.focus) {newwindow.focus()}
-				return false;
-			});		
+		$(function() {
+			$("#pop").click(
+					function() {
+						newwindow = window.open("process_bar", '',
+								'height=50,width=1000');
+						if (window.focus) {
+							newwindow.focus()
+						}
+						return false;
+					});
 		})
 	</script>
 </body>
