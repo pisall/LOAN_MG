@@ -1,6 +1,7 @@
 package com.system.loan.dao.co;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -136,6 +137,29 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		Transaction tx=null;
 		try{
 			tx=session.beginTransaction();
+			String[] listSw;
+			String filter="";
+			if(paging.getSw()!=null){
+				if(paging.getSw().length()>0){
+					System.out.println("sw="+ paging.getSw());
+					listSw=paging.getSw().split(" ");
+					System.out.println("size arrysw="+listSw.length);
+					
+					if(listSw.length>0){
+						filter=" and(";
+						for(int i=0;i<listSw.length;i++){
+							if(i>0){
+								filter+=" or ";
+							}
+							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
+						}
+						filter+=")";
+						System.out.println("filter="+filter);
+					}
+				}
+				
+			}
+			
 			Query query=session.createQuery("select new map(co_id as co_id,"
 					+ "co_first_nm as co_first_nm,"
 					+ "co_last_nm as co_last_nm,"
@@ -144,7 +168,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "co_phone as co_phone,"
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
-					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true");
+					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true"+ filter);
 			
 			/*Query query=session.createQuery("from CO_DTO_001 where loginDTO.enabled=true");*/
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
@@ -361,9 +385,31 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		Session session=null;
 		Transaction tx=null;
 		try{
+			String[] listSw;
+			String filter="";
+			if(paging.getSw()!=null){
+				if(paging.getSw().length()>0){
+					System.out.println("sw="+ paging.getSw());
+					listSw=paging.getSw().split(" ");
+					System.out.println("size arrysw="+listSw.length);
+					
+					if(listSw.length>0){
+						filter=" and(";
+						for(int i=0;i<listSw.length;i++){
+							if(i>0){
+								filter+=" or ";
+							}
+							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
+						}
+						filter+=")";
+						System.out.println("filter="+filter);
+					}
+				}
+				
+			}
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=true");
+			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=true"+ filter);
 			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
 			if(paging.getPageNo()<1){
 				paging.setPageNo(1);

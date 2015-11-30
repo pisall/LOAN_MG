@@ -105,9 +105,6 @@
                         <h2 class="page-header" id="pro_nm">
                             Mr.Prak Virak
                         </h2>
-                        
-                        	
-                        
                  
                         <div style="position: relative;">
                         	<span class="glyphicon glyphicon-tag sticker">

@@ -112,7 +112,14 @@ function getCoById(){
 			$("#co_dob").text(moment(data.dob,"YYYYMMDD").format('ll'));
 			$("#co_reg_dtt").text($.format.date(new Date(convertToStandardDateString(data.reg_dtt)),"ddd,MMM dd yyyy"));
 			//$("#co_reg_dtt").text(convertToStandardDateString(data.reg_dtt));
-			$("#co_update_dtt").text(moment(data.update_dtt,"YYYYMMDDhmmss").format("MMMM Do YYYY, h:mm:ss a"));
+			if(data.update_dtt.length==14 ){
+				$("#co_update_dtt").parents("tr").css("display","");
+				$("#co_update_dtt").text(moment(data.update_dtt,"YYYYMMDDhmmss").format("MMMM Do YYYY, h:mm:ss a"));
+			}else{
+				$("#co_update_dtt").parents("tr").css("display","none");
+			}
+			
+			
 			var proNm="";
 			if(data.co_sex=="M"){
 				proNm+="Mr.";

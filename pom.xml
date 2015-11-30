@@ -305,7 +305,37 @@
 				<artifactId>spring-security-ldap</artifactId>
 				<version>4.0.3.RELEASE</version>
 			</dependency>
-
+			
+			<!-- servlet api -->
+			 <dependency>
+	          <groupId>javax.servlet</groupId>
+	          <artifactId>javax.servlet-api</artifactId>
+	          <version>3.1.0</version>
+	        </dependency>
+	        <!-- json library -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-core</artifactId>
+			    <version>2.3.0</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+			    <version>2.3.0</version>
+			</dependency>
+			
+			<!-- spring websocket -->
+			<dependency>
+			   <groupId>org.springframework</groupId>
+			   <artifactId>spring-websocket</artifactId>
+			   <version>4.0.1.RELEASE</version>
+			</dependency>
+			<dependency>
+			   <groupId>org.springframework</groupId>
+			   <artifactId>spring-messaging</artifactId>
+			   <version>4.0.1.RELEASE</version>
+			</dependency>
 
 
 	</dependencies>

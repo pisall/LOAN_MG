@@ -4,7 +4,12 @@
 
 $(document).ready(function(){
 	//blur event
-	listCo({pageNo:1,pcnt:10});
+	var sw=$("#sw").val();
+	listCo({pageNo:1,pcnt:10,sw:sw});
+	$("#btn_search").click(function(){
+		var sw=$("#sw").val();
+		listCo({pageNo:1,pcnt:10,sw:sw});
+	});
 	
 });
 
@@ -29,16 +34,31 @@ function listCo(input){
 			var tbody="";
 			$("#paging").html("");
 			var paging=data.PAGING;
+			var sw=$("#sw").val();
 			if(paging.totalPage>0){
-				$("#paging").append('<li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
+				//previous paging
+				$("#paging").append('<li class="next" val="0p"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
 				for(var i=1;i<=paging.totalPage;i++){
 					$("#paging").append('<li val="'+i+'"><a href="#">'+i+'</a></li>');
 				}
-				$("#paging").append(' <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
+				//next paging
+				$("#paging").append(' <li class="next" val="0n"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
+				//add active to current page
 				$("#paging").children("li[val="+paging.pageNo+"]").addClass("active");
+				
+				//click page index
 				$("#paging").children("li").click(function(){
-					listCo({pageNo:$(this).attr("val"),pcnt:10});
+					listCo({pageNo:$(this).attr("val"),pcnt:10,sw:sw});
 				});
+				//click previous
+				$("#paging").children("li[val=0p]").click(function(){
+					listCo({pageNo:paging.pageNo-1,pcnt:10,sw:sw});
+				});
+				//click previous
+				$("#paging").children("li[val=0n]").click(function(){
+					listCo({pageNo:paging.pageNo+1,pcnt:10,sw:sw});
+				});
+				
 			}
 			
 			$.each(data.REC,function(i,v){
@@ -91,6 +111,7 @@ function listCo(input){
 			});
 		},
 		error : function(data, status, er) {
+			stopLoading();
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});

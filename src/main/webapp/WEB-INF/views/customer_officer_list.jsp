@@ -63,8 +63,8 @@
 									<div class="col-md-6 pull-right">
 											
 											<div class="form-group input-group">
-												<input class="form-control" type="text" placeholder="Enter CO ID or Name">
-												<span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+												<input class="form-control" type="text" id="sw" placeholder="Enter CO ID or Name">
+												<span class="input-group-btn"><a href="#none" class="btn btn-default" id="btn_search"><i class="fa fa-search"></i></a></span>
 											</div>
 										
 									</div>
