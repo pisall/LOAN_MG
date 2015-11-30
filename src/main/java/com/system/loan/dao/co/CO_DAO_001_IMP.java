@@ -51,12 +51,10 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		
 		
 		// TODO Auto-generated method stub
-		System.out.println("insert");
 		Session session=null;
 		Transaction tx=null;
 		try {
 			int count=countByLogId(LOG.getLog_email());
-			System.out.println("cont="+count);
 			if(count>0){
 				result.put("ERROR", true);
 				result.put("MESSAGE", "duplicated record");
@@ -80,7 +78,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			
 		} catch (HibernateException e) {
 			// TODO: handle exception
-			System.out.println("IError::CO_DAO_001(Class)::newCoLog(function)");
 			e.printStackTrace();
 		}
 		return result;
@@ -90,7 +87,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	@Override
 	public int countByLogId(String LogEmail) {
 		// TODO Auto-generated method stub
-		System.out.println("function::countByLogId");
 		Session session=factory.getCurrentSession();
 		Transaction tx=null;
 		try{
@@ -99,13 +95,11 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			query.setString(0, LogEmail);
 			Object count=query.uniqueResult();
 			int intc=Integer.parseInt(count.toString());
-			System.out.println("intc-"+intc);
 			tx.commit();
 			return intc;
 			
 			
 		}catch(HibernateException e){
-			System.out.println("IError::CO_DAO_001(Class)::countByLogId(function)");
 			e.printStackTrace();
 		}
 		
@@ -141,9 +135,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			String filter="";
 			if(paging.getSw()!=null){
 				if(paging.getSw().length()>0){
-					System.out.println("sw="+ paging.getSw());
 					listSw=paging.getSw().split(" ");
-					System.out.println("size arrysw="+listSw.length);
 					
 					if(listSw.length>0){
 						filter=" and(";
@@ -154,7 +146,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
 						}
 						filter+=")";
-						System.out.println("filter="+filter);
 					}
 				}
 				
@@ -192,7 +183,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		Transaction tx=null;
 		try{
 			tx=session.beginTransaction();
-			System.out.println(" id="+id);
 			//Query query=session.createQuery("select new map(co_id as co_id) from CO_DTO_001");
 			Query query=session.createQuery("select new map("
 					+ "co_id as co_id,"
@@ -217,14 +207,12 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			
 			HashMap<String, Object> result=new HashMap();
 			List list=query.list();
-			System.out.println("list size="+list.size());
 			if(list.size()>0){
 				result=(HashMap<String, Object>)list.get(0);
 			}
 			tx.commit();
 			return result;
 		}catch(HibernateException e){
-			System.out.println("eeerorr");
 			e.printStackTrace();
 			
 		}
@@ -301,7 +289,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			query.setInteger(1, id);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			int count=query.executeUpdate();
-			System.out.println(count);
 
 			tx.commit();
 			result.put("ERROR", false);
@@ -323,7 +310,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
 			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
-			System.out.println("firstNam="+co.getCo_first_nm());
 			co.setCo_first_nm(input.getCo_first_nm());
 			co.setCo_last_nm(input.getCo_last_nm());
 			co.setCo_sex(input.getCo_sex());
@@ -334,9 +320,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			co.setCo_phone(input.getCo_phone());
 			co.setCo_cpm_phone(input.getCo_cpm_phone());
 			co.setCo_brand(input.getCo_brand());
-			System.out.println("brand="+input.getCo_brand());
 			session.update(co);
-			System.out.println("finsihed");
 			tx.commit();
 			result.put("ERROR", false);
 			return result;
@@ -389,9 +373,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			String filter="";
 			if(paging.getSw()!=null){
 				if(paging.getSw().length()>0){
-					System.out.println("sw="+ paging.getSw());
 					listSw=paging.getSw().split(" ");
-					System.out.println("size arrysw="+listSw.length);
 					
 					if(listSw.length>0){
 						filter=" and(";
@@ -402,7 +384,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
 						}
 						filter+=")";
-						System.out.println("filter="+filter);
 					}
 				}
 				
@@ -415,7 +396,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 				paging.setPageNo(1);
 			}
 			if(pcount>0){
-				System.out.println("pcount>");
 				int totalPage=(int) Math.ceil((float) pcount/paging.getPcnt());
 				if(totalPage<paging.getPageNo()){
 					paging.setPageNo(totalPage);
