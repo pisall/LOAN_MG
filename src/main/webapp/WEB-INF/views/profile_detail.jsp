@@ -125,11 +125,14 @@
 										
 										<tbody>
 											
-											<tr><td style="width:150px"><span class="lyphicon glyphicon-minus margin-right5"></span>Brand</td><td><span id="co_brand"></span></td></tr>
+											
+											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Date of Birth</td><td><span id="co_dob"></span></td></tr>
+											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Place of birth</td><td><span id="co_pb_address"></span></td></tr>
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>National ID</td><td><span id="co_national_id"></span></td></tr>
+											<tr><td style="width:150px"><span class="lyphicon glyphicon-minus margin-right5"></span>Brand</td><td><span id="co_brand"></span></td></tr>
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Mobile Phone</td><td><span id="co_phone"></span></td></tr>
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Office Phone</td><td><span id="co_office_phone"></span></td></tr>
-											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Place of birth</td><td><span id="co_pb_address"></span></td></tr>
+											
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Address</td><td><span id="co_address"></span></td></tr>
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Register Date</td><td><span id="co_reg_dtt"></span></td></tr>
 											<tr><td><span class="lyphicon glyphicon-minus margin-right5"></span>Register By</td><td><span id="co_reg_nm"></span></td></tr>
@@ -137,8 +140,7 @@
 										</tbody>
 									</table>
 								</div>
-								<a href="#none" class="edit"><span class="glyphicon glyphicon-edit"></span>
-                        		</a>
+								<a href="#none" class="edit" id="btn_edit_mod"><span class="glyphicon glyphicon-edit"></span></a>
 							</div>
 							
                         

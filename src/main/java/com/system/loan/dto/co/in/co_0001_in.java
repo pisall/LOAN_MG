@@ -18,10 +18,12 @@ public class co_0001_in implements Serializable{
 	private String dob;
 	private String co_pb_address;
 	private String address;
+	private String update_dtt;
 	
 	private String log_password;
 	private String log_email;
 	private String confirm_password;
+	
 	
 	
 	
@@ -198,6 +200,18 @@ public class co_0001_in implements Serializable{
 	}
 	
 	
+	/**
+	 * @return the update_dtt
+	 */
+	public String getUpdate_dtt() {
+		return update_dtt;
+	}
+	/**
+	 * @param update_dtt the update_dtt to set
+	 */
+	public void setUpdate_dtt(String update_dtt) {
+		this.update_dtt = update_dtt;
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

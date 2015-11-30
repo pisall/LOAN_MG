@@ -314,5 +314,63 @@ public class co_001_controller {
 		return result;
 	}
 	
+	/*
+	 * update profile
+	 */
+	
+	@RequestMapping(value="/co_u0005",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coU0005(@RequestBody co_0001_in input,HttpServletRequest req){
+		
+		HashMap<String, Object> result=new HashMap<String, Object>();
+		HttpSession session=req.getSession();
+		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+		int sesCoId=user.getCoId();
+		result.put("CODE", "0000");
+		
+		String regDate="";
+		
+		/*
+		 * get current date and time
+		 */
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date date = new Date();
+		regDate=dateFormat.format(date);
+		
+		/*
+		
+		
+		/*
+		 * @parameter national id if null
+		 */
+		if(input.getCo_national_id()==null || input.getCo_national_id().isEmpty()||input.getCo_national_id()==""){
+			result.put("CODE", "0001");
+			result.put("MESSAGE","national id is required");
+			return result;
+		}
+		
+		/*
+		 * @parameter phone is null
+		 */
+		
+		if(input.getCo_phone()==null || input.getCo_phone().isEmpty()||input.getCo_phone()==""){
+			result.put("CODE", "0001");
+			result.put("MESSAGE","phone is required");
+			return result;
+		}
+		input.setCo_id(sesCoId);
+		input.setUpdate_dtt(regDate);
+		result=coDao.updateProfile(input);
+		
+		
+		//input.set
+		
+		System.out.println("this is result:="+result.toString());
+		
+		
+		
+		return result;
+	}
+	
 
 }
