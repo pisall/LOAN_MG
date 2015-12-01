@@ -66,7 +66,7 @@ public class LoanAgreementController implements Serializable{
 			int   period = Integer.parseInt(acodto.getAc_period());
 			float saving_amount = acodto.getAc_saving_amount();
 			String  pay_period_type = acodto.getAc_period_type(); 
-			float principal_paid 	=	amount/period; 
+			float principal_paid 	=	 amount/period; 
 			   
 			
 			float balance_remain 	= amount;
@@ -140,9 +140,9 @@ public class LoanAgreementController implements Serializable{
 		   // System.out.println("Pay Day  ::==="+Pay_day_Str);
 		    
 		    //calculate 
-		    balance_remain=balance_remain-principal_paid;
-		    total_pay_rate=balance_remain*rate; 
-			balance_payment=principal_paid+total_pay_rate; 
+		    balance_remain= balance_remain-principal_paid;
+		    total_pay_rate= balance_remain*rate; 
+			balance_payment= principal_paid+total_pay_rate; 
 			
 			// set data to Transection Object
 			Date date = new Date (); 

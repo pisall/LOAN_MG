@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.GuarantorDaoImp;
+import com.system.loan.dao.customer.CustomerDaoImp;
 import com.system.loan.dto.CustomerDto;
 import com.system.loan.dto.pagingDto;
 
@@ -60,6 +60,7 @@ public class CustomerController {
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
+		
 		int totaPage = 0;
 		totaPage = (int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
 		paging.setTotalPage(totaPage);

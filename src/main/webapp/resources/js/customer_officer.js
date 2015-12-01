@@ -1,6 +1,7 @@
 /**
  * 
  */
+var coID = $.trim(id);
 $(function() {
 	listCoByBrand();
 	$("#test").click(function() {
@@ -87,6 +88,8 @@ function listCoByBrand() {
 								+ v.coFirstName+" "+v.coLastName + " </option>";
 					});
 			$("#co_info").append(result);
+			$("#co_info_report").append(result);
+			
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

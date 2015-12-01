@@ -279,6 +279,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			
 			$("#loanAgreement").validate({
 				 errorPlacement: function(label, element) {
 			           label.addClass('arrow');

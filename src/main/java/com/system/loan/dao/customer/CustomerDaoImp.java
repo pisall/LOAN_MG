@@ -1,4 +1,4 @@
-package com.system.loan.dao;
+package com.system.loan.dao.customer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

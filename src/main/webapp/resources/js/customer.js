@@ -12,6 +12,33 @@ $(function() {
 	clearWord();
 	listCus(page_no);
 	
+	$("#from").change(function(){
+		if($(this).val()==""){
+			$("#to").prop('disabled', true);
+		}else{
+			$("#to").prop('disabled', false);
+		}
+	});
+	
+	$("#btnAdSearch").click(function(){
+		if($(this).val()==1){
+			$(this).html("Hide Advance Search");
+			$("#advance_search").show();				
+			$(this).val(0);
+			
+		}else if($(this).val()==0){
+			tr_type=1;
+			startDate="";
+			endDate="";
+			$(this).html("Show Advance Search");
+			$("#advance_search").hide();
+			$("#from,#to").val("");
+			$("#to").prop('disabled', true);
+			$('#tr_type option:eq(0)').prop('selected', true)
+			$(this).val(1);
+			listCus(1);
+		}
+	});
 
 	$("#record_num").change(function() {
 		listCus(1);
@@ -46,11 +73,10 @@ $(function() {
 	      numberOfMonths: 1,
 	      dateFormat: 'dd-mm-yy',
 	      onClose: function( selectedDate ) {
-	    	startDate= dateFormate( $("#from").val()); endDate=dateFormate($("#to").val());
-	    	if(startDate=="" || endDate==""){
-	    		startDate="";endDate="";
-	    	}
-	        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+	    	  if($("#from").val()!="" && $("#to").val()!=""){
+	    		  startDate= dateFormate( $("#from").val()); endDate=dateFormate($("#to").val());
+	    	  }
+	        $( "#from" ).datepicker( "option", "maxDate", selectedDate );	      
 	        listCus(1);
 	      }
 	    });
@@ -156,7 +182,6 @@ function listCus(pageNo) {
 		"startDate":$.trim(startDate),
 		"endDate":$.trim(endDate)		
 	}
-	console.log(input);
 	$
 			.ajax({
 				url : BASE_URL + "/customer/listCus?coID=" + coID,
@@ -176,7 +201,7 @@ function listCus(pageNo) {
 					var paging = data.PAGING;
 					var curPage = paging.pageNo;
 					totalPage = parseInt(paging.totalPage);
-					
+					startDate="";endDate="";
 					// clear paging
 					$("#paging").html("");
 

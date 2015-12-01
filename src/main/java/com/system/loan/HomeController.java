@@ -34,10 +34,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.net.httpserver.HttpContext;
-import com.system.loan.dao.CustomerDaoImp;
 import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dao.LdapUserDetailsManager;
 import com.system.loan.dao.myUserDetailsManager;
+import com.system.loan.dao.customer.CustomerDaoImp;
 import com.system.loan.dao.login.LOGIN_DAO_001_IMP;
 import com.system.loan.dto.login.in.login_0001_in;
 import com.system.loan.dto.session.USER_SESSION;

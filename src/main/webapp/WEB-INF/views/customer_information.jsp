@@ -23,13 +23,14 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-12 col-md-12 col-sm-12">
-
+					<div class="col-lg-10 col-md-10 col-sm-10">
 						<h2 class="page-header">
 
 							<span>Customer Infomation</span> <span> </span>
 						</h2>
-
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<button id="btnAdSearch"  class="btn btn-primary page-header" value="1">Show Advance Search</button>
 					</div>
 				</div>
 				<!--//Page Heading -->
@@ -40,25 +41,13 @@
 						<div class="panel panel-default">
 							<div class="panel panel-heading">
 								<div class="row">
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-6 col-sm-6">
 										<select class="form-control" id="co_info">
 											<option value="">Display All</option>
 										</select>
 									</div>
-									<div class="col-md-2 col-sm-2">
-										<select class="form-control" id="tr_type">
-											<option value="1">All</option>
-											<option value="0">Pay Today</option>
-											<option value="3">Area</option>
-											<option value="2">Complete</option>
-											<option value="4">Finish</option>
-										</select>
-									</div>
-									<div class="col-md-3 col-sm-3">
-										 <input class="form-control" type="text" id="from" name="from">
-										 <input class="form-control" type="text" id="to" name="to">
-									</div>
-									<div class="col-md-4 col-sm-4 pull-right">
+																	
+									<div class="col-md-6 col-sm-6 pull-right">
 										<div class="form-group input-group">
 											<input class="form-control" type="text" id="word"
 												placeholder="Search Customer By ID Card or Name"> <span
@@ -67,7 +56,24 @@
 													<i class="fa fa-search"></i>
 												</button></span>
 										</div>
-									</div>
+									</div>					
+								</div>
+								<div class="row" id="advance_search" style="display: none;">		
+									<div class="col-md-4 col-sm-4">
+										<select class="form-control" id="tr_type">
+											<option value="1">All</option>
+											<option value="0">Pay Today</option>
+											<option value="3">Area</option>
+											<option value="2">Complete</option>
+											<option value="4">Finish</option>
+										</select>
+									</div>			
+									<div class="col-md-4 col-sm-4">									
+										<input class="form-control" type="text" id="from" name="from" placeholder="Start date">											
+									</div>									
+									<div class="col-md-4 col-sm-4">									
+										<input class="form-control" disabled="disabled" type="text" id="to" name="to" placeholder="End date">										
+									</div>										
 								</div>
 
 							</div>
@@ -90,15 +96,11 @@
 										</tbody>
 									</table>
 								</div>
-
 							</div>
 							<!-- //panel body -->
-
 						</div>
 						<!--//panel top -->
-
 					</div>
-
 				</div>
 				<!-- //list -->
 				<div class="row">
@@ -156,7 +158,9 @@
 						}
 						return false;
 					});
+			
 		})
+		
 	</script>
 </body>
 

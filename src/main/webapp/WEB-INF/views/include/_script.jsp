@@ -28,8 +28,8 @@
      <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
      <script src="${pageContext.request.contextPath}/resources/js/additional-methods.min.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/mprogress.min.js"></script>
-     
- 
+      <script src="${pageContext.request.contextPath}/resources/js/accounting.min.js"></script>
+      
 	<script type="text/javascript">
 	jQuery.validator.setDefaults({
 		  debug: true,
@@ -75,12 +75,13 @@
 			});
 		
 			 
-			 function formatStringToDateTime(date,time){
+			
+			 
+		});
+		 function formatStringToDateTime(date,time){
 				return  moment(date, "YYYYMMDD"+time).format(
 					"DD-MM-YYYY"+time)
 			 }
-			 
-		});
 		 /**
 		 * Go Back
 		 */
