@@ -147,12 +147,11 @@ public class CustomerDaoImp implements CustomerDao {
 		if (paging.getSw() != null || paging.getTr_type()!=null || paging.getStartDate()!=null || paging.getEndDate()!=null ) {
 		if (paging.getSw() != "" || paging.getTr_type()!="" || paging.getStartDate() !="" || paging.getEndDate()!="") {
 			if(paging.getTr_type().equals("0")){
-				status=" and (to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') LIKE '%"+getDateNow()+"%' and tr.tr_stts in ('1','3'))";
+				status=" and (to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') LIKE '%"+getDateNow()+"%' and tr.tr_stts in ('1'))";
 			}else{
 				status="and (tr.tr_stts like '%" + paging.getTr_type().toLowerCase()+ "%')";
 			}
 			if(paging.getStartDate() !="" &&  paging.getEndDate()!=""){
-				System.out.println(paging.getStartDate()+"==========="+paging.getEndDate());
 				date=" and(to_char(to_date(tr.pay_date, 'YYYYMMDDHH24MISS'),'YYYY-MM-DD') 	BETWEEN '"+paging.getStartDate()+"'  AND '"+paging.getEndDate()+"' )";
 			}
 		 	filter = status + date + " and ( cast(cus.cu_id as text) like '%" + paging.getSw().toLowerCase()

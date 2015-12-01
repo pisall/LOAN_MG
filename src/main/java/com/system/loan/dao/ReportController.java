@@ -28,6 +28,12 @@ public class ReportController {
 		return "report_loan"; 
 	}
 	
+	@RequestMapping(value="/loan_late")
+	public String loan_late(Model model){
+		model.addAttribute("page_id","report_loan");
+		return "loan_late"; 
+	}
+	
 	/**
 	 * List Customer
 	 * 

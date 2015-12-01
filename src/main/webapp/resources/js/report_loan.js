@@ -56,7 +56,7 @@ $(function(){
 
 function dateFormate(date){
 	 return moment(date, "DD-MM-YYYY").format("YYYY-MM-DD")
-	}
+}
 
 function list_expend_report(pageNo) {
 	var input = {

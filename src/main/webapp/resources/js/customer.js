@@ -291,6 +291,7 @@ function getCustomerDetail(cuID) {
 			$("#cu_date_created").html(
 					moment(data.cuDtt, "YYYYMMDD hh:mm:ss").format(
 							"DD-MM-YYYY hh:mm:ss"));
+			//console.log(moment(data.cuDtt, "YYYYMMDD hh:mm:ss").format("YYYY"));
 
 		},
 		error : function(data, status, er) {
