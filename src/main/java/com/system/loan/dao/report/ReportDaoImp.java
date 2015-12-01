@@ -1,5 +1,6 @@
 package com.system.loan.dao.report;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,12 +82,56 @@ public class ReportDaoImp implements ReportDao {
 		Transaction tx = null;	
 		try {		
 			tx = session.beginTransaction();
-			String sql="select count(*) as cnt from (select DISTINCT cus.cu_id from mfi_customers cus , mfi_account ac,mfi_co co  where 1=1 and (cus.cu_id=ac.cu_id) and (co.co_id=cus.co_id)and (ac.ac_stat='Y') and (cus.cu_del_yn='Y')and  cast(cus.co_id as TEXT) LIKE ?) as total";
+			String sql="select count(*) as cnt from (select DISTINCT cus.cu_id from mfi_customers cus , mfi_account ac,mfi_co co  where 1=1 and (cus.cu_id=ac.cu_id) and (co.co_id=cus.co_id)and (ac.ac_stat='Y') and (cus.cu_del_yn='Y')and  cast(cus.co_id as TEXT) LIKE ?  " + getFilter(paging) +") as total";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);			
 			query.setString(0, "%" + coID + "%");
 			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
 			cnt=Integer.parseInt(result.get("cnt").toString());		
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BigDecimal getTotalAmount(String coID) {
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+		BigDecimal cnt = new BigDecimal(0.0);	
+		Transaction tx = null;	
+		try {		
+			tx = session.beginTransaction();
+			String sql="select cast(SUM (ac_amount) as DECIMAL) AS total_amount from mfi_customers cus , mfi_account ac,mfi_co co where 1=1 and (cus.cu_id=ac.cu_id) and (co.co_id=cus.co_id) and (ac.ac_stat='Y') and (cus.cu_del_yn='Y') and  (cast(cus.co_id as TEXT) LIKE ?) ";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
+			query.setString(0, "%" + coID + "%");
+			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
+			cnt=(BigDecimal) result.get("total_amount");	
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BigDecimal getSubTotal(String coID,pagingDto paging) {
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+		BigDecimal cnt = new BigDecimal(0.0);	
+		Transaction tx = null;	
+		try {		
+			tx = session.beginTransaction();
+			String sql="select cast(SUM (ac_amount) as DECIMAL) AS total_amount from mfi_customers cus , mfi_account ac,mfi_co co where 1=1 and (cus.cu_id=ac.cu_id) and (co.co_id=cus.co_id) and (ac.ac_stat='Y') and (cus.cu_del_yn='Y') and  (cast(cus.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+"";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
+			query.setString(0, "%" + coID + "%");
+			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
+			cnt=(BigDecimal) result.get("total_amount");	
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");
