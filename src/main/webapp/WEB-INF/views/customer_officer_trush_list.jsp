@@ -43,7 +43,9 @@
                         <h2 class="page-header">
                         	<div class="row">
                         		<div class="col-lg-6 col-md-6">CO <small>Customer Officer Infomation</small></div>
-                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right"><a href="#none" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;<a class="btn btn-primary" href="${pageContext.request.contextPath}/co_001_controller/co_0001"><span class="glyphicon glyphicon-plus">&nbsp;New</span></a></div>
+                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right">
+                        			<a href="#none" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restore</a>
+                        			</div>
                         		
                         	</div>
                             
@@ -85,6 +87,7 @@
 										</colgroup>
 										<thead class="style2">
 											<tr>
+												<th><input type="checkbox"></th>
 												<th>ID</th>
 												<th>Name</th>
 												<th>Sex</th>
@@ -261,7 +264,7 @@
 		var PAGE_ID="${page_id}";
 		console.log("ppp="+PAGE_ID);
 	</script>
-    <script src="${pageContext.request.contextPath}/resources/js/page/customer_officer_list.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/page/customer_officer_trush_list.js"></script>
 
 </body>
 

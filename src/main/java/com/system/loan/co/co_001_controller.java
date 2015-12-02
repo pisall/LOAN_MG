@@ -272,7 +272,7 @@ public class co_001_controller {
 	 */
 	
 	@RequestMapping(value="/co_0005",method=RequestMethod.GET)
-	public ModelAndView co0004(){
+	public ModelAndView co0005(){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("profile_detail");
 		mv.addObject("page_id","co_0005");
@@ -405,6 +405,29 @@ public class co_001_controller {
 		result=coDao.changeIsOtherEditProf(input.isOther_edit_prof(), req);
 		return result;
 	}
+	
+	//list co trush 
+	@RequestMapping(value="co_l0005",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coL0005(@RequestBody pagingDto paging){
+		
+		HashMap<String, Object> result=new HashMap<>();
+		pagingDto newpaging=new pagingDto();
+		newpaging=coDao.getPangingTrush(paging);
+		result.put("PAGING", newpaging);
+		List rec=coDao.coTrushList(newpaging);
+		result.put("REC", rec);
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/co_0006",method=RequestMethod.GET)
+	public ModelAndView co0006(HttpServletRequest req){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("customer_officer_trush_list");
+		mv.addObject("page_id","co_0003");
+		return mv;
+	} 
 	
 	
 

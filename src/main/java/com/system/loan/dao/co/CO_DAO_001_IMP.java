@@ -594,5 +594,113 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		
 		return null;
 	}
+	
+	//list of trush co
+	public List coTrushList(pagingDto paging) {
+		// TODO Auto-generated method stub
+		Session session=factory.getCurrentSession();
+		Transaction tx=null;
+		try{
+			tx=session.beginTransaction();
+			String[] listSw;
+			String filter="";
+			if(paging.getSw()!=null){
+				if(paging.getSw().length()>0){
+					listSw=paging.getSw().split(" ");
+					
+					if(listSw.length>0){
+						filter=" and(";
+						for(int i=0;i<listSw.length;i++){
+							if(i>0){
+								filter+=" or ";
+							}
+							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
+						}
+						filter+=")";
+					}
+				}
+				
+			}
+			
+			Query query=session.createQuery("select new map(co_id as co_id,"
+					+ "co_first_nm as co_first_nm,"
+					+ "co_last_nm as co_last_nm,"
+					+ "co_sex as co_sex,"
+					+ "co_brand as co_brand,"
+					+ "co_phone as co_phone,"
+					+ "regCo.co_id as reg_co_id,"
+					+ "regCo.co_first_nm as reg_co_first_nm,"
+					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=false"+ filter);
+			
+			/*Query query=session.createQuery("from CO_DTO_001 where loginDTO.enabled=true");*/
+			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
+			query.setMaxResults(paging.getPcnt());
+			
+			List result=(List)query.list();
+			tx.commit();
+			return result;
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	//paging co list trush
+	
+	public pagingDto getPangingTrush(pagingDto paging) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		Transaction tx=null;
+		try{
+			String[] listSw;
+			String filter="";
+			if(paging.getSw()!=null){
+				if(paging.getSw().length()>0){
+					listSw=paging.getSw().split(" ");
+					
+					if(listSw.length>0){
+						filter=" and(";
+						for(int i=0;i<listSw.length;i++){
+							if(i>0){
+								filter+=" or ";
+							}
+							filter+="co_first_nm like '%"+listSw[i]+"%' or co_last_nm like '%"+listSw[i]+"%' or cast(co_id as text) like '%"+listSw[i]+"%'";
+						}
+						filter+=")";
+					}
+				}
+				
+			}
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=false"+ filter);
+			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
+			if(paging.getPageNo()<1){
+				paging.setPageNo(1);
+			}
+			if(pcount>0){
+				int totalPage=(int) Math.ceil((float) pcount/paging.getPcnt());
+				if(totalPage<paging.getPageNo()){
+					paging.setPageNo(totalPage);
+				}
+				
+				paging.setTotal(pcount);
+				paging.setTotalPage(totalPage);
+				
+			}else{
+				paging.setPageNo(1);
+				paging.setTotal(0);
+				paging.setTotalPage(0);
+			}
+			
+			tx.commit();
+			return paging;
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
+		return paging;
+	}
 
 }
