@@ -41,7 +41,7 @@
 	
 	String datetime = date.format(now);
 	
-	//y
+	//
 
  	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
  		int strCoId;
