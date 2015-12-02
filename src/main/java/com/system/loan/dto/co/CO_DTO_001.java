@@ -33,34 +33,34 @@ public class CO_DTO_001 {
 	@Column(name="co_id")
 	private int co_id;
 	
-	@Column(name="co_first_nm")
+	@Column(name="co_first_nm",nullable=true)
 	private String co_first_nm;
 	
-	@Column(name="co_last_nm")
+	@Column(name="co_last_nm",nullable=true)
 	private String co_last_nm;
 	
-	@Column(name="co_sex")
+	@Column(name="co_sex",nullable=true)
 	private String co_sex;
 	
 	@Column(name="co_national_id")
 	private String co_national_id;
 	
-	@Column(name="co_brand")
+	@Column(name="co_brand",nullable=true)
 	private String co_brand;
 	
 	@Column(name="co_phone")
 	private String co_phone;
 	
-	@Column(name="co_cpm_phone")
+	@Column(name="co_cpm_phone",nullable=true)
 	private String co_cpm_phone;
 	
-	@Column(name="dob")
+	@Column(name="dob",nullable=true)
 	private String dob;
 	
-	@Column(name="address")
+	@Column(name="address",nullable=true)
 	private String address;
 	
-	@Column(name="co_pb_address")
+	@Column(name="co_pb_address",nullable=true)
 	private String co_pb_address;
 	
 	@Column(name="reg_dtt")
@@ -68,6 +68,8 @@ public class CO_DTO_001 {
 	
 	@Column(name="update_dtt")
 	private String update_dtt;
+	@Column(name="other_edit_prof", nullable=true)
+	private boolean other_edit_prof;
 	
 	/*@Column(name="reg_co_id")
 	private int reg_co_id;*/
@@ -268,6 +270,8 @@ public class CO_DTO_001 {
 	public void setUpdate_dtt(String update_dtt) {
 		this.update_dtt = update_dtt;
 	}
+	
+	
 
 	/**
 	 * @return the reg_co_id
@@ -282,6 +286,20 @@ public class CO_DTO_001 {
 	/*public void setReg_co_id(int reg_co_id) {
 		this.reg_co_id = reg_co_id;
 	}*/
+
+	/**
+	 * @return the other_edit_prof
+	 */
+	public boolean isOther_edit_prof() {
+		return other_edit_prof;
+	}
+
+	/**
+	 * @param other_edit_prof the other_edit_prof to set
+	 */
+	public void setOther_edit_prof(boolean other_edit_prof) {
+		this.other_edit_prof = other_edit_prof;
+	}
 
 	/**
 	 * @return the loginDTO

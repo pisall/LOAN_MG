@@ -3,6 +3,8 @@ package com.system.loan.dao.login;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -195,6 +197,7 @@ private SessionFactory factory=null;
 		}
 		return rcnt;
 	}
+	
 }
 
 
