@@ -99,7 +99,7 @@ public static SessionFactory factory = null;
 					+ " gua.gu_phone,"
 					+ " gua.gu_address,"
 					+ " trn.tr_id,"
-					+ " to_char(to_date(trn.pay_date, 'YYYYMMDDHH24MISS'),'DD-MM-YYYY') As pay_date , "
+					+ " to_char(to_date(trn.pay_date, 'YYYYMMDDHH24MISS'),'DD-MM-YYYY') As date_pay , "
 					+ " trn.pay_day,"
 					+ " trn.tr_origin_amount,"
 					+ " trn.tr_balance,"
@@ -206,8 +206,19 @@ public static SessionFactory factory = null;
 		}
 		return listData;
 	}
-	 
 	
-	 
-
+		public void check_late() {
+			Session session = factory.getCurrentSession();
+			Transaction tran = null;				
+			try{
+				tran=session.beginTransaction(); 
+				String sql = "UPDATE mfi_transection SET tr_stts='3' WHERE to_date(pay_date, 'YYYYMMDDHH24MISS') < CURRENT_DATE  and tr_stts='1'";				  
+				SQLQuery query = session.createSQLQuery(sql);
+				query.executeUpdate();
+				tran.commit();
+			}catch(HibernateException hne){
+				if(tran!=null) tran.rollback();
+				hne.printStackTrace();
+			}	
+		}
 }

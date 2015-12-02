@@ -48,8 +48,13 @@
 								<div class="panel panel-heading">
 									<div class="row">
 										<div class="col-md-4 col-sm-4 col-xs-4">
+												<input type="hidden" value="${entry.cu_id}" id="TR_CU_ID">
 											<table class="table">
 												<tbody>
+													<tr>
+														<td style="border: 0px">Customer No :</td>
+														<td style="border: 0px">${entry.cu_id}</td>
+													</tr> 
 													<tr>
 														<td style="border: 0px">Customer Name :</td>
 														<td style="border: 0px">${entry.cu_nm}</td>
@@ -141,7 +146,7 @@
 												
 												<tr>
 													<td>${idcount.count}</td>
-													<td>${entry.pay_date}</td>
+													<td>${entry.date_pay}</td>
 													<td>${entry.pay_day}</td>
 													<td>${entry.tr_origin_amount}</td>
 													<td>${entry.tr_save_payment}</td>
@@ -175,15 +180,21 @@
 															<c:otherwise>
 															</c:otherwise>
 														</c:choose>
+														
+														 <c:choose>
+															<c:when test="${entry.tr_stts=='3'}">													
+																	<input type="hidden" value="${entry.tr_pay_amount}" class="amount">																
+															</c:when>
+														</c:choose> 
 
 													</td>
 												</tr>
 											</c:forEach>
-
+													
 										</tbody>
 									</table>
 								</div>
-
+									
 							</div>
 							<!-- //panel body -->
 
@@ -210,14 +221,21 @@
 	<!-- Reprot schadule payment  -->
 	<script
 		src="${pageContext.request.contextPath}/resources/js/report_payment.js"></script>
-
+	
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var PAGE_ID = "${page_id}";
 		console.log("ppp=" + PAGE_ID);
+		var total=0;
+		$(function(){
+			$(".amount").each(function(i,v){
+				 total+=parseInt($(this).val());
+			});
+			$("#total_amount_late").val(total);
+		})
 	</script>
 
-
+	<input type="hidden" value="" id="total_amount_late">
 
 </body>
 

@@ -6,7 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <%@page import="com.system.loan.dto.session.USER_SESSION"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -18,9 +17,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Loan_Approve</title>
-	    <!-- Bootstrap Core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet">
+    <title>SB Admin - Bootstrap Admin Template</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,19 +30,7 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mprogress.min.css">
-   
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
-   
-   	<style type="text/css">
-   		label.error{
-   			color:red;
-   		}
-   		
-   		
-   	</style>
-   
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
    </head>
    
  
@@ -58,7 +44,7 @@
 	
 
  	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
- 		int strCoId=0;
+ 		int strCoId;
  		String strCoNm="";
  	if(user!=null){
  		strCoId=user.getCoId();
