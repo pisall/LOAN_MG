@@ -10,11 +10,11 @@ public class Testing {
 		  // create 2 BigDecimal Objects
 		        BigDecimal bg1, bg2;
 
-		        bg1 = new BigDecimal("0.02402344547456443");
+		        bg1 = new BigDecimal("2");
 
 		 // set scale of bg1 to 2 in bg2 using floor as rounding mode
 		        bg2 = bg1.setScale(3, RoundingMode.HALF_UP);
-		        
+		        System.out.println(bg2.floatValue());
 		       
 		        String str = bg1 + " after changing the scale to 2 and rounding is " +bg2;
 

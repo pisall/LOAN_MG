@@ -1,6 +1,8 @@
 package com.system.loan;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,7 +68,7 @@ public class LoanAgreementController implements Serializable{
 			int   period = Integer.parseInt(acodto.getAc_period());
 			float saving_amount = acodto.getAc_saving_amount();
 			String  pay_period_type = acodto.getAc_period_type(); 
-			float principal_paid 	=	 amount/period; 
+			float principal_paid 	=amount/period; 
 			   
 			
 			float balance_remain 	= amount;
@@ -143,6 +145,24 @@ public class LoanAgreementController implements Serializable{
 		    balance_remain= balance_remain-principal_paid;
 		    total_pay_rate= balance_remain*rate; 
 			balance_payment= principal_paid+total_pay_rate; 
+			
+			BigDecimal a1,a2,b1,b2,c1,c2,d1,d2;
+						a1=new BigDecimal(balance_remain);
+						a2=a1.setScale(0, RoundingMode.HALF_UP);
+						b1=new BigDecimal(total_pay_rate);
+						b2=b1.setScale(3, RoundingMode.HALF_UP);
+						c1=new BigDecimal(balance_payment);
+						c2=c1.setScale(0, RoundingMode.HALF_UP);
+						d1=new BigDecimal(principal_paid);
+						d2=d1.setScale(0, RoundingMode.HALF_UP);
+						
+						
+		System.out.println("Original balance_remain=== "+" "+a1+"New === "+a2);
+		System.out.println("Original total_pay_rate=== "+" "+b1+"New === "+b2);
+		System.out.println("Original balance_payment=== "+" "+c1+"New === "+c2);
+		System.out.println("Original principal_paid=== "+" "+d1+"New === "+d2);
+						
+			
 			
 			// set data to Transection Object
 			Date date = new Date (); 

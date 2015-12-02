@@ -135,7 +135,7 @@
 			name="from"> <label class="form-control" for="to">to</label> <input class="form-control" type="text"
 			id="to" name="to"> -->
 	</div>
-	</div>
+	
 	<!-- /#wrapper -->
 	<%@include file="customer_detail.jsp"%>
 
@@ -144,7 +144,7 @@
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var id="<%=strCoId%>";
-		//var PAGE_ID="${page_id}";
+		var PAGE_ID="${page_id}";
 	</script>
 
 	<script

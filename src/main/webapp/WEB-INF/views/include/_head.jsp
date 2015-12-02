@@ -37,6 +37,8 @@
  
    
    <%
+   int strCoId=0;
+	String strCoNm="";
 	Date  now = new Date();
 	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 	
@@ -45,8 +47,7 @@
 	//
 
  	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
- 		int strCoId;
- 		String strCoNm="";
+ 		
  	if(user!=null){
  		strCoId=user.getCoId();
  		strCoNm=user.getCoNm();
