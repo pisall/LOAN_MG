@@ -15,12 +15,12 @@ $(document).ready(function(){
 	 $("#tr_type").change(function(){
 		 var totalAmount=0;
 		 if($(this).val()==4){
-			 	if($("#total").val()!=0 || $("#total").val()!="" ||$("#total").val()!=null){
-					totalAmount= parseInt($("#total").val()) + parseInt(BALANCE) ;			 			 		
-				}else{
-					 totalAmount=parseInt(PAID_AMOUNT)+parseInt(BALANCE);
+			 	if($("#total").val()!=0){
+					totalAmount=parseInt($("#total").val()) + parseInt(BALANCE) ;			 			 		
+				}else if($("#total").val()==0){
+					 totalAmount=parseInt(PAID_AMOUNT)+ parseInt(BALANCE);
 				}		
-			 $("#paid_amount").val(totalAmount);
+			 $("#paid_amount").val(accounting.formatMoney(totalAmount," "));
 		 }else{
 			 $("#paid_amount").val(total_amount);
 		 }
@@ -62,17 +62,19 @@ $(document).ready(function(){
 			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
 			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
 			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
-			var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+dat.ac_amount+"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ")+" R"+"</td><td>"+accounting.formatMoney(dat.tr_balance,"")+" R"+"</td><td>"+dat.gu_pawn+"</td></tr>";
+			var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+accounting.formatMoney(dat.ac_amount," ")+" R"+"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ")+" R"+"</td><td>"+accounting.formatMoney(dat.tr_balance,"")+" R"+"</td><td>"+dat.gu_pawn+"</td></tr>";
 			$("#cu_name").html(dat.cu_nm);
 			$("#admin_app_date").html(date_now);
 			$("#client_app_date").html(date_now);
 			
-			if($("#total").val()!=0 || $("#total").val()!="" ||$("#total").val()!=null){
+			var pay_amount=accounting.formatMoney(dat.tr_pay_amount,"");
+			
+			if($("#total").val()!=0){
 				$("#paid_amount").val($("#total").val());
-				total_amount=$("#total").val();
-			}else{
-				$("#paid_amount").val(dat.tr_pay_amount);
-				total_amount=dat.tr_pay_amount;
+				total_amount=accounting.formatMoney($("#total").val(),"");
+			}else if($("#total").val()==0){
+				$("#paid_amount").val(pay_amount);
+				total_amount=pay_amount;
 			}
 			
 			

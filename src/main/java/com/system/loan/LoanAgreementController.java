@@ -150,7 +150,7 @@ public class LoanAgreementController implements Serializable{
 						a1=new BigDecimal(balance_remain);
 						a2=a1.setScale(0, RoundingMode.HALF_UP);
 						b1=new BigDecimal(total_pay_rate);
-						b2=b1.setScale(3, RoundingMode.HALF_UP);
+						b2=b1.setScale(0, RoundingMode.HALF_UP);
 						c1=new BigDecimal(balance_payment);
 						c2=c1.setScale(0, RoundingMode.HALF_UP);
 						d1=new BigDecimal(principal_paid);
@@ -171,11 +171,11 @@ public class LoanAgreementController implements Serializable{
 			
 			tran = new TransectionDto();
 			
-			tran.setTr_balance(balance_remain);			
-			tran.setTr_origin_amount(principal_paid);	
+			tran.setTr_balance(a2.floatValue());			
+			tran.setTr_total_rate(b2.floatValue());		 
+			tran.setTr_pay_amount(c2.floatValue());		
+			tran.setTr_origin_amount(d2.floatValue());	
 			tran.setTr_save_payment(saving_amount);		
-			tran.setTr_pay_amount(balance_payment);		
-			tran.setTr_total_rate(total_pay_rate);		 
 			tran.setPay_date(pay_date_time);			
 			tran.setPay_day(Pay_day_Str);				
 			tran.setTr_dtt(dateimte);					
