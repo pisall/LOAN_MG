@@ -33,9 +33,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
    </head>
-   
- 
-   
+  
    <%
    int strCoId=0;
 	String strCoNm="";
