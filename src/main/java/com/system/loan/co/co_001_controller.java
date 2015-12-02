@@ -278,6 +278,10 @@ public class co_001_controller {
 		mv.addObject("page_id","co_0005");
 		return mv;
 	}
+	/**
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value="/co_l0003",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> coL0003(HttpServletRequest req){
 		HttpSession session=req.getSession();
@@ -288,18 +292,24 @@ public class co_001_controller {
 		return result;
 	}
 	/*
-	 * update co by id
+	 * update co by id 
+	 * if id is not equal id from session, it is checked whether this id is allowed to edit;
 	 */
 	@RequestMapping(value="/co_u0003",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> coU0003(@RequestBody co_0001_in input,HttpServletRequest req){
+		
 		System.out.println(input.toString());
 		HashMap<String , Object> result=new HashMap<>();
+		
+		
 		HashMap<String, Object> updateResule=new HashMap<>();
-		updateResule=coDao.updateCo(input);
+		updateResule=coDao.updateCo(input,req);
 		if((boolean)updateResule.get("ERROR")){
 			result.put("ERROR", true);
+			result.put("MESSAGE",updateResule.get("MESSAGE"));
 		}else{
 			result.put("ERROR", false);
+			//result.put("MESSAGE",updateResule.get("MESSAGE"));
 		}
 		return result;//test
 	}
@@ -371,6 +381,31 @@ public class co_001_controller {
 		
 		return result;
 	}
+	@RequestMapping(value="/privacy_view",method=RequestMethod.GET)
+	public ModelAndView privacyView(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("privacy");
+		mv.addObject("page_id", "privacy_view");
+		return mv;
+	}
+	@RequestMapping(value="/request_privacy",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> requestPrivacy(HttpServletRequest req){
+		
+		HashMap<String, Object> result=new HashMap<>();
+		result=coDao.getPrivacy(req);
+		return result;
+	}
+	
+	@RequestMapping(value="/change_other_edit_prof",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object>changeOtherEditProf(@RequestBody co_0002_in input,HttpServletRequest req){
+		HashMap<String, Object> result=new HashMap<>();
+		System.out.println(input.toString());
+		result=coDao.changeIsOtherEditProf(input.isOther_edit_prof(), req);
+		return result;
+	}
+	
 	
 
 }

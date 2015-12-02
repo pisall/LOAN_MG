@@ -4,5 +4,5 @@ import com.system.loan.dto.LoanApprovalDto;
 
 public interface LoanApprovalInterface {
 	public boolean LoanApro_Insert(LoanApprovalDto loaApro);
-	public boolean TranSac_Update(int tr_id, String tr_type);
+	public boolean TranSac_Update(int tr_id, String tr_type,int cu_id);
 }

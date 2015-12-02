@@ -22,14 +22,15 @@ public class LoanApprovalsController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//LoanApprovalDao loanApproDao = null;
 	
-	@RequestMapping(value="/loanApprove/{tr_id}/{tr_type}", produces="application/json", consumes="application/json", method=RequestMethod.POST)
-	public @ResponseBody boolean loanApproval(@RequestBody LoanApprovalDto loanApproDto, @PathVariable("tr_id") Integer  tr_id , @PathVariable("tr_type") String  tr_type){
+	@RequestMapping(value="/loanApprove/{tr_id}/{tr_type}/{tr_cu_id}", produces="application/json", consumes="application/json", method=RequestMethod.POST)
+	public @ResponseBody boolean loanApproval(@RequestBody LoanApprovalDto loanApproDto, @PathVariable("tr_id") Integer  tr_id , @PathVariable("tr_type") String  tr_type,@PathVariable("tr_cu_id") int  tr_cu_id){
 		
+		System.out.println("testing=========================================");
 		//loanApproDao = new LoanApprovalDao();  
 		loanApproDao.LoanApro_Insert(loanApproDto);
-		loanApproDao.TranSac_Update(tr_id, tr_type);
+		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
 		
-	return true; 
+		return true; 
 	} 
 }
 

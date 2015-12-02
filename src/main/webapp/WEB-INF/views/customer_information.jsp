@@ -1,7 +1,12 @@
 
 <%@include file="include/_head.jsp"%>
-
+	<%
+		if(strCoNm=="" || strCoNm==null){
+ 			response.sendRedirect("../login");
+ 		}
+	%>
 <body>
+
 	<div id="wrapper">
 
 		<!-- Navigation -->

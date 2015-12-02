@@ -12,13 +12,10 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class co_0002_in implements Serializable{
 	
-	public co_0002_in(){
-		
-	}
-	
 	private int co_id;
 	private String co_nm;
 	private boolean enabled;
+	private boolean other_edit_prof;
 	
 	
 	
@@ -67,6 +64,23 @@ public class co_0002_in implements Serializable{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	
+
+	/**
+	 * @return the other_edit_prof
+	 */
+	public boolean isOther_edit_prof() {
+		return other_edit_prof;
+	}
+
+	/**
+	 * @param other_edit_prof the other_edit_prof to set
+	 */
+	public void setOther_edit_prof(boolean other_edit_prof) {
+		System.out.println("set="+other_edit_prof);
+		this.other_edit_prof = other_edit_prof;
+	}
 
 	@Override
 	public String toString() {
@@ -75,6 +89,7 @@ public class co_0002_in implements Serializable{
 		result.append("co_id:"+this.co_id+",\n");
 		result.append("co_nm:"+this.co_nm+"\n");
 		result.append("enabled:"+this.enabled+"\n");
+		result.append("other_edit_prof:"+this.other_edit_prof);
 		
 		return result.toString();
 	}

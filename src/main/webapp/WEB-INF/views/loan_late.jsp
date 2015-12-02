@@ -44,8 +44,8 @@
 					
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel panel-heading">
-								<!-- <div class="row">
+							<!-- <div class="panel panel-heading">
+								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<select class="form-control" id="co_info_report">
 											<option value="">Display All</option>
@@ -57,25 +57,27 @@
 									<div class="col-md-3 col-sm-3">									
 										<input class="form-control" disabled="disabled" type="text" id="to" name="to" placeholder="End date">										
 									</div>														
-								</div> -->
+								</div>
 								
-							</div>
+							</div> -->
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<div class="table-responsive">
 									<table class="table table-hover table-striped">
 										<thead class="style2">
 											<tr class="active">
+												<th>No</th>
 												<th>Customer No</th>
 												<th>Customer Name</th>
 												<th>Customer Officer No</th>
 												<th>Customer Officer Name</th>
-												<th>Loan Date</th>
-												<th>Loan Amount</th>
+												<th>Pay Date</th>
+												<th>Pay Amount</th>
+												<th>Days Late</th>
 												
 											</tr>
 										</thead>
-										<tbody id="loan_expend_report" >
+										<tbody id="loan_late_report" >
 											
 										</tbody>
 									</table>
@@ -119,8 +121,8 @@
 		var id="<%=strCoId%>";
 	</script>
 	
-	<script
-		src="${pageContext.request.contextPath}/resources/js/report_loan.js"></script>
+<%-- 	<script
+		src="${pageContext.request.contextPath}/resources/js/report_loan.js"></script> --%>
 </body>
 
 </html>

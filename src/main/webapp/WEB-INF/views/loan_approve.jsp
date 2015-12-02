@@ -1,7 +1,12 @@
 <%@include file="include/_head.jsp"%>
+	<%
+		if(strCoNm=="" || strCoNm==null){
+ 			response.sendRedirect("../login");
+ 		}
+	%>
 <body>
 
-
+	<input type="hidden" value="${TOTAL_AMOUNT_LATE}" id="total">
 
 	<div id="wrapper">
 
@@ -140,15 +145,15 @@
 										<label class="control-label col-sm-4" for="paid_amount">
 											Paid Amount:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required"
-												name="paid_amount" id="paid_amount" placeholder="0.0">
+											<input  type="text" class="form-control check_number required"
+												name="paid_amount" id="paid_amount" placeholder="0.0" disabled="disabled">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="amount-fine">Amount
 											fine:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required"
+											<input type="text" class="form-control check_number "
 												name="amount_fine" id="amount_fine" placeholder="0.0">
 										</div>
 									</div>
@@ -158,8 +163,7 @@
 											Type:</label>
 										<div class="col-sm-8">
 											<select class="form-control" id="tr_type" name="tr_type">
-												<option value="2">Complete</option>
-												<option value="3">Area</option>
+												<option value="2">Complete</option>											
 												<option value="4">Finished</option>
 											</select>
 										</div>

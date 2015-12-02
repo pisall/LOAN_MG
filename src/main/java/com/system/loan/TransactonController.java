@@ -3,11 +3,14 @@ package com.system.loan;
 import java.io.Serializable;
 
 import javax.inject.Inject;
+import javax.jws.WebParam.Mode;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
@@ -31,8 +34,9 @@ public class TransactonController implements Serializable {
 		return schaPay.Schadule_Payment(tr_id, cu_id);
 	} 
 	
-	@RequestMapping(value="/loanApprove",method = RequestMethod.GET)
-	public String loanApproval(WebRequest request){ 
+	@RequestMapping(value="/loanApprove")
+	public String loanApproval(WebRequest request,@RequestParam(value="total")int total,Model model){ 
+		model.addAttribute("TOTAL_AMOUNT_LATE",total);
 		return "loan_approve";
 	}
 	 

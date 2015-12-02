@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -22,6 +25,7 @@ import com.system.loan.dto.pagingDto;
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
 import com.system.loan.dto.co.in.co_0001_in;
+import com.system.loan.dto.session.USER_SESSION;
 @Service
 public class CO_DAO_001_IMP implements CO_DAO_001{
 	private SessionFactory factory=null;
@@ -65,7 +69,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
 			tx.setTimeout(5);
-			CO.setLoginDTO(LOG);
+			//CO.setLoginDTO(LOG);
 			CO.setRegCo(reg_co);
 			LOG.setCoDTO(CO);
 			session.save(CO);
@@ -250,7 +254,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		try{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("select new map(co_id as co_id,co_first_nm as co_first_nm,co_last_nm as co_last_nm) from CO_DTO_001 where loginDTO.log_email=?");
+			Query query=session.createQuery("select new map(co_id as co_id,co_first_nm as co_first_nm,co_last_nm as co_last_nm,other_edit_prof as other_edit_prof) from CO_DTO_001 where loginDTO.log_email=?");
 			query.setString(0, userid);
 			List list=(List)query.list();
 			tx.commit();
@@ -301,7 +305,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return null;
 	}
 	
-	public HashMap<String, Object> updateCo(co_0001_in input){
+	/*public HashMap<String, Object> updateCo(co_0001_in input){
 		Session session=null;
 		Transaction tx=null;
 		HashMap<String, Object> result=new HashMap<>();
@@ -310,6 +314,49 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
 			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
+			co.setCo_first_nm(input.getCo_first_nm());
+			co.setCo_last_nm(input.getCo_last_nm());
+			co.setCo_sex(input.getCo_sex());
+			co.setDob(input.getDob());
+			co.setCo_national_id(input.getCo_national_id());
+			co.setAddress(input.getAddress());
+			co.setCo_pb_address(input.getCo_pb_address());
+			co.setCo_phone(input.getCo_phone());
+			co.setCo_cpm_phone(input.getCo_cpm_phone());
+			co.setCo_brand(input.getCo_brand());
+			session.update(co);
+			tx.commit();
+			result.put("ERROR", false);
+			return result;
+		
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+	
+	public HashMap<String, Object> updateCo(co_0001_in input,HttpServletRequest req){
+		HttpSession sess=req.getSession();
+		USER_SESSION user=(USER_SESSION)sess.getAttribute("USER_SESSION");
+		int sesCoId=user.getCoId();
+		
+		Session session=null;
+		Transaction tx=null;
+		HashMap<String, Object> result=new HashMap<>();
+		try{
+			result.put("ERROR", true);
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
+			int coId=co.getCo_id();
+			if(coId!=sesCoId){
+				if(!co.isOther_edit_prof()){
+					tx.rollback();
+					result.put("ERROR", true);
+					result.put("MESSAGE", "authortication is required.");
+					
+				}
+			}
 			co.setCo_first_nm(input.getCo_first_nm());
 			co.setCo_last_nm(input.getCo_last_nm());
 			co.setCo_sex(input.getCo_sex());
@@ -451,6 +498,101 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		
 		return null;
 		
+	}
+	//get privacy
+	
+	public HashMap<String, Object> getPrivacy(HttpServletRequest req){
+		
+		HttpSession sess=req.getSession();
+		USER_SESSION user=(USER_SESSION)sess.getAttribute("USER_SESSION");
+		int coId=0;
+		
+		HashMap<String, Object> result=new HashMap<>();
+		
+		Session session=null;
+		Transaction tx=null;
+		try{
+			if(user==null){
+				result.put("ERROR", true);
+				result.put("MESSAGE", "Access denied");
+				return result;
+			}else{
+				coId=user.getCoId();
+			}
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			Query query=session.createQuery("select new map(other_edit_prof as other_edit_prof) from CO_DTO_001 where co_id=?");
+			query.setParameter(0, coId);
+			List list=(List)query.list();
+			
+			tx.commit();
+			
+			if(list.size()>0){
+				HashMap<String, Object> privacyHash=(HashMap<String, Object>)list.get(0);
+				String strIsOtherEditProf=privacyHash.get("other_edit_prof").toString();
+				if(strIsOtherEditProf!=null){
+					if(strIsOtherEditProf.length()>0){
+						if(strIsOtherEditProf.equals("true") || strIsOtherEditProf.equals("1")||strIsOtherEditProf.equals("TRUE")){
+							result.put("other_edit_prof", true);
+						}else{
+							result.put("other_edit_prof", false);
+						}
+					}else{
+						result.put("other_edit_prof", false);
+					}
+					
+				}else{
+					result.put("other_edit_prof", false);
+				}
+				
+			}else{
+				result.put("ERROR", true);
+				result.put("MESSAGE", "Please login.");
+				return result;
+			}
+			result.put("ERROR", false);
+			return result;
+			
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public HashMap<String, Object> changeIsOtherEditProf(boolean isOtherEditProf,HttpServletRequest req){
+		HttpSession sess=req.getSession();
+		USER_SESSION user=(USER_SESSION)sess.getAttribute("USER_SESSION");
+		int coId=0;
+		
+		HashMap<String, Object> result=new HashMap<>();
+		
+		Session session=null;
+		Transaction tx=null;
+		
+		try{
+			if(user==null){
+				result.put("ERROR", true);
+				result.put("MESSAGE", "Access denied");
+				return result;
+			}else{
+				coId=user.getCoId();
+			}
+			CO_DTO_001 co=findCoById(coId);
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			co.setOther_edit_prof(isOtherEditProf);
+			session.update(co);
+			tx.commit();
+			
+			result.put("ERROR", false);
+			return result;
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

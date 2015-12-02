@@ -59,24 +59,27 @@ public static SessionFactory factory = null;
 
 	@SuppressWarnings("unused")
 	@Override
-	public boolean TranSac_Update(int tr_id, String tr_type) {
+	public boolean TranSac_Update(int tr_id, String tr_type,int cu_id) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		Transaction tran = null;
-		 
+		String sql1="";
+		
 		try{
 			tran=session.beginTransaction();
 			Date date = new Date();
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 			String datetime = format.format(date); 
 			
-			String sql = "update mfi_transection "
-						+ "set tr_stts=?"
-						+ "where tr_id=?";
-			SQLQuery query = session.createSQLQuery(sql);
+			 if(tr_type.equals("2")){
+				sql1="update mfi_transection set tr_stts='2' where (tr_cu_id='"+cu_id+"' and tr_stts='3') OR (tr_id='"+tr_id+"' and tr_stts='1')";
+			}else if(tr_type.equals("4")){
+				sql1="update mfi_transection set tr_stts='4' where tr_cu_id='"+cu_id+"' and tr_stts in('1','2','3')";
+			}
+			SQLQuery query = session.createSQLQuery(sql1);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			query.setParameter(0, tr_type);
-			query.setParameter(1, tr_id);
+			//query.setParameter(0, cu_id);
+			//query.setParameter(1, tr_id);
 			query.executeUpdate(); 
 			tran.commit();
 		}catch(HibernateException e){
