@@ -64,7 +64,7 @@ public class CustomerController {
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
-		tr.check_late();
+		//tr.check_late();
 		int totaPage = 0;
 		totaPage = (int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
 		paging.setTotalPage(totaPage);

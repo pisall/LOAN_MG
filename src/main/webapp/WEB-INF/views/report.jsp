@@ -145,12 +145,11 @@
 													<td><fmt:formatNumber value="${entry.tr_pay_amount}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
-													<td><fmt:formatNumber value="${entry.tr_balance}"
+													<td fmt:formatNumber value="${entry.tr_balance}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
-													<td
-														onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}');">
+													<td <c:if test="${entry.tr_stts!='3' && entry.tr_stts!='2' && entry.tr_stts!='4'}"> onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}');" </c:if>>
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">

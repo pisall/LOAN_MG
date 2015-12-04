@@ -219,7 +219,7 @@ public static SessionFactory factory = null;
 									   +" or ( to_date(pay_date, 'YYYYMMDD24H')  - CURRENT_DATE > 7 and ac_period_type='Week') "
 									   +" or (  to_date(pay_date, 'YYYYMMDD24H') - CURRENT_DATE > DATE_PART('days', DATE_TRUNC('month', NOW()) +'1 MONTH' - DATE_TRUNC('month', NOW())) and ac_period_type='Month')" 
 							    +")";	  
-				String sql1="UPDATE mfi_transection SET tr_stts='3' WHERE ( CURRENT_DATE - to_date(pay_date, 'YYYYMMDD24H') >= 1)";
+				String sql1="UPDATE mfi_transection SET tr_stts='3' WHERE ( CURRENT_DATE - to_date(pay_date, 'YYYYMMDD24H')>0)";
 				SQLQuery query = session.createSQLQuery(sql1);
 				query.executeUpdate();
 				tran.commit();
