@@ -57,7 +57,7 @@ public class LoanAgreementController implements Serializable{
 		}
 		
 		@RequestMapping(value="/newLoanAgreementGetData" , method=RequestMethod.POST)
-		public @ResponseBody int newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
+		public  String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
 			
 			HttpSession session_user=req.getSession();
 			USER_SESSION user=(USER_SESSION)session_user.getAttribute("USER_SESSION");
@@ -158,12 +158,7 @@ public class LoanAgreementController implements Serializable{
 						d1=new BigDecimal(principal_paid);
 						d2=d1.setScale(0, RoundingMode.HALF_UP);
 						
-						
-		System.out.println("Original balance_remain=== "+" "+a1+"New === "+a2);
-		System.out.println("Original total_pay_rate=== "+" "+b1+"New === "+b2);
-		System.out.println("Original balance_payment=== "+" "+c1+"New === "+c2);
-		System.out.println("Original principal_paid=== "+" "+d1+"New === "+d2);
-						
+	
 			
 			
 			// set data to Transection Object
@@ -207,7 +202,7 @@ public class LoanAgreementController implements Serializable{
 		cus_id= loanAgreDto.getCu_id();
 		
 		
-		return cus_id;
+		return "redirect:/customer/home_customer";
 		
 		// return  "redirect:/LoanAgreement/report/"+cus_id;
 		}

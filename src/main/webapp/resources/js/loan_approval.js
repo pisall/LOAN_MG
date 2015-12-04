@@ -10,8 +10,8 @@ var TOTAL_PAId_AMOUNT=0;
 var TOTAL_AMOUNT=0;
 var AMOUNT_FINE=0,AMOUNT_RATE=10/100,TOTAL_AMOUNT_FINE=0;
 var DAYS_LATE=0;
-$(document).ready(function(){
-
+var TOTAL_FINE_AMOUNT=0;
+$(document).ready(function(){	
 	 var tr_id = document.getElementById('tr_id').value;
 	 var cu_id = document.getElementById('cu_id').value;
 	
@@ -38,6 +38,7 @@ $(document).ready(function(){
 				  LoanApprove(); 				 
 			  }
 		});
+	
 	 $.ajax({
 		url:BASE_URL+'/schadule_payment/schadule/'+tr_id+"/"+cu_id,
 		type:'POST',
@@ -64,17 +65,16 @@ $(document).ready(function(){
 			$("#admin_app_date").html(date_now);
 			$("#client_app_date").html(date_now);
 			
-			var total_days_late=0;
-			DAYS_LATE=parseInt(dat.day_late);
-			var d=new Date();
-			var dayOfMonth=parseInt(daysInMonth(d.getMonth(),d.getFullYear()));
-			var total_tr=parseInt(dat.total_tr);			
+				
 			// CALCULATE AMOUNT
 			LATE_AMOUNT=parseInt($("#total").val());
 			PAID_AMOUNT=parseInt(dat.tr_pay_amount);
 			BALANCE=parseInt(dat.tr_balance);
+		
+			$("#day_late").val(DAYS_LATE);
+			$("#paid_amount").val(TOTAL_FINE_AMOUNT);
 			
-			if(LATE_AMOUNT!=0){
+			/*if(LATE_AMOUNT!=0){
 				TOTAL_PAId_AMOUNT=(LATE_AMOUNT+ PAID_AMOUNT);						
 			}else if(TOTAL_PAId_AMOUNT==0){
 				TOTAL_PAId_AMOUNT=PAID_AMOUNT; 			
@@ -94,7 +94,7 @@ $(document).ready(function(){
 				
 				console.log(AMOUNT_FINE +"=== total paid amount==" + TOTAL_PAId_AMOUNT );
 			}		
-				
+			*/	
 			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
 			
 		} 
@@ -105,6 +105,8 @@ $(document).ready(function(){
 		
 		 $("#form_approve").submit();
 	 });
+	
+	 getDaysLate(cu_id);
 });
 
 function daysInMonth(month, year) {
@@ -119,7 +121,7 @@ function LoanApprove(){
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
-	console.log(TR_CU_ID);
+	
 	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:AMOUNT_FINE,approve_note:TRAN_NOTE}
 	
 	$.ajax({
@@ -133,6 +135,34 @@ function LoanApprove(){
 		},
 		success:function(dat){
 			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
+		}
+	}); 
+}   
+
+//insert loanApprove Info 
+function getDaysLate(cu_id){ 
+	$.ajax({
+		url:BASE_URL+"/loan/calculate_days_late/"+cu_id,
+		type:'POST',
+		datatype:'JSON', 
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success:function(dat){
+			console.log(dat);
+			$(dat).each(function(i,v){
+				if(dat[i].ac_period_type=="Month"){
+					TOTAL_FINE_AMOUNT+=parseInt(dat[i].amount_fine_months_late);
+					DAYS_LATE=(parseInt(dat[0].total_months_late));
+				}else{
+					TOTAL_FINE_AMOUNT+=parseInt(dat[i].amount_fine_days_weeks_late);
+					DAYS_LATE=(parseInt(dat[0].total_days_weeks_late));
+					
+				}
+				
+			});
+			
 		}
 	}); 
 }   

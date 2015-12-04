@@ -288,7 +288,7 @@
 
 		</div>
 		<!-- /#page-wrapper -->
-			<input type="text" value="${cus_id}" id="cus_id">
+			
 	</div>
 	<!-- /#wrapper -->
 	<%@include file="include/_script.jsp"%>
@@ -300,29 +300,6 @@
 	<script type="text/javascript">
 	
 		$(function() {
-			//test
-			  $("#loanAgreement").submit(function (ev) {
-				  $.ajax({
-						url : BASE_URL + "/LoanAgreement/newLoanAgreementGetData/",
-						type : 'POST',
-						dataType : 'JSON',
-						beforeSend : function(xhr) {
-							xhr.setRequestHeader("Accept", "application/json");
-							xhr.setRequestHeader("Content-Type", "application/json");
-						},
-						success : function(data) {
-							alert(data);
-						},
-						error : function(data, status, er) {
-							console.log("error: " + data + " status: " + status + " er:" + er);
-						}
-					});
-
-			        ev.preventDefault();
-			    });
-				
-				
-			
 			
 			$("#loanAgreement").validate({
 				errorPlacement : function(label, element) {
@@ -334,6 +311,8 @@
 					form.submit();
 				}
 			});
+			
+	
 			$("#dob").datepicker({
 				showOtherMonths : true,
 				selectOtherMonths : true,

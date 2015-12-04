@@ -124,7 +124,7 @@
 												<th>Pay Amount</th>
 												<th>Balance</th>
 												<th>Status</th>
-
+																							
 											</tr>
 										</thead>
 										<tbody>
@@ -149,7 +149,7 @@
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
-													<td <c:if test="${entry.tr_stts!='3' && entry.tr_stts!='2' && entry.tr_stts!='4'}"> onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}');" </c:if>>
+													<td onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}');" >
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">
