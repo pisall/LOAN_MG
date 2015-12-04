@@ -145,7 +145,7 @@
 													<td><fmt:formatNumber value="${entry.tr_pay_amount}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
-													<td fmt:formatNumber value="${entry.tr_balance}"
+													<td> <fmt:formatNumber value="${entry.tr_balance}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
@@ -222,10 +222,6 @@
 		console.log("ppp=" + PAGE_ID);
 		var total = 0;
 		$(function() {	
-				//  $( "body" ).off( "click",".img_late", flash );
-				$( ".img_late" ).unbind("click");
-			
-			//$(".img_late")
 			
 			$(".amount").each(function(i, v) {
 				total += parseInt($(this).val());

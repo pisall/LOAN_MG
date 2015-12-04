@@ -15,10 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.system.loan.dao.LoanAgreementDao;
@@ -55,7 +57,7 @@ public class LoanAgreementController implements Serializable{
 		}
 		
 		@RequestMapping(value="/newLoanAgreementGetData" , method=RequestMethod.POST)
-		public String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
+		public @ResponseBody int newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
 			
 			HttpSession session_user=req.getSession();
 			USER_SESSION user=(USER_SESSION)session_user.getAttribute("USER_SESSION");
@@ -202,9 +204,15 @@ public class LoanAgreementController implements Serializable{
 		//loanAgreDao =new LoanAgreementDao();
 		loanAgreDao.InsertNewCustomer(loanAgreDto,co_id); 
 		
-		cus_id= loanAgreDto.getCu_id(); 
-		 return  "redirect:/LoanAgreement/report/"+cus_id;
+		cus_id= loanAgreDto.getCu_id();
+		
+		
+		return cus_id;
+		
+		// return  "redirect:/LoanAgreement/report/"+cus_id;
 		}
+		
+		
 		  
 		@RequestMapping(value="/report/{id}",method = RequestMethod.GET)
 		public  String ShowReport(@PathVariable("id") int id, Map<String ,Object>model) {  
