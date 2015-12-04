@@ -41,7 +41,7 @@
 			</div>
             <div class="container-fluid">
 
-                <!-- Page Heading -->
+                <!-- Page Heading --->
                 <div class="row">
 					
                     <div class="col-lg-12">
@@ -164,15 +164,15 @@
 		        </div>
 		        <div class="modal-body">
 		          <div class="row">	
-						<%-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-xs-12 col-lg-3 col-md-3 col-sm-3  pull-right">
 							
 									<img src="${pageContext.request.contextPath}/resources/img/png/user_default.png" class="img-responsive"/>
 								
 							</div>
-						</div> --%>
+						</div>
 						
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<%-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
 							<img src="${pageContext.request.contextPath}/resources/img/png/user_default.png" class="img-responsive"/>
 							
 						</div>
@@ -185,10 +185,10 @@
 							</div>
 							
 						
-						</div>
+						</div> --%>
 						
 						
-						<!-- <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+						<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
 							<div class="panel panel-default">
 								<div class="panel panel-body">
 									<table class="table table-striped table-bordered table-condensed">
@@ -256,7 +256,7 @@
 								</div>
 							</div>
 							
-						</div> -->
+						</div>
 						
 					</div>
 		        </div>
