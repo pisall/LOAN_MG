@@ -22,7 +22,7 @@ function changeEdit(isOtherEditProf){
 		dataType : 'JSON',
 		data : JSON.stringify(input),
 		beforeSend : function(xhr) {
-			startLoading();
+			//startLoading();
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
@@ -46,12 +46,12 @@ function getPrivacy(){
 		dataType : 'JSON',
 		//data : JSON.stringify(input),
 		beforeSend : function(xhr) {
-			startLoading();
+			//startLoading();
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			stopLoading();
+			//stopLoading();
 			$('#btn_switch_edit').bootstrapSwitch('state', data.other_edit_prof);
 			
 		},

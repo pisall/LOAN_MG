@@ -78,6 +78,7 @@
 								<div class="table-responsive">
 									<table class="table table-hover table-striped" id="list">
 										<colgroup>
+											<col style="width: 50px;">
 											<col >
 											<col >
 											<col >
@@ -87,7 +88,7 @@
 										</colgroup>
 										<thead class="style2">
 											<tr>
-												<th><input type="checkbox"></th>
+												<th style="width: 20px;"><input type="checkbox" id="ch_all"></th>
 												<th>ID</th>
 												<th>Name</th>
 												<th>Sex</th>

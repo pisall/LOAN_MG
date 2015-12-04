@@ -9,9 +9,23 @@
 		.help-block{
 			display: none;
 		}
+		
+		div.input-label{
+		    float: right;
+	    	height: 0px;
+		}
+		div.input-label>label{
+			font-weight: normal;
+		    color: #294A98;
+		    position: relative;
+		    top: -29px;
+		    right: 10px;
+		    background: #E9E9E9;
+		    padding: 2px 5px;
+		    border-radius: 5px;
+		}
 	</style>
-
-</head>
+	
 
 <body>
 
@@ -43,6 +57,7 @@
                         			New CO<small>(Cuctomer Officer Agreement)</small>
                         		</div>
                         		<div class="ccol-lg-6 col-sm-6 col-md-6 co-xs-6">
+                        			<a href="#none" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span>update</span></a>
                         			<a class="btn btn-primary pull-right" href="${pageContext.request.contextPath}/co_001_controller/co_0003" ><span class="glyphicon glyphicon-list"></span>&nbsp; List</a>
                         		</div>
                         	</div>
@@ -130,6 +145,7 @@
 										<label class="control-label col-sm-2" for="ph_1">Mobile</label>
 										<div class="col-sm-10">
 										  <input type="email" class="form-control" id="phone" placeholder="Enter Phone">
+										  <div class="input-label"><label id="lb_phone">010 738-3848</label></div>
 										  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
 										</div>
 									  </div>
@@ -138,6 +154,7 @@
 										<label class="control-label col-sm-2" for="ph_2">Office Phone</label>
 										<div class="col-sm-10">
 										  <input type="email" class="form-control" id="cpm_phone" placeholder="Enter Second phone">
+										   <div class="input-label"><label id="lb_office_phone">010 738-3848</label></div>
 										</div>
 									  </div>
 									  
@@ -186,6 +203,32 @@
 
     </div>
     <!-- /#wrapper -->
+    
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Trigger Modal in iFrame</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		          <iframe src="${pageContext.request.contextPath}/uploadController/fileUploadForm" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>  
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		    <!-- /.modal-content -->
+		  </div>
+		  <!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+    
+    
 
     <!-- jQuery -->
     <%@include file="include/_script.jsp"%>

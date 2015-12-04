@@ -16,6 +16,6 @@ public interface CO_DAO_001 {
 	public pagingDto getPaging(pagingDto paging);
 	public HashMap<String, Object> findCoById2(int id);
 	public HashMap<String, Object> findLogByLogMail(String email);
-	public HashMap<String, Object> updateEnabledUser(int id,boolean enabled);
+	public HashMap<String, Object> updateEnabledUser(List<Integer> id,boolean enabled);
 
 }

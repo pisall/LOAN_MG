@@ -161,9 +161,10 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "co_sex as co_sex,"
 					+ "co_brand as co_brand,"
 					+ "co_phone as co_phone,"
+					+ "other_edit_prof as other_edit_prof,"
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
-					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true"+ filter);
+					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true  "+filter+" order by co_id");
 			
 			/*Query query=session.createQuery("from CO_DTO_001 where loginDTO.enabled=true");*/
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
@@ -274,7 +275,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	}
 	
 	@Override
-	public HashMap<String, Object> updateEnabledUser(int id, boolean enabled) {
+	public HashMap<String, Object> updateEnabledUser(List<Integer> id, boolean enabled) {
 		// TODO Auto-generated method stub
 		Session session=null;
 		Transaction tx=null;
@@ -290,15 +291,19 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			String sql="update mfi_login set enabled=? where co_id=?";
 			Query query=session.createSQLQuery(sql);
 			query.setBoolean(0, enabled);
-			query.setInteger(1, id);
-			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			int count=query.executeUpdate();
+			for(int item:id){
+				query.setInteger(1, item);
+				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				int count=query.executeUpdate();
+			}
+			
 
 			tx.commit();
 			result.put("ERROR", false);
 			return result;
 			
 		}catch(HibernateException e){
+			tx.rollback();
 			e.printStackTrace();
 		}
 		result.put("ERROR", true);
@@ -439,6 +444,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			tx=session.beginTransaction();
 			Query query=session.createQuery("select count(*) as pcnt from CO_DTO_001 where loginDTO.enabled=true"+ filter);
 			int pcount=Integer.parseInt(query.uniqueResult().toString());//(int)query.uniqueResult().toString();
+			System.out.println("pcoutn="+pcount);
 			if(paging.getPageNo()<1){
 				paging.setPageNo(1);
 			}

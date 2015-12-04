@@ -11,6 +11,11 @@ $(document).ready(function(){
 		listCoTrush({pageNo:1,pcnt:10,sw:sw});
 	});
 	
+	$("#ch_all").click(function(){
+		var isCheck=$(this).prop("checked");
+		$("input[name=_ch]").prop("checked",Boolean(isCheck));
+	});
+	
 });
 
 function listCoTrush(input){
@@ -65,16 +70,14 @@ function listCoTrush(input){
 				
 				var tr="";
 				tr+='<tr>';
-					tr+='<td name="co_id"><input type="checkbox" name="_ch" value="'+v.co_id+'"/></td>';
+					tr+='<td name="_ch"><input type="checkbox" name="_ch" value="'+v.co_id+'"/></td>';
 					tr+='<td name="co_id">'+v.co_id+'</td>';
 					tr+='<td>'+v.co_first_nm+' '+v.co_last_nm+'</td>';
 					tr+='<td>'+v.co_sex+'</td>';
 					tr+='<td>'+v.co_brand+'</td>';
 					tr+='<td>'+v.co_phone+'</td>';
 					tr+='<td>';
-						tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'"><span class="glyphicon glyphicon-pencil"></span></a>';
-						tr+='&nbsp;';
-						tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'"><span class="glyphicon glyphicon-trash"></span></a>';
+						tr+='<a href="#none" name="btn_restore" val="'+v.co_id+'"><span class="glyphicon glyphicon-share-alt"></span></a>';
 					tr+='</td>';
 				tr+='</tr>';
 				tbody+=tr;
@@ -90,17 +93,19 @@ function listCoTrush(input){
 					
 				});
 			});
-			$("[name=btn_disabled]").each(function(){
+			$("[name=btn_restore]").each(function(){
 				$(this).click(function(){
 					var input={};
+					var arr=[];
+					arr.push(input);
 					input["co_id"]=$(this).attr("val");
-					input["enabled"]=false;
+					input["enabled"]=true;
 					//disabledUser(input);
 					
 					$.confirm({
 						text : "Are you sure want to disable this user?<br/>click ok to disable.",
 						confirm : function() {
-							disabledUser(input);
+							enableUser(arr);
 
 						},
 						cancel : function() {
@@ -118,9 +123,9 @@ function listCoTrush(input){
 	});
 	
 }
-function disabledUser(input){
+function enableUser(input){
 	$.ajax({
-		url : BASE_URL + "/co_001_controller/co_u0001",
+		url : BASE_URL + "/co_001_controller/co_u0004",
 		type : 'POST',
 		dataType : 'JSON',
 		data : JSON.stringify(input),
@@ -131,9 +136,9 @@ function disabledUser(input){
 		},
 		success : function(data) {
 			stopLoading();
-			if(data.CODE=="0000"){
+			if(!data.ERROR){
 				var pageNo=$("#paging").children("li[class=active]").attr("val");
-				listCo({pageNo:pageNo,pcnt:10});
+				listCoTrush({pageNo:pageNo,pcnt:10});
 				
 			}
 		}

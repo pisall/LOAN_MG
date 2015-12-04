@@ -1,6 +1,7 @@
-f<%@include file="include/_head.jsp"%>
+<%@include file="include/_head.jsp"%>
 
 <body>
+	
 
 	<div id="wrapper">
 

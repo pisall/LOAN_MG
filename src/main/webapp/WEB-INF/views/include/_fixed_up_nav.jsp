@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/log_0001"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/co_001_controller/privacy_view"><i class="fa fa-fw fa-gear"></i> Privacy</a>
+                            <a href="${pageContext.request.contextPath}/co_001_controller/privacy_view"><i class="fa fa-wrench"></i> Privacy</a>
                         </li>
                         <li class="divider"></li>
                         <li>

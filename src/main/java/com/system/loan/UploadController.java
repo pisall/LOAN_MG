@@ -5,6 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +28,7 @@ import com.system.loan.dto.UploadedFile;
 public class UploadController {
 	@Autowired
 	 FileValidator fileValidator;
+	
 
 	 @RequestMapping("/fileUploadForm")
 	 public ModelAndView getUploadForm(
@@ -33,7 +40,7 @@ public class UploadController {
 	 @RequestMapping("/fileUpload")
 	 public ModelAndView fileUploaded(
 	   @ModelAttribute("uploadedFile") UploadedFile uploadedFile,
-	   BindingResult result) {
+	   BindingResult result,HttpServletRequest request) {
 	  InputStream inputStream = null;
 	  OutputStream outputStream = null;
 
@@ -41,6 +48,14 @@ public class UploadController {
 	  fileValidator.validate(uploadedFile, result);
 
 	  String fileName = file.getOriginalFilename();
+	  
+	  
+	  HttpSession ss=request.getSession();
+	 String parths=ss.getServletContext().getRealPath("/");
+	 String[] par=parths.split(Pattern.quote("\\.metadata\\"));
+	 String fullPath=par[0];
+	 System.out.println(par.length);
+	 System.out.println(parths);
 
 	  if (result.hasErrors()) {
 	   return new ModelAndView("uploadForm");
@@ -48,9 +63,12 @@ public class UploadController {
 
 	  try {
 	   inputStream = file.getInputStream();
+	   String fileFullNm=fullPath+"\\LOAN_MG\\src\\main\\webapp\\resources\\img\\" + fileName;
+	   System.out.println("file full name="+fileFullNm);
 
-	   File newFile = new File("E:/" + fileName);
+	   File newFile = new File(fileFullNm);
 	   if (!newFile.exists()) {
+		   System.out.println("start write new file");
 	    newFile.createNewFile();
 	   }
 	   outputStream = new FileOutputStream(newFile);
@@ -60,6 +78,7 @@ public class UploadController {
 	   while ((read = inputStream.read(bytes)) != -1) {
 	    outputStream.write(bytes, 0, read);
 	   }
+	   System.out.println("writing is finished");
 	   outputStream.close();
 	  } catch (IOException e) {
 	   // TODO Auto-generated catch block

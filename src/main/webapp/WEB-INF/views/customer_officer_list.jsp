@@ -3,12 +3,18 @@
 </head>
 
 <body>
+	<form>
+		<input type="hidden" value="<%=strCoId %>" id="hi_co_id"/>
+	</form>
 	<style>
 		.modal-header{
 			border-bottom: 1px solid #FFFFFF;
 		    background-color: #136686;
 		    box-shadow: 0px 1px 2px #797777;
 		    color:#fff;
+		}
+		a.disabled{
+			cursor: not-allowed; 
 		}
 	</style>
 
@@ -43,7 +49,7 @@
                         <h2 class="page-header">
                         	<div class="row">
                         		<div class="col-lg-6 col-md-6">CO <small>Customer Officer Infomation</small></div>
-                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right"><a href="#none" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;<a class="btn btn-primary" href="${pageContext.request.contextPath}/co_001_controller/co_0001"><span class="glyphicon glyphicon-plus">&nbsp;New</span></a></div>
+                        		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right"><a href="${pageContext.request.contextPath}/co_001_controller/co_0006" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>&nbsp;Go to trash</a>&nbsp;<a class="btn btn-primary" href="${pageContext.request.contextPath}/co_001_controller/co_0001"><span class="glyphicon glyphicon-plus">&nbsp;New</span></a></div>
                         		
                         	</div>
                             
@@ -128,7 +134,6 @@
 								  <li><a href="#">3</a></li>
 								  <li><a href="#">4</a></li>
 								  <li><a href="#">5</a></li>
-								  
 								  <li class="next"><a href="none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 								</ul>
 							</div>
@@ -159,15 +164,31 @@
 		        </div>
 		        <div class="modal-body">
 		          <div class="row">	
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<%-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-xs-12 col-lg-3 col-md-3 col-sm-3  pull-right">
 							
 									<img src="${pageContext.request.contextPath}/resources/img/png/user_default.png" class="img-responsive"/>
 								
 							</div>
+						</div> --%>
+						
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<img src="${pageContext.request.contextPath}/resources/img/png/user_default.png" class="img-responsive"/>
+							
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+							<div>
+								<span>Mr.Prak Virak</span><br/>
+								<span>R & D</span><br/>
+								Tell : <span>010 904-489</span><br/>
+								Office : 023 8347
+							</div>
+							
+						
 						</div>
 						
-						<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+						
+						<!-- <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
 							<div class="panel panel-default">
 								<div class="panel panel-body">
 									<table class="table table-striped table-bordered table-condensed">
@@ -235,7 +256,7 @@
 								</div>
 							</div>
 							
-						</div>
+						</div> -->
 						
 					</div>
 		        </div>

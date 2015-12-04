@@ -1,9 +1,11 @@
 /**
  * 
  */
+var _CO_ID;
 
 $(document).ready(function(){
 	//blur event
+	_CO_ID=$("#hi_co_id").val();
 	var sw=$("#sw").val();
 	listCo({pageNo:1,pcnt:10,sw:sw});
 	$("#btn_search").click(function(){
@@ -69,11 +71,16 @@ function listCo(input){
 					tr+='<td>'+v.co_first_nm+' '+v.co_last_nm+'</td>';
 					tr+='<td>'+v.co_sex+'</td>';
 					tr+='<td>'+v.co_brand+'</td>';
-					tr+='<td>'+v.co_phone+'</td>';
+					tr+='<td>'+v.co_phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2-$3")+'</td>';
 					tr+='<td>';
-						tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'"><span class="glyphicon glyphicon-pencil"></span></a>';
+						if(v.other_edit_prof==true || _CO_ID==v.co_id){
+							tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>';
+						}else{
+							tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'" class="btn btn-default btn-xs disabled" style="color:#F30A0A;"><span class="glyphicon glyphicon-ban-circle"></span></a>';
+						}
+						
 						tr+='&nbsp;';
-						tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'"><span class="glyphicon glyphicon-trash"></span></a>';
+						tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'" style="color:#A50606;"><span class="glyphicon glyphicon-remove"></span></a>';
 					tr+='</td>';
 				tr+='</tr>';
 				tbody+=tr;

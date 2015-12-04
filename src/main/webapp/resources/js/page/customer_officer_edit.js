@@ -11,6 +11,17 @@ $(document).ready(function(){
 	viewCustomer(ID);
 	//console.log("id==="+ID);
 	
+	//evetn
+	$("#phone").keyup(function(){
+		var strPhone=$(this).val();
+		$("#lb_phone").text(strPhone.replace(/(\d{3})(\d{3})(\d{1})/, "$1 $2-$3"));
+	});
+	
+	$("#cpm_phone").keyup(function(){
+		var strPhone=$(this).val();
+		$("#lb_office_phone").text(strPhone.replace(/(\d{3})(\d{3})(\d{1})/, "$1 $2-$3"));
+	});
+	
 });
 
 function getCoById(input){
@@ -185,6 +196,8 @@ function viewCustomer(id){
 			$("#pb_adress").val(data.co_pb_address);
 			$("#address").val(data.address);
 			$("#brand").val(data.co_brand);
+			$("#lb_phone").text(data.co_phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2-$3"));
+			$("#lb_office_phone").text(data.co_cpm_phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2-$3"))
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);

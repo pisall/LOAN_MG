@@ -2,6 +2,7 @@ package com.system.loan.co;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -228,6 +229,7 @@ public class co_001_controller {
 		HttpSession session=req.getSession();
 		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
 		int sesCoId=user.getCoId();
+		List<Integer> listId=new ArrayList<>();
 		
 		HashMap<String, Object> result=new HashMap<>();
 		result.put("CODE", "0000");
@@ -236,8 +238,10 @@ public class co_001_controller {
 		int coId=input.getCo_id();
 		if(coId==0){
 			result.put("CODE", "0001");
-			result.put("MESSAGE","national id is required");
+			result.put("MESSAGE","");
 		}else if(coId>0){
+			
+			//check if user disable own self
 			if(sesCoId==coId){
 				result.put("CODE", "0001");
 				result.put("MESSAGE","Request is not avaliable.");
@@ -247,7 +251,8 @@ public class co_001_controller {
 		
 		if(result.get("CODE").toString().equals("0000")){
 			System.out.println("start exe");
-			exe=coDao.updateEnabledUser(input.getCo_id(), false);
+			listId.add(input.getCo_id());
+			exe=coDao.updateEnabledUser(listId, false);
 			if((boolean)exe.get("ERROR")){
 				result.put("CODE", "0001");
 				result.put("MESSAGE","False to process.");
@@ -257,6 +262,31 @@ public class co_001_controller {
 		
 		return result;
 	}
+	/*
+	 * enabled user
+	 */
+	@RequestMapping(value="/co_u0004",method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> coU0004(@RequestBody List<co_0002_in> input,HttpServletRequest req){
+		HashMap<String, Object> result=new HashMap<String, Object>();
+		HashMap<String, Object> exe=new HashMap<String, Object>();
+		List listId=new ArrayList<Integer>();
+		for(co_0002_in item:input){
+			listId.add(item.getCo_id());
+		}
+			exe=coDao.updateEnabledUser(listId, true);
+			if((boolean)exe.get("ERROR")){
+				result.put("ERROR", true);
+				result.put("MESSAGE","False to process.");
+			}else{
+				result.put("ERROR", false);
+				result.put("MESSAGE","Restoring is successful.");
+			}
+		
+		
+		return result;
+	}
+	
 	
 	@RequestMapping(value="/co_u0002",method=RequestMethod.POST)
 	@ResponseBody
