@@ -7,9 +7,21 @@
 <body>
 
 	<input type="hidden" value="${TOTAL_AMOUNT_LATE}" id="total">
-	<input type="hidden" value="${PERIOD_TYPE}" id="PERIOD_TYPE">
 
-	
+	<div id="wrapper">
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+			<!-- Fixed Up Navigation -->
+			<%@include file="include/_fixed_up_nav.jsp"%>
+
+			<!-- Side Bar Navigation -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<%@include file="include/_side_nav.jsp"%>
+			</div>
+
+		</nav>
 		<!-- End Navigation -->
 		<div id="page-wrapper">
 			<div class="container-fluid">
@@ -20,13 +32,8 @@
 							value="<%=request.getParameter("tr_id")%>" /> <input
 							type="hidden" id="cu_id"
 							value="<%=request.getParameter("cu_id")%>" />
-							<button style="float: left;" class="btn btn-primary"
-								onclick=" return goBackPage();">
-								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
-							</button> 
 						<h2 class="page-header" style="text-align: center">Loan
 							Approval</h2>
-							 
 					</div>
 				</div>
 
@@ -147,15 +154,7 @@
 											fine:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number required "
-												name="amount_fine" value="0" id="amount_fine" placeholder="0.0">											
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine">Days
-											Late:</label>
-										<div class="col-sm-8">
-											<input type="text" class="form-control "
-												name="day_late" id="day_late" placeholder="0.0" disabled="disabled">											
+												name="amount_fine" id="amount_fine" placeholder="0.0">
 										</div>
 									</div>
 
@@ -215,6 +214,7 @@
 		</div>
 		<!-- /.container-fluid -->
 
+	</div>
 	<!-- /#page-wrapper -->
 	<%@include file="include/_script.jsp"%>
 

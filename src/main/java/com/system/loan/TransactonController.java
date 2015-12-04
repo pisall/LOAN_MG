@@ -35,8 +35,9 @@ public class TransactonController implements Serializable {
 	} 
 	
 	@RequestMapping(value="/loanApprove")
-	public String loanApproval(WebRequest request,@RequestParam(value="total")int total,Model model){ 
+	public String loanApproval(WebRequest request,@RequestParam(value="period_type")String period_type,@RequestParam(value="total")int total,Model model){ 
 		model.addAttribute("TOTAL_AMOUNT_LATE",total);
+		model.addAttribute("PERIOD_TYPE",period_type);
 		return "loan_approve";
 	}
 	 

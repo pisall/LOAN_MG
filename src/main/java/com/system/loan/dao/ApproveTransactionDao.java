@@ -41,17 +41,14 @@ public class ApproveTransactionDao implements TransactionInterface {
 		try{
 			tran=session.beginTransaction(); 
 			
-		String sql = "select   "
-					
-					+ "co.co_id "
+		String sql = "select"				
+					+ " co.co_id "
 					+ ",co.co_first_nm "
 					+ ",co.co_last_nm "
 					+ ",co.co_sex "
 					+ ",co.co_national_id "
 					+ ",co.co_brand "
-					+ ",co.co_phone  " 
-					
-					
+					+ ",co.co_phone  " 						
 					+ ",cus.cu_id "
 					+ ",cus.cu_nm "
 					+ ",cus.cu_sex "
@@ -72,13 +69,15 @@ public class ApproveTransactionDao implements TransactionInterface {
 					+ ",tran.pay_day"
 					+ ",tran.tr_pay_amount "
 					+ ",tran.tr_balance "
-				+ "from "
+					+",(to_date(pay_date,'YYYYMMDD24H') - (SELECT to_date(pay_date,'YYYYMMDD24H') FROM mfi_transection WHERE tr_cu_id="+cus_id+" and tr_stts='3' ORDER BY pay_date ASC LIMIT 1)) as day_late "
+					+",(SELECT count(tr_id) from mfi_transection WHERE tr_stts='3' and tr_cu_id="+cus_id+") as total_tr "
+				+ " from "
 					+ "mfi_customers cus "
 					+ ",mfi_co co  "
 					+ ",mfi_guarantor gua  "
 					+ ",mfi_account acc "
 					+ ",mfi_transection tran "
-				+ "where 1=1 "
+				+ " where 1=1 "
 					+ "and cus.cu_id=gua.cu_id "
 					+ "and cus.co_id=co.co_id "
 					+ "and cus.cu_id=acc.cu_id "

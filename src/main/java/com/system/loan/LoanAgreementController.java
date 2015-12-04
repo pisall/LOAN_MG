@@ -208,7 +208,6 @@ public class LoanAgreementController implements Serializable{
 		  
 		@RequestMapping(value="/report/{id}",method = RequestMethod.GET)
 		public  String ShowReport(@PathVariable("id") int id, Map<String ,Object>model) {  
-			tranDao.check_late();
 			//tranDao = new TransectionDao();
 			model.put("list", tranDao.ShowReport(id));	
 			model.put("Customer", tranDao.Customer_Report(id));

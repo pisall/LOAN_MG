@@ -212,8 +212,15 @@ public static SessionFactory factory = null;
 			Transaction tran = null;				
 			try{
 				tran=session.beginTransaction(); 
-				String sql = "UPDATE mfi_transection SET tr_stts='3' WHERE to_date(pay_date, 'YYYYMMDDHH24MISS') < CURRENT_DATE  and tr_stts='1'";				  
-				SQLQuery query = session.createSQLQuery(sql);
+				String sql = "UPDATE mfi_transection tr  SET  tr_stts='3' FROM mfi_customers cu,mfi_account ac  WHERE 1=1 "
+							    +" and (cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id and  tr_stts='1' and  cu.cu_del_yn='Y')"			 
+							    +" and ( "
+									   +" (to_date(pay_date, 'YYYYMMDD24H') - CURRENT_DATE > 3 and ac_period_type='Day') "
+									   +" or ( to_date(pay_date, 'YYYYMMDD24H')  - CURRENT_DATE > 7 and ac_period_type='Week') "
+									   +" or (  to_date(pay_date, 'YYYYMMDD24H') - CURRENT_DATE > DATE_PART('days', DATE_TRUNC('month', NOW()) +'1 MONTH' - DATE_TRUNC('month', NOW())) and ac_period_type='Month')" 
+							    +")";	  
+				String sql1="UPDATE mfi_transection SET tr_stts='3' WHERE ( CURRENT_DATE - to_date(pay_date, 'YYYYMMDD24H') > 1)";
+				SQLQuery query = session.createSQLQuery(sql1);
 				query.executeUpdate();
 				tran.commit();
 			}catch(HibernateException hne){

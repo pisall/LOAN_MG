@@ -128,7 +128,7 @@
 
 			</div>
 			<!-- /.container-fluid -->
-
+			<button id="pop">Top</button>
 		</div>
 		<!-- /#page-wrapper -->
 		<!-- <label for="from" class="label-control">From</label> <input class="form-control" type="text" id="from"
@@ -153,18 +153,18 @@
 		src="${pageContext.request.contextPath}/resources/js/customer_officer.js"></script>
 
 	<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 			$("#pop").click(
 					function() {
-						newwindow = window.open("process_bar", '',
-								'height=50,width=1000');
+						newwindow = window.open("${pageContext.request.contextPath}/LoanAgreement/report/264", '',
+								'height=700,width=1000');
 						if (window.focus) {
 							newwindow.focus()
 						}
 						return false;
 					});
 			
-		})
+		}) */
 		
 	</script>
 </body>

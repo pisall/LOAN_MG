@@ -16,7 +16,9 @@ $(document).ready(function(){
 		 var totalAmount=0;
 		 if($(this).val()==4){
 			 	if($("#total").val()!=0){
-					totalAmount=parseInt($("#total").val()) + parseInt(BALANCE) ;			 			 		
+					totalAmount=(accounting.unformat(parseInt($("#paid_amount").val())) + parseInt(BALANCE)) ;
+					console.log("total paid amount=="+accounting.unformat($("#paid_amount").val()) +"Balance"+ parseInt(BALANCE));
+	 				console.log("total amount======"+accounting.unformat(parseInt($("#paid_amount").val())) + parseInt(BALANCE));
 				}else if($("#total").val()==0){
 					 totalAmount=parseInt(PAID_AMOUNT)+ parseInt(BALANCE);
 				}		
@@ -39,7 +41,6 @@ $(document).ready(function(){
 				  LoanApprove(); 				 
 			  }
 		});
-	 
 	 $.ajax({
 		url:BASE_URL+'/schadule_payment/schadule/'+tr_id+"/"+cu_id,
 		type:'POST',
@@ -51,7 +52,7 @@ $(document).ready(function(){
 		},
 		success:function(dat){
 			console.log(dat);
-			var date_now=moment().format('DD/MM/YYYY');
+			var date_now=moment().format('DD-MM-YYYY');
 			CO_ID=dat.co_id;
 			CU_ID=dat.cu_id;
 			AC_ID= dat.ac_id;
@@ -67,14 +68,29 @@ $(document).ready(function(){
 			$("#admin_app_date").html(date_now);
 			$("#client_app_date").html(date_now);
 			
-			var pay_amount=accounting.formatMoney(dat.tr_pay_amount,"");
+			var day_late=0,total_days_late=0;
+			day_late=parseInt(dat.day_late);
+			var d=new Date();
+			var dayOfMonth=parseInt(daysInMonth(d.getMonth(),d.getFullYear()));
+			var total_tr=parseInt(dat.total_tr);
+			
+			if(day_late>0){		
+				if($("#PERIOD_TYPE").val()=="Day"){	
+					total_days_late=(parseInt(day_late)/4);
+				}
+				if($("#PERIOD_TYPE").val()=="Week" || $("#PERIOD_TYPE").val()=="Month"){	
+					total_days_late=(parseInt(day_late)-total_tr);				
+				}
+				$("#day_late").val(total_days_late);
+			}
 			
 			if($("#total").val()!=0){
-				$("#paid_amount").val($("#total").val());
-				total_amount=accounting.formatMoney($("#total").val(),"");
+				total_amount=(parseInt($("#total").val())+ parseInt(PAID_AMOUNT));
+				$("#paid_amount").val(accounting.formatMoney(total_amount,""));
+
 			}else if($("#total").val()==0){
-				$("#paid_amount").val(pay_amount);
-				total_amount=pay_amount;
+				$("#paid_amount").val(accounting.formatMoney(PAID_AMOUNT,""));
+				
 			}
 			
 			
@@ -90,9 +106,13 @@ $(document).ready(function(){
 	 });
 });
 
+function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}
+
 // insert loanApprove Info 
 function LoanApprove(){ 
-	var PAID_AMOUNT = document.getElementById('paid_amount').value;
+	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
 	var AMOUNT_FINE = document.getElementById('amount_fine').value ;
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
@@ -102,7 +122,7 @@ function LoanApprove(){
 	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:AMOUNT_FINE,approve_note:TRAN_NOTE}
 	
 	$.ajax({
-		url:BASE_URL+'/loan/loanApprove/'+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
+		url:BASE_URL+"/loan/loanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
 		type:'POST',
 		datatype:'JSON', 
 		data : JSON.stringify(input),

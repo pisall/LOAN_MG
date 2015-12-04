@@ -7,10 +7,13 @@ var tr_type="";
 var startDate="";
 var endDate="";
 
+
 $(function() {
 	datetimenow();
 	clearWord();
 	listCus(page_no);
+
+	
 	
 	$("#from").change(function(){
 		if($(this).val()==""){
@@ -82,6 +85,8 @@ $(function() {
 	    });
 
 });
+
+
 
 function dateFormate(date){
  return moment(date, "DD-MM-YYYY").format("YYYY-MM-DD")
@@ -384,9 +389,58 @@ function addCustomer() {
  * @param cuID
  */
 
-function getCustomerTransaction(cuID) {
-	location.href = BASE_URL + "/LoanAgreement/report/" + cuID;
+function getCustomerTransaction(cuID) {	
+	
+	   popup(BASE_URL+"/LoanAgreement/report/"+cuID);
+		
+		//PopupCenter(BASE_URL+"/LoanAgreement/report/"+cuID, '', 1200, 500);
+		
+		/*newwindow = window.open(BASE_URL+"/LoanAgreement/report/"+cuID, '',
+				'height=700,width=1000,,directories=no,location=no');
+		if (window.focus) {
+			newwindow.focus()
+		}
+		return false;*/
+	//location.href = BASE_URL + "/LoanAgreement/report/" + cuID;
 }
+function popup(url ) 
+{
+ var width  = 1000;
+ var height = 700;
+ var left   = (screen.width  - width)/2;
+ var top    = (screen.height - height)/2;
+ var params = 'width='+width+', height='+height;
+ params += ', top='+top+', left='+left;
+ params += ', directories=no';
+ params += ', location=no';
+ params += ', menubar=no';
+ params += ', resizable=no';
+ params += ', scrollbars=no';
+ params += ', status=no';
+ params += ', toolbar=no';
+ var newwin=window.open(url,'', params);
+ if (window.focus) {newwin.focus()}
+// window.moveTo(500, 100);
+ return false;
+}
+
+/*function PopupCenter(url, title, w, h) {
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+        newWindow.focus();
+    }
+}*/
 
 /**
  * Load Current Date Time

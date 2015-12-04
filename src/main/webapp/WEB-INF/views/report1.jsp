@@ -1,9 +1,9 @@
 <%@include file="include/_head.jsp"%>
 <body>
 
-	<!-- <div id="wrapper"> -->
+	<div id="wrapper">
 
-		<%-- <!-- Navigation -->
+		<!-- Navigation -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 			<!-- Fixed Up Navigation -->
@@ -15,7 +15,7 @@
 				<%@include file="include/_side_nav.jsp"%>
 			</div>
 
-		</nav> --%>
+		</nav>
 		<!-- End Navigation -->
 
 		<div id="page-wrapper">
@@ -28,10 +28,10 @@
 					<div class="col-lg-12">
 
 						<h2 class="page-header" style="text-align: center;">
-							<!-- <button style="float: left;" class="btn btn-primary"
+							<button style="float: left;" class="btn btn-primary"
 								onclick=" return goBack('customer','home_customer');">
 								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
-							</button> -->
+							</button>
 							Schedule Payments
 						</h2>
 						<span> </span>
@@ -46,7 +46,6 @@
 						<!-- panel top-->
 						<div class="panel panel-default">
 							<c:forEach var="entry" items="${Customer}">
-								<input type="hidden" id="period_type" value="${entry.ac_period_type}">
 								<div class="panel panel-heading">
 									<div class="row">
 										<div class="col-md-4 col-sm-4 col-xs-4">
@@ -85,7 +84,7 @@
 													<tr>
 														<td style="border: 0px">Loan Period :</td>
 														<td style="border: 0px">${entry.ac_period}&nbsp;
-															${entry.ac_period_type} </td>
+															${entry.ac_period_type}</td>
 													</tr>
 													<tr>
 														<td>Full Amount :</td>
@@ -224,8 +223,8 @@
 			<!-- /.container-fluid -->
 		</div>
 		<!-- /#page-wrapper -->
-	<!-- </div>
- -->
+	</div>
+
 	<%@include file="include/_script.jsp"%>
 
 	<!-- Loan Report javascript  -->
@@ -250,8 +249,6 @@
 	</script>
 
 	<input type="hidden" value="" id="total_amount_late">
-	
-	
 
 </body>
 
