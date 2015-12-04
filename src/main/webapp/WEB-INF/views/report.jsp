@@ -1,23 +1,7 @@
 <%@include file="include/_head.jsp"%>
+
 <body>
-
-	<!-- <div id="wrapper"> -->
-
-		<%-- <!-- Navigation -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
-			<!-- Fixed Up Navigation -->
-			<%@include file="include/_fixed_up_nav.jsp"%>
-
-
-			<!-- Side Bar Navigation -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<%@include file="include/_side_nav.jsp"%>
-			</div>
-
-		</nav> --%>
-		<!-- End Navigation -->
-
+	
 		<div id="page-wrapper">
 
 			<div class="container-fluid">
@@ -28,10 +12,7 @@
 					<div class="col-lg-12">
 
 						<h2 class="page-header" style="text-align: center;">
-							<!-- <button style="float: left;" class="btn btn-primary"
-								onclick=" return goBack('customer','home_customer');">
-								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
-							</button> -->
+							
 							Schedule Payments
 						</h2>
 						<span> </span>
@@ -173,7 +154,7 @@
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">
-																<a href="#"> <img alt=""
+																<a href="#"> <img  alt=""
 																	src="${pageContext.request.contextPath}/resources/img/transaction.png"
 																	width="35px" height="25px"></a>
 															</c:when>
@@ -183,7 +164,7 @@
 																	width="35px" height="25px"></a>
 															</c:when>
 															<c:when test="${entry.tr_stts=='3'}">
-																<a href="#"> <img alt=""
+																<a href="#"> <img class='img_late'   alt=""
 																	src="${pageContext.request.contextPath}/resources/img/area.png"
 																	width="35px" height="25px"></a>
 															</c:when>
@@ -241,7 +222,12 @@
 		var PAGE_ID = "${page_id}";
 		console.log("ppp=" + PAGE_ID);
 		var total = 0;
-		$(function() {
+		$(function() {	
+				//  $( "body" ).off( "click",".img_late", flash );
+				$( ".img_late" ).unbind("click");
+			
+			//$(".img_late")
+			
 			$(".amount").each(function(i, v) {
 				total += parseInt($(this).val());
 			});

@@ -36,7 +36,7 @@
 							<div class="panel-heading"><b>Customer Officer Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-striped table-responsive">
 										<thead class="style2">
 											<tr class="active">
 												<th>Name</th>										
@@ -59,7 +59,7 @@
 							<div class="panel-heading"><b>Customer Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-striped table-responsive">
 										<thead class="style2">
 											<tr class="active">
 												<th>Name</th>												
@@ -83,7 +83,7 @@
 							<div class="panel-heading"><b>Gurantor Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-striped table-responsive">
 										<thead class="style2">
 											<tr class="active">
 												<th>Name</th>											
@@ -106,7 +106,7 @@
 							<div class="panel-heading"><b>Loan Information</b></div>
 							<div class="panel-body" style="padding:10px">
 								<div >
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-striped table-responsive">
 										<thead class="style2">
 											<tr class="active">
 												<th>Pay Type</th>

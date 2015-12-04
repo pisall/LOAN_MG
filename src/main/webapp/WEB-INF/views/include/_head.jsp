@@ -20,6 +20,9 @@
     <meta name="author" content="">
 
     <title>SB Admin - Bootstrap Admin Template</title>
+	
+	<!-- Jquery ui css -->
+	<link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +35,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
    </head>
   
    <%
@@ -54,5 +57,6 @@
  		
  	}
 	%>
+	
     
 
