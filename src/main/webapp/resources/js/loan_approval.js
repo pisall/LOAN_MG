@@ -5,27 +5,24 @@ var TR_ID;
 var TR_TYPE ;
 var PAID_AMOUNT=0;
 var BALANCE=0;
-var total_amount=0;
+var LATE_AMOUNT=0;
+var TOTAL_PAId_AMOUNT=0;
+var TOTAL_AMOUNT=0;
+var AMOUNT_FINE=0,AMOUNT_RATE=10/100,TOTAL_AMOUNT_FINE=0;
+var DAYS_LATE=0;
 $(document).ready(function(){
 
 	 var tr_id = document.getElementById('tr_id').value;
 	 var cu_id = document.getElementById('cu_id').value;
-	// alert("wtf tr_id:="+tr_id+"==cu_id:=="+cu_id);
-	 
-	 $("#tr_type").change(function(){
-		 var totalAmount=0;
+	
+	 $("#tr_type").change(function(){		
 		 if($(this).val()==4){
-			 	if($("#total").val()!=0){
-					totalAmount=(accounting.unformat(parseInt($("#paid_amount").val())) + parseInt(BALANCE)) ;
-					console.log("total paid amount=="+accounting.unformat($("#paid_amount").val()) +"Balance"+ parseInt(BALANCE));
-	 				console.log("total amount======"+accounting.unformat(parseInt($("#paid_amount").val())) + parseInt(BALANCE));
-				}else if($("#total").val()==0){
-					 totalAmount=parseInt(PAID_AMOUNT)+ parseInt(BALANCE);
-				}		
-			 $("#paid_amount").val(accounting.formatMoney(totalAmount," "));
+			 TOTAL_AMOUNT=parseInt((TOTAL_PAId_AMOUNT+BALANCE));		 				 			
 		 }else{
-			 $("#paid_amount").val(total_amount);
+			 TOTAL_AMOUNT=TOTAL_PAId_AMOUNT;			
 		 }
+		 $("#paid_amount").val(accounting.formatMoney(TOTAL_AMOUNT,""));
+		
 	 });
 	 	
 	 // validation 
@@ -57,8 +54,7 @@ $(document).ready(function(){
 			CU_ID=dat.cu_id;
 			AC_ID= dat.ac_id;
 			TR_ID=dat.tr_id;
-			PAID_AMOUNT=dat.tr_pay_amount;
-			BALANCE=dat.tr_balance;
+			
 			
 			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
 			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
@@ -68,35 +64,40 @@ $(document).ready(function(){
 			$("#admin_app_date").html(date_now);
 			$("#client_app_date").html(date_now);
 			
-			var day_late=0,total_days_late=0;
-			day_late=parseInt(dat.day_late);
+			var total_days_late=0;
+			DAYS_LATE=parseInt(dat.day_late);
 			var d=new Date();
 			var dayOfMonth=parseInt(daysInMonth(d.getMonth(),d.getFullYear()));
-			var total_tr=parseInt(dat.total_tr);
+			var total_tr=parseInt(dat.total_tr);			
+			// CALCULATE AMOUNT
+			LATE_AMOUNT=parseInt($("#total").val());
+			PAID_AMOUNT=parseInt(dat.tr_pay_amount);
+			BALANCE=parseInt(dat.tr_balance);
 			
-			if(day_late>0){		
+			if(LATE_AMOUNT!=0){
+				TOTAL_PAId_AMOUNT=(LATE_AMOUNT+ PAID_AMOUNT);						
+			}else if(TOTAL_PAId_AMOUNT==0){
+				TOTAL_PAId_AMOUNT=PAID_AMOUNT; 			
+			}
+			$("#paid_amount").val(accounting.formatMoney(TOTAL_PAId_AMOUNT,""));	
+						
+			if(DAYS_LATE>0){		
 				if($("#PERIOD_TYPE").val()=="Day"){	
-					total_days_late=(parseInt(day_late)/4);
+					total_days_late=(parseInt(Math.floor(DAYS_LATE/4)));
 				}
 				if($("#PERIOD_TYPE").val()=="Week" || $("#PERIOD_TYPE").val()=="Month"){	
-					total_days_late=(parseInt(day_late)-total_tr);				
+					total_days_late=(parseInt(DAYS_LATE)-total_tr);				
 				}
 				$("#day_late").val(total_days_late);
-			}
-			
-			if($("#total").val()!=0){
-				total_amount=(parseInt($("#total").val())+ parseInt(PAID_AMOUNT));
-				$("#paid_amount").val(accounting.formatMoney(total_amount,""));
-
-			}else if($("#total").val()==0){
-				$("#paid_amount").val(accounting.formatMoney(PAID_AMOUNT,""));
+							
+				AMOUNT_FINE=(TOTAL_PAId_AMOUNT * AMOUNT_RATE);
 				
-			}
-			
-			
+				console.log(AMOUNT_FINE +"=== total paid amount==" + TOTAL_PAId_AMOUNT );
+			}		
+				
 			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
 			
-		}
+		} 
 	 });
 	 
 	 
