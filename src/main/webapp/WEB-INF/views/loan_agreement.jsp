@@ -300,7 +300,7 @@
 	<script type="text/javascript">
 	
 		$(function() {
-			
+			//test
 			  $("#loanAgreement").submit(function (ev) {
 				  $.ajax({
 						url : BASE_URL + "/LoanAgreement/newLoanAgreementGetData/",
