@@ -92,17 +92,19 @@ function listTrInfo(){
 				
 				// calculate days late 
 				if(tr_stts==1){
-					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0)));
+					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),""));
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
-					$("#amount_fine").val((accounting.formatMoney((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0)));
-					$("#total_paid_amount").val((accounting.formatMoney((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE))).toFixed(0));
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),""));
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),""));
 				}			
 				if(tr_stts==3){
 		
-					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0)));
+					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),""));
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
-					$("#amount_fine").val((accounting.formatMoney((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0)));
-					$("#total_paid_amount").val((accounting.formatMoney((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE)).toFixed(0));
+					
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),""));
+								
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),""));
 				}
 				
 				
