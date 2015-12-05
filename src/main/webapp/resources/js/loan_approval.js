@@ -156,6 +156,7 @@ function getDaysLate(){
 		},
 		success:function(dat){
 			stopLoading();
+			console.log(dat);
 			$(dat).each(function(i,v){
 				if(dat[i].ac_period_type=="Month"){
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
@@ -167,10 +168,8 @@ function getDaysLate(){
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
 					DAYS_LATE=(parseInt(dat[0].total_days_weeks_late));
 					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_days_weeks_late))
-					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_days_weeks_late);
-					//alert(DAYS_LATE);
-				}
-				
+					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_days_weeks_late);								
+				}	
 			});
 			 listTrInfo();
 		}
