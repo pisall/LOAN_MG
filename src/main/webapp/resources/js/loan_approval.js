@@ -20,14 +20,15 @@ var tr_stts=tr_stts;
 
 $(document).ready(function(){	
 	 getDaysLate();
-	
-	 $("#tr_type").change(function(){		
-		 if($(this).val()==4){
-			 TOTAL_AMOUNT=parseInt((TOTAL_PAId_AMOUNT+BALANCE));		 				 			
+	 
+	 $("#tr_type").change(function(){	
+		 var COMPLETE_TOTAL=0;
+		 if($(this).val()==4){		
+			 COMPLETE_TOTAL=(parseInt(TOTAL_FINE_AMOUNT_LATE) + parseInt(BALANCE));	
 		 }else{
-			 TOTAL_AMOUNT=TOTAL_PAId_AMOUNT;			
+			 COMPLETE_TOTAL=(parseInt(TOTAL_FINE_AMOUNT_LATE));
 		 }
-		 $("#paid_amount").val(accounting.formatMoney(TOTAL_AMOUNT,""));
+		 $("#total_paid_amount").val(accounting.formatMoney(COMPLETE_TOTAL.toFixed(0),""));
 		
 	 });
 	 	
@@ -44,10 +45,7 @@ $(document).ready(function(){
 				  LoanApprove(); 				 
 			  }
 		});
-	
 
-	 
-	 
 	 $("#btnApprovale").click(function(){ 
 		
 		 $("#form_approve").submit();
@@ -118,8 +116,8 @@ function daysInMonth(month, year) {
 
 // insert loanApprove Info 
 function LoanApprove(){ 
-	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
-	var AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	var PAID_AMOUNT = TOTAL_FINE_AMOUNT_LATE; //accounting.unformat(document.getElementById('paid_amount').value);
+	var AMOUNT_FINE = AMOUNT_FINE_LATE;//accounting.unformat(document.getElementById('amount_fine').value) ;
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
@@ -156,7 +154,6 @@ function getDaysLate(){
 		},
 		success:function(dat){
 			stopLoading();
-			console.log(dat);
 			$(dat).each(function(i,v){
 				if(dat[i].ac_period_type=="Month"){
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
@@ -168,7 +165,8 @@ function getDaysLate(){
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
 					DAYS_LATE=(parseInt(dat[0].total_days_weeks_late));
 					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_days_weeks_late))
-					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_days_weeks_late);								
+					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_days_weeks_late);		
+					
 				}	
 			});
 			 listTrInfo();

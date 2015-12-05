@@ -143,7 +143,7 @@
 											Paid Amount:</label>
 										<div class="col-sm-8">
 											<input  type="text" class="form-control check_number required"
-												name="paid_amount"  id="paid_amount" placeholder="0.0" >
+												name="paid_amount" disabled="disabled"  id="paid_amount" placeholder="0.0" >
 										</div>
 									</div>
 									
@@ -152,7 +152,7 @@
 											Days Late:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control "
-												name="day_late" id="day_late" placeholder="0.0" >											
+												name="day_late" disabled="disabled" id="day_late" placeholder="0.0" >											
 										</div>
 									</div>
 									
@@ -161,12 +161,12 @@
 											Amount fine:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number required "
-												name="amount_fine"  value="0" id="amount_fine" placeholder="0.0">											
+												name="amount_fine"  disabled="disabled" value="0" id="amount_fine" placeholder="0.0">											
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine">Amount
+										<label class="control-label col-sm-4" for="amount-fine">
 											Total Amount:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number  "
