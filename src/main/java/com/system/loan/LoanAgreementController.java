@@ -203,7 +203,6 @@ public class LoanAgreementController implements Serializable{
 		
 		return "redirect:/LoanAgreement/newLoanAgreement";
 		
-		//return "redirect:/customer/home_customer";
 		
 		// return  "redirect:/LoanAgreement/report/"+cus_id;
 		}

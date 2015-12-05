@@ -4,22 +4,26 @@
  			response.sendRedirect("../login");
  		}
 	%>
+	<%
+		int cu_id=0,tr_id=0,tr_stts=0;
+		if(request.getParameter("tr_id")!=null && request.getParameter("cu_id")!=null){
+			cu_id=Integer.parseInt(request.getParameter("cu_id").toString());
+			tr_id=Integer.parseInt(request.getParameter("tr_id").toString());
+			tr_stts=Integer.parseInt(request.getParameter("tr_stts").toString());
+		}
+	%>
 <body>
 
-	<input type="hidden" value="${TOTAL_AMOUNT_LATE}" id="total">
-	<input type="hidden" value="${PERIOD_TYPE}" id="PERIOD_TYPE">
-
-	
 		<!-- End Navigation -->
 		<div id="page-wrapper">
 			<div class="container-fluid">
 				<!-- Page Heading -->
 				<div class="row" >
 					<div class="col-lg-12 head-print">
-						<input type="hidden" id="tr_id"
-							value="<%=request.getParameter("tr_id")%>" /> <input
+						<!--<input type="hidden" id="tr_id"
+							value="" /> <input
 							type="hidden" id="cu_id"
-							value="<%=request.getParameter("cu_id")%>" />
+							value="" />-->
 							<button style="float: left;" class="btn btn-primary"
 								onclick=" return goBackPage();">
 								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
@@ -139,25 +143,37 @@
 											Paid Amount:</label>
 										<div class="col-sm-8">
 											<input  type="text" class="form-control check_number required"
-												name="paid_amount" id="paid_amount" placeholder="0.0" disabled="disabled">
+												name="paid_amount"  id="paid_amount" placeholder="0.0" >
 										</div>
 									</div>
+									
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine">Amount
-											fine:</label>
-										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
-												name="amount_fine" value="0" id="amount_fine" placeholder="0.0">											
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine">Days
-											Late:</label>
+										<label class="control-label col-sm-4" for="amount-fine">
+											Days Late:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control "
-												name="day_late" id="day_late" placeholder="0.0" disabled="disabled">											
+												name="day_late" id="day_late" placeholder="0.0" >											
 										</div>
 									</div>
+									
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="amount-fine">Amount
+											Amount fine:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control check_number required "
+												name="amount_fine"  value="0" id="amount_fine" placeholder="0.0">											
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="amount-fine">Amount
+											Total Amount:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control check_number  "
+												name="total_paid_amount" disabled="disabled" value="0" id="total_paid_amount" placeholder="0.0">											
+										</div>
+									</div>
+									
 
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="tr_type">Transection
@@ -222,6 +238,9 @@
 		src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
+		var tr_id="<%=tr_id%>";tr_stts
+		var cu_id="<%=cu_id%>";
+		var tr_stts="<%=tr_stts%>";
 	</script>
 
 </body>
