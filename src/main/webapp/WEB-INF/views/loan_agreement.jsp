@@ -7,7 +7,7 @@
 	
 	 if (request.getParameter("cus_id") != null) {
 	        cus_id=Integer.parseInt(request.getParameter("cus_id").toString());
-	  } 
+	  } //check_cus
 %>
 
 <body>
