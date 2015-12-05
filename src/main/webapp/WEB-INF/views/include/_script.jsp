@@ -42,17 +42,15 @@
 	</script>
      
       <script type="text/javascript">
+      var new_window;
 		$(function(){
+			$(new_window).unload(function() {
+				alert();
+				});
+			
 			$("#back_up").click(function(){		
 				startLoading();
-			/* $("#myModal3").modal({backdrop: "static"});			
-				 //startLoading();
-				var bufferIntObj = {
-					template: 2, // type number
-					start: true,  // start it now
-					parent: '#show_process' 
-				};
-				var bufferProgress = new Mprogress(bufferIntObj); */
+	
 				$.ajax({
 					url :"${pageContext.request.contextPath}/backupandrestore/backup",
 					type : 'GET',
@@ -108,11 +106,10 @@
 		  params += ', status=no';
 		  params += ', toolbar=no';
 		 // var newwin=
-		 window.open(url,'', params);
-		 // if (window.focus) {newwin.focus()}
-		 // window.moveTo(500, 100);
-		  return false;
+		 new_window=window.open(url,'', params);
+		 return false;
 		 }
+		
 	</script>
 
 	

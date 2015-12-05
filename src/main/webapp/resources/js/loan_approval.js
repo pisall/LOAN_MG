@@ -137,6 +137,7 @@ function LoanApprove(){
 		success:function(dat){
 			stopLoading();
 			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
+			parent.listCus(1);
 		}
 	}); 
 }   
