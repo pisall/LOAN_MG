@@ -15,8 +15,6 @@ import com.system.loan.dao.LoanApprovalDao;
 import com.system.loan.dao.TransectionDao;
 import com.system.loan.dto.LoanApprovalDto;
 
-import antlr.collections.List;
-
 @Controller
 @RequestMapping(value="loan")
 public class LoanApprovalsController implements Serializable{

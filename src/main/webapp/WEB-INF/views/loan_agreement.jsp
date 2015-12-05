@@ -1,8 +1,13 @@
 <%@include file="include/_head.jsp"%>
 <%
+	int cus_id=0;
 	if (strCoNm == "" || strCoNm == null) {
 		response.sendRedirect("../login");
 	}
+	
+	 if (request.getParameter("cus_id") != null) {
+	        cus_id=Integer.parseInt(request.getParameter("cus_id").toString());
+	  } 
 %>
 <style>
 .error .arrow {
@@ -220,7 +225,7 @@
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
 											<input type="text" class="form-control required check_number"
-												name="ac_rate" id="rate" placeholder="Rate" maxlength="5">
+												name="ac_rate" id="rate" placeholder="Rate" maxlength="4">
 											<!-- <div class="input-group-addon">%</div> -->
 											<!-- </div> -->
 										</div>
@@ -258,9 +263,9 @@
 											Period:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control required check_number"
-												name="ac_period" placeholder="Period" maxlength="3">
-											<br /> <select class="form-control" name="ac_period_type"
-												id="period">
+												name="ac_period" id="ac_period" placeholder="Period" maxlength="2">
+											<br /> <select class="form-control" id="ac_period_type" name="ac_period_type"
+												>
 												<option>Day</option>
 												<option>Week</option>
 												<option>Month</option>
@@ -288,21 +293,58 @@
 
 		</div>
 		<!-- /#page-wrapper -->
+		
+		
 			
 	</div>
 	<!-- /#wrapper -->
 	<%@include file="include/_script.jsp"%>
+	
 	<script>
 		// just for the demos, avoids form submit
-		var PAGE_ID = "${page_id}";
+		var PAGE_ID = "${page_id}";		
+		var cus_id="<%=cus_id%>";
+		
+		if(cus_id !=0){
+			 popup("${pageContext.request.contextPath}/LoanAgreement/report/"+cus_id);
+		}
+		
+		jQuery.validator.addMethod("lessThen56", function(value, element) {
+			var ac_period_type=$("#ac_period_type").val();	
+			return  this.optional(element) || ac_period_type==2 || ac_period_type==3  || (parseFloat(value) < 57 );
+		   
+		}, " Period must be less than 56");
+		
+		jQuery.validator.addMethod("lessThen24", function(value, element) {
+			var ac_period_type=$("#ac_period_type").val();	
+			return  this.optional(element) || ac_period_type==1 || (parseFloat(value) < 25 );
+		   
+		}, " Period must be less than 24");
+		
+		jQuery.validator.addMethod("lessThen10", function(value, element) {
+			return  this.optional(element) || (parseFloat(value) < 11 );
+		   
+		}, " Rate must be less than 10");
+		
 	</script>
 
 	<script type="text/javascript">
 	
 		$(function() {
 			
+			
 			$("#loanAgreement").validate({
+				rules:{
+					"ac_period":{
+						lessThen24:true,
+						lessThen56:true
+					},
+					"ac_rate":{
+						lessThen10:true
+					}
+				},
 				errorPlacement : function(label, element) {
+					
 					label.addClass('arrow');
 					label.insertAfter(element);								
 				},
@@ -311,6 +353,7 @@
 					form.submit();
 				}
 			});
+			
 			
 	
 			$("#dob").datepicker({

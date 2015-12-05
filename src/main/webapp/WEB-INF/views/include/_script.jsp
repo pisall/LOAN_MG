@@ -107,8 +107,9 @@
 		  params += ', scrollbars=no';
 		  params += ', status=no';
 		  params += ', toolbar=no';
-		  var newwin=window.open(url,'', params);
-		  if (window.focus) {newwin.focus()}
+		 // var newwin=
+		 window.open(url,'', params);
+		 // if (window.focus) {newwin.focus()}
 		 // window.moveTo(500, 100);
 		  return false;
 		 }

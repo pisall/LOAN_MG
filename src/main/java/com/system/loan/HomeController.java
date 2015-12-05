@@ -1,23 +1,12 @@
 package com.system.loan;
 
-import java.io.IOException;
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
-import javax.naming.directory.DirContext;
-import javax.security.sasl.AuthenticationException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.RequestWrapper;
 
-import org.springframework.http.HttpRequest;
-import org.springframework.ldap.core.ContextSource;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,12 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.net.httpserver.HttpContext;
 import com.system.loan.dao.CustomerOfficerDaoImp;
-import com.system.loan.dao.LdapUserDetailsManager;
 import com.system.loan.dao.myUserDetailsManager;
 import com.system.loan.dao.customer.CustomerDaoImp;
 import com.system.loan.dao.login.LOGIN_DAO_001_IMP;

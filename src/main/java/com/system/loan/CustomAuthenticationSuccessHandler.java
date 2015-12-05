@@ -2,7 +2,6 @@ package com.system.loan;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.concurrent.SynchronousQueue;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
