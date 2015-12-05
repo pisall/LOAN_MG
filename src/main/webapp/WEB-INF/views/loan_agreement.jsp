@@ -9,11 +9,7 @@
 	        cus_id=Integer.parseInt(request.getParameter("cus_id").toString());
 	  } 
 %>
-<style>
-.error .arrow {
-	color: red;
-}
-</style>
+
 <body>
 
 	<div id="wrapper">
