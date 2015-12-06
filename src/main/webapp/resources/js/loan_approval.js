@@ -135,9 +135,10 @@ function LoanApprove(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
+			
 			stopLoading();
 			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
-			parent.listCus(1);
+			//parent.listCus(1);
 		}
 	}); 
 }   
@@ -154,6 +155,7 @@ function getDaysLate(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
+			console.log(dat);
 			stopLoading();
 			$(dat).each(function(i,v){
 				if(dat[i].ac_period_type=="Month"){

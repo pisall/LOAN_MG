@@ -233,8 +233,6 @@
 
 	<!-- /#page-wrapper -->
 	<%@include file="include/_script.jsp"%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
 
 	<script
 		src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
