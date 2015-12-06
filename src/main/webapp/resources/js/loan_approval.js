@@ -28,8 +28,20 @@ $(document).ready(function(){
 		 }else{
 			 COMPLETE_TOTAL=(parseInt(TOTAL_FINE_AMOUNT_LATE));
 		 }
-		 $("#total_paid_amount").val(accounting.formatMoney(COMPLETE_TOTAL.toFixed(0),"")+" R");
+		 $("#total_paid_amount").val(accounting.formatMoney(COMPLETE_TOTAL.toFixed(0),""));
 		
+	 });
+	 
+	 $("#paid_amount,#amount_fine").keyup(function(){
+		 TOTAL_FINE_AMOUNT_LATE=(parseInt(document.getElementById('paid_amount').value)+parseInt(document.getElementById('amount_fine').value));
+		 $("#total_paid_amount").val(TOTAL_FINE_AMOUNT_LATE);
+	 });
+	 
+	 $("#pre_pay").keyup(function(){
+		 var BALANCE=0;var PREPAY=parseInt(document.getElementById('pre_pay').value);
+		 var PAID_AMOUNT=parseInt(document.getElementById('total_paid_amount').value);
+		 BALANCE=(parseInt(TOTAL_FINE_AMOUNT_LATE)-PREPAY);
+		 $("#balance").val(BALANCE);
 	 });
 	 	
 	 // validation 
@@ -76,7 +88,7 @@ function listTrInfo(){
 				var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
 				var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
 				var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
-				var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+accounting.formatMoney(dat.ac_amount," ")+" R"+"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ")+" R"+"</td><td>"+accounting.formatMoney(dat.tr_balance,"")+" R"+"</td><td>"+dat.gu_pawn+"</td></tr>";
+				var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+accounting.formatMoney(dat.ac_amount," ") +"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ") +"</td><td>"+accounting.formatMoney(dat.tr_balance,"") +"</td><td>"+dat.gu_pawn+"</td></tr>";
 				$("#cu_name").html(dat.cu_nm);
 				$("#admin_app_date").html(date_now);
 				$("#client_app_date").html(date_now);
@@ -90,17 +102,17 @@ function listTrInfo(){
 				
 				// calculate days late 
 				if(tr_stts==1){
-					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),"") +" R");
+					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),"")  );
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
-					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"")+" R");
-					//$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"")+" R");
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
 				}			
 				if(tr_stts==3){
 		
-					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),"")+" R");
+					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),"") );
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);					
-					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"")+" R");							
-					//$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),"")+" R");
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );							
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),"") );
 				}
 				
 				
@@ -164,16 +176,13 @@ function getDaysLate(){
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
 					DAYS_LATE=(parseInt(dat[0].total_months_late));
 					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_months_late))
-					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_months_late);
-				}else if(dat[0].ac_period_type=="Day" || dat[0].ac_period_type=="Week"){
-					
+				}else if(dat[0].ac_period_type=="Day" || dat[0].ac_period_type=="Week"){				
 					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
 					DAYS_LATE=(parseInt(dat[0].total_days_weeks_late));
-					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_days_weeks_late))
-					TOTAL_FINE_AMOUNT_LATE+=parseInt(dat[i].total_amount_fine_days_weeks_late);		
-					
+					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_days_weeks_late))							
 				}	
 			});
+			TOTAL_FINE_AMOUNT_LATE+=parseInt(PAY_AMOUNT_LATE + AMOUNT_FINE_LATE);
 			 listTrInfo();
 		}
 	}); 

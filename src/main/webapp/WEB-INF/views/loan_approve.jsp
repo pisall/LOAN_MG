@@ -143,7 +143,7 @@
 											Paid Amount:</label>
 										<div class="col-sm-8">
 											<input  type="text" class="form-control check_number required"
-												name="paid_amount" disabled="disabled"  id="paid_amount" placeholder="0.0" >
+												name="paid_amount"  id="paid_amount" placeholder="0.0" >
 										</div>
 									</div>
 									
@@ -152,7 +152,7 @@
 											Days Late:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control "
-												name="day_late" disabled="disabled" id="day_late" placeholder="0.0" >											
+												name="day_late"  id="day_late" placeholder="0.0" >											
 										</div>
 									</div>
 									
@@ -161,7 +161,7 @@
 											Amount fine:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number required "
-												name="amount_fine"  disabled="disabled" value="0" id="amount_fine" placeholder="0.0">											
+												name="amount_fine"   value="0" id="amount_fine" placeholder="0.0">											
 										</div>
 									</div>
 									
@@ -170,7 +170,7 @@
 											Total Amount:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number  "
-												name="total_paid_amount" disabled="disabled" value="0" id="total_paid_amount" placeholder="0.0">											
+												name="total_paid_amount"  value="0" id="total_paid_amount" placeholder="0.0">											
 										</div>
 									</div>
 									
@@ -179,7 +179,7 @@
 											Prepay:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number  "
-												name="pre_pay" disabled="disabled" value="0" id="pre_pay" placeholder="0.0">											
+												name="pre_pay"  value="0" id="pre_pay" placeholder="0.0">											
 										</div>
 									</div>
 									
@@ -188,7 +188,7 @@
 											Balance:</label>
 										<div class="col-sm-8">
 											<input type="text" class="form-control check_number  "
-												name="balance" disabled="disabled" value="0" id="balance" placeholder="0.0">											
+												name="balance"  value="0" id="balance" placeholder="0.0">											
 										</div>
 									</div>
 									
