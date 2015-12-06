@@ -6,15 +6,16 @@ import java.math.RoundingMode;
 public class test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// create 2 BigDecimal Objects
-        BigDecimal bg1, bg2;
-        bg1 = new BigDecimal("0.0258099887");
-	// set scale of bg1 to 2 in bg2 using floor as rounding mode
-        bg2 = bg1.setScale(3, RoundingMode.HALF_UP);
-        String str = bg1 + " after changing the scale to 2 and rounding is " +bg2;
-	// print bg2 value
-        System.out.println( str );
+		
+		float b1=0,b2=0,b3=0,b4;
+		
+		 b1=(float) 567666.336666;
+		 b2=(float) (b1*0.01);
+		 b3=(float) (Math.ceil(b2));
+		 b4=(b3*100);
+		
+		System.out.println(Math.ceil(b4));
+		
 
 	}
 

@@ -69,8 +69,6 @@ public class ApproveTransactionDao implements TransactionInterface {
 					+ ",tran.pay_day"
 					+ ",tran.tr_pay_amount "
 					+ ",tran.tr_balance "
-					+",(to_date(pay_date,'YYYYMMDD24H') - (SELECT to_date(pay_date,'YYYYMMDD24H') FROM mfi_transection WHERE tr_cu_id="+cus_id+" and tr_stts='3' ORDER BY pay_date ASC LIMIT 1)) as day_late "
-					+",(SELECT count(tr_id) from mfi_transection WHERE tr_stts='3' and tr_cu_id="+cus_id+") as total_tr "
 				+ " from "
 					+ "mfi_customers cus "
 					+ ",mfi_co co  "

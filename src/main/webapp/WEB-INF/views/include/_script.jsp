@@ -44,9 +44,6 @@
       <script type="text/javascript">
       var new_window;
 		$(function(){
-			$(new_window).unload(function() {
-				alert();
-				});
 			
 			$("#back_up").click(function(){		
 				startLoading();

@@ -46,6 +46,12 @@ public class LoanApprovalDto implements Serializable {
 	@Column(name="amount_fine")
 	private float amount_fine ;
 	
+	@Column(name="days_late")
+	private float days_late ;
+	
+	@Column(name="pre_pay")
+	private float pre_pay ;
+	
 	@Column(name="tr_type")
 	private String tr_type;
 	
@@ -120,6 +126,22 @@ public class LoanApprovalDto implements Serializable {
 
 	public void setPaid_amount(float paid_amount) {
 		this.paid_amount = paid_amount;
+	}
+
+	public float getDays_late() {
+		return days_late;
+	}
+
+	public void setDays_late(float days_late) {
+		this.days_late = days_late;
+	}
+
+	public float getPre_pay() {
+		return pre_pay;
+	}
+
+	public void setPre_pay(float pre_pay) {
+		this.pre_pay = pre_pay;
 	}
 
 	public float getAmount_fine() {

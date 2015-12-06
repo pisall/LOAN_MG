@@ -174,6 +174,24 @@
 										</div>
 									</div>
 									
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="amount-fine">
+											Prepay:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control check_number  "
+												name="pre_pay" disabled="disabled" value="0" id="pre_pay" placeholder="0.0">											
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="amount-fine">
+											Balance:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control check_number  "
+												name="balance" disabled="disabled" value="0" id="balance" placeholder="0.0">											
+										</div>
+									</div>
+									
 
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="tr_type">Transection

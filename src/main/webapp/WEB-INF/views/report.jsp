@@ -220,7 +220,7 @@
 	
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var PAGE_ID = "${page_id}";
-		console.log("ppp=" + PAGE_ID);
+		
 		var total = 0;
 		
 		// send parametter to loanApprove
