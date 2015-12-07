@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("testtttttt");
-//		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
+		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("SYS");
 //		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 //		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN","DBA");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -44,10 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuu");
 		http.authorizeRequests()
-		.antMatchers("/login").permitAll()
-		.antMatchers("/", "/**").authenticated()
+		.antMatchers("/login","/sys/sys_form").permitAll()
+		//.antMatchers("/", "/**").authenticated()
+		.antMatchers("/", "/**").access("hasRole('ROLE_ADMIN')")
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
         .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+        .antMatchers("/sys/sys_form").access("hasRole('SYS')")
         .and().formLogin().loginPage("/login").successHandler(suc)
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf().disable()

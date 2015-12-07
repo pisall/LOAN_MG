@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		throws UsernameNotFoundException {
 		System.out.println("userName="+username);
 		HashMap<String, Object> user = login.findLogByLogMail(username);
-		List<GrantedAuthority> authorities =buildUserAuthority(user.get("log_email").toString());
+		List<GrantedAuthority> authorities =buildUserAuthority("ROLE_ADMIN"/*user.get("log_email").toString()*/);
 
 		return buildUserForAuthentication(user, authorities);
 		
