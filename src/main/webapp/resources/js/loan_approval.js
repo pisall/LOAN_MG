@@ -23,6 +23,7 @@ var tr_stts=tr_stts;
 $(document).ready(function(){	
 	 getDaysLate();
 	 
+	 
 	 if(tr_stts==2){
 		$("#btnApprovale").html("Update");
 		$("#btnApprovale").val(1);
@@ -31,13 +32,13 @@ $(document).ready(function(){
 	 
 	 $("#tr_type").change(function(){	
 			
-		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
+		 $("#total_paid_amount").val(accounting.formatMoney(($(this).val()==4)?getTotalFinishedAmount():getTotalAmount(),""));	
 		
 		 if(PRE_PAY>0){
 			$("#frm_pre_pay").show();
 			$("#frm_balance").show();
 			if($(this).val()==4){
-				$("#balance").val(accounting.formatMoney(getTotalFinishedAmount()-parseInt(accounting.unformat(document.getElementById('pre_pay').value)),""));
+				$("#balance").val(accounting.formatMoney(getTotalFinishedAmount() - getPrepay(),""));
 			}else{
 				$("#balance").val(accounting.formatMoney(accounting.formatMoney(getBalance()),""));
 			}
@@ -93,17 +94,29 @@ $(document).ready(function(){
 
 });
 
+function getPrepay(){
+	return ceilAmount(parseInt(accounting.unformat(document.getElementById('pre_pay').value)));
+}
+
 function getBalance(){
-	return (getTotalAmount() - parseInt(accounting.unformat(document.getElementById('pre_pay').value)));
+	return ceilAmount(getTotalAmount() - parseInt(accounting.unformat(document.getElementById('pre_pay').value)));
 }
 	 
 function getTotalFinishedAmount(){
-	return (getTotalAmount() + parseInt(BALANCE));
+	return ceilAmount(getTotalAmount() + parseInt(BALANCE));
 }
 
 function getTotalAmount(){
-	return (parseInt(accounting.unformat(document.getElementById('paid_amount').value)) + parseInt(accounting.unformat(document.getElementById('amount_fine').value) ))
+	return ceilAmount(parseInt(accounting.unformat(document.getElementById('paid_amount').value)) + parseInt(accounting.unformat(document.getElementById('amount_fine').value) ))
 	
+}
+
+function ceilAmount(amount){
+	var a1=0,a2=2,a3=0;
+	a1=((amount).toFixed(0) * 0.1);
+	a2=(a1.toFixed(0));
+	a3=(a2*100);
+	return a3;
 }
 
 function listEditLoanApprove(){
@@ -169,17 +182,17 @@ function listTrInfo(){
 							
 				// calculate days late 
 				if(tr_stts==1){
-					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),"")  );
+					$("#paid_amount").val(accounting.formatMoney(ceilAmount(PAID_AMOUNT+PAY_AMOUNT_LATE),"")  );
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
-					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
-					$("#total_paid_amount").val(accounting.formatMoney((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE),"") );
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?ceilAmount(AMOUNT_FINE_LATE):0),"") );
+					$("#total_paid_amount").val(accounting.formatMoney((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(ceilAmount(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)):ceilAmount(PAID_AMOUNT+PAY_AMOUNT_LATE),"") );
 					if(PRE_PAY>0){
 						$("#btnApprovale").val(1);
 						$("#tr_type option[value='5']").remove();
 						$("#pre_pay").attr("disabled","disabled");
 						$("#frm_pre_pay").show();
 						$("#frm_balance").show();
-						$("#pre_pay").val(accounting.formatMoney(PRE_PAY,""));
+						$("#pre_pay").val(accounting.formatMoney(ceilAmount(PRE_PAY),""));
 						$("#balance").val(accounting.formatMoney(getBalance(),""));
 					}
 				}		
@@ -187,10 +200,10 @@ function listTrInfo(){
 							
 				if(tr_stts==3){
 		
-					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),"") );
+					$("#paid_amount").val(accounting.formatMoney(ceilAmount(PAY_AMOUNT_LATE),"") );
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);					
-					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );							
-					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),"") );
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?ceilAmount(AMOUNT_FINE_LATE):0),"") );							
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?ceilAmount(TOTAL_FINE_AMOUNT_LATE):ceilAmount(PAY_AMOUNT_LATE)),"") );
 				}
 				
 				$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
