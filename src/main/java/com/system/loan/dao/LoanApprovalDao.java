@@ -92,5 +92,7 @@ public static SessionFactory factory = null;
 		}
 		return true;
 	}
+	
+	
 
 }

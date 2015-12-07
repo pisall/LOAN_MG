@@ -37,10 +37,10 @@ public class ApproveTransactionDao implements TransactionInterface {
 		Transaction tran = null;
 		
 		Object Data =null;
+		String filter="";
 		
 		try{
 			tran=session.beginTransaction(); 
-			
 		String sql = "select"				
 					+ " co.co_id "
 					+ ",co.co_first_nm "
@@ -97,6 +97,7 @@ public class ApproveTransactionDao implements TransactionInterface {
 		}
 		return Data; 
 	}
- 
+	
+	
 
 }

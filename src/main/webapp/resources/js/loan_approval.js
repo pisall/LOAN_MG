@@ -14,25 +14,40 @@ var TOTAL_FINE_AMOUNT_LATE=0;
 var PAY_AMOUNT_LATE=0;
 var AMOUNT_FINE=0;
 var AMOUNT_FINE_LATE=0;
+var PRE_PAY=0;
 var tr_id=tr_id;
 var cu_id=cu_id;
 var tr_stts=tr_stts;
 
+
 $(document).ready(function(){	
 	 getDaysLate();
 	 $("#tr_type").change(function(){	
-		if($(this).val()==5){
+			
+		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
+		
+		 if(PRE_PAY>0){
 			$("#frm_pre_pay").show();
 			$("#frm_balance").show();
+			if($(this).val()==4){
+				$("#balance").val(accounting.formatMoney(getTotalFinishedAmount()-parseInt(accounting.unformat(document.getElementById('pre_pay').value)),""));
+			}else{
+				$("#balance").val(accounting.formatMoney(accounting.formatMoney(getBalance()),""));
+			}
 		}else{
-			$("#frm_pre_pay").hide();
-			$("#frm_balance").hide();
+			if($(this).val()==5){
+				$("#frm_pre_pay").show();
+				$("#frm_balance").show();
+			}else{
+				$("#frm_pre_pay").hide();
+				$("#frm_balance").hide();
+			}
 		}
-		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
 	 });
 	 
 	 $("#paid_amount,#amount_fine").keyup(function(){
-		 $("#total_paid_amount").val(getTotalAmount());
+		 $("#total_paid_amount").val(accounting.formatMoney(getTotalAmount(),""));
+		 $("#balance").val(accounting.formatMoney(getBalance(),""));
 	 });
 	 
 	 $("#day_late").keyup(function(){
@@ -43,7 +58,7 @@ $(document).ready(function(){
 	 });
 	 
 	 $("#pre_pay").keyup(function(){
-		 $("#balance").val( (BALANCE==""  || BALANCE==0 || BALANCE==null )?0:accounting.formatMoney(getBalance(),""));
+		 $("#balance").val(accounting.formatMoney(getBalance(),""));
 	 });
 	 	
 	 // validation 
@@ -68,11 +83,11 @@ $(document).ready(function(){
 });
 
 function getBalance(){
-	return (getTotalAmount() - parseInt(document.getElementById('pre_pay').value));
+	return (getTotalAmount() - parseInt(accounting.unformat(document.getElementById('pre_pay').value)));
 }
 	 
 function getTotalFinishedAmount(){
-	return (parseInt(accounting.unformat(document.getElementById('total_paid_amount').value)) + parseInt(BALANCE));
+	return (getTotalAmount() + parseInt(BALANCE));
 }
 
 function getTotalAmount(){
@@ -99,7 +114,7 @@ function listTrInfo(){
 				CU_ID=dat.cu_id;
 				AC_ID= dat.ac_id;
 				TR_ID=dat.tr_id;
-				
+				PRE_PAY=dat.pre_pay;
 				
 				var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
 				var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
@@ -122,12 +137,12 @@ function listTrInfo(){
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
 					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
 					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
-					if(dat.pre_pay>0){
+					if(PRE_PAY>0){
 						$("#tr_type option[value='5']").remove();
 						$("#pre_pay").attr("disabled","disabled");
 						$("#frm_pre_pay").show();
 						$("#frm_balance").show();
-						$("#pre_pay").val(accounting.formatMoney(dat.pre_pay,""));
+						$("#pre_pay").val(accounting.formatMoney(PRE_PAY,""));
 						$("#balance").val(accounting.formatMoney(getBalance(),""));
 					}
 				}			
