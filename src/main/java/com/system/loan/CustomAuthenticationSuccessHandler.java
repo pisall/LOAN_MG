@@ -35,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     	
     	if(strRole.equals("ROLE_SYS")){
     		 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-    		 httpServletResponse.sendRedirect("/sys/sys_form");
+    		 httpServletResponse.sendRedirect("sys/sys_form");
     		
     	}else{
     		 HttpSession session = httpServletRequest.getSession();

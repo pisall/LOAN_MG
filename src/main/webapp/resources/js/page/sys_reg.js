@@ -9,9 +9,7 @@ $(document).ready(function(){
 	$("#btn_save").click(function(){
 		coInsert(false);
 	});
-	$("#btn_save_new").click(function(){
-		coInsert(true);
-	});
+	
 	
 });
 
@@ -201,8 +199,10 @@ function coInsert(isNew){
 	if(validation(input)){
 		return;
 	}
+	
+	//return;
 	$.ajax({
-		url : BASE_URL + "/co_001_controller/co_c0001",
+		url : BASE_URL + "/sys/sys_req",
 		type : 'POST',
 		dataType : 'JSON',
 		data : JSON.stringify(input),

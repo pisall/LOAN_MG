@@ -215,7 +215,6 @@
     <%@include file="include/_script.jsp"%>
     <script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
-		var PAGE_ID="${page_id}";
 		
 	</script>
     
