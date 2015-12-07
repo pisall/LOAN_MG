@@ -71,7 +71,13 @@ $(document).ready(function(){
 			  submitHandler: function(form) { 
 				  $("#btnApprovale").hide();
 				  window.print();
-				  LoanApprove(); 				 
+				  if($("#btnApprovale").val()==1){
+					  alert(1);
+					  updateLoanApprove();
+				  }else{
+					  alert(0);
+					  LoanApprove(); 		
+				  }		 		 
 			  }
 		});
 
@@ -138,6 +144,7 @@ function listTrInfo(){
 					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
 					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
 					if(PRE_PAY>0){
+						$("#btnApprovale").val(1);
 						$("#tr_type option[value='5']").remove();
 						$("#pre_pay").attr("disabled","disabled");
 						$("#frm_pre_pay").show();
@@ -161,13 +168,44 @@ function listTrInfo(){
 		 });
 }
 
+function updateLoanApprove(){
+	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
+	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
+	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	var TOTAL_DAYS_LATE=document.getElementById('day_late').value;
+	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
+	var TRAN_TYPE = document.getElementById('tr_type').value; 
+	var TRAN_NOTE = document.getElementById('tr_note').value;
+	var TR_TYPE = document.getElementById('tr_type').value;  
+	var TR_CU_ID=CU_ID;
+	alert(TR_ID);
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	startLoading();
+	$.ajax({
+		url:BASE_URL+"/loan/updateLoanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
+		type:'POST',
+		datatype:'JSON', 
+		data : JSON.stringify(input),
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success:function(dat){		
+			stopLoading();
+			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
+		}
+	}); 
+}
+
+
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
 
 // insert loanApprove Info 
 function LoanApprove(){ 
-	var TOTAL_PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
+	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
+	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
 	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
 	var TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
 	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
@@ -176,7 +214,7 @@ function LoanApprove(){
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
 	
-	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
 	startLoading();
 	$.ajax({
 		url:BASE_URL+"/loan/loanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,

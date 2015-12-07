@@ -39,8 +39,7 @@ public class ApproveTransactionDao implements TransactionInterface {
 		Transaction tran = null;
 		
 		Object Data =null;
-		String filter="";
-		
+	
 		try{
 			tran=session.beginTransaction(); 
 		String sql = "select"				

@@ -29,12 +29,14 @@ public class LoanApprovalsController implements Serializable{
 	
 		loanApproDao.LoanApro_Insert(loanApproDto);
 		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
+		return true; 
+	} 
+	@RequestMapping(value="/updateLoanApprove/{tr_id}/{tr_type}/{tr_cu_id}", produces="application/json", consumes="application/json", method=RequestMethod.POST)
+	public @ResponseBody boolean updateLoanApprove(@RequestBody LoanApprovalDto loanApproDto, @PathVariable("tr_id") Integer  tr_id , @PathVariable("tr_type") String  tr_type,@PathVariable("tr_cu_id") int  tr_cu_id){	
+		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
 		
-		System.out.println("get prepay===" +  loanApproDto.getPre_pay());
-		
-		if(loanApproDto.getPre_pay()>0){
-			loanApproDao.updateLoanApprove(loanApproDto);
-		}
+		System.out.println("update success=="+loanApproDto.toString());
+		loanApproDao.updateLoanApprove(loanApproDto);
 		return true; 
 	} 
 	

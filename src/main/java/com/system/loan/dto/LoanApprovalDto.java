@@ -51,7 +51,9 @@ public class LoanApprovalDto implements Serializable {
 	
 	@Column(name="pre_pay")
 	private float pre_pay ;
-	
+
+	@Column(name="total_paid_amount")
+	private float total_paid_amount ;
 	@Column(name="tr_type")
 	private String tr_type;
 	
@@ -80,6 +82,7 @@ public class LoanApprovalDto implements Serializable {
 		this.tr_dtt=tr_dtt;
 	}
 
+	
 	public int getLoa_id() {
 		return loa_id;
 	}
@@ -128,6 +131,20 @@ public class LoanApprovalDto implements Serializable {
 		this.paid_amount = paid_amount;
 	}
 
+	/**
+	 * @return the total_paid_amount
+	 */
+	public float getTotal_paid_amount() {
+		return total_paid_amount;
+	}
+
+	/**
+	 * @param total_paid_amount the total_paid_amount to set
+	 */
+	public void setTotal_paid_amount(float total_paid_amount) {
+		this.total_paid_amount = total_paid_amount;
+	}
+
 	public float getDays_late() {
 		return days_late;
 	}
@@ -174,6 +191,17 @@ public class LoanApprovalDto implements Serializable {
 
 	public void setTr_dtt(String tr_dtt) {
 		this.tr_dtt = tr_dtt;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LoanApprovalDto [loa_id=" + loa_id + ", co_id=" + co_id + ", cu_id=" + cu_id + ", ac_id=" + ac_id
+				+ ", tr_id=" + tr_id + ", paid_amount=" + paid_amount + ", amount_fine=" + amount_fine + ", days_late="
+				+ days_late + ", pre_pay=" + pre_pay + ", total_paid_amount=" + total_paid_amount + ", tr_type="
+				+ tr_type + ", approve_note=" + approve_note + ", tr_dtt=" + tr_dtt + "]";
 	}
 	 
 }

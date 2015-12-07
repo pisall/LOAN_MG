@@ -69,8 +69,7 @@ public static SessionFactory factory = null;
 			tran=session.beginTransaction();
 			Date date = new Date();
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-			String datetime = format.format(date); 
-			
+			String datetime = format.format(date); 		
 			
 			if(tr_type.equals("2")){
 				sql1="update mfi_transection set tr_stts='2' where (tr_cu_id='"+cu_id+"' and tr_stts='3') OR (tr_id='"+tr_id+"' and tr_stts='1')";
@@ -97,16 +96,24 @@ public static SessionFactory factory = null;
 	public 	boolean updateLoanApprove(LoanApprovalDto approve) {		
 		Session session = factory.getCurrentSession();
 		Transaction tran = null;		
+		Date date = new Date();
+		SimpleDateFormat formart = new SimpleDateFormat("yyyyMMddHHmmss");
+		String datetime = formart.format(date);
+		String sql="UPDATE mfi_loanapproval SET  amount_fine=?,total_paid_amount=?,pre_pay=?,days_late=?,tr_type=?,approve_note=?,tr_dtt=?,paid_amount=? WHERE tr_id=?";
 		try{
 			tran=session.beginTransaction();
-			LoanApprovalDto app=(LoanApprovalDto)session.get(LoanApprovalDto.class,approve.getTr_id());		
-			app.setPaid_amount(approve.getPaid_amount());
-			app.setPre_pay(approve.getPre_pay());
-			app.setAmount_fine(approve.getAmount_fine());
-			app.setDays_late(approve.getDays_late());
-			
-			System.out.println(app.toString());
-			
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			query.setParameter(0, approve.getAmount_fine());
+			query.setParameter(1, approve.getTotal_paid_amount());
+			query.setParameter(2, approve.getPre_pay());
+			query.setParameter(3, approve.getDays_late());
+			query.setParameter(4, approve.getTr_type());
+			query.setParameter(5, approve.getApprove_note());
+			query.setParameter(6, datetime);
+			query.setParameter(7, approve.getTr_id());
+			query.setParameter(8, approve.getPaid_amount());
+			query.executeUpdate(); 
 			tran.commit();
 		}catch(HibernateException hne){
 			if(tran!=null) tran.rollback();
