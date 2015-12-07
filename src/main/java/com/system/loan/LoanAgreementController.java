@@ -55,7 +55,7 @@ public class LoanAgreementController implements Serializable{
 		}
 		
 		@RequestMapping(value="/newLoanAgreementGetData" , method=RequestMethod.POST)
-		public String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
+		public  String newLoanAgreement(@ModelAttribute("AcountInfoDto") AcountInfoDto acodto  , @ModelAttribute("GuarantorInfoLoanerDto") GuarantorInfoLoanerDto guiloanernfoDto,  @ModelAttribute("LoanAgreementDto")LoanAgreementDto loanAgreDto, HttpServletRequest req, Map<String,Object>  model){
 			
 			HttpSession session_user=req.getSession();
 			USER_SESSION user=(USER_SESSION)session_user.getAttribute("USER_SESSION");
@@ -146,23 +146,12 @@ public class LoanAgreementController implements Serializable{
 		    total_pay_rate= balance_remain*rate; 
 			balance_payment= principal_paid+total_pay_rate; 
 			
-			BigDecimal a1,a2,b1,b2,c1,c2,d1,d2;
-						a1=new BigDecimal(balance_remain);
-						a2=a1.setScale(0, RoundingMode.HALF_UP);
-						b1=new BigDecimal(total_pay_rate);
-						b2=b1.setScale(0, RoundingMode.HALF_UP);
-						c1=new BigDecimal(balance_payment);
-						c2=c1.setScale(0, RoundingMode.HALF_UP);
-						d1=new BigDecimal(principal_paid);
-						d2=d1.setScale(0, RoundingMode.HALF_UP);
-						
-						
-		System.out.println("Original balance_remain=== "+" "+a1+"New === "+a2);
-		System.out.println("Original total_pay_rate=== "+" "+b1+"New === "+b2);
-		System.out.println("Original balance_payment=== "+" "+c1+"New === "+c2);
-		System.out.println("Original principal_paid=== "+" "+d1+"New === "+d2);
-						
-			
+			float a1,b1,c1,d1;
+								
+						a1=ceilNum(balance_remain);    
+						b1=ceilNum(total_pay_rate);    
+						c1=ceilNum(balance_payment);  
+						d1=ceilNum(principal_paid);  
 			
 			// set data to Transection Object
 			Date date = new Date (); 
@@ -171,10 +160,10 @@ public class LoanAgreementController implements Serializable{
 			
 			tran = new TransectionDto();
 			
-			tran.setTr_balance(a2.floatValue());			
-			tran.setTr_total_rate(b2.floatValue());		 
-			tran.setTr_pay_amount(c2.floatValue());		
-			tran.setTr_origin_amount(d2.floatValue());	
+			tran.setTr_balance(a1);			
+			tran.setTr_total_rate(b1);		 
+			tran.setTr_pay_amount(c1);		
+			tran.setTr_origin_amount(d1);	
 			tran.setTr_save_payment(saving_amount);		
 			tran.setPay_date(pay_date_time);			
 			tran.setPay_day(Pay_day_Str);				
@@ -202,9 +191,26 @@ public class LoanAgreementController implements Serializable{
 		//loanAgreDao =new LoanAgreementDao();
 		loanAgreDao.InsertNewCustomer(loanAgreDto,co_id); 
 		
-		cus_id= loanAgreDto.getCu_id(); 
-		 return  "redirect:/LoanAgreement/report/"+cus_id;
+		cus_id= loanAgreDto.getCu_id();
+		
+		model.put("cus_id",cus_id);
+		
+		return "redirect:/LoanAgreement/newLoanAgreement";
+		
+		
+		// return  "redirect:/LoanAgreement/report/"+cus_id;
 		}
+		
+		public float ceilNum(float num){
+			float b1=0,b2=0,b3=0,b4=0;
+			 b1=(float) num;
+			 b2=(float) (b1*0.01);
+			 b3=(float) (Math.ceil(b2));
+			 b4=(b3*100);
+			return b4;
+		}
+		
+		
 		  
 		@RequestMapping(value="/report/{id}",method = RequestMethod.GET)
 		public  String ShowReport(@PathVariable("id") int id, Map<String ,Object>model) {  

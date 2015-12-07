@@ -392,26 +392,7 @@ function addCustomer() {
 function getCustomerTransaction(cuID) {	
 	   popup(BASE_URL+"/LoanAgreement/report/"+cuID);
 }
-function popup(url ) 
-{
- var width  = 1000;
- var height = 750;
- var left   = (screen.width  - width)/2;
- var top    = (screen.height - height)/2;
- var params = 'width='+width+', height='+height;
- params += ', top='+top+', left='+left;
- params += ', directories=no';
- params += ', location=no';
- params += ', menubar=no';
- params += ', resizable=no';
- params += ', scrollbars=no';
- params += ', status=no';
- params += ', toolbar=no';
- var newwin=window.open(url,'', params);
- if (window.focus) {newwin.focus()}
-// window.moveTo(500, 100);
- return false;
-}
+
 
 
 

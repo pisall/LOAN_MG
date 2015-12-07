@@ -295,6 +295,18 @@ public class LoanAgreementDto implements Serializable {
 	public void setCu_del_yn(String cu_del_yn) {
 		this.cu_del_yn = cu_del_yn;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LoanAgreementDto [cu_id=" + cu_id + ", coDto=" + coDto + ", acountInfoHash=" + acountInfoHash
+				+ ", gurantorInfoHash=" + gurantorInfoHash + ", transection=" + transection + ", cu_nm=" + cu_nm
+				+ ", cu_nick_nm=" + cu_nick_nm + ", cu_sex=" + cu_sex + ", cu_dob=" + cu_dob + ", cu_national_id="
+				+ cu_national_id + ", cu_phone=" + cu_phone + ", cu_address=" + cu_address + ", cu_pawn=" + cu_pawn
+				+ ", cu_dtt=" + cu_dtt + ", cu_note=" + cu_note + ", cu_photo=" + cu_photo + ", cu_del_yn=" + cu_del_yn
+				+ "]";
+	}
 	
 	
 	/*

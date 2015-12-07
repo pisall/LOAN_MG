@@ -37,6 +37,11 @@
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
+  <style>
+		.error{
+			color:red;
+		}
+	</style>
    </head>
   
    <%

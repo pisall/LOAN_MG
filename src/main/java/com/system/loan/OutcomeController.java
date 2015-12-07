@@ -1,8 +1,6 @@
 package com.system.loan;
  
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.Entity;
 
@@ -11,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.system.loan.dao.OutcomeDao;
  
 @Entity

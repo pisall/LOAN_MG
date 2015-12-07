@@ -11,6 +11,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Service;
 
+import com.system.loan.dto.LoanApprovalDto;
+
 @Service
 public class ApproveTransactionDao implements TransactionInterface {
 	public static SessionFactory factory = null;
@@ -37,10 +39,9 @@ public class ApproveTransactionDao implements TransactionInterface {
 		Transaction tran = null;
 		
 		Object Data =null;
-		
+	
 		try{
 			tran=session.beginTransaction(); 
-			
 		String sql = "select"				
 					+ " co.co_id "
 					+ ",co.co_first_nm "
@@ -60,30 +61,29 @@ public class ApproveTransactionDao implements TransactionInterface {
 					+ ",acc.ac_amount "
 					+ ",acc.ac_start_date "
 					+ ",gua.gu_nm "
-					+ ",gua.gu_sex"
+					+ ",gua.gu_sex "
 					+ ",gua.gu_phone "
 					+ ",gua.gu_national_id "
 					+ ",gua.gu_pawn "
 					+ ",tran.tr_id "
 					+ ",tran.pay_date "
-					+ ",tran.pay_day"
+					+ ",tran.pay_day "
 					+ ",tran.tr_pay_amount "
 					+ ",tran.tr_balance "
-					+",(to_date(pay_date,'YYYYMMDD24H') - (SELECT to_date(pay_date,'YYYYMMDD24H') FROM mfi_transection WHERE tr_cu_id="+cus_id+" and tr_stts='3' ORDER BY pay_date ASC LIMIT 1)) as day_late "
-					+",(SELECT count(tr_id) from mfi_transection WHERE tr_stts='3' and tr_cu_id="+cus_id+") as total_tr "
+					+ ",(SELECT pre_pay FROM mfi_loanapproval WHERE cu_id="+cus_id+" and tr_id="+tr_id+") "
 				+ " from "
 					+ "mfi_customers cus "
 					+ ",mfi_co co  "
 					+ ",mfi_guarantor gua  "
 					+ ",mfi_account acc "
-					+ ",mfi_transection tran "
+					+ ",mfi_transection tran"
 				+ " where 1=1 "
 					+ "and cus.cu_id=gua.cu_id "
 					+ "and cus.co_id=co.co_id "
 					+ "and cus.cu_id=acc.cu_id "
-					+ "and acc.ac_id=tran.tr_ac_id "
-					+ "and cus.cu_id=?"
-					+ "and tran.tr_id=?"; 
+					+ "and acc.ac_id=tran.tr_ac_id 	"
+					+ "and cus.cu_id=? "
+					+ "and tran.tr_id=? "; 
 				  
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
@@ -98,6 +98,5 @@ public class ApproveTransactionDao implements TransactionInterface {
 		}
 		return Data; 
 	}
- 
-
+	 
 }

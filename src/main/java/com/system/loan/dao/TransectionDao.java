@@ -206,20 +206,14 @@ public static SessionFactory factory = null;
 		}
 		return listData;
 	}
+		
 	
 		public void check_late() {
 			Session session = factory.getCurrentSession();
 			Transaction tran = null;				
 			try{
-				tran=session.beginTransaction(); 
-				String sql = "UPDATE mfi_transection tr  SET  tr_stts='3' FROM mfi_customers cu,mfi_account ac  WHERE 1=1 "
-							    +" and (cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id and  tr_stts='1' and  cu.cu_del_yn='Y')"			 
-							    +" and ( "
-									   +" (to_date(pay_date, 'YYYYMMDD24H') - CURRENT_DATE > 3 and ac_period_type='Day') "
-									   +" or ( to_date(pay_date, 'YYYYMMDD24H')  - CURRENT_DATE > 7 and ac_period_type='Week') "
-									   +" or (  to_date(pay_date, 'YYYYMMDD24H') - CURRENT_DATE > DATE_PART('days', DATE_TRUNC('month', NOW()) +'1 MONTH' - DATE_TRUNC('month', NOW())) and ac_period_type='Month')" 
-							    +")";	  
-				String sql1="UPDATE mfi_transection SET tr_stts='3' WHERE ( CURRENT_DATE - to_date(pay_date, 'YYYYMMDD24H')>0)";
+				tran=session.beginTransaction(); 		
+				String sql1="UPDATE mfi_transection SET tr_stts='3' WHERE ( CURRENT_DATE - to_date(pay_date, 'YYYYMMDD24H')>0) and tr_stts='1'";
 				SQLQuery query = session.createSQLQuery(sql1);
 				query.executeUpdate();
 				tran.commit();
@@ -228,4 +222,61 @@ public static SessionFactory factory = null;
 				hne.printStackTrace();
 			}	
 		}
+		
+		public List calculateDaysLate(int cu_id) {
+			Session session = factory.getCurrentSession();
+			Transaction tran = null;	
+			List listData =null;
+			String sql="SELECT"
+						+" ac.ac_period_type "
+						+" ,(CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H')))  date_late "
+						+" ,CASE WHEN "
+						+" (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3 AND (ac_period_type='Day' OR ac_period_type='Week') "
+						+" THEN "
+						+" (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3 ELSE 0 "
+						+" END total_days_weeks_late "
+						+" ,tr_pay_amount "
+						+" ,CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3  AND (ac_period_type='Day' OR ac_period_type='Week') "
+						+" THEN "
+						+" (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3)) ELSE 0 "
+						+" END amount_fine_days_weeks_late "
+						+" ,CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3  AND (ac_period_type='Day' OR ac_period_type='Week') "
+						+" THEN "
+						+" (tr_pay_amount + (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3)) )  ELSE tr_pay_amount "
+						+" END total_amount_fine_days_weeks_late "
+						+" ,CASE WHEN "
+						+" (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1 AND ac_period_type='Month' "
+						+" THEN "
+						+" (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1 ELSE tr_pay_amount "
+						+" END total_months_late "
+						+" ,CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1  AND ac_period_type='Month' THEN  "
+						+" (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1)) ELSE 0 "
+						+" END amount_fine_months_late "
+						+" ,CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1  AND ac_period_type='Month' THEN "
+						+" (tr_pay_amount + (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1))) ELSE tr_pay_amount "
+						+" END total_amount_fine_months_late "
+						+" FROM "
+						+" mfi_transection tr,mfi_account ac " 
+						+" WHERE "
+						+" tr.tr_ac_id=ac.ac_id  "
+						+" AND "
+						+" tr_cu_id=? "
+						+" AND "
+						+" tr_stts='3' "
+						+" ORDER BY pay_date asc ";
+			try{
+				tran=session.beginTransaction(); 		
+				SQLQuery query = session.createSQLQuery(sql);
+				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				query.setParameter(0, cu_id);
+				listData = query.list();  
+				tran.commit();
+			}catch(HibernateException hne){
+				if(tran!=null) tran.rollback();
+				hne.printStackTrace();
+			}	
+			return listData;
+		}
+		
+		
 }

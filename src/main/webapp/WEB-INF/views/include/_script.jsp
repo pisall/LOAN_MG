@@ -42,17 +42,12 @@
 	</script>
      
       <script type="text/javascript">
+      var new_window;
 		$(function(){
+			
 			$("#back_up").click(function(){		
 				startLoading();
-			/* $("#myModal3").modal({backdrop: "static"});			
-				 //startLoading();
-				var bufferIntObj = {
-					template: 2, // type number
-					start: true,  // start it now
-					parent: '#show_process' 
-				};
-				var bufferProgress = new Mprogress(bufferIntObj); */
+	
 				$.ajax({
 					url :"${pageContext.request.contextPath}/backupandrestore/backup",
 					type : 'GET',
@@ -92,23 +87,26 @@
 		 function goBackPage(){
 			 history.back();
 		 }
-		 window.onload = maxWindow;
-
-		    function maxWindow() {
-		        window.moveTo(0, 0);
-
-
-		        if (document.all) {
-		            top.window.resizeTo(screen.availWidth, screen.availHeight);
-		        }
-
-		        else if (document.layers || document.getElementById) {
-		            if (top.window.outerHeight < screen.availHeight || top.window.outerWidth < screen.availWidth) {
-		                top.window.outerHeight = screen.availHeight;
-		                top.window.outerWidth = screen.availWidth;
-		            }
-		        }
-		    }
+		 function popup(url ) 
+		 {
+		  var width  = 1000;
+		  var height = 750;
+		  var left   = (screen.width  - width)/2;
+		  var top    = (screen.height - height)/2;
+		  var params = 'width='+width+', height='+height;
+		  params += ', top='+top+', left='+left;
+		  params += ', directories=no';
+		  params += ', location=no';
+		  params += ', menubar=no';
+		  params += ', resizable=no';
+		  params += ', scrollbars=no';
+		  params += ', status=no';
+		  params += ', toolbar=no';
+		 // var newwin=
+		 new_window=window.open(url,'', params);
+		 return false;
+		 }
+		
 	</script>
 
 	

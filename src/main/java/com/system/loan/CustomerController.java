@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -64,7 +62,7 @@ public class CustomerController {
 	@RequestMapping(value = "/listCus", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
-		//tr.check_late();
+		tr.check_late();
 		int totaPage = 0;
 		totaPage = (int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
 		paging.setTotalPage(totaPage);

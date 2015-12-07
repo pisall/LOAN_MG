@@ -27,7 +27,7 @@
 						<!-- panel top-->
 						<div class="panel panel-default">
 							<c:forEach var="entry" items="${Customer}">
-								<input type="hidden" id="period_type" value="${entry.ac_period_type}">
+								
 								<div class="panel panel-heading">
 									<div class="row">
 										<div class="col-md-4 col-sm-4 col-xs-4">
@@ -124,7 +124,7 @@
 												<th>Pay Amount</th>
 												<th>Balance</th>
 												<th>Status</th>
-
+																							
 											</tr>
 										</thead>
 										<tbody>
@@ -145,11 +145,11 @@
 													<td><fmt:formatNumber value="${entry.tr_pay_amount}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
-													<td fmt:formatNumber value="${entry.tr_balance}"
+													<td> <fmt:formatNumber value="${entry.tr_balance}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
-													<td <c:if test="${entry.tr_stts!='3' && entry.tr_stts!='2' && entry.tr_stts!='4'}"> onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}');" </c:if>>
+													<td onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">
@@ -213,29 +213,22 @@
 		src = "${pageContext.request.contextPath}/resources/js/loanAgreement_Report.js"
 	</script>
 	<!-- Reprot schadule payment  -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/report_payment.js"></script>
+	
 
 	<script type="text/javascript">
+	
+	
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var PAGE_ID = "${page_id}";
-		console.log("ppp=" + PAGE_ID);
+		
 		var total = 0;
-		$(function() {	
-				//  $( "body" ).off( "click",".img_late", flash );
-				$( ".img_late" ).unbind("click");
-			
-			//$(".img_late")
-			
-			$(".amount").each(function(i, v) {
-				total += parseInt($(this).val());
-			});
-			$("#total_amount_late").val(total);
-		})
+		
+		// send parametter to loanApprove
+		function transaction_payment(tr_id,cu_id,tr_stts){	
+			location.href=BASE_URL+"/schadule_payment/loanApprove?tr_id="+tr_id+"&cu_id="+cu_id+"&tr_stts="+tr_stts; 
+		} 
 	</script>
 
-	<input type="hidden" value="" id="total_amount_late">
-	
 	
 
 </body>

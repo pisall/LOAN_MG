@@ -10,19 +10,55 @@ var TOTAL_PAId_AMOUNT=0;
 var TOTAL_AMOUNT=0;
 var AMOUNT_FINE=0,AMOUNT_RATE=10/100,TOTAL_AMOUNT_FINE=0;
 var DAYS_LATE=0;
-$(document).ready(function(){
+var TOTAL_FINE_AMOUNT_LATE=0;
+var PAY_AMOUNT_LATE=0;
+var AMOUNT_FINE=0;
+var AMOUNT_FINE_LATE=0;
+var PRE_PAY=0;
+var tr_id=tr_id;
+var cu_id=cu_id;
+var tr_stts=tr_stts;
 
-	 var tr_id = document.getElementById('tr_id').value;
-	 var cu_id = document.getElementById('cu_id').value;
-	
-	 $("#tr_type").change(function(){		
-		 if($(this).val()==4){
-			 TOTAL_AMOUNT=parseInt((TOTAL_PAId_AMOUNT+BALANCE));		 				 			
-		 }else{
-			 TOTAL_AMOUNT=TOTAL_PAId_AMOUNT;			
-		 }
-		 $("#paid_amount").val(accounting.formatMoney(TOTAL_AMOUNT,""));
+
+$(document).ready(function(){	
+	 getDaysLate();
+	 $("#tr_type").change(function(){	
+			
+		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
 		
+		 if(PRE_PAY>0){
+			$("#frm_pre_pay").show();
+			$("#frm_balance").show();
+			if($(this).val()==4){
+				$("#balance").val(accounting.formatMoney(getTotalFinishedAmount()-parseInt(accounting.unformat(document.getElementById('pre_pay').value)),""));
+			}else{
+				$("#balance").val(accounting.formatMoney(accounting.formatMoney(getBalance()),""));
+			}
+		}else{
+			if($(this).val()==5){
+				$("#frm_pre_pay").show();
+				$("#frm_balance").show();
+			}else{
+				$("#frm_pre_pay").hide();
+				$("#frm_balance").hide();
+			}
+		}
+	 });
+	 
+	 $("#paid_amount,#amount_fine").keyup(function(){
+		 $("#total_paid_amount").val(accounting.formatMoney(getTotalAmount(),""));
+		 $("#balance").val(accounting.formatMoney(getBalance(),""));
+	 });
+	 
+	 $("#day_late").keyup(function(){
+		 var days_late=$(this).val(); 
+		 var total=0;
+		 $("#amount_fine").val((days_late>0?AMOUNT_FINE_LATE:0));
+		 $("#total_paid_amount").val(accounting.formatMoney(getTotalAmount(),""));
+	 });
+	 
+	 $("#pre_pay").keyup(function(){
+		 $("#balance").val(accounting.formatMoney(getBalance(),""));
 	 });
 	 	
 	 // validation 
@@ -35,77 +71,129 @@ $(document).ready(function(){
 			  submitHandler: function(form) { 
 				  $("#btnApprovale").hide();
 				  window.print();
-				  LoanApprove(); 				 
+				  if($("#btnApprovale").val()==1){				 
+					  updateLoanApprove();
+				  }else{
+					  LoanApprove(); 		
+				  }		 		 
 			  }
 		});
-	 $.ajax({
-		url:BASE_URL+'/schadule_payment/schadule/'+tr_id+"/"+cu_id,
-		type:'POST',
-		datatype:'JSON',
-		//data:{tr_id:tr_id,cu_id:cu_id},
-		beforeSend : function(xhr) {
-			xhr.setRequestHeader("Accept", "application/json");
-			xhr.setRequestHeader("Content-Type", "application/json");
-		},
-		success:function(dat){
-			console.log(dat);
-			var date_now=moment().format('DD-MM-YYYY');
-			CO_ID=dat.co_id;
-			CU_ID=dat.cu_id;
-			AC_ID= dat.ac_id;
-			TR_ID=dat.tr_id;
-			
-			
-			var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
-			var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
-			var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
-			var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+accounting.formatMoney(dat.ac_amount," ")+" R"+"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ")+" R"+"</td><td>"+accounting.formatMoney(dat.tr_balance,"")+" R"+"</td><td>"+dat.gu_pawn+"</td></tr>";
-			$("#cu_name").html(dat.cu_nm);
-			$("#admin_app_date").html(date_now);
-			$("#client_app_date").html(date_now);
-			
-			var total_days_late=0;
-			DAYS_LATE=parseInt(dat.day_late);
-			var d=new Date();
-			var dayOfMonth=parseInt(daysInMonth(d.getMonth(),d.getFullYear()));
-			var total_tr=parseInt(dat.total_tr);			
-			// CALCULATE AMOUNT
-			LATE_AMOUNT=parseInt($("#total").val());
-			PAID_AMOUNT=parseInt(dat.tr_pay_amount);
-			BALANCE=parseInt(dat.tr_balance);
-			
-			if(LATE_AMOUNT!=0){
-				TOTAL_PAId_AMOUNT=(LATE_AMOUNT+ PAID_AMOUNT);						
-			}else if(TOTAL_PAId_AMOUNT==0){
-				TOTAL_PAId_AMOUNT=PAID_AMOUNT; 			
-			}
-			$("#paid_amount").val(accounting.formatMoney(TOTAL_PAId_AMOUNT,""));	
-						
-			if(DAYS_LATE>0){		
-				if($("#PERIOD_TYPE").val()=="Day"){	
-					total_days_late=(parseInt(Math.floor(DAYS_LATE/4)));
-				}
-				if($("#PERIOD_TYPE").val()=="Week" || $("#PERIOD_TYPE").val()=="Month"){	
-					total_days_late=(parseInt(DAYS_LATE)-total_tr);				
-				}
-				$("#day_late").val(total_days_late);
-							
-				AMOUNT_FINE=(TOTAL_PAId_AMOUNT * AMOUNT_RATE);
-				
-				console.log(AMOUNT_FINE +"=== total paid amount==" + TOTAL_PAId_AMOUNT );
-			}		
-				
-			$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
-			
-		} 
-	 });
-	 
-	 
+
 	 $("#btnApprovale").click(function(){ 
 		
 		 $("#form_approve").submit();
 	 });
+
 });
+
+function getBalance(){
+	return (getTotalAmount() - parseInt(accounting.unformat(document.getElementById('pre_pay').value)));
+}
+	 
+function getTotalFinishedAmount(){
+	return (getTotalAmount() + parseInt(BALANCE));
+}
+
+function getTotalAmount(){
+	return (parseInt(accounting.unformat(document.getElementById('paid_amount').value)) + parseInt(accounting.unformat(document.getElementById('amount_fine').value) ))
+	
+}
+
+function listTrInfo(){
+	startLoading();
+	 $.ajax({
+			url:BASE_URL+'/schadule_payment/schadule/'+tr_id+"/"+cu_id,
+			type:'POST',
+			datatype:'JSON',
+			//data:{tr_id:tr_id,cu_id:cu_id},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Accept", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+			},
+			success:function(dat){
+				console.log("information "+dat);
+				stopLoading();
+				var date_now=moment().format('DD-MM-YYYY');
+				CO_ID=dat.co_id;
+				CU_ID=dat.cu_id;
+				AC_ID= dat.ac_id;
+				TR_ID=dat.tr_id;
+				PRE_PAY=dat.pre_pay;
+				
+				var co_info="<tr><td>"+dat.co_first_nm+' '+dat.co_last_nm+"</td><td>"+dat.co_phone+"</td><td>"+dat.co_national_id+"</td></tr>";
+				var cu_info="<tr><td>"+dat.cu_nm+"</td><td>"+dat.cu_phone+"</td><td>"+dat.cu_national_id+"</td></tr>";
+				var gu_info="<tr><td>"+dat.gu_nm+"</td><td>"+dat.gu_phone+"</td><td>"+dat.gu_national_id+"</td></tr>";
+				var loan_info="<tr><td>"+dat.ac_period_type+"</td><td>"+accounting.formatMoney(dat.ac_amount," ") +"</td><td>"+date_now+"</td><td>"+accounting.formatMoney(dat.tr_pay_amount," ") +"</td><td>"+accounting.formatMoney(dat.tr_balance,"") +"</td><td>"+dat.gu_pawn+"</td></tr>";
+				$("#cu_name").html(dat.cu_nm);
+				$("#admin_app_date").html(date_now);
+				$("#client_app_date").html(date_now);
+				
+					
+				// CALCULATE AMOUNT
+				LATE_AMOUNT=parseInt($("#total").val());
+				PAID_AMOUNT=parseInt(dat.tr_pay_amount);
+				BALANCE=parseInt(dat.tr_balance);
+				
+				
+				// calculate days late 
+				if(tr_stts==1){
+					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),"")  );
+					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
+					if(PRE_PAY>0){
+						$("#btnApprovale").val(1);
+						$("#tr_type option[value='5']").remove();
+						$("#pre_pay").attr("disabled","disabled");
+						$("#frm_pre_pay").show();
+						$("#frm_balance").show();
+						$("#pre_pay").val(accounting.formatMoney(PRE_PAY,""));
+						$("#balance").val(accounting.formatMoney(getBalance(),""));
+					}
+				}			
+				if(tr_stts==3){
+		
+					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),"") );
+					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);					
+					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );							
+					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),"") );
+				}
+				
+				
+				$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
+				
+			} 
+		 });
+}
+
+function updateLoanApprove(){
+	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
+	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
+	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	var TOTAL_DAYS_LATE=document.getElementById('day_late').value;
+	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
+	var TRAN_TYPE = document.getElementById('tr_type').value; 
+	var TRAN_NOTE = document.getElementById('tr_note').value;
+	var TR_TYPE = document.getElementById('tr_type').value;  
+	var TR_CU_ID=CU_ID;
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	startLoading();
+	$.ajax({
+		url:BASE_URL+"/loan/updateLoanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
+		type:'POST',
+		datatype:'JSON', 
+		data : JSON.stringify(input),
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success:function(dat){		
+			stopLoading();
+			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
+		}
+	}); 
+}
+
 
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
@@ -113,15 +201,18 @@ function daysInMonth(month, year) {
 
 // insert loanApprove Info 
 function LoanApprove(){ 
+	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
 	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
-	var AMOUNT_FINE = document.getElementById('amount_fine').value ;
+	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	var TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
+	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
-	console.log(TR_CU_ID);
-	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:AMOUNT_FINE,approve_note:TRAN_NOTE}
 	
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	startLoading();
 	$.ajax({
 		url:BASE_URL+"/loan/loanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
 		type:'POST',
@@ -132,7 +223,40 @@ function LoanApprove(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
+			
+			stopLoading();
 			window.location.href=BASE_URL+"/LoanAgreement/report/"+CU_ID;
+			//parent.listCus(1);
+		}
+	}); 
+}   
+
+//insert loanApprove Info 
+function getDaysLate(){ 
+	startLoading();
+	$.ajax({
+		url:BASE_URL+"/loan/calculate_days_late/"+cu_id,
+		type:'POST',
+		datatype:'JSON', 
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success:function(dat){
+			stopLoading();
+			$(dat).each(function(i,v){
+				if(dat[i].ac_period_type=="Month"){
+					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
+					DAYS_LATE=(parseInt(dat[0].total_months_late));
+					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_months_late))
+				}else if(dat[0].ac_period_type=="Day" || dat[0].ac_period_type=="Week"){				
+					PAY_AMOUNT_LATE+=parseInt(dat[i].tr_pay_amount);
+					DAYS_LATE=(parseInt(dat[0].total_days_weeks_late));
+					AMOUNT_FINE_LATE+=(parseInt(dat[i].amount_fine_days_weeks_late))							
+				}	
+			});
+			TOTAL_FINE_AMOUNT_LATE+=parseInt(PAY_AMOUNT_LATE + AMOUNT_FINE_LATE);
+			 listTrInfo();
 		}
 	}); 
 }   
