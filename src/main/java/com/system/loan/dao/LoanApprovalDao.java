@@ -99,7 +99,7 @@ public static SessionFactory factory = null;
 		Date date = new Date();
 		SimpleDateFormat formart = new SimpleDateFormat("yyyyMMddHHmmss");
 		String datetime = formart.format(date);
-		String sql="UPDATE mfi_loanapproval SET  amount_fine=?,total_paid_amount=?,pre_pay=?,days_late=?,tr_type=?,approve_note=?,tr_dtt=?,paid_amount=? WHERE tr_id=?";
+		String sql="UPDATE mfi_loanapproval SET amount_fine=?,total_paid_amount=?,pre_pay=?,days_late=?,tr_type=?,approve_note=?,tr_dtt=?,paid_amount=? WHERE tr_id=?";
 		try{
 			tran=session.beginTransaction();
 			SQLQuery query = session.createSQLQuery(sql);
@@ -111,8 +111,8 @@ public static SessionFactory factory = null;
 			query.setParameter(4, approve.getTr_type());
 			query.setParameter(5, approve.getApprove_note());
 			query.setParameter(6, datetime);
-			query.setParameter(7, approve.getTr_id());
-			query.setParameter(8, approve.getPaid_amount());
+			query.setParameter(7, approve.getPaid_amount());
+			query.setParameter(8, approve.getTr_id());
 			query.executeUpdate(); 
 			tran.commit();
 		}catch(HibernateException hne){

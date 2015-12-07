@@ -71,11 +71,9 @@ $(document).ready(function(){
 			  submitHandler: function(form) { 
 				  $("#btnApprovale").hide();
 				  window.print();
-				  if($("#btnApprovale").val()==1){
-					  alert(1);
+				  if($("#btnApprovale").val()==1){				 
 					  updateLoanApprove();
 				  }else{
-					  alert(0);
 					  LoanApprove(); 		
 				  }		 		 
 			  }
