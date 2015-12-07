@@ -305,17 +305,17 @@
 			 popup("${pageContext.request.contextPath}/LoanAgreement/report/"+cus_id);
 		}
 		
-		jQuery.validator.addMethod("lessThen56", function(value, element) {
-			var ac_period_type=$("#ac_period_type").val();	
-			return  this.optional(element) || ac_period_type==2 || ac_period_type==3  || (parseFloat(value) < 57 );
-		   
-		}, " Period must be less than 56");
-		
 		jQuery.validator.addMethod("lessThen24", function(value, element) {
 			var ac_period_type=$("#ac_period_type").val();	
-			return  this.optional(element) || ac_period_type==1 || (parseFloat(value) < 25 );
+			return  this.optional(element) || ac_period_type==2 || ac_period_type==3  || (parseFloat(value) < 25 );
 		   
 		}, " Period must be less than 24");
+		
+		jQuery.validator.addMethod("lessThen56", function(value, element) {
+			var ac_period_type=$("#ac_period_type").val();	
+			return  this.optional(element) || ac_period_type==1 || (parseFloat(value) < 57 );
+		   
+		}, " Period must be less than 56");
 		
 		jQuery.validator.addMethod("lessThen10", function(value, element) {
 			return  this.optional(element) || (parseFloat(value) < 11 );
