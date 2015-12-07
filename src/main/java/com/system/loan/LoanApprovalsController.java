@@ -30,6 +30,11 @@ public class LoanApprovalsController implements Serializable{
 		loanApproDao.LoanApro_Insert(loanApproDto);
 		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
 		
+		System.out.println("get prepay===" +  loanApproDto.getPre_pay());
+		
+		if(loanApproDto.getPre_pay()>0){
+			loanApproDao.updateLoanApprove(loanApproDto);
+		}
 		return true; 
 	} 
 	

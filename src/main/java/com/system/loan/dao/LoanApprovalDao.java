@@ -93,6 +93,32 @@ public static SessionFactory factory = null;
 		return true;
 	}
 	
+
+	public 	boolean updateLoanApprove(LoanApprovalDto approve) {		
+		Session session = factory.getCurrentSession();
+		Transaction tran = null;		
+		try{
+			tran=session.beginTransaction();
+			LoanApprovalDto app=(LoanApprovalDto)session.get(LoanApprovalDto.class,approve.getTr_id());		
+			app.setPaid_amount(approve.getPaid_amount());
+			app.setPre_pay(approve.getPre_pay());
+			app.setAmount_fine(approve.getAmount_fine());
+			app.setDays_late(approve.getDays_late());
+			
+			System.out.println(app.toString());
+			
+			tran.commit();
+		}catch(HibernateException hne){
+			if(tran!=null) tran.rollback();
+			hne.printStackTrace();
+			return false;
+		}
+		return true; 
+	}
+
+
+
+	
 	
 
 }

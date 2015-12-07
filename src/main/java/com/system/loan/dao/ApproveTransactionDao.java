@@ -11,6 +11,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Service;
 
+import com.system.loan.dto.LoanApprovalDto;
+
 @Service
 public class ApproveTransactionDao implements TransactionInterface {
 	public static SessionFactory factory = null;
@@ -97,7 +99,5 @@ public class ApproveTransactionDao implements TransactionInterface {
 		}
 		return Data; 
 	}
-	
-	
-
+	 
 }
