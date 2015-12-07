@@ -20,28 +20,30 @@ var tr_stts=tr_stts;
 
 $(document).ready(function(){	
 	 getDaysLate();
-	 
 	 $("#tr_type").change(function(){	
-		 var COMPLETE_TOTAL=0;
-		 if($(this).val()==4){		
-			 COMPLETE_TOTAL=(parseInt(TOTAL_FINE_AMOUNT_LATE) + parseInt(BALANCE));	
-		 }else{
-			 COMPLETE_TOTAL=(parseInt(TOTAL_FINE_AMOUNT_LATE));
-		 }
-		 $("#total_paid_amount").val(accounting.formatMoney(COMPLETE_TOTAL.toFixed(0),""));
-		
+		if($(this).val()==5){
+			$("#frm_pre_pay").show();
+			$("#frm_balance").show();
+		}else{
+			$("#frm_pre_pay").hide();
+			$("#frm_balance").hide();
+		}
+		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
 	 });
 	 
 	 $("#paid_amount,#amount_fine").keyup(function(){
-		 TOTAL_FINE_AMOUNT_LATE=(parseInt(document.getElementById('paid_amount').value)+parseInt(document.getElementById('amount_fine').value));
-		 $("#total_paid_amount").val(TOTAL_FINE_AMOUNT_LATE);
+		 $("#total_paid_amount").val(getTotalAmount());
+	 });
+	 
+	 $("#day_late").keyup(function(){
+		 var days_late=$(this).val(); 
+		 var total=0;
+		 $("#amount_fine").val((days_late>0?AMOUNT_FINE_LATE:0));
+		 $("#total_paid_amount").val(accounting.formatMoney(getTotalAmount(),""));
 	 });
 	 
 	 $("#pre_pay").keyup(function(){
-		 var BALANCE=0;var PREPAY=parseInt(document.getElementById('pre_pay').value);
-		 var PAID_AMOUNT=parseInt(document.getElementById('total_paid_amount').value);
-		 BALANCE=(parseInt(TOTAL_FINE_AMOUNT_LATE)-PREPAY);
-		 $("#balance").val(BALANCE);
+		 $("#balance").val( (BALANCE==""  || BALANCE==0 || BALANCE==null )?0:accounting.formatMoney(getBalance(),""));
 	 });
 	 	
 	 // validation 
@@ -65,6 +67,19 @@ $(document).ready(function(){
 
 });
 
+function getBalance(){
+	return (getTotalAmount() - parseInt(document.getElementById('pre_pay').value));
+}
+	 
+function getTotalFinishedAmount(){
+	return (parseInt(accounting.unformat(document.getElementById('total_paid_amount').value)) + parseInt(BALANCE));
+}
+
+function getTotalAmount(){
+	return (parseInt(accounting.unformat(document.getElementById('paid_amount').value)) + parseInt(accounting.unformat(document.getElementById('amount_fine').value) ))
+	
+}
+
 function listTrInfo(){
 	startLoading();
 	 $.ajax({
@@ -77,6 +92,7 @@ function listTrInfo(){
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success:function(dat){
+				console.log("information "+dat);
 				stopLoading();
 				var date_now=moment().format('DD-MM-YYYY');
 				CO_ID=dat.co_id;
@@ -106,6 +122,14 @@ function listTrInfo(){
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
 					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
 					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
+					if(dat.pre_pay>0){
+						$("#tr_type option[value='5']").remove();
+						$("#pre_pay").attr("disabled","disabled");
+						$("#frm_pre_pay").show();
+						$("#frm_balance").show();
+						$("#pre_pay").val(accounting.formatMoney(dat.pre_pay,""));
+						$("#balance").val(accounting.formatMoney(getBalance(),""));
+					}
 				}			
 				if(tr_stts==3){
 		
@@ -130,7 +154,7 @@ function daysInMonth(month, year) {
 function LoanApprove(){ 
 	var TOTAL_PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
 	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
-	var TOTAL_DAYS_LATE=document.getElementById('day_late').value;
+	var TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
 	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
@@ -169,7 +193,6 @@ function getDaysLate(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
-			console.log(dat);
 			stopLoading();
 			$(dat).each(function(i,v){
 				if(dat[i].ac_period_type=="Month"){

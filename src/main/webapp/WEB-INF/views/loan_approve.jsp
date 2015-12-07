@@ -138,7 +138,6 @@
 							<div class="row">
 								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
-
 										<label class="control-label col-sm-4" for="paid_amount">
 											Paid Amount:</label>
 										<div class="col-sm-8">
@@ -151,7 +150,7 @@
 										<label class="control-label col-sm-4" for="amount-fine">
 											Days Late:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control "
+											<input type="text" class="form-control check_number required "
 												name="day_late"  id="day_late" placeholder="0.0" >											
 										</div>
 									</div>
@@ -160,7 +159,7 @@
 										<label class="control-label col-sm-4" for="amount-fine">Amount
 											Amount fine:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
+											<input type="text" class="form-control check_number   "
 												name="amount_fine"   value="0" id="amount_fine" placeholder="0.0">											
 										</div>
 									</div>
@@ -169,28 +168,30 @@
 										<label class="control-label col-sm-4" for="amount-fine">
 											Total Amount:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number  "
-												name="total_paid_amount"  value="0" id="total_paid_amount" placeholder="0.0">											
+											<input type="text" class="form-control check_number required "
+												name="total_paid_amount" disabled="disabled"  value="0" id="total_paid_amount" placeholder="0.0">											
 										</div>
 									</div>
 									
-									<div class="form-group">
+																	
+									<div class="form-group" id="frm_pre_pay"  style="display:none">
 										<label class="control-label col-sm-4" for="amount-fine">
 											Prepay:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number  "
+											<input type="text" class="form-control check_number required "
 												name="pre_pay"  value="0" id="pre_pay" placeholder="0.0">											
 										</div>
 									</div>
 									
-									<div class="form-group">
+									<div class="form-group" id="frm_balance"  style="display:none">
 										<label class="control-label col-sm-4" for="amount-fine">
 											Balance:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number  "
-												name="balance"  value="0" id="balance" placeholder="0.0">											
+											<input type="text" class="form-control check_number required "
+												name="balance" disabled="disabled"  value="0" id="balance" placeholder="0.0">											
 										</div>
 									</div>
+									
 									
 
 									<div class="form-group">
@@ -200,6 +201,7 @@
 											<select class="form-control" id="tr_type" name="tr_type">
 												<option value="2">Complete</option>											
 												<option value="4">Finished</option>
+												<option value="5">Prepay</option> 
 											</select>
 										</div>
 									</div>

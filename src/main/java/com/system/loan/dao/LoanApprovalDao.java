@@ -71,10 +71,13 @@ public static SessionFactory factory = null;
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 			String datetime = format.format(date); 
 			
-			 if(tr_type.equals("2")){
+			
+			if(tr_type.equals("2")){
 				sql1="update mfi_transection set tr_stts='2' where (tr_cu_id='"+cu_id+"' and tr_stts='3') OR (tr_id='"+tr_id+"' and tr_stts='1')";
 			}else if(tr_type.equals("4")){
 				sql1="update mfi_transection set tr_stts='4' where tr_cu_id='"+cu_id+"' and tr_stts in('1','2','3')";
+			}else if(tr_type.equals("5")){
+				sql1="update mfi_transection set tr_stts='1' where (tr_cu_id='"+cu_id+"' and  tr_id='"+tr_id+"') ";
 			}
 			SQLQuery query = session.createSQLQuery(sql1);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
