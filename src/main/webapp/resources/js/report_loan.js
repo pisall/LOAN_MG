@@ -113,20 +113,14 @@ function list_expend_report(pageNo) {
 									+ "<td>"
 									+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
 									+ "</td>"
-									+ "<td>"
-									+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
-									+ "</td>"
-									+ "<td>"
-									+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
-									+ "</td>"
 									
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Amount :</td><td style='color:blue;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Not Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Profit :</td><td style='color:red;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Amount :</td><td style='color:blue;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Total Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Total Not Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Profit :</td><td style='color:red;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
 						
 					}
 
