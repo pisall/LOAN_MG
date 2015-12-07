@@ -71,6 +71,7 @@ public class ApproveTransactionDao implements TransactionInterface {
 					+ ",tran.tr_pay_amount "
 					+ ",tran.tr_balance "
 					+ ",(SELECT pre_pay FROM mfi_loanapproval WHERE cu_id="+cus_id+" and tr_id="+tr_id+") "
+					+ ",(SELECT tr_id FROM mfi_transection WHERE tr_cu_id="+cus_id+" ORDER BY pay_date DESC LIMIT 1) last_tr_id "
 				+ " from "
 					+ "mfi_customers cus "
 					+ ",mfi_co co  "

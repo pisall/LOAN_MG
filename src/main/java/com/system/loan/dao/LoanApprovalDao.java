@@ -2,9 +2,11 @@ package com.system.loan.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -122,6 +124,31 @@ public static SessionFactory factory = null;
 		}
 		return true; 
 	}
+	
+	public 	HashMap<String, Object> listLoanEdit(int tr_id) {	
+		Session session = factory.getCurrentSession();
+		Transaction tran = null;		
+		String sql="SELECT pre_pay,paid_amount,amount_fine,days_late,total_paid_amount FROM mfi_loanapproval WHERE tr_id=? limit 1";
+		//LoanApprovalDto app=null;
+		HashMap<String, Object> app=new HashMap<>();
+		
+		Object data=null;
+		try{
+			tran=session.beginTransaction();	
+			Query query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			query.setParameter(0, tr_id);
+			app= (HashMap<String, Object>)query.uniqueResult();
+			tran.commit();
+			System.out.println("test="+app.toString());
+		}catch(HibernateException hne){
+			if(tran!=null) tran.rollback();
+			hne.printStackTrace();
+			return null;
+		}
+		return app; 
+	}
+
 
 
 

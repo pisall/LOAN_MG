@@ -22,6 +22,13 @@ var tr_stts=tr_stts;
 
 $(document).ready(function(){	
 	 getDaysLate();
+	 
+	 if(tr_stts==2){
+		$("#btnApprovale").html("Update");
+		$("#btnApprovale").val(1);
+		listEditLoanApprove();
+	 }
+	 
 	 $("#tr_type").change(function(){	
 			
 		 $("#total_paid_amount").val(accounting.formatMoney((($(this).val()==4)?getTotalFinishedAmount():getTotalAmount()).toFixed(0),""));	
@@ -71,11 +78,11 @@ $(document).ready(function(){
 			  submitHandler: function(form) { 
 				  $("#btnApprovale").hide();
 				  window.print();
-				  if($("#btnApprovale").val()==1){				 
+				  if($("#btnApprovale").val()==1){	
 					  updateLoanApprove();
 				  }else{
 					  LoanApprove(); 		
-				  }		 		 
+				  }		 
 			  }
 		});
 
@@ -97,6 +104,27 @@ function getTotalFinishedAmount(){
 function getTotalAmount(){
 	return (parseInt(accounting.unformat(document.getElementById('paid_amount').value)) + parseInt(accounting.unformat(document.getElementById('amount_fine').value) ))
 	
+}
+
+function listEditLoanApprove(){
+	startLoading();
+	$.ajax({
+		url:BASE_URL+"/loan/get_edit_loan_approve/"+tr_id,
+		type:'POST',
+		datatype:'JSON', 
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success:function(dat){
+			console.log(dat);
+			stopLoading();
+			$("#paid_amount").val(accounting.formatMoney((dat.paid_amount),""));
+			$("#day_late").val(dat.days_late);
+			$("#amount_fine").val(accounting.formatMoney(dat.amount_fine,""));
+			$("#total_paid_amount").val(accounting.formatMoney(dat.total_paid_amount,""));
+		}
+	}); 
 }
 
 function listTrInfo(){
@@ -134,13 +162,17 @@ function listTrInfo(){
 				PAID_AMOUNT=parseInt(dat.tr_pay_amount);
 				BALANCE=parseInt(dat.tr_balance);
 				
-				
+				if(dat.last_tr_id==tr_id){
+					$("#tr_type option[value='5']").remove();
+					$("#tr_type option[value='2']").remove();
+				}
+							
 				// calculate days late 
 				if(tr_stts==1){
 					$("#paid_amount").val(accounting.formatMoney((PAID_AMOUNT+PAY_AMOUNT_LATE).toFixed(0),"")  );
 					$("#day_late").val((DAYS_LATE>0)?DAYS_LATE:0);
 					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );
-					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE)).toFixed(0),"") );
+					$("#total_paid_amount").val(accounting.formatMoney((TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT)>0?(TOTAL_FINE_AMOUNT_LATE +PAID_AMOUNT):(PAID_AMOUNT+PAY_AMOUNT_LATE),"") );
 					if(PRE_PAY>0){
 						$("#btnApprovale").val(1);
 						$("#tr_type option[value='5']").remove();
@@ -150,7 +182,9 @@ function listTrInfo(){
 						$("#pre_pay").val(accounting.formatMoney(PRE_PAY,""));
 						$("#balance").val(accounting.formatMoney(getBalance(),""));
 					}
-				}			
+				}		
+
+							
 				if(tr_stts==3){
 		
 					$("#paid_amount").val(accounting.formatMoney((PAY_AMOUNT_LATE).toFixed(0),"") );
@@ -158,7 +192,6 @@ function listTrInfo(){
 					$("#amount_fine").val(accounting.formatMoney(((AMOUNT_FINE_LATE >0)?AMOUNT_FINE_LATE:0).toFixed(0),"") );							
 					$("#total_paid_amount").val(accounting.formatMoney(((TOTAL_FINE_AMOUNT_LATE >0)?TOTAL_FINE_AMOUNT_LATE:PAY_AMOUNT_LATE).toFixed(0),"") );
 				}
-				
 				
 				$("#co_info").append(co_info);$("#cu_info").append(cu_info);$("#gu_info").append(gu_info);$("#loan_info").append(loan_info);
 				
