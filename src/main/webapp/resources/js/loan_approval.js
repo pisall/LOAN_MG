@@ -111,14 +111,6 @@ function getTotalAmount(){
 	
 }
 
-function ceilAmount(amount){
-	var a1=0,a2=2,a3=0;
-	a1=((amount).toFixed(0) * 0.1);
-	a2=(a1.toFixed(0));
-	a3=(a2*100);
-	return a3;
-}
-
 function listEditLoanApprove(){
 	startLoading();
 	$.ajax({
