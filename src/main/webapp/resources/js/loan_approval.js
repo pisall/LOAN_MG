@@ -176,7 +176,6 @@ function updateLoanApprove(){
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
-	alert(TR_ID);
 	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
 	startLoading();
 	$.ajax({
