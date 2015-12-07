@@ -1,6 +1,7 @@
 package com.system.loan;
  
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -31,6 +32,12 @@ public class LoanApprovalsController implements Serializable{
 		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
 		return true; 
 	} 
+	
+	@RequestMapping(value="/get_edit_loan_approve/{tr_id}", produces="application/json", consumes="application/json", method=RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> getEditLoanApprove( @PathVariable("tr_id") Integer  tr_id){
+		return loanApproDao.listLoanEdit(tr_id); 
+	} 
+	
 	@RequestMapping(value="/updateLoanApprove/{tr_id}/{tr_type}/{tr_cu_id}", produces="application/json", consumes="application/json", method=RequestMethod.POST)
 	public @ResponseBody boolean updateLoanApprove(@RequestBody LoanApprovalDto loanApproDto, @PathVariable("tr_id") Integer  tr_id , @PathVariable("tr_type") String  tr_type,@PathVariable("tr_cu_id") int  tr_cu_id){	
 		loanApproDao.TranSac_Update(tr_id, tr_type,tr_cu_id);
