@@ -67,9 +67,7 @@
 										<thead class="style2">
 											<tr class="active">
 												<th>Customer No</th>
-												<th>Customer Name</th>
-												<th>Customer Officer No</th>
-												<th>Customer Officer Name</th>
+												<th>Customer Name</th>											
 												<th>Loan Date</th>
 												<th>Loan Amount</th>
 												

@@ -20,17 +20,18 @@ public class SysController {
 	public ModelAndView sysForm(){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("sys_reg");
-		
 		return mv;
 	}
 	
 	
 	@RequestMapping(value="/sys_req",method=RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object> sysReq(@RequestBody co_0001_in input){
+	public @ResponseBody HashMap<String, Object> sysReq(@RequestBody co_0001_in input){
 		System.out.println("start request="+input.toString());
 		
-		return null;
+		HashMap<String, Object> result=new HashMap<>();
+		result.put("test", "you");
+		
+		return result;
 	}
 
 }

@@ -53,8 +53,8 @@ public class ReportController {
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", report.listExpendreport(paging, coID));
 		model.put("PAGING", paging);
-		model.put("TOTAL_AMOUNT", report.getTotalAmount(coID));
-		model.put("SUB_AMOUNT", report.getSubTotal(coID, paging));
+		model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
+		//model.put("SUB_AMOUNT", report.getSubTotal(coID, paging));
 		return model;
 	}
 }

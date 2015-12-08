@@ -207,6 +207,7 @@ function coInsert(isNew){
 		dataType : 'JSON',
 		data : JSON.stringify(input),
 		beforeSend : function(xhr) {
+			console.log("before sent");
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},

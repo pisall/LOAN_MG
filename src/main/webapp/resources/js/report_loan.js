@@ -6,6 +6,7 @@ var word = "";
 var tr_type="";
 var startDate="";
 var endDate="";
+var total_amount=0,total_paid_amount=0,total_amount_fine=0;
 
 $(function(){
 	list_expend_report(page_no);
@@ -76,15 +77,19 @@ function list_expend_report(pageNo) {
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
-				success : function(data) {					
+				success : function(data) {	
+					console.log(data);
 					stopLoading();		
 					value = data;
 					var result = "";
 					var paging = data.PAGING;
 					var curPage = paging.pageNo;
-					var totalAmount=0,subAmount=0;
+					
 					totalPage = parseInt(paging.totalPage);
 					startDate="";endDate="";
+					total_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount));
+					total_paid_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_paid_amount));
+					total_amount_fine=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount_fine));
 					// clear paging
 					$("#paging").html("");
 					$("#loan_expend_report").html("");
@@ -94,20 +99,14 @@ function list_expend_report(pageNo) {
 
 						for (var i = 0; i < data.REC.length; i++) {
 							var cuID = data.REC[i].cu_id;
-							totalAmount=data.TOTAL_AMOUNT;
-							subAmount=data.SUB_AMOUNT;
+							
+							//subAmount=data.SUB_AMOUNT;
 							result += "<tr><td>"
 									+ cuID
 									+ "</td>"
 									+ "<td style='cursor: pointer;' class='name'>"
 									+ "<span class='ellipsis' title='"+data.REC[i].cu_nm+"'>"+data.REC[i].cu_nm+"</span>"
-									+ "</td>"
-									+ "<td>"
-									+ data.REC[i].co_id
-									+ "</td>"
-									+ "<td>"
-									+ data.REC[i].co_first_nm +" "+data.REC[i].co_last_nm
-									+ "</td>"
+									+ "</td>"								
 									+ "<td>" 
 									+ formatStringToDateTime(data.REC[i].ac_start_date,"")
 									+ "</td>"
@@ -118,8 +117,10 @@ function list_expend_report(pageNo) {
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Sub Amount :</td><td style='color:blue;'>"+accounting.formatMoney(subAmount," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td style='color:red;'>"+accounting.formatMoney(totalAmount," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Amount :</td><td style='color:blue;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Total Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Total Not Paid Amount :</td><td style='color:red;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='3' style='text-align:right;color:red; position: relative;left: -87px;'>Profit :</td><td style='color:red;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
 						
 					}
 
@@ -136,6 +137,18 @@ function list_expend_report(pageNo) {
 							+ " er:" + er);
 				}
 			});
+}
+
+function getTotalPaidAmount(){
+	return (ceilAmount(total_paid_amount + total_amount_fine))
+}
+
+function getProfit(){
+	return (ceilAmount(getTotalPaidAmount() - total_amount));
+}
+
+function getBalance(){
+	return (ceilAmount(total_amount - getTotalPaidAmount()));
 }
 
 function loadPaging() {

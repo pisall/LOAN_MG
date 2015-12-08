@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("testtttttt");
 		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("SYS");
+		auth.eraseCredentials(false);
 //		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
 //		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN","DBA");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -49,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/", "/**").access("hasRole('ROLE_ADMIN')")
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
         .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-        .antMatchers("/sys/sys_form").access("hasRole('SYS')")
+        .antMatchers("/sys/**").access("hasRole('SYS')")
         .and().formLogin().loginPage("/login").successHandler(suc)
         .usernameParameter("ssoId").passwordParameter("password")
         .and().csrf().disable()
