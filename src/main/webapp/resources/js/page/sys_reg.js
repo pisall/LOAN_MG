@@ -212,12 +212,7 @@ function coInsert(isNew){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			alert("New CO creating is successfully!")
-			if(isNew){
-				window.location.href = BASE_URL+"/co_001_controller/co_0001";
-			}else{
-				window.location.href = BASE_URL+"/co_001_controller/co_0003";
-			}
+			console.log(data);
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
