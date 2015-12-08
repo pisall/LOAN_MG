@@ -9,7 +9,15 @@
 	        cus_id=Integer.parseInt(request.getParameter("cus_id").toString());
 	  } //check_cus
 %>
-
+<style>
+		.form-group.required .control-label:after {
+		  content:"*";
+		  color:red;
+		}
+		.help-block{
+			display: none;
+		}
+	</style>
 <body>
 
 	<div id="wrapper">
@@ -60,21 +68,22 @@
 										<span class="glyphicon glyphicon-user"
 											style="font-size: 90px;"></span>
 									</div>
-									<span class="btn btn-default btn-file btn-sm"> Browse <input
+									<!--<span class="btn btn-default btn-file btn-sm"> Browse <input
 										type="file" id="cu_photo" name="cu_photo">
 
-									</span>
+									</span>-->
 
-									<div class="form-group ">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="fst_nm">
-											Name:</label>
+											Name </label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control required" name="cu_nm"
 												id="cu_nm" placeholder="Full Name" maxlength="50">
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
 
-									<div class="form-group">
+									<!--<div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
 											Nick name:</label>
 										<div class="col-sm-10">
@@ -82,10 +91,10 @@
 												class="form-control required" name="cu_nick_nm"
 												id="nick_name" placeholder="Nick Name">
 										</div>
-									</div>
+									</div>-->
 
-									<div class="form-group">
-										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
+									<div class="form-group required">
+										<label class="control-label col-sm-2" for="ls_nm">Sex </label>
 										<div class="col-sm-10" name="cu_sex" id="cu_sex">
 											<label class="radio-inline"> <input type="radio"
 												value="m" name="cu_sex" checked="checked">Male
@@ -95,32 +104,35 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="nt_card">
 											DOB</label>
 										<div class="col-sm-10">
 											<input maxlength="50" type="text"
-												class="form-control  required" id="dob" name="cu_dob"
+												class="form-control  required" id="cu_dob" name="cu_dob"
 												placeholder="Date of Birth">
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="9"
 												class="form-control required check_number"
-												name="cu_national_id" id="cu_id_card"
+												name="cu_national_id" id="cu_national_id"
 												placeholder="Enter National Card">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="nt_card">
 											Phone</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="10"
 												class="form-control required check_number" name="cu_phone"
 												id="cu_phone" placeholder="User Phone number">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
 
@@ -128,7 +140,7 @@
 										<label class="control-label col-sm-2" for="text">
 											Address</label>
 										<div class="col-sm-10">
-											<textarea class="form-control required" maxlength="100"
+											<textarea class="form-control" maxlength="100"
 												rows="3" name="cu_address" id="cu_address"
 												placeholder="User Address"></textarea>
 										</div>
@@ -137,24 +149,25 @@
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="text"> Pawn</label>
 										<div class="col-sm-10">
-											<textarea class="form-control " maxlength="100" rows="3"
+											<textarea class="form-control" maxlength="100" rows="3"
 												name="cu_pawn" id="user_pawn" placeholder="User Pawn"></textarea>
 										</div>
 									</div>
 
 									<hr />
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="text">
 											Guarantor</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="50"
-												class="form-control required" name="gu_nm" id="gu_name"
+												class="form-control required" name="gu_nm" id="gu_nm"
 												placeholder="Guarantor name">
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="ls_nm">Sex</label>
 										<div class="col-sm-10" name="cu_sex" id="cu_sex">
 											<label class="radio-inline"> <input type="radio"
@@ -165,23 +178,25 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="nt_card">
 											ID Card</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="9"
 												class="form-control required check_number"
-												name="gu_national_id" id="gu_id_card"
+												name="gu_national_id" id="gu_national_id"
 												placeholder="Guarantor National Card">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="text">
 											Phone</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="10"
 												class="form-control required check_number" name="gu_phone"
-												id="gu_phone" placeholder="Guarantor phone">
+												id="gu_phone" placeholder="Guarantor cu_phone">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
 									<div class="form-group">
@@ -205,74 +220,75 @@
 								<div class="panel-body">
 
 									<!-- account infor  -->
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2">Amount</label>
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
 											<input type="text" class="form-control required check_number"
-												name="ac_amount" id="amount" placeholder="Amount">
+												name="ac_ac_amount" id="ac_amount" placeholder="Amount">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 											<!-- <div class="input-group-addon">R</div> -->
 											<!-- </div> -->
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2">Rate</label>
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
 											<input type="text" class="form-control required check_number"
-												name="ac_rate" id="rate" placeholder="Rate" maxlength="4">
-											<!-- <div class="input-group-addon">%</div> -->
-											<!-- </div> -->
+												name="ac_rate" id="ac_rate" placeholder="Rate" maxlength="4">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>											
 										</div>
 									</div>
 
 
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
 											Saving Amount:</label>
 										<div class="col-sm-10">
-											<select class="form-control required" name="ac_saving_amount">
+											<select class="form-control required" name="ac_saving_ac_amount">
 												<option>2500</option>
 												<option>5000</option>
 												<option>7500</option>
 												<option>10000</option>
 											</select>
 										</div>
-									</div>
+									</div>-->
 
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="ls_nm">
 											Account Type:</label>
 										<div class="col-sm-10">
-											<select class="form-control required" name="ac_type">
-												<option>Loan</option>
-												<option>Saving</option>
+											<select class="form-control" id="ac_type" name="ac_type">
+												<option value='loan'>Loan</option>
+												<!-- <option>Saving</option>
 												<option>PayRoll</option>
-												<option>Deposit</option>
+												<option>Deposit</option>-->
 											</select>
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-2" for="ls_nm">
 											Period:</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control required check_number"
 												name="ac_period" id="ac_period" placeholder="Period" maxlength="2">
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 											<br /> <select class="form-control" id="ac_period_type" name="ac_period_type"
 												>
-												<option>Day</option>
-												<option>Week</option>
-												<option>Month</option>
-												<option>Year</option>
+												<option value="Day">Day</option>
+												<option value="Week">Week</option>
+												<option value="Month">Month</option>
+												<!--<option>Year</option>-->
 											</select>
 
 										</div>
 									</div>
 
 									<div class="pull-right">
-										<button type="submit" id="query" class="btn btn-primary">Int
+										<button type="button" id="query" class="btn btn-primary">Int
 											Query</button>
 									</div>
 								</div>
@@ -307,7 +323,7 @@
 		
 		jQuery.validator.addMethod("lessThen24", function(value, element) {
 			var ac_period_type=$("#ac_period_type").val();	
-			return  this.optional(element) || ac_period_type==2 || ac_period_type==3  || (parseFloat(value) < 25 );
+			return  this.optional(element)  || (parseFloat(value) < 25 );
 		   
 		}, " Period must be less than 24");
 		
@@ -326,10 +342,9 @@
 
 	<script type="text/javascript">
 	
-		$(function() {
+		
 			
-			
-			$("#loanAgreement").validate({
+			/*$("#loanAgreement").validate({
 				rules:{
 					"ac_period":{
 						lessThen24:true,
@@ -339,28 +354,153 @@
 						lessThen10:true
 					}
 				},
-				errorPlacement : function(label, element) {
-					
-					label.addClass('arrow');
-					label.insertAfter(element);								
+				errorPlacement : function(error, element) {				
+					//label.addClass('arrow');
+					//label.insertAfter(element);		
+					//error.appendTo(element.prev(".control-label") );
+					error.insertBefore(element);
 				},
-				/* wrapper: 'div', */
+				 wrapper: 'div', 
 				submitHandler : function(form) {
 					form.submit();
 				}
-			});
-			
-			
+			});*/
+						
 	
-			$("#dob").datepicker({
+			/*$("#dob").datepicker({
 				showOtherMonths : true,
 				selectOtherMonths : true,
 				changeMonth : true,
 				changeYear : true,
 				dateFormat : "dd-mm-yy"
 			});
-		})
+		})*/
 		
+		$(document).ready(function(){
+			//blur event
+			onblur();
+			
+			$("#query").click(function(){
+				coInsert(false);
+			});
+		});
+
+		function onblur(){
+			//Customer validation 
+			checkNullOnBlue("cu_nm");
+			checkNullOnBlue("cu_dob");
+			checkNullOnBlue("cu_national_id");
+			checkNullOnBlue("cu_phone");
+			checkNullOnBlue("gu_nm");
+			checkNullOnBlue("gu_phone");
+			checkNullOnBlue("gu_national_id");
+			checkNullOnBlue("gu_dob");
+			checkNullOnBlue("ac_amount");
+			checkNullOnBlue("ac_rate");
+			checkNullOnBlue("ac_period");
+		}
+		
+		
+		function checkNullOnBlue(name){
+			$("#"+name).blur(function(){
+				var txt="";
+				txt=$(this).val();
+				if(txt==""){
+					$(this).siblings(".help-block").show();
+					$(this).parents(".form-group").addClass("has-error");
+				}else{
+					$(this).parents(".form-group").removeClass("has-error");
+					$(this).siblings(".help-block").hide();
+				}
+			});
+		}
+		
+			
+		function checkNull(input,name){
+			/*--  log_email  --*/
+			var error=false;
+			if(input){
+				if(input!=""){
+					$("#" +name).parents(".form-group").removeClass("has-error");
+					$("#" +name).siblings(".help-block").hide();
+				}else{
+					
+					error=true;
+					$("#" +name).parents(".form-group").addClass("has-error");
+					$("#" +name).siblings(".help-block").show();
+					
+				}
+			}else{
+				error=true;
+				$("#" +name).parents(".form-group").addClass("has-error");
+				$("#" +name).siblings(".help-block").show();
+				
+			}
+		}
+
+
+		function validation(input){
+			/*--  log_email  --*/
+			var error=false;
+			
+			checkNull(input.cu_nm,"cu_nm");
+			checkNull(input.cu_dob,"cu_dob");
+			checkNull(input.cu_national_id,"cu_national_id");
+			checkNull(input.cu_phone,"cu_phone");
+			checkNull(input.gu_nm,"gu_nm");
+			checkNull(input.gu_phone,"gu_phone");
+			checkNull(input.gu_national_id,"gu_national_id");
+			checkNull(input.gu_dob,"gu_dob");
+			checkNull(input.ac_amount,"ac_amount");
+			checkNull(input.ac_rate,"ac_rate");
+			checkNull(input.ac_period,"ac_period");
+	
+			return error;
+		}
+		function coInsert(isNew){
+			var input={};
+			input['cu_nm']=$("#cu_nm").val();
+			input['cu_national_id']=$("#cu_national_id").val();
+			input['cu_phone']=$("#cu_phone").val();
+			input['gu_nm']=$("#gu_nm").val();
+			input['gu_phone']=$("#gu_phone").val();
+			input['gu_national_id']=$("#gu_national_id").val();
+			input['ac_amount']=$("#ac_amount").val();
+			input['ac_rate']=$("#ac_rate").val();
+			input['ac_period']=$("#ac_period").val();
+			
+			console.log(input);
+			//pb_adress
+			//return;
+			
+			if(validation(input)){
+				return;
+			}
+			$.ajax({
+				url : BASE_URL + "/co_001_controller/co_c0001",
+				type : 'POST',
+				dataType : 'JSON',
+				data : JSON.stringify(input),
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {
+					alert("New CO creating is successfully!")
+					if(isNew){
+						window.location.href = BASE_URL+"/co_001_controller/co_0001";
+					}else{
+						window.location.href = BASE_URL+"/co_001_controller/co_0003";
+					}
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status + " er:" + er);
+				}
+			});
+		}
+		
+		
+
 	</script>
 
 </body>
