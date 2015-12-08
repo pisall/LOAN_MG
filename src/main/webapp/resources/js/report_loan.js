@@ -169,7 +169,30 @@ function list_loan_late(pageNo) {
 					$("#report_loan_late").html("");
 					showPaging(totalPage, curPage)
 						
-				
+						if (data.REC.length > 0) {
+
+							for (var i = 0; i < data.REC.length; i++) {
+								var cuID = data.REC[i].cu_id;
+								
+								//subAmount=data.SUB_AMOUNT;
+								result += "<tr><td>"
+										+ cuID
+										+ "</td>"
+										+ "<td style='cursor: pointer;' class='name'>"
+										+ "<span class='ellipsis' title='"+data.REC[i].cu_nm+"'>"+data.REC[i].cu_nm+"</span>"
+										+ "</td>"								
+										+ "<td>" 
+										+ formatStringToDateTime(data.REC[i].ac_start_date,"")
+										+ "</td>"
+										+ "<td>"
+										+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
+										+ "</td>"
+										
+										+"</tr>";
+							}
+							$("#report_loan_late").append(result);
+						}
+						 
 					loadPaging();
 
 					pageNext();

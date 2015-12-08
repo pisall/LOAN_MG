@@ -52,13 +52,3 @@
 			class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a>
 	</li>
 </ul>
-
-<div class="dropdown">
-	<a href="#" data-toggle="dropdown">Dropdown Example <span
-		class="caret"></span></a>
-	<ul class="dropdown-menu">
-		<li><a href="#">HTML</a></li>
-		<li><a href="#">CSS</a></li>
-		<li><a href="#">JavaScript</a></li>
-	</ul>
-</div>
