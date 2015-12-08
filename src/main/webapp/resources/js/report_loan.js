@@ -10,6 +10,7 @@ var total_amount=0,total_paid_amount=0,total_amount_fine=0;
 
 $(function(){
 	list_expend_report(page_no);
+	list_loan_late(page_no);
 	$("#record_num").change(function() {
 		list_expend_report(1);
 	});
@@ -125,6 +126,50 @@ function list_expend_report(pageNo) {
 					}
 
 					
+				
+					loadPaging();
+
+					pageNext();
+
+					pagePrevious();
+				},
+				error : function(data, status, er) {
+					console.log("error: " + data + " status: " + status
+							+ " er:" + er);
+				}
+			});
+}
+
+function list_loan_late(pageNo) {
+	var input = {
+		"pageNo" : $.trim(pageNo),
+		"pcnt" : $.trim($("#record_num").val()),
+	}
+	$
+			.ajax({
+				url : BASE_URL + "/report/report_loan_late",
+				type : 'POST',
+				dataType : 'JSON',
+				data : JSON.stringify(input),
+				beforeSend : function(xhr) {
+					startLoading();
+					xhr.setRequestHeader("Accept", "application/json");
+					xhr.setRequestHeader("Content-Type", "application/json");
+				},
+				success : function(data) {	
+					console.log(data);
+					stopLoading();		
+					value = data;
+					var result = "";
+					var paging = data.PAGING;
+					var curPage = paging.pageNo;
+					
+					totalPage = parseInt(paging.totalPage);
+					// clear paging
+					$("#paging").html("");
+					$("#").html("");
+					showPaging(totalPage, curPage)
+											
 				
 					loadPaging();
 
