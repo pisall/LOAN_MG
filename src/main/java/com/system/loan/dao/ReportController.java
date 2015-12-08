@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.jws.WebParam.Mode;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +30,11 @@ public class ReportController {
 		return "report_loan"; 
 	}
 	
-	@RequestMapping(value="/loan_late")
-	public String loan_late(Model model){
-		model.addAttribute("page_id","report_loan");
-		return "loan_late"; 
-	}
+	@RequestMapping(value = "/report_late")
+	public String reportLate(Model model){
+	model.addAttribute("page_id", "cont_7");
+    return "loan_late";
+}
 	
 	/**
 	 * List Customer
@@ -55,16 +56,11 @@ public class ReportController {
 		model.put("REC", report.listExpendreport(paging, coID));
 		model.put("PAGING", paging);
 		model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
-		model.put("page_id", "cont_7");
 		return model;
 	}
 	
-	@RequestMapping(value = "/report_late")
-		public String reportLate(){
-			return "loan_late";
-	}
 	@RequestMapping(value = "/report_loan_late", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public HashMap<String, Object> reportLoanLate(@RequestBody pagingDto paging,@RequestParam(name = "coID", defaultValue = "") String coID){
+	public @ResponseBody HashMap<String, Object> reportLoanLate(@RequestBody pagingDto paging,@RequestParam(name = "coID", defaultValue = "") String coID){
 		int totaPage = 0;
 		totaPage = (int) Math.ceil((float) report.getTotalLoanLate(paging, coID) / paging.getPcnt());
 		paging.setTotalPage(totaPage);
@@ -74,7 +70,6 @@ public class ReportController {
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", report.listReportLate(paging, coID));
 		model.put("PAGING", paging);
-		model.put("page_id", "cont_7");
 		return model;
 	}
 }

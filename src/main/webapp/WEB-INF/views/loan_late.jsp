@@ -77,7 +77,7 @@
 												
 											</tr>
 										</thead>
-										<tbody id="loan_late_report" >
+										<tbody id="report_loan_late" >
 											
 										</tbody>
 									</table>

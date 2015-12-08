@@ -24,10 +24,7 @@ public class ReportDaoImp implements ReportDao {
 	public static SessionFactory factory = null;
 
 	public ReportDaoImp() {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure() // configures
-																									// settings
-																									// from
-																									// hibernate.cfg.xml
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure() // configures																								// hibernate.cfg.xml
 				.build();
 		try {
 			factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
@@ -80,7 +77,23 @@ public class ReportDaoImp implements ReportDao {
 		Transaction tx = null;	
 		try {
 			tx = session.beginTransaction();
-			String sql="SELECT "
+			SQLQuery query = session.createSQLQuery(getSqlLoanLate());
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			query.setString(0, "%" + coID + "%");
+			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
+			query.setMaxResults(paging.getPcnt());
+			result = query.list();
+			tx.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+	
+    public String getSqlLoanLate(){
+    	String sql="";
+    					sql="SELECT "
 							+"ac.ac_id "
 							+",cu.cu_nm " 
 							+",cu.cu_id "
@@ -95,7 +108,7 @@ public class ReportDaoImp implements ReportDao {
 										+"from mfi_transection tr2 "
 											+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
 												+"order by tr2.pay_date ASC limit 1 "
-							   +") days_late "
+							   +") payment_date "
 								+",(SELECT "
 										+"CASE  "
 											+"WHEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) > 3 AND (ac.ac_period_type='Day' OR ac.ac_period_type='Week') "  
@@ -145,20 +158,9 @@ public class ReportDaoImp implements ReportDao {
 									+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
 								+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
 								+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
-								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,date_late,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late";
-			SQLQuery query = session.createSQLQuery(sql);
-			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			query.setString(0, "%" + coID + "%");
-			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
-			query.setMaxResults(paging.getPcnt());
-			result = query.list();
-			tx.commit();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return result;
-	}
+								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,date_late,payment_date,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late ";
+    			return sql;		
+    }
 	
 	@SuppressWarnings("unchecked")
 	public int getTotalLoanLate(pagingDto paging, String coID) {
@@ -168,73 +170,7 @@ public class ReportDaoImp implements ReportDao {
 		Transaction tx = null;	
 		try {		
 			tx = session.beginTransaction();
-			String sql="select count(*) cnt from( SELECT "
-					+"ac.ac_id "
-					+",cu.cu_nm " 
-					+",cu.cu_id "
-					+",sum(tr_pay_amount) loan_amount "
-					+",sum(tr_origin_amount) paid_amount "
-					  +",to_date((select tr2.pay_date "
-								+"from mfi_transection tr2 "
-									+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
-										+"order by tr2.pay_date DESC limit 1 "
-					   +"),'YYYYMMDD24H') date_late "
-						+",(select (CURRENT_DATE - to_date(tr2.pay_date, 'YYYYMMDD24H')) "
-								+"from mfi_transection tr2 "
-									+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
-										+"order by tr2.pay_date ASC limit 1 "
-					   +") days_late "
-						+",(SELECT "
-								+"CASE  "
-									+"WHEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) > 3 AND (ac.ac_period_type='Day' OR ac.ac_period_type='Week') "  
-									+"THEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) - 3 ELSE 0 "  
-								+"END total_days_weeks_late "   
-					   +"FROM "  
-								 +"mfi_transection tr2  "
-						 +"WHERE "  
-								 +"tr2.tr_ac_id=tr.tr_ac_id  "  	    
-						 +"AND "  
-								 +"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
-					  +") "
-						+",(SELECT "
-								+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3  AND (ac_period_type='Day' OR ac_period_type='Week') "  
-										 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3)) ELSE 0  " 
-								+"END amount_fine_days_weeks_late  " 
-								+"FROM  "
-										+"mfi_transection tr2 " 
-								+"WHERE "  
-										+"tr2.tr_ac_id=tr.tr_ac_id "   	    
-								+"AND  " 
-										+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
-					  +") "
-					  +",(SELECT "  
-								+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1 AND ac_period_type='Month' "  
-										 +"THEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1 ELSE 0 "  
-								+"END total_months_late "  
-						+"FROM "  
-										+"mfi_transection tr2 "
-						+"WHERE "  
-										+"tr2.tr_ac_id=tr.tr_ac_id "   	    
-								+"AND "  
-										+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
-					 +")"
-					 +",(SELECT "
-						+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1  AND ac_period_type='Month' " 
-								 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1)) ELSE 0  " 
-								 +"END amount_fine_months_late "
-						+"FROM "  
-									+"mfi_transection tr2 " 
-						+"WHERE "  
-									+"tr2.tr_ac_id=tr.tr_ac_id  "  	    
-								 +"AND "  
-									+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
-					  +") "
-						+"from "
-							+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
-						+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
-						+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
-						+"group by ac.ac_id,cu.cu_nm,cu.cu_id,date_late,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late "
-						+ ") cnt ";
+			String sql="select count(*) cnt from(" +getSqlLoanLate()+ ") cnt ";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);			
 			query.setString(0, "%" + coID + "%");
@@ -246,8 +182,7 @@ public class ReportDaoImp implements ReportDao {
 			e.printStackTrace();
 		}
 		return cnt;
-	}
-	
+	}	
 	
 	
 	@SuppressWarnings("unchecked")
@@ -302,17 +237,18 @@ public class ReportDaoImp implements ReportDao {
 		Object result=null;
 		try {		
 			tx = session.beginTransaction();
-			String sql="select "
-					+"cast(SUM (ac_amount) as DECIMAL) AS total_amount, "
-					+"cast(SUM (loa.paid_amount) as DECIMAL) AS total_paid_amount, "
-					+"cast(SUM (loa.amount_fine) as DECIMAL) AS total_amount_fine  "
-					+"from mfi_customers cus , mfi_account ac,mfi_co co ,mfi_loanapproval loa "
-					+"where 1=1 and (cus.cu_id=ac.cu_id) "
-					+ "and (co.co_id=cus.co_id) "
-					+ "and (co.co_id=loa.co_id) "
-					+ "and (ac.ac_stat='Y') "
-					+ "and (cus.cu_del_yn='Y') "
-					+ "and (cast(cus.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+"";
+			String sql="select "     
+					       +"cast(SUM (ac_amount) as DECIMAL) AS total_amount, "   
+					       +"cast(SUM (loa.paid_amount) as DECIMAL) AS total_paid_amount, "     
+					       +"cast(SUM (loa.amount_fine) as DECIMAL) AS total_amount_fine "      
+					       +"from mfi_customers cus , mfi_account ac,mfi_co co ,mfi_loanapproval loa ,mfi_transection tr " 
+					       +"where 1=1  "    
+									+"and (cus.cu_id=ac.cu_id)  " 
+									+"and (ac.ac_id=tr.tr_ac_id) "  						
+									+"and (tr.tr_id=loa.tr_id) "
+					        +"and (ac.ac_stat='Y') "     
+					        +"and (cus.cu_del_yn='Y') "     
+					        +"and (cast(cus.co_id as TEXT) LIKE  ? )"+ getFilter(paging)+"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
 			query.setString(0, "%" + coID + "%");

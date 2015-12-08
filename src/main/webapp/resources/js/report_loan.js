@@ -79,7 +79,6 @@ function list_expend_report(pageNo) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {	
-					console.log(data);
 					stopLoading();		
 					value = data;
 					var result = "";
@@ -147,7 +146,7 @@ function list_loan_late(pageNo) {
 	}
 	$
 			.ajax({
-				url : BASE_URL + "/report/report_loan_late",
+				url : BASE_URL + "/report/report_loan_late?coID=" + coID,
 				type : 'POST',
 				dataType : 'JSON',
 				data : JSON.stringify(input),
@@ -167,9 +166,9 @@ function list_loan_late(pageNo) {
 					totalPage = parseInt(paging.totalPage);
 					// clear paging
 					$("#paging").html("");
-					$("#").html("");
+					$("#report_loan_late").html("");
 					showPaging(totalPage, curPage)
-											
+						
 				
 					loadPaging();
 
