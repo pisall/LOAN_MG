@@ -97,8 +97,8 @@ public class ReportDaoImp implements ReportDao {
 							+"ac.ac_id "
 							+",cu.cu_nm " 
 							+",cu.cu_id "
-							+",sum(tr_pay_amount) loan_amount "
-							+",sum(tr_origin_amount) paid_amount "
+							+",sum(tr_pay_amount) paid_amount  "
+							+",sum(tr_origin_amount) loan_amount "
 							  +",to_date((select tr2.pay_date "
 										+"from mfi_transection tr2 "
 											+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
@@ -158,7 +158,7 @@ public class ReportDaoImp implements ReportDao {
 									+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
 								+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
 								+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
-								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,payment_date,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late";
+								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,payment_date,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late ORDER BY payment_date DESC";
     			return sql;		
     }
 	
@@ -248,11 +248,12 @@ public class ReportDaoImp implements ReportDao {
 									+"and (tr.tr_id=loa.tr_id) "
 					        +"and (ac.ac_stat='Y') "     
 					        +"and (cus.cu_del_yn='Y') "     
-					        +"and ( cast(cus.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+"";
+					        +"and ( cast(cus.co_id as TEXT) LIKE '%"+coID+"%' ) "+ getFilter(paging)+"";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
-			query.setString(0, "%" + coID + "%");
-			result=query.uniqueResult();		
+			//query.setString(0, "%" + coID + "%");
+			result=query.uniqueResult();	
+		
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");

@@ -10,7 +10,6 @@ var total_amount=0,total_paid_amount=0,total_amount_fine=0;
 
 $(function(){
 	list_expend_report(page_no);
-	list_loan_late(page_no);
 	$("#record_num").change(function() {
 		list_expend_report(1);
 	});
@@ -61,6 +60,7 @@ function dateFormate(date){
 }
 
 function list_expend_report(pageNo) {
+
 	var input = {
 		"pageNo" : $.trim(pageNo),
 		"pcnt" : $.trim($("#record_num").val()),
@@ -79,6 +79,7 @@ function list_expend_report(pageNo) {
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
 				success : function(data) {	
+					console.log(data);
 					stopLoading();		
 					value = data;
 					var result = "";
@@ -90,6 +91,8 @@ function list_expend_report(pageNo) {
 					total_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount));
 					total_paid_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_paid_amount));
 					total_amount_fine=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount_fine));
+					
+					console.log(total_paid_amount);
 					// clear paging
 					$("#paging").html("");
 					$("#loan_expend_report").html("");
@@ -139,83 +142,17 @@ function list_expend_report(pageNo) {
 			});
 }
 
-function list_loan_late(pageNo) {
-	var input = {
-		"pageNo" : $.trim(pageNo),
-		"pcnt" : $.trim($("#record_num").val()),
-	}
-	$
-			.ajax({
-				url : BASE_URL + "/report/report_loan_late?coID=" + coID,
-				type : 'POST',
-				dataType : 'JSON',
-				data : JSON.stringify(input),
-				beforeSend : function(xhr) {
-					startLoading();
-					xhr.setRequestHeader("Accept", "application/json");
-					xhr.setRequestHeader("Content-Type", "application/json");
-				},
-				success : function(data) {	
-					console.log(data);
-					stopLoading();		
-					value = data;
-					var result = "";
-					var paging = data.PAGING;
-					var curPage = paging.pageNo;
-					
-					totalPage = parseInt(paging.totalPage);
-					// clear paging
-					$("#paging").html("");
-					$("#report_loan_late").html("");
-					showPaging(totalPage, curPage)
-						
-						if (data.REC.length > 0) {
-
-							for (var i = 0; i < data.REC.length; i++) {
-								var cuID = data.REC[i].cu_id;
-								
-								//subAmount=data.SUB_AMOUNT;
-								result += "<tr><td>"
-										+ cuID
-										+ "</td>"
-										+ "<td style='cursor: pointer;' class='name'>"
-										+ "<span class='ellipsis' title='"+data.REC[i].cu_nm+"'>"+data.REC[i].cu_nm+"</span>"
-										+ "</td>"								
-										+ "<td>" 
-										+ formatStringToDateTime(data.REC[i].ac_start_date,"")
-										+ "</td>"
-										+ "<td>"
-										+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
-										+ "</td>"
-										
-										+"</tr>";
-							}
-							$("#report_loan_late").append(result);
-						}
-						 
-					loadPaging();
-
-					pageNext();
-
-					pagePrevious();
-				},
-				error : function(data, status, er) {
-					console.log("error: " + data + " status: " + status
-							+ " er:" + er);
-				}
-			});
-}
 
 function getTotalPaidAmount(){
-	return (ceilAmount(total_paid_amount + total_amount_fine))
+	return (total_paid_amount + total_amount_fine)
 }
 
 function getProfit(){
-	return (ceilAmount(getTotalPaidAmount() - total_amount));
+	return (getTotalPaidAmount() - total_amount);
 }
 
 function getBalance(){
-	return (ceilAmount(total_amount - getTotalPaidAmount()));
+	return (total_amount - getTotalPaidAmount());
 }
 
 function loadPaging() {
@@ -223,7 +160,8 @@ function loadPaging() {
 
 		page_no = $(this).children("a").html();
 
-		list_expend_report(page_no)
+		list_expend_report(page_no);
+		
 	});
 }
 
@@ -241,7 +179,7 @@ function pageNext() {
 			page_no = totalPage
 
 		}
-		list_expend_report(page_no)
+		list_expend_report(page_no);
 
 	});
 }
@@ -260,7 +198,7 @@ function pagePrevious() {
 
 		}
 
-		list_expend_report(page_no)
+		list_expend_report(page_no);
 
 	});
 }

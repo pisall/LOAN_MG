@@ -65,16 +65,15 @@
 								<div class="table-responsive">
 									<table class="table table-hover table-striped">
 										<thead class="style2">
-											<tr class="active">
-												<th>No</th>
+											<tr class="active">											
 												<th>Customer No</th>
 												<th>Customer Name</th>
-												<th>Customer Officer No</th>
-												<th>Customer Officer Name</th>
-												<th>Pay Date</th>
-												<th>Pay Amount</th>
-												<th>Days Late</th>
-												
+												<th>Payment Date</th>
+												<th>Loan Amount</th>
+												<th>Paid Amount</th>												
+												<th>Amount Fine</th>
+												<th>Days Late</th>											
+												<th>Total Amount</th>																																	
 											</tr>
 										</thead>
 										<tbody id="report_loan_late" >
@@ -121,7 +120,7 @@
 		var id="<%=strCoId%>";
 	</script>
 	
-	<script src="${pageContext.request.contextPath}/resources/js/report_loan.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/report_late.js"></script>
 </body>
 
 </html>
