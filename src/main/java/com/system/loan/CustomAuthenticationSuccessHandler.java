@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     	for(GrantedAuthority gauth:authentication.getAuthorities()){
     		strRole=gauth.getAuthority();
     	}
-    	
+    	System.out.println("rol="+strRole);
     	if(strRole.equals("ROLE_SYS")){
     		 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
     		 httpServletResponse.sendRedirect("sys/sys_form");
