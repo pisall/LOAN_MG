@@ -74,6 +74,182 @@ public class ReportDaoImp implements ReportDao {
 		return filter;
 	}
 	
+	public List listReportLate(pagingDto paging, String coID) {
+		Session session = factory.getCurrentSession();
+		List result = null;	
+		Transaction tx = null;	
+		try {
+			tx = session.beginTransaction();
+			String sql="SELECT "
+							+"ac.ac_id "
+							+",cu.cu_nm " 
+							+",cu.cu_id "
+							+",sum(tr_pay_amount) loan_amount "
+							+",sum(tr_origin_amount) paid_amount "
+							  +",to_date((select tr2.pay_date "
+										+"from mfi_transection tr2 "
+											+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
+												+"order by tr2.pay_date DESC limit 1 "
+							   +"),'YYYYMMDD24H') date_late "
+								+",(select (CURRENT_DATE - to_date(tr2.pay_date, 'YYYYMMDD24H')) "
+										+"from mfi_transection tr2 "
+											+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
+												+"order by tr2.pay_date ASC limit 1 "
+							   +") days_late "
+								+",(SELECT "
+										+"CASE  "
+											+"WHEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) > 3 AND (ac.ac_period_type='Day' OR ac.ac_period_type='Week') "  
+											+"THEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) - 3 ELSE 0 "  
+										+"END total_days_weeks_late "   
+							   +"FROM "  
+										 +"mfi_transection tr2  "
+								 +"WHERE "  
+										 +"tr2.tr_ac_id=tr.tr_ac_id  "  	    
+								 +"AND "  
+										 +"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+							  +") "
+								+",(SELECT "
+										+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3  AND (ac_period_type='Day' OR ac_period_type='Week') "  
+												 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3)) ELSE 0  " 
+										+"END amount_fine_days_weeks_late  " 
+										+"FROM  "
+												+"mfi_transection tr2 " 
+										+"WHERE "  
+												+"tr2.tr_ac_id=tr.tr_ac_id "   	    
+										+"AND  " 
+												+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+							  +") "
+							  +",(SELECT "  
+										+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1 AND ac_period_type='Month' "  
+												 +"THEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1 ELSE 0 "  
+										+"END total_months_late "  
+								+"FROM "  
+												+"mfi_transection tr2 "
+								+"WHERE "  
+												+"tr2.tr_ac_id=tr.tr_ac_id "   	    
+										+"AND "  
+												+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+							 +")"
+							 +",(SELECT "
+								+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1  AND ac_period_type='Month' " 
+										 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1)) ELSE 0  " 
+										 +"END amount_fine_months_late "
+								+"FROM "  
+											+"mfi_transection tr2 " 
+								+"WHERE "  
+											+"tr2.tr_ac_id=tr.tr_ac_id  "  	    
+										 +"AND "  
+											+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+							  +") "
+								+"from "
+									+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
+								+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
+								+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
+								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,date_late,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			query.setString(0, "%" + coID + "%");
+			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
+			query.setMaxResults(paging.getPcnt());
+			result = query.list();
+			tx.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int getTotalLoanLate(pagingDto paging, String coID) {
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+		int cnt = 0;	
+		Transaction tx = null;	
+		try {		
+			tx = session.beginTransaction();
+			String sql="select count(*) cnt from( SELECT "
+					+"ac.ac_id "
+					+",cu.cu_nm " 
+					+",cu.cu_id "
+					+",sum(tr_pay_amount) loan_amount "
+					+",sum(tr_origin_amount) paid_amount "
+					  +",to_date((select tr2.pay_date "
+								+"from mfi_transection tr2 "
+									+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
+										+"order by tr2.pay_date DESC limit 1 "
+					   +"),'YYYYMMDD24H') date_late "
+						+",(select (CURRENT_DATE - to_date(tr2.pay_date, 'YYYYMMDD24H')) "
+								+"from mfi_transection tr2 "
+									+"where tr2.tr_stts='3' and tr2.tr_ac_id=tr.tr_ac_id " 
+										+"order by tr2.pay_date ASC limit 1 "
+					   +") days_late "
+						+",(SELECT "
+								+"CASE  "
+									+"WHEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) > 3 AND (ac.ac_period_type='Day' OR ac.ac_period_type='Week') "  
+									+"THEN  (CURRENT_DATE - (to_date(tr2.pay_date,'YYYYMMDD24H'))) - 3 ELSE 0 "  
+								+"END total_days_weeks_late "   
+					   +"FROM "  
+								 +"mfi_transection tr2  "
+						 +"WHERE "  
+								 +"tr2.tr_ac_id=tr.tr_ac_id  "  	    
+						 +"AND "  
+								 +"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+					  +") "
+						+",(SELECT "
+								+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 3  AND (ac_period_type='Day' OR ac_period_type='Week') "  
+										 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 3)) ELSE 0  " 
+								+"END amount_fine_days_weeks_late  " 
+								+"FROM  "
+										+"mfi_transection tr2 " 
+								+"WHERE "  
+										+"tr2.tr_ac_id=tr.tr_ac_id "   	    
+								+"AND  " 
+										+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+					  +") "
+					  +",(SELECT "  
+								+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1 AND ac_period_type='Month' "  
+										 +"THEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1 ELSE 0 "  
+								+"END total_months_late "  
+						+"FROM "  
+										+"mfi_transection tr2 "
+						+"WHERE "  
+										+"tr2.tr_ac_id=tr.tr_ac_id "   	    
+								+"AND "  
+										+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+					 +")"
+					 +",(SELECT "
+						+"CASE WHEN (CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) > 1  AND ac_period_type='Month' " 
+								 +"THEN (tr_pay_amount * 0.1 * ((CURRENT_DATE - (to_date(pay_date,'YYYYMMDD24H'))) - 1)) ELSE 0  " 
+								 +"END amount_fine_months_late "
+						+"FROM "  
+									+"mfi_transection tr2 " 
+						+"WHERE "  
+									+"tr2.tr_ac_id=tr.tr_ac_id  "  	    
+								 +"AND "  
+									+"tr2.tr_stts='3' order by tr2.pay_date ASC limit 1 " 
+					  +") "
+						+"from "
+							+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
+						+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
+						+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
+						+"group by ac.ac_id,cu.cu_nm,cu.cu_id,date_late,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late "
+						+ ") cnt ";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);			
+			query.setString(0, "%" + coID + "%");
+			HashMap<String,Object> result=(HashMap<String, Object>)query.uniqueResult();
+			cnt=Integer.parseInt(result.get("cnt").toString());		
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	public int totalExpendReport(pagingDto paging, String coID) {
 		// TODO Auto-generated method stub

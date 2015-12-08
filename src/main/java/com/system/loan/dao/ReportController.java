@@ -1,6 +1,7 @@
 package com.system.loan.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,7 +43,7 @@ public class ReportController {
 	 */
 
 	@RequestMapping(value = "/list_expend_report", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> listCus(@RequestBody pagingDto paging,
+	public @ResponseBody HashMap<String, Object> listExpendReport(@RequestBody pagingDto paging,
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
 		int totaPage = 0;
 		totaPage = (int) Math.ceil((float) report.totalExpendReport(paging, coID) / paging.getPcnt());
@@ -54,7 +55,26 @@ public class ReportController {
 		model.put("REC", report.listExpendreport(paging, coID));
 		model.put("PAGING", paging);
 		model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
-		//model.put("SUB_AMOUNT", report.getSubTotal(coID, paging));
+		model.put("page_id", "cont_7");
+		return model;
+	}
+	
+	@RequestMapping(value = "/report_late")
+		public String reportLate(){
+			return "loan_late";
+	}
+	@RequestMapping(value = "/report_loan_late", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+	public HashMap<String, Object> reportLoanLate(@RequestBody pagingDto paging,@RequestParam(name = "coID", defaultValue = "") String coID){
+		int totaPage = 0;
+		totaPage = (int) Math.ceil((float) report.getTotalLoanLate(paging, coID) / paging.getPcnt());
+		paging.setTotalPage(totaPage);
+		if (paging.getTotalPage() < paging.getPageNo()) {
+			paging.setPageNo(paging.getTotalPage());
+		}
+		HashMap<String, Object> model = new HashMap<String, Object>();
+		model.put("REC", report.listReportLate(paging, coID));
+		model.put("PAGING", paging);
+		model.put("page_id", "cont_7");
 		return model;
 	}
 }

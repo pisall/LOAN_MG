@@ -8,10 +8,12 @@
 <body>
 
 	<div id="wrapper">
+	
+	
 
 		<!-- Navigation -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">		
+			
 			<!-- Fixed Up Navigation -->
 			<%@include file="include/_fixed_up_nav.jsp"%>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">

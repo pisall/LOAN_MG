@@ -121,8 +121,7 @@
 		var id="<%=strCoId%>";
 	</script>
 	
-<%-- 	<script
-		src="${pageContext.request.contextPath}/resources/js/report_loan.js"></script> --%>
+	<script src="${pageContext.request.contextPath}/resources/js/report_loan.js"></script>
 </body>
 
 </html>
