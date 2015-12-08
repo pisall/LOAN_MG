@@ -342,46 +342,20 @@
 
 	<script type="text/javascript">
 	
-		
-			
-			/*$("#loanAgreement").validate({
-				rules:{
-					"ac_period":{
-						lessThen24:true,
-						lessThen56:true
-					},
-					"ac_rate":{
-						lessThen10:true
-					}
-				},
-				errorPlacement : function(error, element) {				
-					//label.addClass('arrow');
-					//label.insertAfter(element);		
-					//error.appendTo(element.prev(".control-label") );
-					error.insertBefore(element);
-				},
-				 wrapper: 'div', 
-				submitHandler : function(form) {
-					form.submit();
-				}
-			});*/
-						
-	
-			/*$("#dob").datepicker({
-				showOtherMonths : true,
-				selectOtherMonths : true,
-				changeMonth : true,
-				changeYear : true,
-				dateFormat : "dd-mm-yy"
-			});
-		})*/
-		
 		$(document).ready(function(){
 			//blur event
 			onblur();
 			
 			$("#query").click(function(){
 				coInsert(false);
+			});
+			
+			$("#cu_dob").datepicker({
+				showOtherMonths : true,
+				selectOtherMonths : true,
+				changeMonth : true,
+				changeYear : true,
+				dateFormat : "dd-mm-yy"
 			});
 		});
 
