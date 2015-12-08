@@ -213,6 +213,14 @@ function coInsert(isNew){
 		},
 		success : function(data) {
 			console.log(data);
+			
+			if(data.ERROR){
+				alert(data.MESSAGE);
+			}else{
+				alert("Registration is successfully done!");
+				window.location.href = BASE_URL+"/logout";
+				
+			}
 		},
 		error : function(data, status, er) {
 			console.log("error: " + data + " status: " + status + " er:" + er);
