@@ -56,7 +56,7 @@ public class ReportDaoImp implements ReportDao {
 								+"and (cus.cu_id=ac.cu_id) "    							
 								+"and (ac.ac_stat='Y') "       
 					            +"and (cus.cu_del_yn='Y') "       
-					            +"and ( cast(cus.co_id as TEXT) LIKE ? ) " + getFilter(paging) + " Order By ac.ac_start_date DESC ";
+					            +"and ( cast(co.co_id as TEXT) LIKE ? ) " + getFilter(paging) + " Order By ac.ac_start_date DESC ";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			query.setString(0, "%" + coID + "%");
@@ -105,7 +105,7 @@ public class ReportDaoImp implements ReportDao {
 							            +"cus.cu_del_yn='Y' "
 							        +") "
 							        +"and ( "
-							            +"cast(cus.co_id as TEXT) LIKE ? "
+							            +"cast(co.co_id as TEXT) LIKE ? "
 							        +") "  
 							        +" " + getFilter(paging) + " "
 							    +"Order By "
@@ -146,7 +146,7 @@ public class ReportDaoImp implements ReportDao {
 									+"and (tr.tr_id=loa.tr_id) "
 					        +"and (ac.ac_stat='Y') "     
 					        +"and (cus.cu_del_yn='Y') "     
-					        +"and ( cast(cus.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+ " ";
+					        +"and ( cast(co.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+ " ";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
 			query.setString(0, "%" + coID + "%");

@@ -108,7 +108,10 @@ public class LoanAgreementController implements Serializable{
 		    //pay_date_time for pay on schedule 
 		    dateformate = new SimpleDateFormat("yyyyMMddhhHHmmss"); 
 		    pay_date_time=dateformate.format(DatePayTime); 
-		    acodto.setAc_start_date(pay_date_time);
+		    
+		    //System.out.println("pay_date====================="+pay_date_time);
+		    
+		    //acodto.setAc_start_date(pay_date_time);
 		    // day pay on schedule 
 		    String Pay_day_Str= ""+pay_day; 
 		    
@@ -171,9 +174,11 @@ public class LoanAgreementController implements Serializable{
 			tran.setTr_stts("1");
 			
 			tran.setAccount(acodto);
+			
 			tran.setLoanAgreement(loanAgreDto); 
 			 
-			transections.add(tran); 
+			transections.add(tran);  
+			acodto.setAc_start_date(dateimte);
 			acodto.setLoanAGr(loanAgreDto);
 			guiloanernfoDto.setLoanAgre(loanAgreDto);
 			acodto.setAc_stat("Y");
