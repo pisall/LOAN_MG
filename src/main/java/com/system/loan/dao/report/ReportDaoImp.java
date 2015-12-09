@@ -94,7 +94,10 @@ public class ReportDaoImp implements ReportDao {
     public String getSqlLoanLate(){
     	String sql="";
     					sql="SELECT "
-							+"ac.ac_id "
+    					    +"co.co_fist_nm "
+    					    +",co.co.last_nm "
+    					    +",co.co.phone "
+							+",ac.ac_id "
 							+",cu.cu_nm " 
 							+",cu.cu_id "
 							+",sum(tr_pay_amount) paid_amount  "

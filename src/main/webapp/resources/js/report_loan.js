@@ -104,13 +104,13 @@ function list_expend_report(pageNo) {
 							var cuID = data.REC[i].cu_id;
 							
 							//subAmount=data.SUB_AMOUNT;
-							result += "<tr><td>"
+							result += "<tr><td  align='center'>"
 									+ cuID
 									+ "</td>"
 									+ "<td style='cursor: pointer;' class='name'>"
 									+ "<span class='ellipsis' title='"+data.REC[i].cu_nm+"'>"+data.REC[i].cu_nm+"</span>"
 									+ "</td>"								
-									+ "<td>" 
+									+ "<td  align='center'>" 
 									+ formatStringToDateTime(data.REC[i].ac_start_date,"")
 									+ "</td>"
 									+ "<td>"

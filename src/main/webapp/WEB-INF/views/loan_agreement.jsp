@@ -77,7 +77,7 @@
 										<label class="control-label col-sm-2" for="fst_nm">
 											Name </label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control required" name="cu_nm"
+											<input type="text" class="form-control" name="cu_nm"
 												id="cu_nm" placeholder="Full Name" maxlength="50">
 											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
@@ -109,7 +109,7 @@
 											DOB</label>
 										<div class="col-sm-10">
 											<input maxlength="50" type="text"
-												class="form-control  required" id="cu_dob" name="cu_dob"
+												class="form-control" id="cu_dob" name="cu_dob"
 												placeholder="Date of Birth">
 											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
@@ -119,7 +119,7 @@
 											ID Card</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="9"
-												class="form-control required check_number"
+												class="form-control"
 												name="cu_national_id" id="cu_national_id"
 												placeholder="Enter National Card">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
@@ -130,7 +130,7 @@
 											Phone</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="10"
-												class="form-control required check_number" name="cu_phone"
+												class="form-control " name="cu_phone"
 												id="cu_phone" placeholder="User Phone number">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
@@ -161,7 +161,7 @@
 											Guarantor</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="50"
-												class="form-control required" name="gu_nm" id="gu_nm"
+												class="form-control" name="gu_nm" id="gu_nm"
 												placeholder="Guarantor name">
 											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
@@ -183,7 +183,7 @@
 											ID Card</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="9"
-												class="form-control required check_number"
+												class="form-control "
 												name="gu_national_id" id="gu_national_id"
 												placeholder="Guarantor National Card">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
@@ -194,7 +194,7 @@
 											Phone</label>
 										<div class="col-sm-10">
 											<input type="text" maxlength="10"
-												class="form-control required check_number" name="gu_phone"
+												class="form-control" name="gu_phone"
 												id="gu_phone" placeholder="Guarantor cu_phone">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
@@ -224,8 +224,8 @@
 										<label class="control-label col-sm-2">Amount</label>
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
-											<input type="text" class="form-control required check_number"
-												name="ac_ac_amount" id="ac_amount" placeholder="Amount">
+											<input type="text" class="form-control "
+												name="ac_amount" id="ac_amount" placeholder="Amount">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 											<!-- <div class="input-group-addon">R</div> -->
 											<!-- </div> -->
@@ -236,8 +236,8 @@
 										<label class="control-label col-sm-2">Rate</label>
 										<div class="col-sm-10">
 											<!-- <div class="input-group"> -->
-											<input type="text" class="form-control required check_number"
-												name="ac_rate" id="ac_rate" placeholder="Rate" maxlength="4">
+											<input type="text" class="form-control "
+												name="ac_rate" id="ac_rate" placeholder="Rate" maxlength="5">
 												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>											
 										</div>
 									</div>
@@ -288,8 +288,8 @@
 									</div>
 
 									<div class="pull-right">
-										<button type="button" id="query" class="btn btn-primary">Int
-											Query</button>
+										<button type="button" id="query" class="btn btn-primary">
+											Save</button>
 									</div>
 								</div>
 							</div>
@@ -343,21 +343,44 @@
 	<script type="text/javascript">
 	
 		$(document).ready(function(){
+			$("#query").click(function(){			
+				coInsert();
+			});
 			//blur event
 			onblur();
-			
-			$("#query").click(function(){
-				coInsert(false);
-			});
+			$("#ac_amount").ForceNumericOnly();
+			$("#ac_rate").ForceNumericOnly();
+			$("#ac_period").ForceNumericOnly();
+			$("#cu_phone").ForceNumericOnly();
+			$("#cu_national_id").ForceNumericOnly();
+			$("#gu_phone").ForceNumericOnly();
+			$("#gu_national_id").ForceNumericOnly();
 			
 			$("#cu_dob").datepicker({
 				showOtherMonths : true,
 				selectOtherMonths : true,
 				changeMonth : true,
 				changeYear : true,
-				dateFormat : "dd-mm-yy"
+				dateFormat : "dd-mm-yy",
+				onSelect: function(dateText) {
+					  var txt="";
+						txt=this.value;
+						if(txt==""){
+							$("#cu_dob").siblings(".help-block").show();
+							$("#cu_dob").parents(".form-group").addClass("has-error");
+						}else{
+							$("#cu_dob").parents(".form-group").removeClass("has-error");
+							$("#cu_dob").siblings(".help-block").hide();
+						}
+				  }
 			});
+			
+			
+			
+			
 		});
+		
+		
 
 		function onblur(){
 			//Customer validation 
@@ -368,72 +391,34 @@
 			checkNullOnBlue("gu_nm");
 			checkNullOnBlue("gu_phone");
 			checkNullOnBlue("gu_national_id");
-			checkNullOnBlue("gu_dob");
 			checkNullOnBlue("ac_amount");
 			checkNullOnBlue("ac_rate");
 			checkNullOnBlue("ac_period");
 		}
 		
 		
-		function checkNullOnBlue(name){
-			$("#"+name).blur(function(){
-				var txt="";
-				txt=$(this).val();
-				if(txt==""){
-					$(this).siblings(".help-block").show();
-					$(this).parents(".form-group").addClass("has-error");
-				}else{
-					$(this).parents(".form-group").removeClass("has-error");
-					$(this).siblings(".help-block").hide();
-				}
-			});
-		}
 		
-			
-		function checkNull(input,name){
-			/*--  log_email  --*/
-			var error=false;
-			if(input){
-				if(input!=""){
-					$("#" +name).parents(".form-group").removeClass("has-error");
-					$("#" +name).siblings(".help-block").hide();
-				}else{
-					
-					error=true;
-					$("#" +name).parents(".form-group").addClass("has-error");
-					$("#" +name).siblings(".help-block").show();
-					
-				}
-			}else{
-				error=true;
-				$("#" +name).parents(".form-group").addClass("has-error");
-				$("#" +name).siblings(".help-block").show();
-				
-			}
-		}
-
 
 		function validation(input){
 			/*--  log_email  --*/
 			var error=false;
-			
-			checkNull(input.cu_nm,"cu_nm");
-			checkNull(input.cu_dob,"cu_dob");
-			checkNull(input.cu_national_id,"cu_national_id");
-			checkNull(input.cu_phone,"cu_phone");
-			checkNull(input.gu_nm,"gu_nm");
-			checkNull(input.gu_phone,"gu_phone");
-			checkNull(input.gu_national_id,"gu_national_id");
-			checkNull(input.gu_dob,"gu_dob");
-			checkNull(input.ac_amount,"ac_amount");
-			checkNull(input.ac_rate,"ac_rate");
-			checkNull(input.ac_period,"ac_period");
-	
+			if(checkNull(input.cu_nm,"cu_nm"))error=true;
+			if(checkNull(input.cu_dob,"cu_dob"))error=true;
+			if(checkNull(input.cu_national_id,"cu_national_id"))error=true;
+			if(checkNull(input.cu_phone,"cu_phone"))error=true;
+			if(checkNull(input.gu_nm,"gu_nm"))error=true;
+			if(checkNull(input.gu_phone,"gu_phone"))error=true;
+			if(checkNull(input.gu_national_id,"gu_national_id"))error=true;
+			if(checkNull(input.ac_amount,"ac_amount"))error=true;
+			if(checkNull(input.ac_rate,"ac_rate"))error=true;
+			if(checkNull(input.ac_period,"ac_period"))error=true;
+		
 			return error;
 		}
 		function coInsert(isNew){
 			var input={};
 			input['cu_nm']=$("#cu_nm").val();
+			input['cu_dob']=$("#cu_dob").val();
 			input['cu_national_id']=$("#cu_national_id").val();
 			input['cu_phone']=$("#cu_phone").val();
 			input['gu_nm']=$("#gu_nm").val();
@@ -442,35 +427,13 @@
 			input['ac_amount']=$("#ac_amount").val();
 			input['ac_rate']=$("#ac_rate").val();
 			input['ac_period']=$("#ac_period").val();
-			
-			console.log(input);
-			//pb_adress
-			//return;
-			
+		
 			if(validation(input)){
 				return;
 			}
-			$.ajax({
-				url : BASE_URL + "/co_001_controller/co_c0001",
-				type : 'POST',
-				dataType : 'JSON',
-				data : JSON.stringify(input),
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Accept", "application/json");
-					xhr.setRequestHeader("Content-Type", "application/json");
-				},
-				success : function(data) {
-					alert("New CO creating is successfully!")
-					if(isNew){
-						window.location.href = BASE_URL+"/co_001_controller/co_0001";
-					}else{
-						window.location.href = BASE_URL+"/co_001_controller/co_0003";
-					}
-				},
-				error : function(data, status, er) {
-					console.log("error: " + data + " status: " + status + " er:" + er);
-				}
-			});
+			
+		    $("#loanAgreement").submit();
+					
 		}
 		
 		

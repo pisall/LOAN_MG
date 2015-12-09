@@ -44,6 +44,43 @@
       <script type="text/javascript">
       var new_window;
 		$(function(){
+			 var beforePrint = function() {
+					$("button").hide();
+					$(".pagination").hide();
+					$(".action").hide();
+					$(".status").hide();
+					$("#word").hide();
+					$("#select_num").hide();
+					$(".signature").show(); 
+					$(".signature1").show(); 
+			    };
+			    var afterPrint = function() {
+			    	$("button").show();
+					$(".pagination").show();
+					$(".action").show();
+					$(".status").show();
+					$("#word").show();
+					$("#select_num").show();
+					$(".signature").hide(); 
+					$(".signature1").hide(); 
+			    };
+
+			    if (window.matchMedia) {
+			        var mediaQueryList = window.matchMedia('print');
+			        mediaQueryList.addListener(function(mql) {
+			            if (mql.matches) {
+			                beforePrint();
+			            }else {
+			                afterPrint();
+			            }
+			        });
+			    }
+
+			    window.onbeforeprint = beforePrint;
+			    window.onafterprint = afterPrint;
+
+
+			
 			
 			$("#back_up").click(function(){		
 				startLoading();
@@ -114,6 +151,68 @@
 				a3=(a2*100);
 				return a3;
 			}
+		 
+		 function checkNullOnBlue(name){
+				$("#"+name).blur(function(){
+					var txt="";
+					txt=$(this).val();
+					if(txt==""){
+						$(this).siblings(".help-block").show();
+						$(this).parents(".form-group").addClass("has-error");
+					}else{
+						$(this).parents(".form-group").removeClass("has-error");
+						$(this).siblings(".help-block").hide();
+					}
+				});
+		}
+	
+			function checkNull(input,name){
+				/*--  log_email  --*/
+				var isnull=false;
+				if(input){
+					if(input!=""){
+						$("#" +name).parents(".form-group").removeClass("has-error");
+						$("#" +name).siblings(".help-block").hide();
+					}else{
+						
+						isnull=true;
+						$("#" +name).parents(".form-group").addClass("has-error");
+						$("#" +name).siblings(".help-block").show();
+						
+					}
+				}else{
+					isnull=true;
+					$("#" +name).parents(".form-group").addClass("has-error");
+					$("#" +name).siblings(".help-block").show();
+					
+				}
+				
+				return isnull;
+			}
+			
+			jQuery.fn.ForceNumericOnly =
+				function()
+				{
+				    return this.each(function()
+				    {
+				        $(this).keydown(function(e)
+				        {
+				            var key = e.charCode || e.keyCode || 0;
+				            // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+				            // home, end, period, and numpad decimal
+				            return (
+				                key == 8 || 
+				                key == 9 ||
+				                key == 13 ||
+				                key == 46 ||
+				                key == 110 ||
+				                key == 190 ||
+				                (key >= 35 && key <= 40) ||
+				                (key >= 48 && key <= 57) ||
+				                (key >= 96 && key <= 105));
+				        });
+				    });
+				};
 		
 	</script>
 

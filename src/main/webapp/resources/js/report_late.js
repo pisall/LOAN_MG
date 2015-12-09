@@ -54,14 +54,14 @@ function list_loan_late(pageNo) {
 								    var total_amount=accounting.formatMoney((paid_amount+amount_fine),"")+" R";
 														
 								result += "<tr>" 
-									+"<td>"+data.REC[i].cu_id+"</td>" 
-									+"<td>"+data.REC[i].cu_nm+"</td>" 
-									+"<td>"+data.REC[i].payment_date+"</td>" 
+									+"<td  align='center'>"+data.REC[i].cu_id+"</td>" 
+									+"<td align='left'>"+data.REC[i].cu_nm+"</td>" 
+									+"<td align='center' >"+data.REC[i].payment_date+"</td>" 
 									+"<td>"+accounting.formatMoney(loan_amount,"")+" R"+"</td>" 
-									+"<td>"+accounting.formatMoney(paid_amount,"")+" R"+"</td>" 							
-									+"<td>"+accounting.formatMoney(amount_fine,"")+" R"+"</td>" 
-									+"<td>"+days_late+"</td>" 
-									+"<td>"+total_amount+"</td>" 
+									+"<td '>"+accounting.formatMoney(paid_amount,"")+" R"+"</td>" 							
+									+"<td >"+accounting.formatMoney(amount_fine,"")+" R"+"</td>" 
+									+"<td align='center'>"+days_late+"</td>" 
+									+"<td >"+total_amount+"</td>" 
 										+"</tr>";															
 																					
 										

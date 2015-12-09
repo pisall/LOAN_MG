@@ -216,7 +216,7 @@ function listCus(pageNo) {
 
 						for (var i = 0; i < data.REC.length; i++) {
 							var cuID = data.REC[i].cu_id;
-							result += "<tr><td>"
+							result += "<tr><td align='center'>"
 									+ cuID
 									+ "</td>"
 									+ "<td style='cursor: pointer;' class='name'>"
@@ -225,7 +225,7 @@ function listCus(pageNo) {
 									+ "<td>"
 									+ data.REC[i].cu_national_id
 									+ "</td>"
-									+ "<td>"
+									+ "<td align='center'>"
 									+ data.REC[i].cu_sex
 									+ "</td>"
 									+ "<td>"
@@ -234,7 +234,7 @@ function listCus(pageNo) {
 									+ "<td style='max-width:0px'>"
 									+ "<span class='ellipsis' title='"+data.REC[i].cu_address+"'>"+data.REC[i].cu_address+"</span>"
 									+ "</td>"
-									+ "<td>"
+									+ "<td align='center' class='action'>"
 									+ "<a href='"
 									+ BASE_URL
 									+ "/customer/edit_customer?cuID="

@@ -12,6 +12,15 @@
 			tr_stts=Integer.parseInt(request.getParameter("tr_stts").toString());
 		}
 	%>
+	<style>
+		.form-group.required .control-label:after {
+		  content:"*";
+		  color:red;
+		}
+		.help-block{
+			display: none;
+		}
+	</style>
 <body>
 
 		<!-- End Navigation -->
@@ -19,13 +28,13 @@
 			<div class="container-fluid">
 				<!-- Page Heading -->
 				<div class="row" >
-					<div class="col-lg-12 head-print">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 head-print">
 						<!--<input type="hidden" id="tr_id"
 							value="" /> <input
 							type="hidden" id="cu_id"
 							value="" />-->
 							<button style="float: left;" class="btn btn-primary"
-								onclick=" return goBackPage();">
+								onclick=" return goBackPage();" id="btnGoBack">
 								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
 							</button> 
 						<h2 class="page-header" style="text-align: center">Loan
@@ -136,31 +145,34 @@
 						<div class="col-lg-12">
 
 							<div class="row">
-								<div class="col-lg-6 col-md-6">
-									<div class="form-group">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group required">
 										<label class="control-label col-sm-4" for="paid_amount">
 											Paid Amount:</label>
 										<div class="col-sm-8">
-											<input  type="text" class="form-control check_number required"
+											<input  type="text" class="form-control"
 												name="paid_amount"  id="paid_amount" placeholder="0.0" >
+												<span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
 										</div>
 									</div>
 									
-									<div class="form-group">
+									<div class="form-group required">
 										<label class="control-label col-sm-4" for="amount-fine">
 											Days Late:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
-												name="day_late"  id="day_late" placeholder="0.0" >											
+											<input type="text" class="form-control "
+												name="day_late"  id="day_late" placeholder="0.0" >
+												<span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>												
 										</div>
 									</div>
 									
-									<div class="form-group">
-										<label class="control-label col-sm-4" for="amount-fine">Amount
+									<div class="form-group required">
+										<label class="control-label col-sm-4" for="amount-fine">
 											Amount fine:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number   "
-												name="amount_fine"   value="0" id="amount_fine" placeholder="0.0">											
+											<input type="text" class="form-control"
+												name="amount_fine"   value="0" id="amount_fine" placeholder="0.0">	
+												<span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>											
 										</div>
 									</div>
 									
@@ -168,26 +180,27 @@
 										<label class="control-label col-sm-4" for="amount-fine">
 											Total Amount:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
+											<input type="text" class="form-control "
 												name="total_paid_amount" disabled="disabled"  value="0" id="total_paid_amount" placeholder="0.0">											
 										</div>
 									</div>
 									
 																	
-									<div class="form-group" id="frm_pre_pay"  style="display:none">
-										<label class="control-label col-sm-4" for="amount-fine">
+									<div class="form-group required" id="frm_pre_pay"  style="display:none">
+										<label class="control-label col-sm-4" for="pre_pay">
 											Prepay:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
-												name="pre_pay"  value="0" id="pre_pay" placeholder="0.0">											
+											<input type="text" class="form-control"
+												name="pre_pay"  value="0" id="pre_pay" placeholder="0.0">	
+												<span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>											
 										</div>
 									</div>
 									
 									<div class="form-group" id="frm_balance"  style="display:none">
-										<label class="control-label col-sm-4" for="amount-fine">
+										<label class="control-label col-sm-4" for="balance">
 											Balance:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control check_number required "
+											<input type="text" class="form-control"
 												name="balance" disabled="disabled"  value="0" id="balance" placeholder="0.0">											
 										</div>
 									</div>
@@ -206,7 +219,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-6 col-md-6">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
 										<label class="control-label col-sm-4" for="note">Note:</label>
 										<div class="col-sm-8">

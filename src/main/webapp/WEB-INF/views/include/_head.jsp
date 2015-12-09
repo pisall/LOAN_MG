@@ -37,11 +37,16 @@
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
-  <style>
+  	<style>
 		.error{
 			color:red;
 		}
+		.table th {
+  		 text-align: center;   
+	}
+		
 	</style>
+
    </head>
   
    <%

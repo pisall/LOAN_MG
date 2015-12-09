@@ -63,7 +63,7 @@
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<div class="table-responsive">
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-bordered">
 										<thead class="style2">
 											<tr class="active">											
 												<th>Customer No</th>
@@ -97,6 +97,7 @@
 							<option value='15'>15</option>
 							<option value='20'>20</option>
 							<option value='25'>25</option>
+							<option value='30'>30</option>
 						</select>
 					</div>
 					<div class="col-md-11 col-sm-11 col-lg-11" style="text-align: center;">

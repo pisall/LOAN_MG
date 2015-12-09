@@ -1,5 +1,10 @@
 <%@include file="include/_head.jsp"%>
+<style>
+.table td {
+   text-align: center;   
+}
 
+</style>
 <body>
 	
 		<div id="page-wrapper">
@@ -9,7 +14,7 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-12">
+					<div class="col-md-12 col-sm-12  col-lg-12 col-xs-12 ">
 
 						<h2 class="page-header" style="text-align: center;">
 							
@@ -23,14 +28,14 @@
 
 				<!-- list-->
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-md-12 col-sm-12  col-lg-12 col-xs-12 ">
 						<!-- panel top-->
 						<div class="panel panel-default">
 							<c:forEach var="entry" items="${Customer}">
 								
 								<div class="panel panel-heading">
 									<div class="row">
-										<div class="col-md-4 col-sm-4 col-xs-4">
+										<div class="col-md-4 col-sm-4  col-lg-4 col-xs-4">
 											<input type="hidden" value="${entry.cu_id}" id="TR_CU_ID">
 											<table class="table">
 												<tbody>
@@ -52,14 +57,14 @@
 													</tr>
 													<tr>
 														<td>Address :</td>
-														<td>${entry.cu_address}</td>
+														<td >${entry.cu_address}</td>
 													</tr>
 
 												</tbody>
 											</table>
 
 										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4">
+										<div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
 											<table class="table">
 
 												<tbody>
@@ -84,7 +89,7 @@
 											</table>
 
 										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4">
+										<div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
 											<table class="table">
 
 												<tbody>
@@ -113,17 +118,17 @@
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<div class="table-responsive">
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-bordered">
 										<thead class="style2">
 											<tr class="tr-heading">
 												<th>No</th>
 												<th>Date Time</th>
 												<th>Day</th>
-												<th>Full Amount</th>
-												<th>Save Amount</th>
+												<th>Full Amount</th>											
 												<th>Pay Amount</th>
 												<th>Balance</th>
-												<th>Status</th>
+												<th class="status">Status</th>
+												<th class="signature" style="display: none">Signature</th>
 																							
 											</tr>
 										</thead>
@@ -138,10 +143,7 @@
 													<td><fmt:formatNumber
 															value="${entry.tr_origin_amount}" type="currency"
 															currencySymbol="R" pattern=" #,##0.00 ¤; -#,##0.00 ¤" />
-													</td>
-													<td><fmt:formatNumber value="${entry.tr_save_payment}"
-															type="currency" currencySymbol="R"
-															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
+													</td>												
 													<td><fmt:formatNumber value="${entry.tr_pay_amount}"
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
@@ -149,7 +151,7 @@
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
-													<td onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
+													<td class="status" onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">
@@ -182,6 +184,7 @@
 														</c:choose>
 
 													</td>
+													<td class="signature1" style="text-align: center;display: none">...............................</td>
 												</tr>
 											</c:forEach>
 

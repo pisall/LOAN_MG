@@ -22,7 +22,11 @@ var tr_stts=tr_stts;
 
 $(document).ready(function(){	
 	 getDaysLate();
-	 
+	 onblur();
+	 $("#paid_amount").ForceNumericOnly();
+	 $("#day_late").ForceNumericOnly();
+	 $("#amount_fine").ForceNumericOnly();
+	 $("#pre_pay").ForceNumericOnly();
 	 
 	 if(tr_stts==2){
 		$("#btnApprovale").html("Update");
@@ -49,6 +53,7 @@ $(document).ready(function(){
 			}else{
 				$("#frm_pre_pay").hide();
 				$("#frm_balance").hide();
+				$("#pre_pay").val(0);
 			}
 		}
 	 });
@@ -71,7 +76,7 @@ $(document).ready(function(){
 	 	
 	 // validation 
 	 
-	 $("#form_approve").validate({
+	 /*$("#form_approve").validate({
 			 errorPlacement: function(label, element) {
 		           label.addClass('arrow');
 		           label.insertAfter(element);
@@ -85,11 +90,12 @@ $(document).ready(function(){
 					  LoanApprove(); 		
 				  }		 
 			  }
-		});
+		});*/
 
 	 $("#btnApprovale").click(function(){ 
 		
-		 $("#form_approve").submit();
+		 add_loan_approve();
+		// $("#form_approve").submit();
 	 });
 
 });
@@ -122,7 +128,7 @@ function listEditLoanApprove(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success:function(dat){
-			console.log(dat);
+		
 			stopLoading();
 			$("#paid_amount").val(accounting.formatMoney((dat.paid_amount),""));
 			$("#day_late").val(dat.days_late);
@@ -235,6 +241,47 @@ function updateLoanApprove(){
 
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
+}
+
+function onblur(){
+	//Customer validation 
+	checkNullOnBlue("paid_amount");
+	checkNullOnBlue("day_late");
+	checkNullOnBlue("amount_fine");
+	checkNullOnBlue("pre_pay");
+}
+
+function validation(input){
+	/*--  log_email  --*/
+	var error=false;
+	if(checkNull(input.paid_amount,"paid_amount"))error=true;
+	if(checkNull(input.day_late,"day_late"))error=true;
+	if(checkNull(input.amount_fine,"amount_fine"))error=true;
+	if(checkNull(input.pre_pay,"pre_pay"))error=true;
+	return error;
+}
+function add_loan_approve(){
+	var input={};
+	input['paid_amount']=$("#paid_amount").val();
+	input['day_late']=$("#day_late").val();
+	input['amount_fine']=$("#amount_fine").val();
+	input['pre_pay']=$("#pre_pay").val();
+	
+	console.log(input);
+	
+	if(validation(input)){
+		return;
+	}	
+
+	 
+	  if($("#btnApprovale").val()==1){	
+		  updateLoanApprove();
+	  }else{
+		  LoanApprove(); 		
+	  }
+	  
+	  window.print();
+   
 }
 
 // insert loanApprove Info 

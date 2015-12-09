@@ -30,20 +30,20 @@
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-10 col-md-10 col-sm-10">
+					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 						<h2 class="page-header">
 
 							<span>Customer Infomation</span> <span> </span>
 						</h2>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 ">
 						<button id="btnAdSearch"  class="btn btn-primary page-header" value="1">Show Advance Search</button>
 					</div>
 				</div>
 				<!--//Page Heading -->
 				<!-- list-->
 				<div class="row">
-					<div class="col-md-12 col-lg-12">
+					<div class="col-md-12 col-lg-12 col-sm-13 col-xs-12">
 						<!-- panel top-->
 						<div class="panel panel-default">
 							<div class="panel panel-heading">
@@ -87,7 +87,7 @@
 							<!-- panel body -->
 							<div class="panel panel-body">
 								<div class="table-responsive">
-									<table class="table table-hover table-striped">
+									<table class="table table-hover table-bordered">
 										<thead class="style2">
 											<tr class="active">
 												<th>ID</th>
@@ -96,7 +96,7 @@
 												<th>Sex</th>
 												<th>Phone</th>
 												<th style="width: 45%">Address</th>
-												<th>Action</th>
+												<th class="action">Action</th>
 											</tr>
 										</thead>
 										<tbody id="tableCustomer">
