@@ -87,7 +87,7 @@ public class ReportDaoImp implements ReportDao {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
-		}
+		}//
 		return result;
 	}
 	
