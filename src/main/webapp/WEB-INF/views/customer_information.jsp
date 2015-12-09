@@ -5,6 +5,11 @@
  			response.sendRedirect("../login");
  		}
 	%>
+	<style>
+		table{
+			font-size:12px;
+		}
+	</style>
 <body>
 
 	<div id="wrapper">

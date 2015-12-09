@@ -1,10 +1,12 @@
 <%@include file="include/_head.jsp"%>
-<style>
-.table td {
-   text-align: center;   
-}
-
-</style>
+	<style>
+		table{
+			font-size:12px;
+		}
+		table td{
+			text-align: center;
+		}
+	</style>
 <body>
 	
 		<div id="page-wrapper">
@@ -137,10 +139,10 @@
 											<c:forEach items="${list}" var="entry" varStatus="idcount">
 
 												<tr>
-													<td>${idcount.count}</td>
-													<td>${entry.date_pay}</td>
-													<td>${entry.pay_day}</td>
-													<td><fmt:formatNumber
+													<td style="text-align: center;">${idcount.count}</td>
+													<td style="text-align: center;">${entry.date_pay}</td>
+													<td style="text-align: center;">${entry.pay_day}</td>
+													<td style="text-align: center;"><fmt:formatNumber
 															value="${entry.tr_origin_amount}" type="currency"
 															currencySymbol="R" pattern=" #,##0.00 ¤; -#,##0.00 ¤" />
 													</td>												
@@ -151,7 +153,7 @@
 															type="currency" currencySymbol="R"
 															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 
-													<td class="status" onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
+													<td class="status" style="text-align: center;" onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
 
 														<c:choose>
 															<c:when test="${entry.tr_stts=='1'}">

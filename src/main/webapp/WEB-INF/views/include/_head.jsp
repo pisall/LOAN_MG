@@ -6,8 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <%@page import="com.system.loan.dto.session.USER_SESSION"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,9 +18,6 @@
     <meta name="author" content="">
 
     <title>SB Admin - Bootstrap Admin Template</title>
-	
-	<!-- Jquery ui css -->
-	<link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -35,41 +30,27 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
-     
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/simplePagination.css">
-     
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
-  	<style>
-		.error{
-			color:red;
-		}
-		.table th {
-  		 text-align: center;   
-	}
-		
-	</style>
-
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css">
    </head>
-  
+   
+ 
+   
    <%
-   int strCoId=0;
-	String strCoNm="";
 	Date  now = new Date();
 	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 	
 	String datetime = date.format(now);
 	
-	//
+	
 
  	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
- 		
+ 		int strCoId;
+ 		String strCoNm="";
  	if(user!=null){
  		strCoId=user.getCoId();
  		strCoNm=user.getCoNm();
  		
  	}
 	%>
-	
     
 

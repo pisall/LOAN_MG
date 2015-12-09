@@ -1,4 +1,9 @@
 <%@include file="include/_head.jsp"%>
+<style>
+table{
+    font-size: 12px
+    }
+</style>
 <body>
 
 	<div id="wrapper">
@@ -67,11 +72,12 @@
 										<thead class="style2">
 											<tr class="active">
 												<th>Customer No</th>
-												<th>Customer Name</th>											
+												<th>Customer Name</th>	
+												<th>Customer Officer No</th>
+												<th>Customer Officer Name</th>											
 												<th>Loan Date</th>
 												<th>Loan Amount</th>
-												<th>Customer Officer No</th>
-												<th>Customer Officer Name</th>												
+																							
 											</tr>
 										</thead>
 										<tbody id="loan_expend_report" >
