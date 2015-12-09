@@ -15,7 +15,7 @@ $(document).ready(function(){
 		edges:3,
 		displayedPages:3,
 		currentPage:1,
-		onPageClick:pageClick
+		onPageClick:pageingClick
 	});
 	
 	listCo({pageNo:1,pcnt:10,sw:sw});
@@ -26,7 +26,7 @@ $(document).ready(function(){
 	
 });
 
-function pageing(pageN,event){
+function pageingClick(pageN,event){
 	var sw=$("#sw").val();
 	listCo({pageNo:pageN,pcnt:10,sw:sw});
 }
@@ -76,8 +76,8 @@ function listCo(input){
 				$("#paging").children("li[val=0n]").click(function(){
 					listCo({pageNo:paging.pageNo+1,pcnt:10,sw:sw});
 				});*/
-				
-				//$("#paging").pagination('updateItems', 50);
+				console.log("test="+paging.total);
+				$("#paging").pagination('updateItems', paging.total);
 				
 				
 				
