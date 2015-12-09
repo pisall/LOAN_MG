@@ -36,6 +36,9 @@
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
+     
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/simplePagination.css">
+     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
   <style>
 		.error{

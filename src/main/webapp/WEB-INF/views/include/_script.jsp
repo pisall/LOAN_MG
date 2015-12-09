@@ -30,6 +30,8 @@
       <script src="${pageContext.request.contextPath}/resources/js/mprogress.min.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/accounting.min.js"></script>
       
+      <script src="${pageContext.request.contextPath}/resources/js/simplePagination.js"></script>
+      
 	<script type="text/javascript">
 	jQuery.validator.setDefaults({
 		  debug: true,
