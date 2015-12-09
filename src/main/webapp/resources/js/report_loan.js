@@ -138,15 +138,15 @@ function list_expend_report(pageNo) {
 									+ formatStringToDateTime(data.REC[i].ac_start_date,"")
 									+ "</td>"
 									+ "<td>"
-									+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
+									+ accounting.formatMoney(data.REC[i].ac_amount," ",0)+" R"
 									+ "</td>"
 									
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_loan_amount," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(total_paid_amount," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_loan_amount," ",0)+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(total_paid_amount," ",0)+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ",0)+" R</td></tr>");
 						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:green; position: relative;left: -87px;'>Profit :</td><td style='color:green;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
 						
 					}

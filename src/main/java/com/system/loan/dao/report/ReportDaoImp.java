@@ -151,17 +151,10 @@ public class ReportDaoImp implements ReportDao {
 						 +"sum(lo.total_paid_amount) total_paid_amount "
 					+"FROM "
 						+"mfi_customers cu, "
-						+"mfi_co co, "
-						+"mfi_account ac, "
-						+"mfi_transection tr, "
 						+"mfi_loanapproval lo "
-					+"where  "
-						+"cu.co_id=co.co_id " 
-						+"and cu.cu_id=ac.cu_id "
-						+"and ac.cu_id=tr.tr_cu_id "
-						+"and tr.tr_cu_id=lo.cu_id "
+					+"where 1=1 "
+						+"and cu.cu_id=lo.cu_id "
 						+"and cu.cu_del_yn='Y' "
-						+"and ac.ac_stat='Y' "
 						+"and cast(cu.co_id as text) like ? " + getFilter(paging) + " ";
 						
 			SQLQuery query = session.createSQLQuery(sql);
