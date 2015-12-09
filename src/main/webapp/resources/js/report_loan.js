@@ -105,9 +105,9 @@ function list_expend_report(pageNo) {
 					var result = "";
 					var paging = data.PAGING;							
 					startDate="";endDate="";
-					total_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount));
-					total_paid_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_paid_amount));
-					total_amount_fine=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount_fine));
+					//total_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount));
+					//total_paid_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_paid_amount));
+					//total_amount_fine=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount_fine));
 				
 					$("#paging").html("");
 					$("#loan_expend_report").html("");
@@ -143,10 +143,10 @@ function list_expend_report(pageNo) {
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
-						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:green; position: relative;left: -87px;'>Profit :</td><td style='color:green;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
+						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
+						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
+						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
+						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:green; position: relative;left: -87px;'>Profit :</td><td style='color:green;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
 						
 					}
 			

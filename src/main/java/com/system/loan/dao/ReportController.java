@@ -57,7 +57,7 @@ public class ReportController {
 		paging.setTotal(total);
 		model.put("REC", report.listExpendreport(paging, coID));
 		model.put("PAGING", paging);
-		model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
+		//model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
 		return model;
 	}
 	

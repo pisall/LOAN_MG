@@ -85,9 +85,9 @@ table{
 										</tbody>
 									</table>
 									
-								</div>
-							</div>
-							
+								</div>							
+								
+							</div>				
 							<!-- //panel body -->
 						</div>								
 					</div>

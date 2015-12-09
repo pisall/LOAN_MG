@@ -44,20 +44,7 @@ public class ReportDaoImp implements ReportDao {
 		Transaction tx = null;	
 		try {
 			tx = session.beginTransaction();
-			String sql="select "
-							+"cus.cu_id, "
-							+"cus.cu_nm, "
-							+"co.co_first_nm, "
-							+"co.co_last_nm, "
-							+"co.co_id,ac_start_date, "
-							+"ac.ac_amount " 
-							+"from mfi_customers cus , mfi_account ac,mfi_co co "   
-							+"where 1=1  "
-								+"and (cus.cu_id=ac.cu_id) "    							
-								+"and (ac.ac_stat='Y') "       
-					            +"and (cus.cu_del_yn='Y') "       
-					            +"and ( cast(co.co_id as TEXT) LIKE ? ) " + getFilter(paging) + " Order By ac.ac_start_date DESC ";
-			SQLQuery query = session.createSQLQuery(sql);
+			SQLQuery query = session.createSQLQuery(getQueryExpend(paging));
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			query.setString(0, "%" + coID + "%");
 			query.setFirstResult((paging.getPageNo() - 1) * paging.getPcnt());
@@ -71,6 +58,31 @@ public class ReportDaoImp implements ReportDao {
 		return list;
 	}
 	
+	public String getQueryExpend(pagingDto paging){
+		String sql="";
+		
+			sql="SELECT "
+							+"cu.cu_id, "
+							+"cu.cu_nm, "
+							+"co.co_id, "
+							+"co.co_first_nm, "
+							+"co.co_last_nm, "
+							+"ac.ac_amount, "
+							+"ac.ac_start_date "
+							+"FROM "
+							+"mfi_customers "
+							+"cu,mfi_co co, "
+							+"mfi_account ac "
+							+"where "
+							+"cu.co_id=co.co_id "
+							+"and cu.cu_id=ac.cu_id "
+							+"and cu.cu_del_yn='Y' "
+							+"and ac.ac_stat='Y' "
+							+"and cast(cu.co_id as text) like ? " + getFilter(paging) + " Order By ac.ac_start_date DESC ";
+		
+			return sql;
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public int totalExpendReport(pagingDto paging, String coID) {
@@ -80,37 +92,7 @@ public class ReportDaoImp implements ReportDao {
 		Transaction tx = null;	
 		try {		
 			tx = session.beginTransaction();
-			String sql="SELECT count(*) cnt FROM( "
-							+"select "
-							+"cus.cu_id, "
-							        +"cus.cu_nm, "
-							        +"co.co_first_nm, "
-							        +"co.co_last_nm, "
-							        +"co.co_id, "
-							        +"ac_start_date, "
-							        +"ac.ac_amount " 
-							    +"from "
-							        +"mfi_customers cus, "
-							        +"mfi_account ac, "
-							        +"mfi_co co " 
-							    +"where "
-							        +"1=1 "   
-							        +"and ( "
-							            +"cus.cu_id=ac.cu_id "
-							        +") "
-							        +"and ( "
-							            +"ac.ac_stat='Y' "
-							        +") "
-							        +"and ( "
-							            +"cus.cu_del_yn='Y' "
-							        +") "
-							        +"and ( "
-							            +"cast(co.co_id as TEXT) LIKE ? "
-							        +") "  
-							        +" " + getFilter(paging) + " "
-							    +"Order By "
-							        +"ac.ac_start_date DESC "
-					   +") cnt ";
+			String sql="SELECT count(*) cnt FROM("+ getQueryExpend(paging) +") cnt ";
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);			
 			query.setString(0, "%" + coID + "%");
@@ -124,29 +106,66 @@ public class ReportDaoImp implements ReportDao {
 		return cnt;
 	}
 	
-	
-	
-
 	@SuppressWarnings("unchecked")
-	public Object getTotalIncomeOutcome(String coID,pagingDto paging) {
+	public Object getTotalLoanAmount(String coID,pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;	
 		Object result=null;
 		try {		
 			tx = session.beginTransaction();
-			String sql="select "     
-					       +"cast(SUM (ac_amount) as DECIMAL) AS total_amount, "   
-					       +"cast(SUM (loa.paid_amount) as DECIMAL) AS total_paid_amount, "     
-					       +"cast(SUM (loa.amount_fine) as DECIMAL) AS total_amount_fine "      
-					       +"from mfi_customers cus , mfi_account ac,mfi_co co ,mfi_loanapproval loa ,mfi_transection tr " 
-					       +"where 1=1  "    
-									+"and (cus.cu_id=ac.cu_id)  " 
-									+"and (ac.ac_id=tr.tr_ac_id) "  						
-									+"and (tr.tr_id=loa.tr_id) "
-					        +"and (ac.ac_stat='Y') "     
-					        +"and (cus.cu_del_yn='Y') "     
-					        +"and ( cast(co.co_id as TEXT) LIKE ? ) "+ getFilter(paging)+ " ";
+			String sql="SELECT " 
+							+"sum(ac.ac_amount) total_loan_amount "
+						+"FROM "
+						+"mfi_customers "
+						+"cu,mfi_co co, "
+						+"mfi_account ac "
+						+"where "
+						+"cu.co_id=co.co_id "
+						+"and cu.cu_id=ac.cu_id "
+						+"and cu.cu_del_yn='Y'  "
+						+"and ac.ac_stat='Y' "
+						+"and  cast(cu.co_id as text) like ? " + getFilter(paging) + " ";
+						
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
+			query.setString(0, "%" + coID + "%");
+			result=query.uniqueResult();	
+		
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(" error total remord");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getTotalPaidAndFineAmount(String coID,pagingDto paging) {
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;	
+		Object result=null;
+		try {		
+			tx = session.beginTransaction();
+			String sql="SELECT " 
+						 +"sum(lo.paid_amount) total_paid_amount "
+						 +",sum(lo.amount_fine) total_fine_amount "
+					+"FROM "
+						+"mfi_customers cu, "
+						+"mfi_co co, "
+						+"mfi_account ac, "
+						+"mfi_transection tr, "
+						+"mfi_loanapproval lo "
+					+"where  "
+						+"cu.co_id=co.co_id " 
+						+"and cu.cu_id=ac.cu_id "
+						+"and ac.cu_id=tr.tr_cu_id "
+						+"and tr.tr_cu_id=lo.cu_id "
+						+"and cu.cu_del_yn='Y' "
+						+"and ac.ac_stat='Y' "
+						+"and cast(cu.co_id as text) like ? " + getFilter(paging) + " ";
+						
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
 			query.setString(0, "%" + coID + "%");
