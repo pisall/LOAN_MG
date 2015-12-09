@@ -7,6 +7,17 @@ $(document).ready(function(){
 	//blur event
 	_CO_ID=$("#hi_co_id").val();
 	var sw=$("#sw").val();
+	
+	$("#paging").pagination({
+		items: 0,
+		itemsOnPage: 10,
+		cssStyle: 'light-theme',
+		edges:3,
+		displayedPages:3,
+		currentPage:1,
+		onPageClick:pageClick
+	});
+	
 	listCo({pageNo:1,pcnt:10,sw:sw});
 	$("#btn_search").click(function(){
 		var sw=$("#sw").val();
@@ -14,6 +25,11 @@ $(document).ready(function(){
 	});
 	
 });
+
+function pageing(pageN,event){
+	var sw=$("#sw").val();
+	listCo({pageNo:pageN,pcnt:10,sw:sw});
+}
 
 function listCo(input){
 	
@@ -38,7 +54,7 @@ function listCo(input){
 			var paging=data.PAGING;
 			var sw=$("#sw").val();
 			if(paging.totalPage>0){
-				//previous paging
+				/*//previous paging
 				$("#paging").append('<li class="next" val="0p"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
 				for(var i=1;i<=paging.totalPage;i++){
 					$("#paging").append('<li val="'+i+'"><a href="#">'+i+'</a></li>');
@@ -59,7 +75,11 @@ function listCo(input){
 				//click previous
 				$("#paging").children("li[val=0n]").click(function(){
 					listCo({pageNo:paging.pageNo+1,pcnt:10,sw:sw});
-				});
+				});*/
+				
+				//$("#paging").pagination('updateItems', 50);
+				
+				
 				
 			}
 			
