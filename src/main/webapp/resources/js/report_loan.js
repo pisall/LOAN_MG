@@ -116,7 +116,10 @@ function list_expend_report(pageNo) {
 									+ "<td>"
 									+ accounting.formatMoney(data.REC[i].ac_amount," ")+" R"
 									+ "</td>"
-									
+									+"<td align='center'>"+data.REC[i].co_id+"</td>" 
+									+ "</td>"								
+									+"<td>"+data.REC[i].co_first_nm +" "+data.REC[i].co_last_nm +"</td>" 
+									+ "</td>"									
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
