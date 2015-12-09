@@ -130,8 +130,7 @@ public class ReportDaoImp implements ReportDao {
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
 			query.setString(0, "%" + coID + "%");
-			result=query.uniqueResult();	
-		
+			result=query.uniqueResult();			
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");
@@ -141,7 +140,7 @@ public class ReportDaoImp implements ReportDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Object getTotalPaidAndFineAmount(String coID,pagingDto paging) {
+	public Object getTotalPaidAmount(String coID,pagingDto paging) {
 		// TODO Auto-generated method stub
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;	
@@ -149,8 +148,7 @@ public class ReportDaoImp implements ReportDao {
 		try {		
 			tx = session.beginTransaction();
 			String sql="SELECT " 
-						 +"sum(lo.paid_amount) total_paid_amount "
-						 +",sum(lo.amount_fine) total_fine_amount "
+						 +"sum(lo.total_paid_amount) total_paid_amount "
 					+"FROM "
 						+"mfi_customers cu, "
 						+"mfi_co co, "
@@ -169,8 +167,7 @@ public class ReportDaoImp implements ReportDao {
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
 			query.setString(0, "%" + coID + "%");
-			result=query.uniqueResult();	
-		
+			result=query.uniqueResult();		
 			tx.commit();
 		} catch (HibernateException e) {
 			System.out.println(" error total remord");

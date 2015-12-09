@@ -7,7 +7,7 @@ var tr_type="";
 var startDate="";
 var endDate="";
 var rec_num=10;
-var total_amount=0,total_paid_amount=0,total_amount_fine=0;
+var total_loan_amount=0,total_paid_amount=0;
 
 $(function(){
 	
@@ -99,15 +99,16 @@ function list_expend_report(pageNo) {
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
-				success : function(data) {					
+				success : function(data) {	
+					console.log(data);
 					stopLoading();		
 					value = data;
 					var result = "";
 					var paging = data.PAGING;							
 					startDate="";endDate="";
-					//total_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount));
-					//total_paid_amount=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_paid_amount));
-					//total_amount_fine=ceilAmount(parseInt(data.TOTAL_AMOUNT.total_amount_fine));
+					total_loan_amount=ceilAmount(parseInt(data.TOTAL_LOAN_AMOUNT.total_loan_amount));
+					total_paid_amount=ceilAmount(parseInt(data.TOTAL_PAID_AMOUNT.total_paid_amount));
+
 				
 					$("#paging").html("");
 					$("#loan_expend_report").html("");
@@ -143,10 +144,10 @@ function list_expend_report(pageNo) {
 									+"</tr>";
 						}
 						$("#loan_expend_report").append(result);
-						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_amount," ")+" R</td></tr>");
-						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(getTotalPaidAmount()," ")+" R</td></tr>");
-						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
-						//$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:green; position: relative;left: -87px;'>Profit :</td><td style='color:green;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:red; position: relative;left: -87px;'>Total Amount :</td><td colspan='1' style='color:red;'>"+accounting.formatMoney(total_loan_amount," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(total_paid_amount," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:blue; position: relative;left: -87px;'>Total Not Paid Amount :</td><td colspan='1' style='color:blue;'>"+accounting.formatMoney(((getBalance()<=0)?0:getBalance())," ")+" R</td></tr>");
+						$("#loan_expend_report").append("<tr><td colspan='5' style='text-align:right;color:green; position: relative;left: -87px;'>Profit :</td><td style='color:green;'>"+accounting.formatMoney((getProfit()>0)?getProfit():0," ")+" R</td></tr>");
 						
 					}
 			
@@ -159,16 +160,12 @@ function list_expend_report(pageNo) {
 }
 
 
-function getTotalPaidAmount(){
-	return (total_paid_amount + total_amount_fine)
-}
-
 function getProfit(){
-	return (getTotalPaidAmount() - total_amount);
+	return (total_paid_amount - total_loan_amount);
 }
 
 function getBalance(){
-	return (total_amount - getTotalPaidAmount());
+	return (total_loan_amount - total_paid_amount);
 }
 
 function loadPaging() {
