@@ -62,7 +62,9 @@ function list_loan_late(pageNo) {
 									+"<td >"+accounting.formatMoney(amount_fine,"")+" R"+"</td>" 
 									+"<td align='center'>"+days_late+"</td>" 
 									+"<td >"+total_amount+"</td>" 
-										+"</tr>";															
+									+"<td  align='center'>"+data.REC[i].co_first_nm +" "+data.REC[i].co_last_nm +"</td>" 
+									+"<td  align='center'>"+data.REC[i].co_phone+"</td>" 
+									+"</tr>";															
 																					
 										
 							}

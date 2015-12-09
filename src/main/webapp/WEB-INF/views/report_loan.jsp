@@ -70,7 +70,8 @@
 												<th>Customer Name</th>											
 												<th>Loan Date</th>
 												<th>Loan Amount</th>
-												
+												<th>Customer Officer No</th>
+												<th>Customer Officer Name</th>												
 											</tr>
 										</thead>
 										<tbody id="loan_expend_report" >

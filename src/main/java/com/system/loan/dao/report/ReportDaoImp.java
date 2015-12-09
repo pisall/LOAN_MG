@@ -94,9 +94,9 @@ public class ReportDaoImp implements ReportDao {
     public String getSqlLoanLate(){
     	String sql="";
     					sql="SELECT "
-    					    +"co.co_fist_nm "
-    					    +",co.co.last_nm "
-    					    +",co.co.phone "
+    					    +"co_first_nm "
+    					    +",co_last_nm "
+    					    +",co.phone "
 							+",ac.ac_id "
 							+",cu.cu_nm " 
 							+",cu.cu_id "
@@ -161,7 +161,7 @@ public class ReportDaoImp implements ReportDao {
 									+"mfi_customers cu, mfi_account ac ,  mfi_transection tr ,mfi_co co "
 								+"WHERE cu.co_id=co.co_id and  cu.cu_id=ac.cu_id and  ac.ac_id=tr.tr_ac_id "
 								+"and tr.tr_stts='3' and cu.cu_del_yn='Y' and  CAST(co.co_id AS TEXT) LIKE ? "
-								+"group by ac.ac_id,cu.cu_nm,cu.cu_id,payment_date,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late ORDER BY payment_date DESC";
+								+"group by co_phone,co_first_nm  ,co_last_nm , ac.ac_id,cu.cu_nm,cu.cu_id,payment_date,days_late,total_days_weeks_late,amount_fine_days_weeks_late,amount_fine_days_weeks_late,total_months_late,amount_fine_months_late ORDER BY payment_date DESC";
     			return sql;		
     }
 	

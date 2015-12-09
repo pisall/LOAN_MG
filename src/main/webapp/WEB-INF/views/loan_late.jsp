@@ -73,7 +73,9 @@
 												<th>Paid Amount</th>												
 												<th>Amount Fine</th>
 												<th>Days Late</th>											
-												<th>Total Amount</th>																																	
+												<th>Total Amount</th>
+												<th>Officer Name</th>		
+												<th>Officer Phone</th>																																	
 											</tr>
 										</thead>
 										<tbody id="report_loan_late" >
