@@ -37,7 +37,7 @@
     
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-switch.css">
      
-     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/simplePagination.css">
+     <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/simplePagination.css"> --%>
      
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/v_costomize.css"> 
   	<style>
