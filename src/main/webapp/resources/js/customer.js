@@ -11,10 +11,18 @@ var endDate="";
 $(function() {
 	datetimenow();
 	clearWord();
-	listCus(page_no);
+	listCus(1);
+	
+	$("#paging").pagination({
+		items: 100,
+		itemsOnPage:10,
+		cssStyle: 'light-theme',
+		edges:3,
+		displayedPages:3,
+		currentPage:1,
+		onPageClick:pageingClick
+	});
 
-	
-	
 	$("#from").change(function(){
 		if($(this).val()==""){
 			$("#to").prop('disabled', true);
@@ -44,6 +52,7 @@ $(function() {
 	});
 
 	$("#record_num").change(function() {
+		$("#paging").pagination('updateItemsOnPage', $(this).val());
 		listCus(1);
 	});
 
@@ -86,92 +95,18 @@ $(function() {
 
 });
 
-
+function pageingClick(pageN,event){
+	listCus(pageN);
+}
 
 function dateFormate(date){
  return moment(date, "DD-MM-YYYY").format("YYYY-MM-DD")
-}
-
-function loadPaging() {
-	$("#paging").children("[name=p_index]").click(function() {
-
-		page_no = $(this).children("a").html();
-
-		listCus(page_no);
-	});
 }
 
 function clearWord() {
 	$("#word").val("");
 }
 
-/**
- * Next pagination
- */
-function pageNext() {
-
-	$("#p_next").click(function() {
-
-		page_no = $(this).siblings(".active").children("a").html();
-		page_no++;
-		totalPage = value.PAGING.totalPage;
-		if (page_no > totalPage) {
-			page_no = totalPage
-
-		}
-		listCus(page_no);
-
-	});
-}
-
-/**
- * Previouse pagination
- */
-function pagePrevious() {
-
-	$("#p_pre").click(function() {
-		page_no = $(this).siblings(".active").children("a").html();
-		page_no--;
-		totalPage = value.PAGING.totalPage;
-		if (page_no < 1) {
-			page_no = 1
-
-		}
-
-		listCus(page_no);
-
-	});
-}
-/**
- * Show pagination
- * 
- * @param totalPage
- * @param curPage
- */
-
-function showPaging(totalPage, curPage) {
-
-	if (totalPage > 1) {
-		$("#paging")
-				.append(
-						'<li id="p_pre" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-left"></span></a></li>');
-		for (var i = 1; i <= totalPage; i++) {
-			if (i == curPage)
-				$("#paging").append(
-						'<li class="active"  name="p_index"><a href="#none">'
-								+ i + '</a></li>');
-
-			else
-				$("#paging").append(
-						'<li  name="p_index"><a href="#none">' + i
-								+ '</a></li>');
-
-		}
-		$("#paging")
-				.append(
-						'<li id="p_next" class="next"><a href="#none"><span class="glyphicon glyphicon-chevron-right"></span></a></li>');
-	}
-}
 
 /**
  * List Customer
@@ -198,19 +133,16 @@ function listCus(pageNo) {
 					xhr.setRequestHeader("Accept", "application/json");
 					xhr.setRequestHeader("Content-Type", "application/json");
 				},
-				success : function(data) {
-					
+				success : function(data) {					
 					stopLoading();
 					value = data;
 					var result = "";
 					var paging = data.PAGING;
-					var curPage = paging.pageNo;
-					totalPage = parseInt(paging.totalPage);
 					startDate="";endDate="";
 					// clear paging
 					$("#paging").html("");
 
-					showPaging(totalPage, curPage)
+					$("#paging").pagination('updateItems', paging.total);
 
 					if (data.REC.length > 0) {
 
@@ -256,13 +188,7 @@ function listCus(pageNo) {
 					$('.name').click(function() {
 						var cuID = $(this).parent().find("td:first").text();
 						getCustomerDetail(cuID);
-					});
-
-					loadPaging();
-
-					pageNext();
-
-					pagePrevious();
+					});				
 				},
 				error : function(data, status, er) {
 					console.log("error: " + data + " status: " + status
@@ -347,43 +273,6 @@ function deleteCustomer(cusID) {
 
 }
 /**
- * Add Customer
- */
-function addCustomer() {
-
-	var input = {
-		cuName : $.trim($("#cu_name").val()),
-		cuNickName : $.trim($("#cu_nick_name").val()),
-		cuSex : $.trim($("#cu_sex").val()),
-		cuDOB : $.trim($("#cu_dob").val()),
-		cuNationalID : $.trim($("#cu_national_id").val()),
-		cuPhone : $.trim($("#cu_phone").val()),
-		cuAddress : $.trim($("#cu_address").val()),
-		cuDtt : $.trim(datetimenow()),
-		cuPawn : $.trim($("#cu_pawn").val()),
-		cuNote : $.trim($("#cu_note").val()),
-	}
-
-	$.ajax({
-
-		url : BASE_URL + "/customer/addCustomer",
-		type : 'POST',
-		dataType : 'JSON',
-		data : JSON.stringify(input),
-		beforeSend : function(xhr) {
-			xhr.setRequestHeader("Accept", "application/json");
-			xhr.setRequestHeader("Content-Type", "application/json");
-		},
-		success : function(data) {
-
-		},
-		error : function(data, status, er) {
-			console.log("error: " + data + " status: " + status + " er:" + er);
-		}
-	});
-}
-
-/**
  * Get Customer Transaction
  * 
  * @param cuID
@@ -392,9 +281,6 @@ function addCustomer() {
 function getCustomerTransaction(cuID) {	
 	   popup(BASE_URL+"/LoanAgreement/report/"+cuID);
 }
-
-
-
 
 /**
  * Load Current Date Time
