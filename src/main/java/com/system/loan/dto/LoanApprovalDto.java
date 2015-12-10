@@ -54,6 +54,10 @@ public class LoanApprovalDto implements Serializable {
 
 	@Column(name="total_paid_amount")
 	private float total_paid_amount ;
+	
+	@Column(name="balance")
+	private float balance ;
+	
 	@Column(name="tr_type")
 	private String tr_type;
 	
@@ -143,6 +147,14 @@ public class LoanApprovalDto implements Serializable {
 	 */
 	public void setTotal_paid_amount(float total_paid_amount) {
 		this.total_paid_amount = total_paid_amount;
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
 	}
 
 	public float getDays_late() {

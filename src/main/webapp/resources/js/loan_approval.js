@@ -211,16 +211,33 @@ function listTrInfo(){
 }
 
 function updateLoanApprove(){
-	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
-	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
-	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
-	var TOTAL_DAYS_LATE=document.getElementById('day_late').value;
-	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
+	
+	var TOTAL_PAID_AMOUNT=0,PAID_AMOUNT=0,TOTAL_AMOUNT_FINE=0,TOTAL_DAYS_LATE=0,TOTAL_PREPAY=0,BALANCE=0;
+	// TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
+	 PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
+	 TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	 TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
+	 TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
+	 BALANCE=accounting.unformat(document.getElementById('balance').value);
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
-	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	
+	if(TOTAL_PREPAY>0){
+		if($("#tr_type").val()=="4"){
+			TOTAL_PAID_AMOUNT=BALANCE;		
+		}else{
+			if($("#tr_type").val()=="2"){
+				TOTAL_PAID_AMOUNT=(TOTAL_PREPAY+BALANCE+TOTAL_AMOUNT_FINE);
+				BALANCE=0;
+				TOTAL_PREPAY=0;
+			}
+		}
+	}
+	
+	
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,balance:BALANCE,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
 	startLoading();
 	$.ajax({
 		url:BASE_URL+"/loan/updateLoanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
@@ -280,23 +297,31 @@ function add_loan_approve(){
 		  LoanApprove(); 		
 	  }
 	  
-	  window.print();
+	 // window.print();
    
 }
 
 // insert loanApprove Info 
 function LoanApprove(){ 
-	var TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
-	var PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
-	var TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
-	var TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
-	var TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
+	var TOTAL_PAID_AMOUNT=0,PAID_AMOUNT=0,TOTAL_AMOUNT_FINE=0,TOTAL_DAYS_LATE=0,TOTAL_PREPAY=0,BALANCE=0;
+	 TOTAL_PAID_AMOUNT=accounting.unformat(document.getElementById('total_paid_amount').value);
+	 PAID_AMOUNT = accounting.unformat(document.getElementById('paid_amount').value);
+	 TOTAL_AMOUNT_FINE = accounting.unformat(document.getElementById('amount_fine').value) ;
+	 TOTAL_DAYS_LATE=accounting.unformat(document.getElementById('day_late').value);
+	 TOTAL_PREPAY=accounting.unformat(document.getElementById('pre_pay').value);
 	var TRAN_TYPE = document.getElementById('tr_type').value; 
 	var TRAN_NOTE = document.getElementById('tr_note').value;
 	var TR_TYPE = document.getElementById('tr_type').value;  
 	var TR_CU_ID=CU_ID;
 	
-	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
+	if(TOTAL_PREPAY>0){
+		alert("pre_pay");
+		BALANCE=(TOTAL_PAID_AMOUNT-TOTAL_PREPAY);
+		TOTAL_PAID_AMOUNT=TOTAL_PREPAY;
+	}
+	
+	
+	var input={co_id:CO_ID,cu_id:CU_ID,ac_id:AC_ID,tr_id:TR_ID,paid_amount:PAID_AMOUNT,total_paid_amount:TOTAL_PAID_AMOUNT,balance:BALANCE,tr_type:TR_TYPE,amount_fine:TOTAL_AMOUNT_FINE,days_late:TOTAL_DAYS_LATE,pre_pay:TOTAL_PREPAY,approve_note:TRAN_NOTE}
 	startLoading();
 	$.ajax({
 		url:BASE_URL+"/loan/loanApprove/"+TR_ID+"/"+TRAN_TYPE+"/"+TR_CU_ID,
