@@ -230,10 +230,10 @@ function updateLoanApprove(){
 		}else{
 			if($("#tr_type").val()=="2"){
 				TOTAL_PAID_AMOUNT=(TOTAL_PREPAY+BALANCE+TOTAL_AMOUNT_FINE);
-				BALANCE=0;
-				TOTAL_PREPAY=0;
 			}
 		}
+		BALANCE=0;
+		TOTAL_PREPAY=0;
 	}
 	
 	
@@ -315,7 +315,6 @@ function LoanApprove(){
 	var TR_CU_ID=CU_ID;
 	
 	if(TOTAL_PREPAY>0){
-		alert("pre_pay");
 		BALANCE=(TOTAL_PAID_AMOUNT-TOTAL_PREPAY);
 		TOTAL_PAID_AMOUNT=TOTAL_PREPAY;
 	}
