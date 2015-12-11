@@ -64,11 +64,13 @@ public class CustomerController {
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
 		tr.check_late();
 		int totaPage = 0;
-		totaPage = (int) Math.ceil((float) customerImp.totalCus(paging, coID) / paging.getPcnt());
+		int total=customerImp.totalCus(paging, coID);
+		totaPage = (int) Math.ceil((float) total / paging.getPcnt());
 		paging.setTotalPage(totaPage);
 		if (paging.getTotalPage() < paging.getPageNo()) {
 			paging.setPageNo(paging.getTotalPage());
 		}
+		paging.setTotal(total);
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", customerImp.listCustomer(paging, coID));
 		model.put("PAGING", paging);

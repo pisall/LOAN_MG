@@ -79,7 +79,7 @@
 														<td>Full Amount :</td>
 														<td><fmt:formatNumber value="${entry.ac_amount}"
 																type="currency" currencySymbol="R"
-																pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
+																pattern=" #,##0 ¤; -#,##0 ¤" /></td>
 
 													</tr>
 													<tr>
@@ -144,14 +144,14 @@
 													<td style="text-align: center;">${entry.pay_day}</td>
 													<td style="text-align: center;"><fmt:formatNumber
 															value="${entry.tr_origin_amount}" type="currency"
-															currencySymbol="R" pattern=" #,##0.00 ¤; -#,##0.00 ¤" />
+															currencySymbol="R" pattern=" #,##0 ¤; -#,##0 ¤" />
 													</td>												
 													<td><fmt:formatNumber value="${entry.tr_pay_amount}"
 															type="currency" currencySymbol="R"
-															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
+															pattern=" #,##0 ¤; -#,##0 ¤" /></td>
 													<td> <fmt:formatNumber value="${entry.tr_balance}"
 															type="currency" currencySymbol="R"
-															pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
+															pattern=" #,##0 ¤; -#,##0 ¤" /></td>
 
 													<td class="status" style="text-align: center;" onclick="transaction_payment('${entry.tr_id}','${entry.cu_id}','${entry.tr_stts}');" >
 

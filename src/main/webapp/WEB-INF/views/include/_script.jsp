@@ -181,6 +181,7 @@
 						$("#" +name).parents(".form-group").addClass("has-error");
 						$("#" +name).siblings(".help-block").show();
 						
+						
 					}
 				}else{
 					isnull=true;
@@ -188,8 +189,27 @@
 					$("#" +name).siblings(".help-block").show();
 					
 				}
-				
+				if(isnull){
+					$("#" +name).siblings(".help-block").html("This field is required");
+				}
 				return isnull;
+			}
+			
+			
+			function checkLength(name,msg,length){	
+				/*--  log_email  --*/
+				var isFalse=false;
+					if($("#"+name).val()<length){
+						$("#"+name).parents(".form-group").removeClass("has-error");
+						$("#"+name).siblings(".help-block").hide();
+					}else{
+						isFalse=true;				
+						$("#"+name).parents(".form-group").addClass("has-error");
+						$("#"+name).siblings(".help-block").html(msg);
+						$("#"+name).siblings(".help-block").show();
+					}
+				
+				return isFalse;
 			}
 			
 			jQuery.fn.ForceNumericOnly =

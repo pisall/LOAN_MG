@@ -47,26 +47,31 @@ public class ReportController {
 	public @ResponseBody HashMap<String, Object> listExpendReport(@RequestBody pagingDto paging,
 			@RequestParam(name = "coID", defaultValue = "") String coID) {
 		int totaPage = 0;
-		totaPage = (int) Math.ceil((float) report.totalExpendReport(paging, coID) / paging.getPcnt());
+		int total=report.totalExpendReport(paging, coID);
+		totaPage = (int) Math.ceil((float) total / paging.getPcnt());
 		paging.setTotalPage(totaPage);
 		if (paging.getTotalPage() < paging.getPageNo()) {
 			paging.setPageNo(paging.getTotalPage());
 		}
 		HashMap<String, Object> model = new HashMap<String, Object>();
+		paging.setTotal(total);
 		model.put("REC", report.listExpendreport(paging, coID));
 		model.put("PAGING", paging);
-		model.put("TOTAL_AMOUNT", report.getTotalIncomeOutcome(coID, paging));
+		model.put("TOTAL_LOAN_AMOUNT", report.getTotalLoanAmount(coID, paging));
+		model.put("TOTAL_PAID_AMOUNT", report.getTotalPaidAmount(coID, paging));
 		return model;
 	}
 	
 	@RequestMapping(value = "/report_loan_late", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> reportLoanLate(@RequestBody pagingDto paging,@RequestParam(name = "coID", defaultValue = "") String coID){
-		int totaPage = 0;
-		totaPage = (int) Math.ceil((float) report.getTotalLoanLate(paging, coID) / paging.getPcnt());
+		int totaPage = 0,total=0;
+		total=report.getTotalLoanLate(paging, coID);
+		totaPage = (int) Math.ceil((float) total / paging.getPcnt());
 		paging.setTotalPage(totaPage);
 		if (paging.getTotalPage() < paging.getPageNo()) {
 			paging.setPageNo(paging.getTotalPage());
 		}
+		paging.setTotal(total);
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		model.put("REC", report.listReportLate(paging, coID));
 		model.put("PAGING", paging);

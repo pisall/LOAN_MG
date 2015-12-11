@@ -30,7 +30,7 @@ table{
 				<!-- Page Heading -->
 				<div class="row">
 
-					<div class="col-lg-12">				
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">				
 						
 						<h2 class="page-header" style="text-align: center;"><button style="float: left;" class="btn btn-primary" onclick=" return goBack('customer','home_customer');">
 								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
@@ -47,19 +47,19 @@ table{
 				<!-- list-->
 				<div class="row">
 					
-					<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default">
 							<div class="panel panel-heading">
 								<div class="row">
-									<div class="col-md-6 col-sm-6">
+									<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 ">
 										<select class="form-control" id="co_info_report">
 											<option value="">Display All</option>
 										</select>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
 										<input class="form-control" type="text" id="from" name="from" placeholder="Start date">											
 									</div>									
-									<div class="col-md-3 col-sm-3">									
+									<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">									
 										<input class="form-control" disabled="disabled" type="text" id="to" name="to" placeholder="End date">										
 									</div>														
 								</div>
@@ -85,9 +85,9 @@ table{
 										</tbody>
 									</table>
 									
-								</div>
-							</div>
-							
+								</div>							
+								
+							</div>				
 							<!-- //panel body -->
 						</div>								
 					</div>
@@ -95,7 +95,7 @@ table{
 				</div>
 				<!-- //list -->
 				<div class="row">
-					<div class="col-md-1 col-sm-1 col-lg-1" id="select_num">
+					<div class="col-md-1 col-sm-1 col-lg-1 col-xs-1" id="select_num">
 						<select class='form-control' id='record_num' style='width: 100%'>
 							<option value='10'>10</option>
 							<option value='15'>15</option>
@@ -103,7 +103,7 @@ table{
 							<option value='25'>25</option>
 						</select>
 					</div>
-					<div class="col-md-11 col-sm-11 col-lg-11" style="text-align: center;">
+					<div class="col-md-11 col-sm-11 col-lg-11 col-xs-11" style="text-align: center;">
 						<!-- <div class="col-md-6 col-md-offset-3" style="text-align: center"> -->
 						<ul class="pagination" id="paging" style="margin: 0 auto;">
 						</ul>

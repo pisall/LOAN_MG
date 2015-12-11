@@ -79,7 +79,7 @@
 										<div class="col-sm-10">
 											<input type="text" class="form-control" name="cu_nm"
 												id="cu_nm" placeholder="Full Name" maxlength="50">
-											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 
@@ -111,7 +111,7 @@
 											<input maxlength="50" type="text"
 												class="form-control" id="cu_dob" name="cu_dob"
 												placeholder="Date of Birth">
-											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 									<div class="form-group required">
@@ -122,7 +122,7 @@
 												class="form-control"
 												name="cu_national_id" id="cu_national_id"
 												placeholder="Enter National Card">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 									<div class="form-group required">
@@ -132,7 +132,7 @@
 											<input type="text" maxlength="10"
 												class="form-control " name="cu_phone"
 												id="cu_phone" placeholder="User Phone number">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 
@@ -163,7 +163,7 @@
 											<input type="text" maxlength="50"
 												class="form-control" name="gu_nm" id="gu_nm"
 												placeholder="Guarantor name">
-											 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+											 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 
@@ -186,7 +186,7 @@
 												class="form-control "
 												name="gu_national_id" id="gu_national_id"
 												placeholder="Guarantor National Card">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 									<div class="form-group required">
@@ -196,7 +196,7 @@
 											<input type="text" maxlength="10"
 												class="form-control" name="gu_phone"
 												id="gu_phone" placeholder="Guarantor cu_phone">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 										</div>
 									</div>
 									<div class="form-group">
@@ -226,7 +226,7 @@
 											<!-- <div class="input-group"> -->
 											<input type="text" class="form-control "
 												name="ac_amount" id="ac_amount" placeholder="Amount">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 											<!-- <div class="input-group-addon">R</div> -->
 											<!-- </div> -->
 										</div>
@@ -238,7 +238,7 @@
 											<!-- <div class="input-group"> -->
 											<input type="text" class="form-control "
 												name="ac_rate" id="ac_rate" placeholder="Rate" maxlength="5">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>											
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li></li></ul></span>											
 										</div>
 									</div>
 
@@ -275,7 +275,7 @@
 										<div class="col-sm-10">
 											<input type="text" class="form-control required check_number"
 												name="ac_period" id="ac_period" placeholder="Period" maxlength="2">
-												 <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>	
+												 <span class="help-block with-errors"><ul class="list-unstyled"><li> </li></ul></span>	
 											<br /> <select class="form-control" id="ac_period_type" name="ac_period_type"
 												>
 												<option value="Day">Day</option>
@@ -356,6 +356,20 @@
 			$("#gu_phone").ForceNumericOnly();
 			$("#gu_national_id").ForceNumericOnly();
 			
+			$("#ac_period").blur(function(){
+				
+				var ac_period_type=$("#ac_period_type").val();
+				if(ac_period_type=="Day"){
+					checkLength("ac_period","Period must be less than 56", 57);
+				}else{
+					checkLength("ac_period","Period must be less than 24", 25);
+				}
+			});
+			
+			$("#ac_rate").blur(function(){
+				checkLength("ac_rate","Rate must be less than 10 %",11)			
+			});
+			
 			$("#cu_dob").datepicker({
 				showOtherMonths : true,
 				selectOtherMonths : true,
@@ -373,14 +387,10 @@
 							$("#cu_dob").siblings(".help-block").hide();
 						}
 				  }
-			});
-			
-			
-			
-			
+			});		
 		});
 		
-		
+	
 
 		function onblur(){
 			//Customer validation 
@@ -394,6 +404,9 @@
 			checkNullOnBlue("ac_amount");
 			checkNullOnBlue("ac_rate");
 			checkNullOnBlue("ac_period");
+			
+			
+			
 		}
 		
 		
@@ -410,8 +423,28 @@
 			if(checkNull(input.gu_phone,"gu_phone"))error=true;
 			if(checkNull(input.gu_national_id,"gu_national_id"))error=true;
 			if(checkNull(input.ac_amount,"ac_amount"))error=true;
-			if(checkNull(input.ac_rate,"ac_rate"))error=true;
-			if(checkNull(input.ac_period,"ac_period"))error=true;
+			if(checkNull(input.ac_rate,"ac_rate")){
+				error=true;
+			}else{
+				if(checkLength("ac_rate","Rate must be less than 10 %",11)){
+					error=true;
+				}
+			}			
+			if(checkNull(input.ac_period,"ac_period")){
+				error=true;
+			}else{
+				var ac_period_type=$("#ac_period_type").val();
+				if(ac_period_type=="Day"){
+					if(checkLength("ac_period","Period must be less than 56", 57)){
+						error=true;
+					}				
+				}else{
+					if(checkLength("ac_period","Period must be less than 24", 25)){
+						error=true;
+					};
+				}
+			}
+			
 		
 			return error;
 		}
@@ -427,13 +460,12 @@
 			input['ac_amount']=$("#ac_amount").val();
 			input['ac_rate']=$("#ac_rate").val();
 			input['ac_period']=$("#ac_period").val();
-		
+			
 			if(validation(input)){
+				
 				return;
 			}
-			
-		    $("#loanAgreement").submit();
-					
+		    $("#loanAgreement").submit();					
 		}
 		
 		
