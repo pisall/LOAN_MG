@@ -29,7 +29,7 @@
 			class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Month
 			Outcome</a></li>
 	<li cont_name="cont_6" val="cont_6"><a href="#none" id="back_up"><span
-			id="back_up" class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Backup
+			id="back_up" class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Backup tret
 			Data </a></li>
 	<li cont_name="cont_7" val="cont_7">
 		<a href="#none"data-toggle="dropdown" class="dropdown-toggle">
