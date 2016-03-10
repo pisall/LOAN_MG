@@ -4,10 +4,8 @@
 
 $(document).ready(function(){
 	if(typeof PAGE_ID!="undefined"){
-		$("#nav").children("li[val="+PAGE_ID+"]").addClass("active");
+		$("#nav li[val="+PAGE_ID+"]").addClass("active");
 	}
-	
-	//click_setting();
 	
 });
 function deleteAllCookies() {

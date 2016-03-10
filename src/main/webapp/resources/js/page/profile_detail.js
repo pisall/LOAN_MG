@@ -57,7 +57,6 @@ function save(obj){
 	input.co_cpm_phone=$("#co_office_phone").children("input").val();
 	input.co_pb_address=$("#co_pb_address").children("input").val();
 	input.address=$("#co_address").children("input").val();
-	console.log(input);
 	
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_u0005",

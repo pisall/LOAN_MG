@@ -10,7 +10,7 @@
 			</div>
 
 			<!-- Modal Body -->
-			<div class="modal-body">
+			<div class="modal-body" style="text-align:center;">
 				<!-- Row -->
 				<div class="row">
 					<div class="col-md-6 col-lg-6">

@@ -8,7 +8,7 @@
 		    box-shadow: 0px 1px 2px #797777;
 		    color:#fff;
 		}
-	</style>
+	</style>	
 
 
     <div id="wrapper">
@@ -43,7 +43,7 @@
                             
                             <div class="row">
                             	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            		<span id="co_nm">Mr.Prak Virak</span>
+                            		<span id="co_nm"></span>
                             	</div>
                             	
                             	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -52,8 +52,8 @@
 									    Action <span class="caret"></span>
 									  </button>
 									  <ul class="dropdown-menu dropdown-menu-right" >
-									    <li id="opt_change_username"><a href="#">Change user name</a></li>
-									    <li id="opt_change_password"><a href="#">Change password</a></li>
+									    <li id="opt_change_username"><a href="#">Change log in ID</a></li>
+									    <li id="opt_change_password"><a href="#">Change log in Password</a></li>
 									   
 									  </ul>
 									</div>
@@ -103,10 +103,10 @@
 		      <div class="modal-content">
 		        <div class="modal-header">
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Change Password</h4>
+		          <h4 class="modal-title">Change Login Password</h4>
 		        </div>
 		        <!-- //modal body -->
-		        <div class="modal-body">	
+		        <div class="modal-body" style="text-align:center;">	
 		        	 <div>
 		        	 	<div class="form-group required">
 					      <input id="old_pass" type="password" class="form-control has-error" placeholder="Old Password" aria-describedby="basic-addon1">
@@ -140,17 +140,17 @@
 		      <div class="modal-content">
 		        <div class="modal-header">
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Change user name</h4>
+		          <h4 class="modal-title">Change Login ID</h4>
 		        </div>
 		        <!-- //modal body -->
-		        <div class="modal-body">	
+		        <div class="modal-body"  style="text-align:center;">	
 		        	 <div>
 		        	 	<div class="form-group required">
-					      <input id="change_user_nm" type="text" class="form-control has-error" placeholder="New User Name" aria-describedby="basic-addon1">
+					      <input id="change_user_nm" type="text" class="form-control has-error" placeholder="New Login ID" aria-describedby="basic-addon1">
 					    </div>
 					      <br/>
 					      <div class="form-group required">
-					      	<input id="user_nm_change_password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+					      	<input id="user_nm_change_password" type="password" class="form-control" placeholder="Current Password" aria-describedby="basic-addon1">
 					      </div>
 					     
 				      </div>				    
@@ -174,10 +174,10 @@
 		      <div class="modal-content">
 		       <button type="button" id="modal_close" class="close" style="position: absolute;right: 5px;z-index: 100; cursor: pointer;">&times;</button>
 		        <!-- //modal body -->
-		        <div class="modal-body">	
+		        <div class="modal-body"  style="text-align:center;">	
 		        	 <div class="row">
 		        	 	<div class="col-lg-4 co-sm-4 col-md-4 col-xs-4">
-		        	 		<img src="/controller/resources/img/png/user_default.png" class="img-responsive">
+		        	 		<img src="/resources/img/default_profile.jpg" class="img-responsive">
 		        	 	</div>
 		        	 	<div class="col-lg-8 co-sm-8 col-md-8 col-xs-8">
 		        	 		<div style="margin-bottom: 5px;padding-bottom:3px; border-bottom:1px 1px solid #fff;">

@@ -1,3 +1,4 @@
+<%@page import="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="org.springframework.security.core.GrantedAuthority" %>
@@ -8,6 +9,23 @@
  <%@page import="com.system.loan.dto.session.USER_SESSION"%>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+  <%
+   int strCoId=0;
+	String strCoNm="";
+	String logType="";
+	Date  now = new Date();
+	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+	
+	String datetime = date.format(now);
+	
+ 	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
+ 		
+ 	if(user!=null){
+ 		strCoId=user.getCoId();
+ 		strCoNm=user.getCoNm();
+ 		logType = user.getLogType();
+ 	}
+	%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -49,27 +67,13 @@
 	}
 		
 	</style>
-
+	<script type="text/javascript">
+		var _role = "<%=logType%>";
+		var _sesID = "<%=strCoId%>";
+	</script>
    </head>
   
-   <%
-   int strCoId=0;
-	String strCoNm="";
-	Date  now = new Date();
-	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-	
-	String datetime = date.format(now);
-	
-	//
-
- 	USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
- 		
- 	if(user!=null){
- 		strCoId=user.getCoId();
- 		strCoNm=user.getCoNm();
- 		
- 	}
-	%>
+  
 	
     
 

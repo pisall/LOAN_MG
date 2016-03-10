@@ -76,7 +76,7 @@
 			<!-- <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div> -->
-			<div class="modal-body">
+			<div class="modal-body" style="text-align:center;">
 				<div class="row">
 					<div class="panel">
 						<!-- <div class="panel-heading">Customer Detail Information</div> -->

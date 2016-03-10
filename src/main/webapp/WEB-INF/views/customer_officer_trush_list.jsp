@@ -10,6 +10,9 @@
 		    box-shadow: 0px 1px 2px #797777;
 		    color:#fff;
 		}
+		.modal-content>.modal-body{
+			text-align: center;
+		}
 	</style>
 
     <div id="wrapper">
@@ -44,7 +47,7 @@
                         	<div class="row">
                         		<div class="col-lg-6 col-md-6">CO <small>Customer Officer Infomation</small></div>
                         		<div class="col-lg-6 col-md-6 pull-right" style="text-align:right">
-                        			<a href="#none" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restore</a>
+                        			<a href="javascript:" class="btn btn-default" id="RESTORE"><span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restore</a>
                         			</div>
                         		
                         	</div>
@@ -161,7 +164,7 @@
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		          <h4 class="modal-title">Customer Official Detail</h4>
 		        </div>
-		        <div class="modal-body">
+		        <div class="modal-body" style="text-align:center;">
 		          <div class="row">	
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-xs-12 col-lg-3 col-md-3 col-sm-3  pull-right">

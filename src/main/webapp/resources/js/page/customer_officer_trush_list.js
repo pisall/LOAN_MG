@@ -16,6 +16,34 @@ $(document).ready(function(){
 		$("input[name=_ch]").prop("checked",Boolean(isCheck));
 	});
 	
+	$("#RESTORE").click(function(){
+		var input={};
+		input["enabled"]=true;
+		$("#list tbody tr").each(function(i){
+			if($(this).find("input[name=_ch]").prop("checked")){
+				input["co_id"]=$(this).find("input[name=_ch]").val();
+				$.ajax({
+					url : BASE_URL + "/co_001_controller/co_u0001",
+					type : 'POST',
+					dataType : 'JSON',
+					data : JSON.stringify(input),
+					beforeSend : function(xhr) {
+						startLoading();
+						xhr.setRequestHeader("Accept", "application/json");
+						xhr.setRequestHeader("Content-Type", "application/json");
+					},
+					success : function(data) {
+						stopLoading();
+						if(data.CODE=="0000"){
+							var pageNo=$("#paging").children("li[class=active]").attr("val");
+							listCoTrush({pageNo:pageNo,pcnt:10});
+							
+						}
+					}
+				});
+			};
+		});
+	});
 });
 
 function listCoTrush(input){
@@ -103,7 +131,7 @@ function listCoTrush(input){
 					//disabledUser(input);
 					
 					$.confirm({
-						text : "Are you sure want to disable this user?<br/>click ok to disable.",
+						text : "Are you sure want to disable this user?",
 						confirm : function() {
 							enableUser(arr);
 

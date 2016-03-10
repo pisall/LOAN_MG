@@ -4,7 +4,7 @@
 
 
 $(document).ready(function(){
-	loanReport();
+//	loanReport();
 });
 
 function loanReport(){
@@ -19,7 +19,7 @@ function loanReport(){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		}, 
 		succcess:function(dat){
-			  
+			  console.log(">>>>>> loan "+dat);
 		}
 	});
 }

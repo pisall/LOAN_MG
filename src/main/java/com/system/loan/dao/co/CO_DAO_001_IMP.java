@@ -161,7 +161,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "co_sex as co_sex,"
 					+ "co_brand as co_brand,"
 					+ "co_phone as co_phone,"
-					+ "other_edit_prof as other_edit_prof,"
 					+ "regCo.co_id as reg_co_id,"
 					+ "regCo.co_first_nm as reg_co_first_nm,"
 					+ "regCo.co_last_nm as reg_co_last_nm) from CO_DTO_001 where loginDTO.enabled=true  "+filter+" order by co_id");
@@ -207,6 +206,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 					+ "regCo.co_first_nm as reg_co_first_nm,"
 					+ "regCo.co_last_nm as reg_co_last_nm,"
 					+ "loginDTO.log_email as log_email,"
+					+ "loginDTO.log_in as log_in,"
 					+ "loginDTO.log_type as log_type) from CO_DTO_001 where co_id=?");
 			query.setInteger(0, id);
 			
@@ -255,7 +255,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		try{
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("select new map(co_id as co_id,co_first_nm as co_first_nm,co_last_nm as co_last_nm,other_edit_prof as other_edit_prof) from CO_DTO_001 where loginDTO.log_email=?");
+			Query query=session.createQuery("select new map(co_id as co_id,co_first_nm as co_first_nm,co_last_nm as co_last_nm) from CO_DTO_001 where loginDTO.log_email=?");
 			query.setString(0, userid);
 			List list=(List)query.list();
 			tx.commit();
@@ -274,7 +274,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 		return null;
 	}
 	
-	@Override
 	public HashMap<String, Object> updateEnabledUser(List<Integer> id, boolean enabled) {
 		// TODO Auto-generated method stub
 		Session session=null;
@@ -354,14 +353,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			tx=session.beginTransaction();
 			CO_DTO_001 co=(CO_DTO_001)session.get(CO_DTO_001.class, input.getCo_id());
 			int coId=co.getCo_id();
-			if(coId!=sesCoId){
-				if(!co.isOther_edit_prof()){
-					tx.rollback();
-					result.put("ERROR", true);
-					result.put("MESSAGE", "authortication is required.");
-					
-				}
-			}
 			co.setCo_first_nm(input.getCo_first_nm());
 			co.setCo_last_nm(input.getCo_last_nm());
 			co.setCo_sex(input.getCo_sex());
@@ -395,6 +386,7 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 //			co.setCo_first_nm(input.getCo_first_nm());
 //			co.setCo_last_nm(input.getCo_last_nm());
 //			co.setCo_sex(input.getCo_sex());
+			System.out.println(">>>>>>>>>> "+ input);
 			co.setDob(input.getDob());
 			co.setCo_national_id(input.getCo_national_id());
 			co.setAddress(input.getAddress());
@@ -507,64 +499,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 	}
 	//get privacy
 	
-	public HashMap<String, Object> getPrivacy(HttpServletRequest req){
-		
-		HttpSession sess=req.getSession();
-		USER_SESSION user=(USER_SESSION)sess.getAttribute("USER_SESSION");
-		int coId=0;
-		
-		HashMap<String, Object> result=new HashMap<>();
-		
-		Session session=null;
-		Transaction tx=null;
-		try{
-			if(user==null){
-				result.put("ERROR", true);
-				result.put("MESSAGE", "Access denied");
-				return result;
-			}else{
-				coId=user.getCoId();
-			}
-			session=factory.getCurrentSession();
-			tx=session.beginTransaction();
-			Query query=session.createQuery("select new map(other_edit_prof as other_edit_prof) from CO_DTO_001 where co_id=?");
-			query.setParameter(0, coId);
-			List list=(List)query.list();
-			
-			tx.commit();
-			
-			if(list.size()>0){
-				HashMap<String, Object> privacyHash=(HashMap<String, Object>)list.get(0);
-				String strIsOtherEditProf=privacyHash.get("other_edit_prof").toString();
-				if(strIsOtherEditProf!=null){
-					if(strIsOtherEditProf.length()>0){
-						if(strIsOtherEditProf.equals("true") || strIsOtherEditProf.equals("1")||strIsOtherEditProf.equals("TRUE")){
-							result.put("other_edit_prof", true);
-						}else{
-							result.put("other_edit_prof", false);
-						}
-					}else{
-						result.put("other_edit_prof", false);
-					}
-					
-				}else{
-					result.put("other_edit_prof", false);
-				}
-				
-			}else{
-				result.put("ERROR", true);
-				result.put("MESSAGE", "Please login.");
-				return result;
-			}
-			result.put("ERROR", false);
-			return result;
-			
-			
-		}catch(HibernateException e){
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	public HashMap<String, Object> changeIsOtherEditProf(boolean isOtherEditProf,HttpServletRequest req){
 		HttpSession sess=req.getSession();
@@ -587,7 +521,6 @@ public class CO_DAO_001_IMP implements CO_DAO_001{
 			CO_DTO_001 co=findCoById(coId);
 			session=factory.getCurrentSession();
 			tx=session.beginTransaction();
-			co.setOther_edit_prof(isOtherEditProf);
 			session.update(co);
 			tx.commit();
 			

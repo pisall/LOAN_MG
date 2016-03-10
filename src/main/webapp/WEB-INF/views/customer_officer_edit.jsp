@@ -54,10 +54,10 @@
                         <h2 class="page-header">
                         	<div class="row">
                         		<div class="ccol-lg-6 col-sm-6 col-md-6 co-xs-6">
-                        			New CO<small>(Cuctomer Officer Agreement)</small>
+                        			Update CO<small>(Cuctomer Officer Agreement)</small>
                         		</div>
                         		<div class="ccol-lg-6 col-sm-6 col-md-6 co-xs-6">
-                        			<a href="#none" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span>update</span></a>
+<!--                         			<a href="#none" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span>update</span></a> -->
                         			<a class="btn btn-primary pull-right" href="${pageContext.request.contextPath}/co_001_controller/co_0003" ><span class="glyphicon glyphicon-list"></span>&nbsp; List</a>
                         		</div>
                         	</div>
@@ -76,7 +76,44 @@
 						
 						<!-- panel-group -->
 						<div class="panel-group">
-						
+								<!-- account information -->
+						    <div class="panel panel-default" id="ACCOUNT_INFO">
+						      <div class="panel-heading">Account Information</div>
+						      <div class="panel-body">
+						      	<div class="row">
+						      		<div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+						      			<div class="form-group required">
+											<label class="control-label col-sm-2" for="fst_nm">User mame</label>
+											<div class="col-sm-10">
+											  <input type="email" class="form-control" id="user_nm" placeholder="User name">
+											  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
+											</div>
+											
+										</div>
+										<input type="hidden" id="log_in"/>
+										<div class="form-group required">
+											<label class="control-label col-sm-2" for="fst_nm">Password</label>
+											<div class="col-sm-10 ">
+											  <input type="password" class="form-control" id="password" placeholder="User name">
+											  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
+											</div>
+										</div>
+										<div class="form-group required">
+											<label class="control-label col-sm-2" for="fst_nm">Permission</label>
+											<div class="col-sm-10 ">
+<!-- 											  <input type="password" class="form-control" id="role" placeholder="User name"> -->
+											<select id="role">
+												<option value="ROLE_ADMIN">ADMIN</option>
+												<option value="ROLE_USER">USER</option>
+											</select>
+											  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
+											</div>
+										</div>
+						      		</div>
+						      	</div>
+						      </div>
+						    </div>
+						    <!-- //account information -->
 					
 						    
 						    <!-- general information -->
@@ -178,7 +215,6 @@
 									  <a href="#none" id="btn_save" class="btn btn-primary"><span>Update</span></a>
 										  <a class="btn btn-default" href="${pageContext.request.contextPath}/co_001_controller/co_0003">Cancel</a>
 									  </div>
-						    
 							</div>
 							<!-- //panel-group -->
 						 		
@@ -209,7 +245,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
 		      </div>
-		      <div class="modal-body">
+		      <div class="modal-body" style="text-align:center;">
 		          <iframe src="${pageContext.request.contextPath}/uploadController/fileUploadForm" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>  
 		      </div>
 		      <div class="modal-footer">

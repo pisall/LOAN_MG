@@ -7,95 +7,32 @@ $(document).ready(function(){
 		changePassword();
 	});
 	$("#btn_change_pass_confirm").click(function(){
+		removeError();
 		var input={oldPassword:"",newPassword:"",confirmNewPassword:""};
 		input["oldPassword"]=$("#old_pass").val();
 		input["newPassword"]= $("#new_pass").val();
 		input["confirmNewPassword"]=$("#conf_new_pass").val();
-		console.log(input);
-		var isError=false;
 		
-		if(input.oldPassword.length==0){
-			$("#old_pass").parent(".form-group").addClass("has-error");
-			isError=true;
-		}else{
-			$("#old_pass").parent(".form-group").removeClass("has-error");
-		}
-		
-		if(input.newPassword.length==0){
-			$("#new_pass").parent(".form-group").addClass("has-error");
-			isError=true;
-		}else{
-			$("#new_pass").parent(".form-group").removeClass("has-error");
-		}
-		
-		if(input.confirmNewPassword.length==0){
-			$("#conf_new_pass").parent(".form-group").addClass("has-error");
-			isError=true;
-		}else{
-			$("#conf_new_pass").parent(".form-group").removeClass("has-error");
-		}
-		
-		if(isError){
+		if(!validationLogPwd()){
 			return;
 		}
-		
-		if(input.newPassword.length!=input.confirmNewPassword.length){
-			alert("New password and confirm password is not match,please reset new password");
-			$("#conf_new_pass").val("");
-			$("#new_pass").val("");
-			
-			$("#new_pass").parent(".form-group").addClass("has-error");
-			$("#conf_new_pass").parent(".form-group").addClass("has-error");
-			isError=true;
-			
-		}else{
-			$("#new_pass").parent(".form-group").removeClass("has-error");
-			$("#conf_new_pass").parent(".form-group").removeClass("has-error");
-			
-		}
-		if(isError){
-			return;
-		}
-		
-		
-		
 		if(confirm("Do you want to change new password?"))
 		{
 			sendChangPassword(input);
-			
-		}else{
-			
-		}
+		};
 	});
 	
 	//check user Name;
 	$("#btn_change_username_confirm").click(function(){
+		removeError();
 		var input={oldPassword:"",newPassword:"",confirmNewPassword:""};
 		input["userName"]=$("#change_user_nm").val();
 		input["oldPassword"]=$("#user_nm_change_password").val();
-		var isError=false;
 		
-		if(input.userName.length==0){
-			$("#change_user_nm").parent(".form-group").addClass("has-error");
-			isError=true;
-		}else{
-			$("#change_user_nm").parent(".form-group").removeClass("has-error");
-		}
-		
-		if(input.oldPassword.length==0){
-			$("#user_nm_change_password").parent(".form-group").addClass("has-error");
-			isError=true;
-		}else{
-			$("#user_nm_change_password").parent(".form-group").removeClass("has-error");
-		}
-		
-		if(isError){
+		if(!validationLogId()){
 			return;
 		}
-	
-		console.log(input);
 		sendChangeUserName(input);
-		
 	});
 	
 	//event on hide of modal change password
@@ -128,6 +65,79 @@ $(document).ready(function(){
 	});
 		
 });
+function validationLogId(){
+	var username = $("#change_user_nm").val();
+	if(username == "") {
+		alert("Error: Username cannot be blank!");
+		$("#change_user_nm").parents(".form-group").addClass("has-error");
+		$("#change_user_nm").focus();
+		return false;
+	}
+	re = /^\w+$/;
+	if(!re.test(username)) {
+	  $("#change_user_nm").parents(".form-group").addClass("has-error");
+	  alert("Error: Username must contain only letters, numbers and underscores!");
+	  $("#change_user_nm").focus();
+	  return false;
+	}
+	removeError();
+	return true;
+}
+function validationLogPwd(){
+	var pw1 = $("#new_pass").val();
+	var pw2 = $("#conf_new_pass").val();
+	var oldpw = $("#old_pass").val();
+
+	if(oldpw=="") {
+	  $("#old_pass").parents(".form-group").addClass("has-error");
+	  alert("Error: Old Password can not be blank!");
+	  $("#old_pass").focus();
+	  return false;
+	}
+	
+	if(pw1 != "" && pw1 == pw2) {
+	  if(pw1.length < 6) {
+		  $("#new_pass").parents(".form-group").addClass("has-error");
+		  alert("Error: Password must contain at least six characters!");
+		  $("#new_pass").focus();
+		  return false;
+	  }
+	  re = /[0-9]/;
+	  if(!re.test(pw1)) {
+	    $("#new_pass").parents(".form-group").addClass("has-error");
+	    alert("Error: password must contain at least one number (0-9)!");
+	    $("#new_pass").focus();
+	    return false;
+	  }
+	  re = /[a-z]/;
+	  if(!re.test(pw1)) {
+	    $("#new_pass").parents(".form-group").addClass("has-error");
+	    alert("Error: password must contain at least one lowercase letter (a-z)!");
+	    $("#new_pass").focus();
+	    return false;
+	  }
+	  re = /[A-Z]/;
+	  if(!re.test(pw1)) {
+	    $("#new_pass").parents(".form-group").addClass("has-error");
+	   alert("Error: password must contain at least one uppercase letter (A-Z)!");
+	    $("#new_pass").focus();
+	    return false;
+	  }
+	} else {
+	  $("#conf_new_pass").parents(".form-group").addClass("has-error");
+	  alert("Error: Please check that you've entered and confirmed your password!");
+	  $("#conf_new_pass").focus();
+	  return false;
+	}
+
+	removeError();
+	return true;
+}
+function removeError(){
+	 $("#old_pass").parents(".form-group").removeClass("has-error");
+	  $("#new_pass").parents(".form-group").removeClass("has-error");
+	  $("#conf_new_pass").parents(".form-group").removeClass("has-error");
+};
 function changePassword(){
 	$("#myModal").modal("show");
 }
@@ -207,7 +217,6 @@ function sendChangeUserName(input){
 		},
 		success : function(data) {
 			stopLoading();
-			console.log(data);
 			if(data.ERROR){
 				$("#change_user_nm").val("");
 				$("#user_nm_change_password").val("");
@@ -221,7 +230,6 @@ function sendChangeUserName(input){
 		},
 		error : function(data, status, er) {
 			stopLoading();
-			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
 }

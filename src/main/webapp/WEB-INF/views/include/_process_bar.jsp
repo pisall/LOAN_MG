@@ -7,7 +7,7 @@
           <button type="button" class="close" data-dismiss="modal">×</button>
           <h4 class="modal-title">Static Backdrop</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="text-align:center;">
           <div id="show_process"></div>
         </div>
         <div class="modal-footer">

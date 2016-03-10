@@ -148,19 +148,19 @@
 	<%@include file="include/_script.jsp"%>
 	<script type="text/javascript">
 			$(function(){  
-				$("#customer_officer_info").click(function(){
+// 				$("#customer_officer_info").click(function(){
 				
-					location.href="${pageContext.request.contextPath}/co_001_controller/co_0003";
-				});
-				$("#customer_info").click(function(){
-					location.href="${pageContext.request.contextPath}/customer/home_customer";
-				});
-				$("#income_chart").click(function(){					
-					location.href="${pageContext.request.contextPath}/Income/IncomeView";
-				});
-				$("#outcome_chart").click(function(){					
-					location.href="${pageContext.request.contextPath}/Outcome/OutcomeView";
-				});
+// 					location.href="${pageContext.request.contextPath}/co_001_controller/co_0003";
+// 				});
+// 				$("#customer_info").click(function(){
+// 					location.href="${pageContext.request.contextPath}/customer/home_customer";
+// 				});
+// 				$("#income_chart").click(function(){					
+// 					location.href="${pageContext.request.contextPath}/Income/IncomeView";
+// 				});
+// 				$("#outcome_chart").click(function(){					
+// 					location.href="${pageContext.request.contextPath}/Outcome/OutcomeView";
+// 				});
 			})
 			
 	</script>

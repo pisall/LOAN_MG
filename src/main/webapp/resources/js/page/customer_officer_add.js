@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	//blur event
-	onblur();
+//	onblur();
 	
 	$("#btn_save").click(function(){
 		coInsert(false);
@@ -15,170 +15,125 @@ $(document).ready(function(){
 	
 });
 
-function onblur(){
-	$("#user_nm").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-	
-	$("#password").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-	
-	$("#c_password").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-	
-	$("#national_id").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-	
-	$("#phone").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
+function validation(){
+ var username = $("#user_nm").val();
+ var pw1 = $("#password").val();
+ var pw2 = $("#c_password").val();
+ var id = $("#national_id").val();
+ var phone = $("#phone").val();
+  if(username == "") {
+    $("#user_nm").siblings(".help-block").show();
+    $("#user_nm").parents(".form-group").addClass("has-error");
+    $("#user_nm").siblings(".help-block").find("li").text("Error: Username cannot be blank!");
+    $("#user_nm").focus();
+    return false;
+  }
+  re = /^\w+$/;
+  if(!re.test(username)) {
+	$("#user_nm").siblings(".help-block").show();
+    $("#user_nm").parents(".form-group").addClass("has-error");
+    $("#user_nm").siblings(".help-block").find("li").text("Error: Username must contain only letters, numbers and underscores!");
+    $("#user_nm").focus();
+    return false;
+  }
+
+  if(pw1 != "" && pw1 == pw2) {
+    if(pw1.length < 6) {
+  	$("#password").siblings(".help-block").show();
+    $("#password").parents(".form-group").addClass("has-error");
+    $("#password").siblings(".help-block").find("li").text("Error: Password must contain at least six characters!");
+    $("#password").focus();
+    return false;
+    }
+    if(pw1 == username) {
+    	$("#password").siblings(".help-block").show();
+        $("#password").parents(".form-group").addClass("has-error");
+        $("#password").siblings(".help-block").find("li").text("Error: Password must be different from Username!");
+        $("#password").focus();
+        return false;
+    }
+    re = /[0-9]/;
+    if(!re.test(pw1)) {
+      $("#password").siblings(".help-block").show();
+      $("#password").parents(".form-group").addClass("has-error");
+      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one number (0-9)!");
+      $("#password").focus();
+      return false;
+    }
+    re = /[a-z]/;
+    if(!re.test(pw1)) {
+      $("#password").siblings(".help-block").show();
+      $("#password").parents(".form-group").addClass("has-error");
+      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one lowercase letter (a-z)!");
+      $("#password").focus();
+      return false;
+    }
+    re = /[A-Z]/;
+    if(!re.test(pw1)) {
+      $("#password").siblings(".help-block").show();
+      $("#password").parents(".form-group").addClass("has-error");
+      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one uppercase letter (A-Z)!");
+      $("#password").focus();
+      return false;
+    }
+  } else {
+    $("#c_password").siblings(".help-block").show();
+    $("#c_password").parents(".form-group").addClass("has-error");
+    $("#c_password").siblings(".help-block").find("li").text("Error: Please check that you've entered and confirmed your password!");
+    $("#c_password").focus();
+    return false;
+  }
+
+  //National ID and phone number
+  re = /[0-9]/;
+  re1 = /[a-z]/;
+  re2 =/[A-Z]/;
+  if(id=="") {
+    $("#national_id").siblings(".help-block").show();
+    $("#national_id").parents(".form-group").addClass("has-error");
+    $("#national_id").siblings(".help-block").find("li").text("Error: National ID can not be blank!");
+    $("#national_id").focus();
+    return false;
+  }
+  if(!re.test(id) || re1.test(id) || re2.test(id)) {
+    $("#national_id").siblings(".help-block").show();
+    $("#national_id").parents(".form-group").addClass("has-error");
+    $("#national_id").siblings(".help-block").find("li").text("Error: National ID must contain only number (0-9)!");
+    $("#national_id").focus();
+    return false;
+  }
+  if(phone=="") {
+    $("#phone").siblings(".help-block").show();
+    $("#phone").parents(".form-group").addClass("has-error");
+    $("#phone").siblings(".help-block").find("li").text("Error: phone nubmer can not be blank!");
+    $("#phone").focus();
+    return false;
+  }
+  if(!re.test(phone) || re1.test(phone) || re2.test(phone)) {
+    $("#phone").siblings(".help-block").show();
+    $("#phone").parents(".form-group").addClass("has-error");
+    $("#phone").siblings(".help-block").find("li").text("Error: phone id invalid!");
+    $("#phone").focus();
+    return false;
+  }
+  removeError();
+  return true;
 }
 
-
-function validation(input){
-	/*--  log_email  --*/
-	var error=false;
-	if(input.log_email){
-		if(input.log_email!=""){
-			$("#user_nm").parents(".form-group").removeClass("has-error");
-			$("#user_nm").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#user_nm").parents(".form-group").addClass("has-error");
-			$("#user_nm").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#user_nm").parents(".form-group").addClass("has-error");
-		$("#user_nm").siblings(".help-block").show();
-		
-	}
-	/*--  //log_email  --*/
-	
-	/*--  log_password  --*/
-	if(input.log_password){
-		if(input.log_password!=""){
-			$("#password").parents(".form-group").removeClass("has-error");
-			$("#password").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#password").parents(".form-group").addClass("has-error");
-			$("#password").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#password").parents(".form-group").addClass("has-error");
-		$("#password").siblings(".help-block").show();
-		
-	}
-	/*--  //log_password  --*/
-	
-	/*--  confirm_password  --*/
-	if(input.confirm_password){
-		if(input.confirm_password!=""){
-			$("#c_password").parents(".form-group").removeClass("has-error");
-			$("#c_password").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#c_password").parents(".form-group").addClass("has-error");
-			$("#c_password").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#c_password").parents(".form-group").addClass("has-error");
-		$("#c_password").siblings(".help-block").show();
-		
-	}
-	/*--  //confirm_password  --*/
-	
-	/*--  Nation_card  --*/
-	if(input.co_national_id){
-		if(input.co_national_id!=""){
-			$("#national_id").parents(".form-group").removeClass("has-error");
-			$("#national_id").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#national_id").parents(".form-group").addClass("has-error");
-			$("#national_id").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#national_id").parents(".form-group").addClass("has-error");
-		$("#national_id").siblings(".help-block").show();
-		
-	}
-	/*--  //Nation card  --*/
-	
-	
-	/*--  Phone  --*/
-	if(input.co_phone){
-		if(input.co_phone!=""){
-			$("#phone").parents(".form-group").removeClass("has-error");
-			$("#phone").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#phone").parents(".form-group").addClass("has-error");
-			$("#phone").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#phone").parents(".form-group").addClass("has-error");
-		$("#phone").siblings(".help-block").show();
-		
-	}
-	/*--  //Phone  --*/
-	
-	return error;
-}
+function removeError(){
+	 $("#user_nm").parents(".form-group").removeClass("has-error");
+	  $("#user_nm").siblings(".help-block").hide();
+	  $("#password").parents(".form-group").removeClass("has-error");
+	  $("#password").siblings(".help-block").hide();
+	  $("#c_password").parents(".form-group").removeClass("has-error");
+	  $("#c_password").siblings(".help-block").hide();
+	  $("#national_id").parents(".form-group").removeClass("has-error");
+	  $("#national_id").siblings(".help-block").hide();
+	  $("#phone").parents(".form-group").removeClass("has-error");
+	  $("#phone").siblings(".help-block").hide();
+};
 function coInsert(isNew){
+	removeError();
 	var input={};
 	input['co_first_nm']=$("#first_nm").val();
 	input['co_last_nm']=$("#last_nm").val();
@@ -194,11 +149,7 @@ function coInsert(isNew){
 	input['log_password']=$("#password").val();
 	input['confirm_password']=$("#c_password").val();
 	
-	console.log(input);
-	//pb_adress
-	//return;
-	
-	if(validation(input)){
+	if(!validation()){
 		return;
 	}
 	$.ajax({
@@ -211,7 +162,7 @@ function coInsert(isNew){
 			xhr.setRequestHeader("Content-Type", "application/json");
 		},
 		success : function(data) {
-			alert("New CO creating is successfully!")
+			alert("New CO created successfully!")
 			if(isNew){
 				window.location.href = BASE_URL+"/co_001_controller/co_0001";
 			}else{
@@ -222,6 +173,4 @@ function coInsert(isNew){
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
-	
-	
 }

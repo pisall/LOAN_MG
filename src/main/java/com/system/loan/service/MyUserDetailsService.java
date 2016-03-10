@@ -30,18 +30,16 @@ public class MyUserDetailsService implements UserDetailsService {
 		throws UsernameNotFoundException {
 		System.out.println("userName="+username);
 		HashMap<String, Object> user = login.findLogByLogMail(username);
-		List<GrantedAuthority> authorities =buildUserAuthority("ROLE_ADMIN"/*user.get("log_email").toString()*/);
-
+		List<GrantedAuthority> authorities =buildUserAuthority(user.get("log_type").toString());
 		return buildUserForAuthentication(user, authorities);
-		
-		
 	}
 
 	// Converts com.mkyong.users.model.User user to
 	// org.springframework.security.core.userdetails.User
 	private User buildUserForAuthentication(HashMap<String, Object> user, 
 		List<GrantedAuthority> authorities) {
-		System.out.println((boolean)user.get("enabled")+"==========================");
+		System.out.println(authorities+">>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+new User(user.get("log_email").toString(), user.get("log_password").toString(), 
+				(boolean)user.get("enabled"), true, true, true, authorities));
 		return new User(user.get("log_email").toString(), user.get("log_password").toString(), 
 				(boolean)user.get("enabled"), true, true, true, authorities);
 	}

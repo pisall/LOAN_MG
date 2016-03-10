@@ -13,13 +13,13 @@
 
 		<!-- Assume test is the database name -->
 		<property name="hibernate.connection.url">
-			jdbc:postgresql://192.168.178.77/loanmg
+			jdbc:postgresql://localhost/loandevdb
 		</property>
 		<property name="hibernate.connection.username">
-			postgres
+			loan_dev
 		</property>
 		<property name="hibernate.connection.password">
-			postgres
+			loan_dev
 		</property>
 
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

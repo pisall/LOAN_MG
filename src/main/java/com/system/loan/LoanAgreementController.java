@@ -146,7 +146,7 @@ public class LoanAgreementController implements Serializable{
 		    
 		    //calculate 
 		    balance_remain= balance_remain-principal_paid;
-		    total_pay_rate= balance_remain*rate; 
+		    total_pay_rate= balance_remain*rate/100; 
 			balance_payment= principal_paid+total_pay_rate; 
 			
 			float a1,b1,c1,d1;

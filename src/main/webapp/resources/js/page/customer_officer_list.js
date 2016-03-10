@@ -5,7 +5,6 @@ var _CO_ID;
 
 $(document).ready(function(){
 	//blur event
-	_CO_ID=$("#hi_co_id").val();
 	var sw=$("#sw").val();
 	
 	$("#paging").pagination({
@@ -47,7 +46,6 @@ function listCo(input){
 		},
 		success : function(data) {
 			stopLoading();
-			console.log(data);
 			$("#list tbody").html("");
 			var tbody="";
 			$("#paging").html("");
@@ -76,11 +74,7 @@ function listCo(input){
 				$("#paging").children("li[val=0n]").click(function(){
 					listCo({pageNo:paging.pageNo+1,pcnt:10,sw:sw});
 				});*/
-				console.log("test="+paging.total);
 				$("#paging").pagination('updateItems', paging.total);
-				
-				
-				
 			}
 			
 			$.each(data.REC,function(i,v){
@@ -93,14 +87,15 @@ function listCo(input){
 					tr+='<td>'+v.co_brand+'</td>';
 					tr+='<td>'+v.co_phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2-$3")+'</td>';
 					tr+='<td>';
-						if(v.other_edit_prof==true || _CO_ID==v.co_id){
+						if(_sesID==v.co_id){
 							tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>';
+						}else if(_role == "ROLE_USER" || _role ==""){
+							tr+='<a href="" class="btn btn-default btn-xs disabled" style="color:#F30A0A;"><span class="glyphicon glyphicon-ban-circle"></span></a>';
 						}else{
-							tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'" class="btn btn-default btn-xs disabled" style="color:#F30A0A;"><span class="glyphicon glyphicon-ban-circle"></span></a>';
+							tr+='<a href="'+BASE_URL + '/co_001_controller/co_0004/'+v.co_id+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>';
+							tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'" style="color:#A50606;"><span class="glyphicon glyphicon-remove"></span></a>';
 						}
 						
-						tr+='&nbsp;';
-						tr+='<a href="#none" name="btn_disabled" val="'+v.co_id+'" style="color:#A50606;"><span class="glyphicon glyphicon-remove"></span></a>';
 					tr+='</td>';
 				tr+='</tr>';
 				tbody+=tr;
@@ -124,7 +119,7 @@ function listCo(input){
 					//disabledUser(input);
 					
 					$.confirm({
-						text : "Are you sure want to disable this user?<br/>click ok to disable.",
+						text : "Are you sure want to disable this user?",
 						confirm : function() {
 							disabledUser(input);
 

@@ -166,19 +166,13 @@ function listCus(pageNo) {
 									+ "<td style='max-width:0px'>"
 									+ "<span class='ellipsis' title='"+data.REC[i].cu_address+"'>"+data.REC[i].cu_address+"</span>"
 									+ "</td>"
-									+ "<td align='center' class='action'>"
-									+ "<a href='"
-									+ BASE_URL
-									+ "/customer/edit_customer?cuID="
-									+ cuID
-									+ "'><span class='glyphicon glyphicon-pencil'></span></a>"
-									+ "&nbsp;"
-									+ "<a href='#none' onclick=\"return deleteCustomer("
-									+ cuID
-									+ ")\"><span class='glyphicon glyphicon-trash'></span></a>"
-									+ "&nbsp;"
-									+ "<a href='#none'><span class='glyphicon glyphicon-random' onclick=\"return getCustomerTransaction("
-									+ cuID + ")\"></span></a>" + "</td></tr>";
+									+ "<td align='center' class='action'>";
+							
+							result	+= "<a href='"+ BASE_URL+"/customer/edit_customer?cuID="+cuID+"'><span class='glyphicon glyphicon-pencil'></span></a>&nbsp;";
+							if(_role == "ROLE_ADMIN"){
+								result	+="<a href='#none' onclick=\"return deleteCustomer("+cuID+")\"><span class='glyphicon glyphicon-trash'></span></a>&nbsp;";
+							};
+							result	+="<a href='#none'><span class='glyphicon glyphicon-random' onclick=\"return getCustomerTransaction("+cuID+")\"></span></a></td></tr>";
 						}
 
 					}

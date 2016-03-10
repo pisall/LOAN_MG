@@ -68,8 +68,6 @@ public class CO_DTO_001 {
 	
 	@Column(name="update_dtt")
 	private String update_dtt;
-	@Column(name="other_edit_prof", nullable=true)
-	private boolean other_edit_prof;
 	
 	/*@Column(name="reg_co_id")
 	private int reg_co_id;*/
@@ -286,20 +284,6 @@ public class CO_DTO_001 {
 	/*public void setReg_co_id(int reg_co_id) {
 		this.reg_co_id = reg_co_id;
 	}*/
-
-	/**
-	 * @return the other_edit_prof
-	 */
-	public boolean isOther_edit_prof() {
-		return other_edit_prof;
-	}
-
-	/**
-	 * @param other_edit_prof the other_edit_prof to set
-	 */
-	public void setOther_edit_prof(boolean other_edit_prof) {
-		this.other_edit_prof = other_edit_prof;
-	}
 
 	/**
 	 * @return the loginDTO

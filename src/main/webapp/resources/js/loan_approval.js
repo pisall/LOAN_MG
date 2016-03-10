@@ -27,7 +27,6 @@ $(document).ready(function(){
 	 $("#day_late").ForceNumericOnly();
 	 $("#amount_fine").ForceNumericOnly();
 	 $("#pre_pay").ForceNumericOnly();
-	 
 	 if(tr_stts==2){
 		$("#btnApprovale").html("Update");
 		$("#btnApprovale").val(1);

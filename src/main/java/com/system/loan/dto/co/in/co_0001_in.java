@@ -8,6 +8,7 @@ public class co_0001_in implements Serializable{
 	 */
 	private static final long serialVersionUID = -8043769834783119119L;
 	private int co_id;
+	private int log_in;
 	private String co_first_nm;
 	private String co_last_nm;
 	private String co_sex;
@@ -23,6 +24,7 @@ public class co_0001_in implements Serializable{
 	private String log_password;
 	private String log_email;
 	private String confirm_password;
+	private String log_type;
 	
 	
 	
@@ -230,6 +232,18 @@ public class co_0001_in implements Serializable{
 		buf.append("log_password:"+this.log_password+",");
 		buf.append("log_email:"+this.log_email);
 		return buf.toString();
+	}
+	public String getLog_type() {
+		return log_type;
+	}
+	public void setLog_type(String log_type) {
+		this.log_type = log_type;
+	}
+	public int getLog_in() {
+		return log_in;
+	}
+	public void setLog_in(int log_in) {
+		this.log_in = log_in;
 	}
 	
 	

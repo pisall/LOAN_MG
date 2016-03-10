@@ -83,8 +83,10 @@
 
 													</tr>
 													<tr>
-														<td>Part of Loan:</td>
-														<td></td>
+														<td style="border: 0px">Rate</td>
+														<td style="border: 0px"><fmt:formatNumber value="${entry.ac_rate}"
+																type="currency" currencySymbol="%"
+																pattern=" #,##0.00 ¤; -#,##0.00 ¤" /></td>
 													</tr>
 
 												</tbody>
@@ -126,9 +128,9 @@
 												<th>No</th>
 												<th>Date Time</th>
 												<th>Day</th>
-												<th>Full Amount</th>											
-												<th>Pay Amount</th>
-												<th>Balance</th>
+												<th>Principle</th>											
+												<th>Total Payment</th>
+												<th>Outstanding Principle</th>
 												<th class="status">Status</th>
 												<th class="signature" style="display: none">Signature</th>
 																							

@@ -40,7 +40,7 @@
      * @param [options] {{title, text, confirm, cancel, confirmButton, cancelButton, post, confirmButtonClass}}
      * @param [e] {Event}
      */
-    $.confirm = function (options, e) {
+    	 = function (options, e) {
         // Do nothing when active confirm modal.
         if ($('.confirmation-modal').length > 0)
             return;
@@ -98,7 +98,7 @@
                     '<div class="'+ settings.dialogClass +'">' +
                         '<div class="modal-content">' +
                             modalHeader +
-                            '<div class="modal-body">' + settings.text + '</div>' +
+                            '<div class="modal-body" style="text-align:center;>' + settings.text + '</div>' +
                             '<div class="modal-footer">' +
                                 '<button class="confirm btn ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal">' +
                                     settings.confirmButton +

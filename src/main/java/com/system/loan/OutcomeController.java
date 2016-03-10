@@ -1,5 +1,4 @@
 package com.system.loan;
- 
 
 import javax.inject.Inject;
 import javax.persistence.Entity;
@@ -25,7 +24,7 @@ public class OutcomeController {
 	 	}
 		@RequestMapping(value="/OutcomeView", method=RequestMethod.GET)
 		public String Income(Model model){
-			model.addAttribute("page_id","cont_5");
+			model.addAttribute("page_id","Outcome");
 			return "Outcome";
 		}
 	}

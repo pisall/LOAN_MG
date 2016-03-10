@@ -37,9 +37,7 @@
 								onclick=" return goBackPage();" id="btnGoBack">
 								<span style="width: 30px" class="glyphicon glyphicon-arrow-left"></span>
 							</button> 
-						<h2 class="page-header" style="text-align: center">Loan
-							Approval</h2>
-							 
+						<h2 class="page-header" style="text-align: center">Loan Approval</h2>
 					</div>
 				</div>
 
@@ -265,10 +263,9 @@
 		<!-- /.container-fluid -->
 
 	<!-- /#page-wrapper -->
-	<%@include file="include/_script.jsp"%>
+	<%@include file="include/_script_pop.jsp"%>
 
-	<script
-		src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/loan_approval.js"></script>
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
 		var tr_id="<%=tr_id%>";tr_stts

@@ -158,7 +158,6 @@ public class SysConfig {
 				co.setCo_sex(input.getCo_sex());
 				co.setDob(input.getDob());
 				co.setReg_dtt(regDate);
-				co.setOther_edit_prof(false);
 				co.setRegCo(co);
 				
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

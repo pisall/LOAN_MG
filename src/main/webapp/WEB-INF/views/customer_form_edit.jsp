@@ -120,7 +120,7 @@
 										<label class="control-label col-sm-2" for="cu_dob">DOB</label>
 										<input type="hidden" value="${cu.cuDOB}" id="cu_dob">
 										<div class="col-sm-10">
-											<input maxlength="50"  type="text" class="form-control  required" id="dob" placeholder="Date of Birth">
+											<input maxlength="50"  type="text" class="form-control  required" name="cu_dob" id="dob" placeholder="Date of Birth">
 										</div>
 									</div>
 
@@ -332,7 +332,7 @@
 	</div>
 	<!-- /#wrapper -->
 
-	<%@include file="include/_script.jsp"%>
+	<%@include file="include/_script_pop.jsp"%>
 	
 	<script type="text/javascript">
 		var BASE_URL = "${pageContext.request.contextPath}";
@@ -348,7 +348,7 @@
 			$("#dob").val(moment($("#cu_dob").val(), "YYYYMMDD").format("DD-MM-YYYY"));
 			$("#form_cu").validate({
 				errorPlacement : function(label, element) {
-					console.log(label);
+// 					console.log(label);
 				},
 			});
 			
@@ -405,7 +405,7 @@
 						gu_note : $("#gu_note").val()
 					} ]
 				}
-				console.log(input);
+// 				console.log(input);
 				$.ajax({
 					url : BASE_URL + "/customer/update_customer",
 					type : 'POST',
@@ -423,8 +423,8 @@
 							goBack("customer","home_customer");
 					},
 					error : function(data, status, er) {
-						console.log("error: " + data + " status: " + status
-								+ " er:" + er);
+// 						console.log("error: " + data + " status: " + status
+// 								+ " er:" + er);
 					}
 				});
 			}
@@ -441,7 +441,7 @@
 							contentType : false,
 							cache : false,
 							success : function(data) {
-								console.log(data);
+// 								console.log(data);
 							},
 							error : function() {
 
@@ -551,11 +551,11 @@
 												},
 												error : function(data, status,
 														er) {
-													console.log("error: "
-															+ data
-															+ " status: "
-															+ status + " er:"
-															+ er);
+// 													console.log("error: "
+// 															+ data
+// 															+ " status: "
+// 															+ status + " er:"
+// 															+ er);
 												}
 											});
 								} else {

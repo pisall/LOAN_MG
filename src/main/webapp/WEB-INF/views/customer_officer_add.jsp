@@ -149,6 +149,7 @@
 										<label class="control-label col-sm-2" for="nt_card">National Card</label>
 										<div class="col-sm-10">
 										  <input type="text" class="form-control" id="national_id" placeholder="Enter National Card">
+										  <span class="help-block with-errors"><ul class="list-unstyled"><li>Please fill out this field.</li></ul></span>
 										</div>
 									  </div>
 									  

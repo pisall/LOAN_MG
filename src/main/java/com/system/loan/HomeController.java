@@ -7,9 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,7 @@ import com.system.loan.dao.CustomerOfficerDaoImp;
 import com.system.loan.dao.myUserDetailsManager;
 import com.system.loan.dao.customer.CustomerDaoImp;
 import com.system.loan.dao.login.LOGIN_DAO_001_IMP;
+import com.system.loan.dto.co.LOGIN_DTO_001;
 import com.system.loan.dto.login.in.login_0001_in;
 import com.system.loan.dto.session.USER_SESSION;
 
@@ -67,7 +72,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-	public String accessDeniedPage(ModelMap model) {
+	public String accessDeniedPage(Model model) {
 		model.addAttribute("user", getPrincipal());
 		return "accessDenied";
 	}
@@ -99,6 +104,18 @@ public class HomeController {
 		return userName;
 	}
 	
+	
+//	@RequestMapping(value="/updateLogin",method=RequestMethod.POST)
+//	@ResponseBody
+//	public HashMap<String ,Object> updateLogin(@RequestBody LOGIN_DTO_001 input){
+//		HashMap<String, Object> result=new HashMap<>();
+//		
+//		LOGIN_DAO_001_IMP log=new LOGIN_DAO_001_IMP();
+//		result=log.updateLogin(input);
+//		return result;
+//		
+//	}
+	
 	@RequestMapping(value="/changePassword",method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String , Object> changePassword(@RequestBody login_0001_in input){
@@ -112,12 +129,7 @@ public class HomeController {
 		}else{
 			result.put("ERROR", true);
 		}
-		
-		
-		
 		return result;
-		
-		
 	}
 	@RequestMapping(value="/log_0001",method=RequestMethod.GET)
 	public ModelAndView log0001(){

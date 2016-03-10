@@ -87,7 +87,31 @@ private SessionFactory factory=null;
 		}
 		return null;
 	}
-	
+	@Override
+	public LOGIN_DTO_001 getLoginByloginId(int id) {
+		// TODO Auto-generated method stub
+		Session session=null;
+		Transaction tx=null;
+		LOGIN_DTO_001 login;
+		try{
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			//LOGIN_DTO_001 login=(LOGIN_DTO_001)session.get(LOGIN_DTO_001.class, userName);
+			Query query=session.createQuery("From LOGIN_DTO_001 where log_in=?");
+			query.setInteger(0, id);
+			List list=(List)query.list();
+			tx.commit();
+			if (list.size()>0){
+				login=(LOGIN_DTO_001)list.get(0);
+				return login;
+			}else{
+				return null;
+			}
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public HashMap<String, Object> changePassword(login_0001_in input, String userName) {
 		// TODO Auto-generated method stub
@@ -196,6 +220,45 @@ private SessionFactory factory=null;
 			e.printStackTrace();
 		}
 		return rcnt;
+	}
+	
+	public HashMap<String, Object> updateLogin(LOGIN_DTO_001 input,HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> _------------");
+		
+		HashMap<String, Object> result=new HashMap<>();
+		Session session=null;
+		Transaction tx=null;
+		
+		
+		try{
+			LOGIN_DTO_001 login=getLoginByloginId(input.getLog_in());
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = "";
+			
+			if(!"".equals(input.getLog_password())){
+				hashedPassword = passwordEncoder.encode(input.getLog_password());
+				login.setLog_password(hashedPassword);
+			}
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> _------------"+hashedPassword);
+			login.setLog_email(input.getLog_email());
+			login.setLog_type(input.getLog_type());
+			login.setEnabled(true);
+			
+			session=factory.getCurrentSession();
+			tx=session.beginTransaction();
+			tx.setTimeout(5);
+			session.update(login);
+			tx.commit();
+			return result;
+			
+		}catch(HibernateException e){
+			e.printStackTrace();
+			
+		}
+		result.put("ERROR", true);
+		result.put("MESSAGE", "Error when update user Log in!");
+		return result;
 	}
 	
 }

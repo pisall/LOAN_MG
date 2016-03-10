@@ -3,13 +3,13 @@
  */
 
 $(document).ready(function(){
-	//blur event
-	onblur();
+	if(_role == "ROLE_USER"){
+		$("#ACCOUNT_INFO").remove();
+	};
 	$("#btn_save").click(function(){
 		coupdate();
 	});
 	viewCustomer(ID);
-	//console.log("id==="+ID);
 	
 	//evetn
 	$("#phone").keyup(function(){
@@ -42,80 +42,131 @@ function getCoById(input){
 	});
 }
 
-function onblur(){
-	
-	$("#national_id").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-	
-	$("#phone").blur(function(){
-		var txt="";
-		txt=$(this).val();
-		if(txt==""){
-			$(this).siblings(".help-block").show();
-			$(this).parents(".form-group").addClass("has-error");
-		}else{
-			$(this).parents(".form-group").removeClass("has-error");
-			$(this).siblings(".help-block").hide();
-		}
-	});
-}
+function validation(){
+	  username = $("#user_nm").val();
+	  pw1 = $("#password").val();
+	  id = $("#national_id").val();
+	  phone = $("#phone").val();
+	  if(username == "") {
+	    $("#user_nm").siblings(".help-block").show();
+	    $("#user_nm").parents(".form-group").addClass("has-error");
+	    $("#user_nm").siblings(".help-block").find("li").text("Error: Username cannot be blank!");
+	    $("#user_nm").focus();
+	    return false;
+	  }
+	  re = /^\w+$/;
+	  if(!re.test(username)) {
+		$("#user_nm").siblings(".help-block").show();
+	    $("#user_nm").parents(".form-group").addClass("has-error");
+	    $("#user_nm").siblings(".help-block").find("li").text("Error: Username must contain only letters, numbers and underscores!");
+	    $("#user_nm").focus();
+	    return false;
+	  }
 
+	  if(pw1 != "") {
+	    if(pw1.length < 6) {
+	  	$("#password").siblings(".help-block").show();
+	    $("#password").parents(".form-group").addClass("has-error");
+	    $("#password").siblings(".help-block").find("li").text("Error: Password must contain at least six characters!");
+	    $("#password").focus();
+	    return false;
+	    }
+	    if(pw1 == username) {
+	    	$("#password").siblings(".help-block").show();
+	        $("#password").parents(".form-group").addClass("has-error");
+	        $("#password").siblings(".help-block").find("li").text("Error: Password must be different from Username!");
+	        $("#password").focus();
+	        return false;
+	    }
+	    re = /[0-9]/;
+	    if(!re.test(pw1)) {
+	      $("#password").siblings(".help-block").show();
+	      $("#password").parents(".form-group").addClass("has-error");
+	      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one number (0-9)!");
+	      $("#password").focus();
+	      return false;
+	    }
+	    re = /[a-z]/;
+	    if(!re.test(pw1)) {
+	      $("#password").siblings(".help-block").show();
+	      $("#password").parents(".form-group").addClass("has-error");
+	      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one lowercase letter (a-z)!");
+	      $("#password").focus();
+	      return false;
+	    }
+	    re = /[A-Z]/;
+	    if(!re.test(pw1)) {
+	      $("#password").siblings(".help-block").show();
+	      $("#password").parents(".form-group").addClass("has-error");
+	      $("#password").siblings(".help-block").find("li").text("Error: password must contain at least one uppercase letter (A-Z)!");
+	      $("#password").focus();
+	      return false;
+	    }
+	  } else {
+	    $("#password").siblings(".help-block").show();
+	    $("#password").parents(".form-group").addClass("has-error");
+	    $("#password").siblings(".help-block").find("li").text("Error: Please check that you've your password!");
+	    $("#password").focus();
+	    return false;
+	  }
 
-function validation(input){
-	var error=false;
-	
-	/*--  Nation_card  --*/
-	if(input.co_national_id){
-		if(input.co_national_id!=""){
-			$("#national_id").parents(".form-group").removeClass("has-error");
-			$("#national_id").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#national_id").parents(".form-group").addClass("has-error");
-			$("#national_id").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#national_id").parents(".form-group").addClass("has-error");
-		$("#national_id").siblings(".help-block").show();
-		
+	  //National ID and phone number
+	  re = /[0-9]/;
+	  re1 = /[a-z]/;
+	  re2 =/[A-Z]/;
+	  if(id=="") {
+	    $("#national_id").siblings(".help-block").show();
+	    $("#national_id").parents(".form-group").addClass("has-error");
+	    $("#national_id").siblings(".help-block").find("li").text("Error: National ID can not be blank!");
+	    $("#national_id").focus();
+	    return false;
+	  }
+	  if(!re.test(id) || re1.test(id) || re2.test(id)) {
+	    $("#national_id").siblings(".help-block").show();
+	    $("#national_id").parents(".form-group").addClass("has-error");
+	    $("#national_id").siblings(".help-block").find("li").text("Error: National ID must contain only number (0-9)!");
+	    $("#national_id").focus();
+	    return false;
+	  }
+	  if(phone=="") {
+	    $("#phone").siblings(".help-block").show();
+	    $("#phone").parents(".form-group").addClass("has-error");
+	    $("#phone").siblings(".help-block").find("li").text("Error: phone nubmer can not be blank!");
+	    $("#phone").focus();
+	    return false;
+	  }
+	  if(!re.test(phone) || re1.test(phone) || re2.test(phone)) {
+	    $("#phone").siblings(".help-block").show();
+	    $("#phone").parents(".form-group").addClass("has-error");
+	    $("#phone").siblings(".help-block").find("li").text("Error: phone id invalid!");
+	    $("#phone").focus();
+	    return false;
+	  }
+	  removeError();
+	  return true;
 	}
-	/*--  //Nation card  --*/
-	
-	
-	/*--  Phone  --*/
-	if(input.co_phone){
-		if(input.co_phone!=""){
-			$("#phone").parents(".form-group").removeClass("has-error");
-			$("#phone").siblings(".help-block").hide();
-		}else{
-			error=true;
-			$("#phone").parents(".form-group").addClass("has-error");
-			$("#phone").siblings(".help-block").show();
-			
-		}
-	}else{
-		error=true;
-		$("#phone").parents(".form-group").addClass("has-error");
-		$("#phone").siblings(".help-block").show();
-		
-	}
-	/*--  //Phone  --*/
-	
-	return error;
-}
+
+function removeError(){
+	 $("#user_nm").parents(".form-group").removeClass("has-error");
+	  $("#user_nm").siblings(".help-block").hide();
+	  $("#password").parents(".form-group").removeClass("has-error");
+	  $("#password").siblings(".help-block").hide();
+	  $("#national_id").parents(".form-group").removeClass("has-error");
+	  $("#national_id").siblings(".help-block").hide();
+	  $("#phone").parents(".form-group").removeClass("has-error");
+	  $("#phone").siblings(".help-block").hide();
+};
 function coupdate(){
+	removeError();
 	var input={};
+	input['log_email']=$("#user_nm").val();
+	if($("#password").val() !="sameoldone"){
+		input['log_password']=$("#password").val();
+	}else{
+		input['log_password']="";
+	};
+	input['log_type'] = $("#role").val();
+	input['log_in'] = $("#log_in").val();
 	input['co_id']=ID;
 	input['co_first_nm']=$("#first_nm").val();
 	input['co_last_nm']=$("#last_nm").val();
@@ -127,15 +178,9 @@ function coupdate(){
 	input['dob']=$("#dob").val().replace(/-/g, '');
 	input['address']=$("#address").val();
 	input['co_pb_address']=$('#pb_adress').val();
-	
-	console.log(input);
-	//pb_adress
-	//return;
-	
-	if(validation(input)){
+	if(!validation(input)){
 		return;
 	}
-	console.log("start");
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_u0003",
 		type : 'POST',
@@ -160,8 +205,6 @@ function coupdate(){
 			console.log("error: " + data + " status: " + status + " er:" + er);
 		}
 	});
-	
-	
 }
 
 function viewCustomer(id){
@@ -169,8 +212,7 @@ function viewCustomer(id){
 	input["co_id"]=parseInt(id);
 	$.ajax({
 		url : BASE_URL + "/co_001_controller/co_l0002",
-		type : 'POST',
-		dataType : 'JSON',
+		type : 'POST',		dataType : 'JSON',
 		data : JSON.stringify(input),
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Accept", "application/json");
@@ -178,6 +220,10 @@ function viewCustomer(id){
 		},
 		success : function(data) {
 			console.log(data);
+			$("#user_nm").val(data.log_email);
+			$("#password").val("sameoldone");
+			$("#log_in").val(data.log_in);
+			$("#role").val(data.log_type);
 			$("#first_nm").val(data.co_first_nm);
 			$("#last_nm").val(data.co_last_nm);
 			$("#national_id").val(data.co_national_id);

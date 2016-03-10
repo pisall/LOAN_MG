@@ -11,7 +11,18 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.id.CompositeNestedGeneratedValueGenerator.GenerationContextLocator;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +32,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.system.loan.HomeController;
+import com.system.loan.dao.myUserDetailsManager;
 import com.system.loan.dao.co.CO_DAO_001_IMP;
+import com.system.loan.dao.login.LOGIN_DAO_001_IMP;
 import com.system.loan.dto.pagingDto;
 import com.system.loan.dto.co.CO_DTO_001;
 import com.system.loan.dto.co.LOGIN_DTO_001;
 import com.system.loan.dto.co.in.co_0001_in;
 import com.system.loan.dto.co.in.co_0002_in;
+import com.system.loan.dto.login.in.login_0001_in;
 import com.system.loan.dto.session.USER_SESSION;
 
 @Controller
@@ -34,7 +49,8 @@ import com.system.loan.dto.session.USER_SESSION;
 public class co_001_controller {
 	@Inject 
 	CO_DAO_001_IMP coDao;
-	
+	@Inject
+	LOGIN_DAO_001_IMP loginDao;
 	/*
 	 * view add new customer
 	 */
@@ -46,7 +62,7 @@ public class co_001_controller {
 		//CO_DAO_001_IMP coDao=new CO_DAO_001_IMP();
 		HashMap<String, Object> test=new HashMap<>();
 		test=coDao.findLogByLogMail("mnee");
-		System.out.println(test.get("log_email"));//
+//		System.out.println(test.get("log_email"));//
 		
 		return mv;
 	}
@@ -90,8 +106,6 @@ public class co_001_controller {
 		HttpSession session=req.getSession();
 		USER_SESSION user=(USER_SESSION)session.getAttribute("USER_SESSION");
 		int sesCoId=user.getCoId();
-		
-		System.out.println("controller::co_001_controller/co_c0001");
 		
 		String regDate="";
 		
@@ -170,7 +184,7 @@ public class co_001_controller {
 		LOGIN_DTO_001 log=new LOGIN_DTO_001();
 		log.setLog_email(input.getLog_email());
 		log.setLog_password(hashedPassword);
-		log.setLog_type("ROLE_ADMIN");
+		log.setLog_type("ROLE_USER");
 		log.setEnabled(true);
 		
 		
@@ -214,7 +228,6 @@ public class co_001_controller {
 	@RequestMapping(value="/co_l0002",method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String , Object> coL002(@RequestBody co_0002_in input,HttpServletRequest req){
-		System.out.println("controller::co_001_controller/co_c0001");
 		HashMap<String, Object> result=coDao.findCoById2(input.getCo_id());
 		
 		return result;
@@ -252,7 +265,8 @@ public class co_001_controller {
 		if(result.get("CODE").toString().equals("0000")){
 			System.out.println("start exe");
 			listId.add(input.getCo_id());
-			exe=coDao.updateEnabledUser(listId, false);
+			
+			exe=coDao.updateEnabledUser(listId, input.isEnabled());
 			if((boolean)exe.get("ERROR")){
 				result.put("CODE", "0001");
 				result.put("MESSAGE","False to process.");
@@ -327,19 +341,30 @@ public class co_001_controller {
 	 */
 	@RequestMapping(value="/co_u0003",method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> coU0003(@RequestBody co_0001_in input,HttpServletRequest req){
-		
-		System.out.println(input.toString());
+	
+		HashMap<String, Object> updateUserLogin=new HashMap<>();
 		HashMap<String , Object> result=new HashMap<>();
+		HashMap<String, Object> updateCo=new HashMap<>();
+		//update login user
 		
+		LOGIN_DTO_001 login = new LOGIN_DTO_001();
+		login.setLog_in(input.getLog_in());
+		login.setLog_email(input.getLog_email());
+		login.setLog_password(input.getLog_password());
+		login.setLog_type(input.getLog_type());
+		updateUserLogin=loginDao.updateLogin(login,req);
 		
-		HashMap<String, Object> updateResule=new HashMap<>();
-		updateResule=coDao.updateCo(input,req);
-		if((boolean)updateResule.get("ERROR")){
+		//update co
+		updateCo=coDao.updateCo(input,req);
+		if((boolean)updateCo.get("ERROR")){
+			//update login 
 			result.put("ERROR", true);
-			result.put("MESSAGE",updateResule.get("MESSAGE"));
+			result.put("MESSAGE",updateCo.get("MESSAGE"));
+//		}else if((boolean)updateUserLogin.get("ERROR")){
+//			result.put("ERROR", true);
+//			result.put("MESSAGE",updateUserLogin.get("MESSAGE"));
 		}else{
 			result.put("ERROR", false);
-			//result.put("MESSAGE",updateResule.get("MESSAGE"));
 		}
 		return result;//test
 	}
@@ -417,23 +442,6 @@ public class co_001_controller {
 		mv.setViewName("privacy");
 		mv.addObject("page_id", "privacy_view");
 		return mv;
-	}
-	@RequestMapping(value="/request_privacy",method=RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object> requestPrivacy(HttpServletRequest req){
-		
-		HashMap<String, Object> result=new HashMap<>();
-		result=coDao.getPrivacy(req);
-		return result;
-	}
-	
-	@RequestMapping(value="/change_other_edit_prof",method=RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object>changeOtherEditProf(@RequestBody co_0002_in input,HttpServletRequest req){
-		HashMap<String, Object> result=new HashMap<>();
-		System.out.println(input.toString());
-		result=coDao.changeIsOtherEditProf(input.isOther_edit_prof(), req);
-		return result;
 	}
 	
 	//list co trush 

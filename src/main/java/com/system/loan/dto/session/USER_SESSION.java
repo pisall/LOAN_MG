@@ -10,7 +10,7 @@ package com.system.loan.dto.session;
 public class USER_SESSION {
 	private int coId;
 	private String coNm;
-	private boolean other_edit_prof;
+	private String logType;
 	/**
 	 * @return the coId
 	 */
@@ -30,26 +30,15 @@ public class USER_SESSION {
 		return coNm;
 	}
 	/**
-	 * @return the other_edit_prof
-	 */
-	public boolean isOther_edit_prof() {
-		return other_edit_prof;
-	}
-	/**
-	 * @param other_edit_prof the other_edit_prof to set
-	 */
-	public void setOther_edit_prof(boolean other_edit_prof) {
-		this.other_edit_prof = other_edit_prof;
-	}
-	/**
 	 * @param coNm the coNm to set
 	 */
 	public void setCoNm(String coNm) {
 		this.coNm = coNm;
 	}
-	
-	
-	
-	
-
+	public String getLogType() {
+		return logType;
+	}
+	public void setLogType(String logType) {
+		this.logType = logType;
+	}
 }

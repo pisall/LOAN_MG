@@ -12,28 +12,22 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class co_0002_in implements Serializable{
 	
-	private int co_id;
-	private String co_nm;
-	private boolean enabled;
-	private boolean other_edit_prof;
-	
-	
-	
-	/**
-	 * @return the co_id
-	 */
 	public int getCo_id() {
 		return co_id;
 	}
 
-	/**
-	 * @param co_id the co_id to set
-	 */
+
 	public void setCo_id(int co_id) {
 		this.co_id = co_id;
 	}
 
-
+	private int co_id;
+	private String co_nm;
+	private String log_email;
+	private String log_password;
+	private String log_type;
+	private boolean enabled;
+	
 	/**
 	 * @return the co_nm
 	 */
@@ -65,22 +59,6 @@ public class co_0002_in implements Serializable{
 		this.enabled = enabled;
 	}
 	
-	
-
-	/**
-	 * @return the other_edit_prof
-	 */
-	public boolean isOther_edit_prof() {
-		return other_edit_prof;
-	}
-
-	/**
-	 * @param other_edit_prof the other_edit_prof to set
-	 */
-	public void setOther_edit_prof(boolean other_edit_prof) {
-		System.out.println("set="+other_edit_prof);
-		this.other_edit_prof = other_edit_prof;
-	}
 
 	@Override
 	public String toString() {
@@ -89,9 +67,32 @@ public class co_0002_in implements Serializable{
 		result.append("co_id:"+this.co_id+",\n");
 		result.append("co_nm:"+this.co_nm+"\n");
 		result.append("enabled:"+this.enabled+"\n");
-		result.append("other_edit_prof:"+this.other_edit_prof);
 		
 		return result.toString();
+	}
+
+	public String getLog_password() {
+		return log_password;
+	}
+
+	public void setLog_password(String log_password) {
+		this.log_password = log_password;
+	}
+
+	public String getLog_type() {
+		return log_type;
+	}
+
+	public void setLog_type(String log_type) {
+		this.log_type = log_type;
+	}
+
+	public String getLog_email() {
+		return log_email;
+	}
+
+	public void setLog_email(String log_email) {
+		this.log_email = log_email;
 	}
 
 }

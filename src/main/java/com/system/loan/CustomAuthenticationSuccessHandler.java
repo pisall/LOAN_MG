@@ -32,7 +32,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     	for(GrantedAuthority gauth:authentication.getAuthorities()){
     		strRole=gauth.getAuthority();
     	}
-    	System.out.println("rol="+strRole);
     	if(strRole.equals("ROLE_SYS")){
     		 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
     		 httpServletResponse.sendRedirect("sys/sys_form");
@@ -45,22 +44,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 	        HashMap<String, Object> coInfo=co.findCobyUserId(userName);
 	        String strFirstNm=coInfo.get("co_first_nm").toString();
 	        String strLastNm=coInfo.get("co_last_nm").toString();
-	        String strBooOtherEditProf=coInfo.get("other_edit_prof").toString();
 	        
-	        System.out.println("is edit="+strBooOtherEditProf);
-	        boolean booOtherEditProf=false;
-	        if (strBooOtherEditProf.length()!=0){
-	        	if(strBooOtherEditProf.equals("true")|| strBooOtherEditProf.equals("1"));
-	        	booOtherEditProf=true;
-	        }
 	        int coId=(int)coInfo.get("co_id");
 	        USER_SESSION userSession=new USER_SESSION();
 	        userSession.setCoId(coId);
+	        userSession.setLogType(strRole);
 	        userSession.setCoNm(strFirstNm+" "+ strLastNm);
-	        userSession.setOther_edit_prof(booOtherEditProf);
 	        session.setAttribute("USER_SESSION", userSession/*authUser.getUsername()*/);
 	        session.setAttribute("authorities", authentication.getAuthorities());
-
 	        //set our response to OK status
 	       
 
